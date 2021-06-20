@@ -1383,10 +1383,11 @@ namespace Game_Treasure_Hunter
                 }
             }
 
-            if (player.Health == 0)
+            if (player.Health <= 0)
             {
+                player.Health = 0;
                 healthScore.Foreground = Brushes.Red;
-                playerSpriteIndex += 0.5;
+                playerSpriteIndex +=0.2;
                 if (playerSpriteIndex > 10)
                 {
                     ShowGameOver("Вы проиграли!!!");
@@ -1479,12 +1480,15 @@ namespace Game_Treasure_Hunter
                 }
             }
 
-            if(e.Key == Key.R && gameOver == true)
+            if (e.Key == Key.R && gameOver == true)
             {
-                StartGame();
+                //StartGame();
+                GameWindow game = new GameWindow();
+                    game.Show();
+                this.Close();
             }
 
-            if(e.Key == Key.Escape)
+            if (e.Key == Key.Escape)
             {
                 Pause();
             }
@@ -1498,7 +1502,8 @@ namespace Game_Treasure_Hunter
                 jumping = false;
             }
 
-            if(e.Key == Key.Space)
+
+            if (e.Key == Key.Space)
             {
                 Rectangle newBullet = new Rectangle
                 {
