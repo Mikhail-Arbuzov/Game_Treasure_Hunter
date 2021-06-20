@@ -1,0 +1,673 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{52A91A74-69A2-401A-9BB9-552380B21D28}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Game_Treasure_Hunter</RootNamespace>
+    <AssemblyName>Game_Treasure_Hunter</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Characters\Bird.cs" />
+    <Compile Include="Characters\Bear.cs" />
+    <Compile Include="Characters\Soldier.cs" />
+    <Compile Include="Characters\Ninja.cs" />
+    <Compile Include="Characters\Shooter.cs" />
+    <Compile Include="Characters\Terrorist.cs" />
+    <Compile Include="Characters\Robot.cs" />
+    <Compile Include="Characters\Troll.cs" />
+    <Compile Include="Characters\Wolf.cs" />
+    <Compile Include="Characters\Snake.cs" />
+    <Page Include="GameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Characters\Enemy.cs" />
+    <Compile Include="GameWindow.xaml.cs">
+      <DependentUpon>GameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Characters\Hog.cs" />
+    <Compile Include="Interfaces\ICharacterAnimationSprites.cs" />
+    <Compile Include="Interfaces\IWorkingFrames.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Characters\Player.cs" />
+    <Compile Include="Characters\NinjaBoss.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ImagesMenu\adventurer.png" />
+    <Resource Include="ImagesMenu\backgroundMenu.jpg" />
+    <Resource Include="ImagesMenu\game_control.png" />
+    <Resource Include="ImagesMenu\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\amethyst_01.png" />
+    <Resource Include="Images\arrow.png" />
+    <Resource Include="Images\arrowleft.png" />
+    <Resource Include="Images\backgroundLevel_01.jpg" />
+    <Resource Include="Images\backgroundLevel_02.jpg" />
+    <Resource Include="Images\backgroundLevel_03.jpg" />
+    <Resource Include="Images\bloodstone_01.png" />
+    <Resource Include="Images\boxs.png" />
+    <Resource Include="Images\boxs2.png" />
+    <Resource Include="Images\boxs4.png" />
+    <Resource Include="Images\bullets.png" />
+    <Resource Include="Images\Cactus.png" />
+    <Resource Include="Images\coin.gif" />
+    <Resource Include="Images\Crate160.png" />
+    <Resource Include="Images\Crate200.png" />
+    <Resource Include="Images\diamond_.png" />
+    <Resource Include="Images\doorClose.png" />
+    <Resource Include="Images\doorClose_02.png" />
+    <Resource Include="Images\doorOpen.png" />
+    <Resource Include="Images\doorOpen_02.png" />
+    <Resource Include="Images\emerald_.png" />
+    <Resource Include="Images\garnet.png" />
+    <Resource Include="Images\grass.png" />
+    <Resource Include="Images\ground1.png" />
+    <Resource Include="Images\ground2.png" />
+    <Resource Include="Images\ground4.png" />
+    <Resource Include="Images\ground5.png" />
+    <Resource Include="Images\groundLeft.png" />
+    <Resource Include="Images\groundMedium.png" />
+    <Resource Include="Images\groundRight.png" />
+    <Resource Include="Images\ground_3.png" />
+    <Resource Include="Images\heartbeat.png" />
+    <Resource Include="Images\lazer.png" />
+    <Resource Include="Images\left_Kunai.png" />
+    <Resource Include="Images\m1_mPad.png" />
+    <Resource Include="Images\marathon.png" />
+    <Resource Include="Images\mPad.png" />
+    <Resource Include="Images\m_diamond.png" />
+    <Resource Include="Images\m_lazerlef.png" />
+    <Resource Include="Images\m_mPad.png" />
+    <Resource Include="Images\platf_1.png" />
+    <Resource Include="Images\platf_2.png" />
+    <Resource Include="Images\platf_3.png" />
+    <Resource Include="Images\plleft.png" />
+    <Resource Include="Images\plright.png" />
+    <Resource Include="Images\right_Kunai.png" />
+    <Resource Include="Images\sapphire.png" />
+    <Resource Include="Images\sapphire_01.png" />
+    <Resource Include="Images\SignArrow.png" />
+    <Resource Include="Images\Spikes.png" />
+    <Resource Include="Images\toppl.png" />
+    <Resource Include="Images\topplleft.png" />
+    <Resource Include="Images\topplright.png" />
+    <Resource Include="Images\Treasure_closed .png" />
+    <Resource Include="Images\Treasure_open.png" />
+    <Resource Include="Images\tree.png" />
+    <Resource Include="Images\tree2.png" />
+    <Resource Include="Images\_ruby.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesShooter\solderSh_Attack_00.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Attack_01.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Attack_02.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Attack_03.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Attack_04.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Attack_05.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Attack_06.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Attack_07.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Attack_08.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Attack_09.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Die_00.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Die_01.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Die_02.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Die_03.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Die_04.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Die_05.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Die_06.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Die_07.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Die_08.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Die_09.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Hurt_00.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Hurt_01.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Hurt_02.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Hurt_03.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Hurt_04.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Hurt_05.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Hurt_06.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Hurt_07.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Hurt_08.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Hurt_09.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Run_00.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Run_01.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Run_02.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Run_03.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Run_04.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Run_05.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Run_06.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Run_07.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Run_08.png" />
+    <Resource Include="Sprites\SpritesShooter\solderSh_Run_09.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesBear\m_Bear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesBird\Bird_Black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesEnemy\enemy_Attack_00.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Attack_01.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Attack_02.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Attack_03.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Attack_04.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Attack_05.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Attack_06.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Attack_07.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Die_00.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Die_01.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Die_02.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Die_03.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Die_04.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Die_05.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Die_06.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Die_07.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Hurt_00.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Hurt_01.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Hurt_02.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Hurt_03.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Hurt_04.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Hurt_05.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Hurt_06.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Hurt_07.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Idle_00.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Idle_01.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Idle_02.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Idle_03.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Idle_04.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Idle_05.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Idle_06.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Idle_07.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Idle_08.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Idle_09.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Idle_10.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Idle_11.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Walk_00.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Walk_01.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Walk_02.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Walk_03.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Walk_04.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Walk_05.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Walk_06.png" />
+    <Resource Include="Sprites\SpritesEnemy\enemy_Walk_07.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesHog\m_zp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesNinja\ninja_Attack_00.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Attack_01.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Attack_02.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Attack_03.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Attack_04.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Attack_05.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Attack_06.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Attack_07.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Attack_08.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Attack_09.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Dead_00.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Dead_01.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Dead_02.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Dead_03.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Dead_04.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Dead_05.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Dead_06.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Dead_07.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Dead_08.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Dead_09.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Run_00.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Run_01.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Run_02.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Run_03.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Run_04.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Run_05.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Run_06.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Run_07.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Run_08.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Run_09.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Throw_00.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Throw_01.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Throw_02.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Throw_03.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Throw_04.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Throw_05.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Throw_06.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Throw_07.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Throw_08.png" />
+    <Resource Include="Sprites\SpritesNinja\ninja_Throw_09.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_00.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_01.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_02.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_03.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_04.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_05.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_06.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_07.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_08.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_09.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_10.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_11.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_12.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_13.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_death_14.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_hurt_00.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_hurt_01.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_hurt_02.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_hurt_03.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_hurt_04.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_hurt_05.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_hurt_06.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_hurt_07.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_hurt_08.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_hurt_09.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_idle_00.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_idle_01.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_idle_02.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_idle_03.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_idle_04.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_idle_05.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_idle_06.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_idle_07.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_idle_08.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_idle_09.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_idle_10.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_idle_11.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_00.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_009.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_01.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_02.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_03.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_04.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_05.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_06.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_07.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_08.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_10.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_11.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_12.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_13.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_14.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_run_15.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_00.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_01.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_02.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_03.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_04.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_05.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_06.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_07.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_08.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_09.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_10.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_11.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_12.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_13.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_14.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_15.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_16.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_17.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_18.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_19.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_20.png" />
+    <Resource Include="Sprites\SpritesNinjaBos\bow_shoot_21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesPlayer\player_Attack_00.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Attack_01.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Attack_02.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Attack_03.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Attack_04.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Attack_05.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Attack_06.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Attack_07.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Attack_08.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Attack_09.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Die_00.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Die_01.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Die_02.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Die_03.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Die_04.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Die_05.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Die_06.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Die_07.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Die_08.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Die_09.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Hurt_00.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Hurt_01.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Hurt_02.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Hurt_03.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Hurt_04.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Hurt_05.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Hurt_06.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Hurt_07.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Hurt_08.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Hurt_09.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Idle_00.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Idle_01.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Idle_02.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Idle_03.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Idle_04.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Idle_05.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Idle_06.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Idle_07.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Idle_08.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Idle_09.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Jump.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Run_00.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Run_01.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Run_02.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Run_03.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Run_04.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Run_05.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Run_06.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Run_07.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Run_08.png" />
+    <Resource Include="Sprites\SpritesPlayer\player_Run_09.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_00.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_01.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_02.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_03.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_04.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_05.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_06.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_07.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_08.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_09.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_10.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_11.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_12.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_13.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_14.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_15.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_16.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Attack_17.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_00.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_01.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_02.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_03.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_04.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_05.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_06.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_07.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_08.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_09.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_10.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_11.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_12.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_13.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Death_14.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Run_00.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Run_01.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Run_02.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Run_03.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Run_04.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Run_05.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Run_06.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Run_07.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Run_08.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Run_09.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Run_10.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Run_11.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_00.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_01.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_02.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_03.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_04.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_05.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_06.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_07.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_08.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_09.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_10.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_11.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_12.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_13.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_14.png" />
+    <Resource Include="Sprites\SpritesRobot\robot_Shot_15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesSnake\snake.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesSnow\snow_01.png" />
+    <Resource Include="Sprites\SpritesSnow\snow_02.png" />
+    <Resource Include="Sprites\SpritesSnow\snow_03.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesSoldier\solder_Attack_00.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Attack_01.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Attack_02.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Attack_03.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Attack_04.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Attack_05.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Attack_06.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Attack_07.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Attack_08.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Attack_09.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Die_00.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Die_01.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Die_02.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Die_03.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Die_04.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Die_05.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Die_06.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Die_07.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Die_08.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Die_09.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Hurt_00.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Hurt_01.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Hurt_02.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Hurt_03.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Hurt_04.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Hurt_05.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Hurt_06.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Hurt_07.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Hurt_08.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Hurt_09.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Idle_00.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Idle_01.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Idle_02.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Idle_03.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Idle_04.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Idle_05.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Idle_06.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Idle_07.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Idle_08.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Idle_09.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Run_00.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Run_01.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Run_02.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Run_03.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Run_04.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Run_05.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Run_06.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Run_07.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Run_08.png" />
+    <Resource Include="Sprites\SpritesSoldier\solder_Run_09.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesStones\stone_0.png" />
+    <Resource Include="Sprites\SpritesStones\stone_1.png" />
+    <Resource Include="Sprites\SpritesStones\stone_2.png" />
+    <Resource Include="Sprites\SpritesStones\stone_3.png" />
+    <Resource Include="Sprites\SpritesStones\stone_4.png" />
+    <Resource Include="Sprites\SpritesStones\stone_5.png" />
+    <Resource Include="Sprites\SpritesStones\stone_6.png" />
+    <Resource Include="Sprites\SpritesStones\stone_7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Attack1_00.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Attack1_01.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Attack1_02.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Attack1_03.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Attack1_04.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Attack1_05.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Attack_00.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Attack_01.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Attack_02.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Attack_03.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Hurt_00.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Hurt_01.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Hurt_02.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Hurt_03.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Hurt_04.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Hurt_05.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Hurt_06.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Hurt_07.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Hurt_08.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Walk_00.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Walk_01.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Walk_02.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Walk_03.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Walk_04.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Walk_05.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Walk_06.png" />
+    <Resource Include="Sprites\SpritesTerrorist\terrorist_Walk_07.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesTroll\troll_Attack_00.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Attack_01.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Attack_02.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Attack_03.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Attack_04.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Attack_05.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Attack_06.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Attack_07.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Attack_08.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Attack_09.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Dead_00.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Dead_01.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Dead_02.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Dead_03.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Dead_04.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Dead_05.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Dead_06.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Dead_07.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Dead_08.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Dead_09.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Hurt_00.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Hurt_01.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Hurt_02.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Hurt_03.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Hurt_04.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Hurt_05.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Hurt_06.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Hurt_07.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Hurt_08.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Hurt_09.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Idle_00.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Idle_01.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Idle_02.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Idle_03.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Idle_04.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Idle_05.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Idle_06.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Idle_07.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Idle_08.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Idle_09.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Walk_00.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Walk_01.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Walk_02.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Walk_03.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Walk_04.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Walk_05.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Walk_06.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Walk_07.png" />
+    <Resource Include="Sprites\SpritesTroll\troll_Walk_08.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sprites\SpritesWolf\Wolf.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
