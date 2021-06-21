@@ -186,10 +186,10 @@ namespace Game_Treasure_Hunter
                 player.JumpSpeed = 10;
             }
 
-            if (Canvas.GetTop(hero) + (hero.Height * 2) > this.MyCanvas.ActualHeight)
-            {
-                Canvas.SetTop(hero, -80);
-            }
+            //if (Canvas.GetTop(hero) + (hero.Height * 2) > this.MyCanvas.ActualHeight)
+            //{
+            //    Canvas.SetTop(hero, -80);
+            //}
             // движение объектов игры
             MotionLevelOne();
             MotionLevelTwo();

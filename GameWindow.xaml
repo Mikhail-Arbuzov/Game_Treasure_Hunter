@@ -12,7 +12,7 @@
         <Rectangle x:Name="backgroundLevel3" Canvas.Left="3200"  Height="800"  Width="1600" Fill="Green"/>
 
 
-        <Rectangle x:Name="ground1" Tag ="ground" Fill="Blue"  Height="240"  Width="276" Canvas.Top="555" />
+        <Rectangle x:Name="ground1" Tag ="ground" Fill="Blue"  Height="240"  Width="276" Canvas.Top="555" Canvas.Left="1"/>
         <Rectangle x:Name="ground2" Tag="ground" Fill="Blue" Height="192" Canvas.Left="276" Canvas.Top="603" Width="112"/>
         <Rectangle x:Name="ground4"  Tag ="ground"  Fill="Blue" Height="48" Canvas.Left="1012" Canvas.Top="747" Width="588"/>
         <Rectangle x:Name="ground3" Tag="ground" Fill="Blue" Height="48" Canvas.Left="756" Canvas.Top="747" Width="256"/>
