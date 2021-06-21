@@ -253,7 +253,7 @@ namespace Game_Treasure_Hunter
                     }
                     if (playerHitBox.IntersectsWith(shHitBox))
                     {
-                        player.Health -= 2;
+                        player.Health -= 1;
                         playerSpriteIndex += 0.5;
                         if (playerSpriteIndex > 10)
                         {
@@ -1055,12 +1055,27 @@ namespace Game_Treasure_Hunter
                     Rect platformHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (playerHitBox.IntersectsWith(platformHitBox))
                     {
-                        //player.ForceJump = 8;
-                        player.JumpSpeed = 0;
-                        jumping = false;
+                        player.ForceJump = 8;
+                        //player.JumpSpeed = 0;
                         Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
                     }
-                    
+
+                    if(x.Name.ToString() == "platform1")
+                    {
+                        if(playerHitBox.IntersectsWith(platformHitBox))
+                        {
+                            Canvas.SetLeft(hero, Canvas.GetLeft(hero) + horizontalSpeedPlatform);
+                        }
+                    }
+
+                    //if (x.Name.ToString() == "platform2")
+                    //{
+                    //    if (playerHitBox.IntersectsWith(platformHitBox))
+                    //    {
+                    //        Canvas.SetTop(hero, Canvas.GetTop(hero) + verticalSpeedPlatform);
+                    //    }
+                    //}
+
                     if (x.Name.ToString() == "platform7")
                     {
                         if (goRight == true && playerHitBox.IntersectsWith(platformHitBox))
@@ -1467,7 +1482,7 @@ namespace Game_Treasure_Hunter
                 //goUp = true;
                 jumping = true;
                 player.ForceJump = 15;
-                player.JumpSpeed = -12;
+                player.JumpSpeed = -5;
                 player.JumpSprites();
                 hero.Fill = player.playerSprite;
                 if(Keyboard.IsKeyDown(Key.Left))
@@ -1592,7 +1607,7 @@ namespace Game_Treasure_Hunter
             Canvas.SetLeft(hero, 31);
             Canvas.SetTop(hero, 422);
             score = 0;
-            bulletsScore = 10;
+            bulletsScore = 20;
             gem = 0;
             gameOver = false;
             jumping = false;
@@ -1633,6 +1648,7 @@ namespace Game_Treasure_Hunter
             door1.Fill = entry1;
             player.IdleSprites(1);
             hero.Fill = player.playerSprite;
+            hero.Stroke = Brushes.Black;
             enemy.RunSprites(1);
             enemy1.Fill = enemy.enemySprite;
             shooterOne.RunSprites(1);
@@ -2120,12 +2136,12 @@ namespace Game_Treasure_Hunter
                 horizontalSpeedPlatform = -horizontalSpeedPlatform;
             }
 
-            Canvas.SetTop(platform2, Canvas.GetTop(platform2) - verticalSpeedPlatform);
+            Canvas.SetTop(platform2, Canvas.GetTop(platform2) + verticalSpeedPlatform);
             if (Canvas.GetTop(platform2) > 181) 
             {
-                verticalSpeedPlatform = - verticalSpeedPlatform;
+                verticalSpeedPlatform = -verticalSpeedPlatform;
             }
-            if(Canvas.GetTop(platform2) > 491)
+            if(Canvas.GetTop(platform2) > 350)
             {
                 verticalSpeedPlatform = -verticalSpeedPlatform;
             }
@@ -2184,17 +2200,17 @@ namespace Game_Treasure_Hunter
                 enemy1.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
             }
 
-            if (Canvas.GetTop(hero) > 400)
-            {
-                enemy.Speed = 0;
-                enemySpriteIndex += 0.1;
-                if (enemySpriteIndex > 12)
-                {
-                    enemySpriteIndex = 1;
-                }
-                enemy.IdleEnSprites(enemySpriteIndex);
-                enemy1.Fill = enemy.enemySprite;
-            }
+            //if (Canvas.GetTop(hero) > 400)
+            //{
+            //    enemy.Speed = 0;
+            //    enemySpriteIndex += 0.1;
+            //    if (enemySpriteIndex > 12)
+            //    {
+            //        enemySpriteIndex = 1;
+            //    }
+            //    enemy.IdleEnSprites(enemySpriteIndex);
+            //    enemy1.Fill = enemy.enemySprite;
+            //}
 
             if (Canvas.GetLeft(enemy1) < 799)
             {
