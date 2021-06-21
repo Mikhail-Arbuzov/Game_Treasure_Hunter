@@ -1963,7 +1963,7 @@ namespace Game_Treasure_Hunter
             Canvas.SetTop(enemyBullet2, Canvas.GetTop(shooter2) - shooter2.Height / 2 + 24);
             Canvas.SetLeft(enemyBullet3, Canvas.GetTop(terror) + (terror.Height / 2) - 10);
             Canvas.SetTop(enemyBullet3, Canvas.GetLeft(terror) - enemyBullet3.Width);
-            if(Canvas.GetTop(hero) < 260 && Canvas.GetTop(hero) > 176)
+            if(Canvas.GetTop(hero) < 260 && Canvas.GetTop(hero) > 176 && shooterOne.Health > 0)
             {
                 MyCanvas.Children.Add(enemyBullet);
             }
