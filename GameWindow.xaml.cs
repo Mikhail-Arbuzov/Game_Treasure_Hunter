@@ -571,10 +571,18 @@ namespace Game_Treasure_Hunter
             //стрельба по врагам и объектам
             foreach (var y in MyCanvas.Children.OfType<Rectangle>())
             {
-                if(y is Rectangle && (string)y.Tag == "bullet")
+                if (y is Rectangle && (string)y.Tag == "bullet")
                 {
-                    Canvas.SetLeft(y, Canvas.GetLeft(y) + speedBullet);
+                    if (Canvas.GetLeft(y) < Canvas.GetLeft(hero) + hero.Width && !Keyboard.IsKeyDown(Key.Right))
+                    {
+                        //speedBullet++;
+                        Canvas.SetLeft(y, Canvas.GetLeft(y) - speedBullet);
+                    }
 
+                    if (Canvas.GetLeft(y) > Canvas.GetLeft(hero))
+                    {
+                        Canvas.SetLeft(y, Canvas.GetLeft(y) + speedBullet);
+                    }
 
                     Rect bulletHitBox = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
                     if (Canvas.GetLeft(y) < 30 )
@@ -1528,9 +1536,19 @@ namespace Game_Treasure_Hunter
                     Fill = Brushes.White,
                     Stroke = Brushes.Red
                 };
+                
+                 if(!Keyboard.IsKeyDown(Key.Left))
+                 {
+                    Canvas.SetLeft(newBullet, Canvas.GetLeft(hero) + hero.Height);
+                    Canvas.SetTop(newBullet, Canvas.GetTop(hero) + hero.Height / 2 + 24);
+                 }
 
-                Canvas.SetLeft(newBullet, Canvas.GetLeft(hero) + hero.Height);
-                Canvas.SetTop(newBullet, Canvas.GetTop(hero) + hero.Height/2 + 24);
+                if (Keyboard.IsKeyDown(Key.Left) && !Keyboard.IsKeyDown(Key.Right))
+                {
+                    Canvas.SetLeft(newBullet, Canvas.GetLeft(hero));
+                    Canvas.SetTop(newBullet, Canvas.GetTop(hero) + hero.Height / 2 + 24);
+                }
+               
                 bulletsScore--;
                 if(bulletsScore > 0)
                 {
@@ -1547,8 +1565,6 @@ namespace Game_Treasure_Hunter
                 if(Keyboard.IsKeyDown(Key.Left))
                 {
                     hero.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-                    //speedBullet++;
-                    //Canvas.SetLeft(newBullet, Canvas.GetLeft(newBullet) - speedBullet);
                 }
                 if(Keyboard.IsKeyDown(Key.Right))
                 {
@@ -1979,7 +1995,7 @@ namespace Game_Treasure_Hunter
             Canvas.SetTop(enemyBullet2, Canvas.GetTop(shooter2) - shooter2.Height / 2 + 24);
             Canvas.SetLeft(enemyBullet3, Canvas.GetTop(terror) + (terror.Height / 2) - 10);
             Canvas.SetTop(enemyBullet3, Canvas.GetLeft(terror) - enemyBullet3.Width);
-            if(Canvas.GetTop(hero) < 260 && Canvas.GetTop(hero) > 176 && shooterOne.Health > 0)
+            if(Canvas.GetTop(hero) < 260 && Canvas.GetTop(hero) > 145 && shooterOne.Health > 0)
             {
                 MyCanvas.Children.Add(enemyBullet);
             }
@@ -2163,7 +2179,7 @@ namespace Game_Treasure_Hunter
                 shooter1.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
             }
 
-            if (Canvas.GetTop(hero) < 260 && Canvas.GetTop(hero) > 176)
+            if (Canvas.GetTop(hero) < 260 && Canvas.GetTop(hero) > 145)
             {
                 //shooterOne.Speed = 0;
                 shooterSpriteIndex += 0.5;
