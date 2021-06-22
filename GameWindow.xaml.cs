@@ -1369,13 +1369,15 @@ namespace Game_Treasure_Hunter
                 if(x.Name.ToString() == "door1")
                 {
                     Rect doorHitBox1 = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-                    if(gem == 3 && trollOne.Health == 0)
-                       {
-                        if (playerHitBox.IntersectsWith(doorHitBox1))
+
+                    if (playerHitBox.IntersectsWith(doorHitBox1))
+                    {
+                        if (gem == 3 && trollOne.Health == 0)
                         {
                             Canvas.SetLeft(hero, 1624);
                             Canvas.SetTop(hero, 580);
                         }
+                        
                     }
                 }
 
@@ -1419,13 +1421,18 @@ namespace Game_Treasure_Hunter
                 hero.Fill = player.playerSprite;
             }
 
-            if(gem == 3 && trollOne.Health == 0)
+            if(gem == 3)
             {
                 ImageBrush entry = new ImageBrush();
                 entry.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/doorOpen.png"));
                 door1.Fill = entry;
                 treasuresScore.Foreground = Brushes.Yellow;
-                MessageBox.Show("Первый уровень пройден!", "TREASURE HUNTER");
+                if(trollOne.Health == 0)
+                {
+                   treasuresScore.Content = "Сокровища: " + gem + Environment.NewLine + "Первый уровень пройден!";
+                }
+                
+                //MessageBox.Show("Первый уровень пройден!", "TREASURE HUNTER");
             }
 
             if(gem == 3 && robot.Health == 0)
