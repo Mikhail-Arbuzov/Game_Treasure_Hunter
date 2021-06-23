@@ -38,7 +38,7 @@ namespace Game_Treasure_Hunter
         //для движения платформ
         int horizontalSpeedPlatform = 3;
         int verticalSpeedPlatform = 3;
-        int verticalSpeedSpike = 5;
+        int verticalSpeedSpike = 3;
         //для создания пулей врагов
         double speedEnemyBullet = 10;
         int bulletTimer = 0;
@@ -132,7 +132,7 @@ namespace Game_Treasure_Hunter
             // чтоб игрок не выходил за экран
             if (backgroundLevel2.Focusable == false)
             {
-                if (Canvas.GetLeft(hero) >= 1400)
+                if (Canvas.GetLeft(hero) >= 1430)
                 {
                     Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
                     //goRight = false;
@@ -1093,6 +1093,8 @@ namespace Game_Treasure_Hunter
                     //    }
                     //}
 
+                
+
                     if (x.Name.ToString() == "platform7")
                     {
                         if (goRight == true && playerHitBox.IntersectsWith(platformHitBox))
@@ -1350,15 +1352,26 @@ namespace Game_Treasure_Hunter
                     }
                 }
 
-                if(x.Name.ToString() =="grass")
+                if ((string)x.Tag == "surface")
                 {
-                    Rect grassHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-                    if (playerHitBox.IntersectsWith(grassHitBox))
+                    Rect surfaceHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+                    if (playerHitBox.IntersectsWith(surfaceHitBox))
                     {
                         player.ForceJump = 8;
+                        //player.JumpSpeed = 0;
                         Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
                     }
                 }
+
+                //if (x.Name.ToString() =="grass")
+                //{
+                //    Rect grassHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+                //    if (playerHitBox.IntersectsWith(grassHitBox))
+                //    {
+                //        player.ForceJump = 8;
+                //        Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
+                //    }
+                //}
 
                 if(x.Name.ToString() == "cactus")
                 {
@@ -2339,14 +2352,23 @@ namespace Game_Treasure_Hunter
         private void MotionLevelTwo()
         {
             Canvas.SetTop(spike5, Canvas.GetTop(spike5) - verticalSpeedSpike);
-            if (Canvas.GetTop(spike5) < 731 || Canvas.GetTop(spike5) > 656)
+
+            if (Canvas.GetTop(spike5) > 500)
+                verticalSpeedSpike++;
+
+            if (Canvas.GetTop(spike5) > 650)
             {
-                verticalSpeedSpike = -verticalSpeedSpike;
+                verticalSpeedSpike++;
             }
+
             Canvas.SetTop(spike6, Canvas.GetTop(spike6) + verticalSpeedSpike);
-            if (Canvas.GetTop(spike6) < 731 || Canvas.GetTop(spike6) > 656)
+          
+            if (Canvas.GetTop(spike6) < 650)
+                verticalSpeedSpike--;
+
+            if (Canvas.GetTop(spike6) < 500)
             {
-                verticalSpeedSpike = -verticalSpeedSpike;
+                verticalSpeedSpike--;
             }
 
             Canvas.SetLeft(soldier, Canvas.GetLeft(soldier) - soldierOne.Speed);
