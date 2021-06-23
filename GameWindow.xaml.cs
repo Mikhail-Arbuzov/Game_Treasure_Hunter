@@ -129,16 +129,25 @@ namespace Game_Treasure_Hunter
             catridgesScore.Content = "Патроны: " + bulletsScore;
             treasuresScore.Content = "Сокровища: " + gem;
 
-            //if (Canvas.GetLeft(backgroundLevel) > 1600)
-            //{
-            //    Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
-            //    goRight = false;
-            //}
-            //if (Canvas.GetLeft(backgroundLevel) < 0)
-            //{
-            //    Canvas.SetLeft(hero, Canvas.GetLeft(hero) + 10);
-            //    goLeft = false;
-            //}
+            // чтоб игрок не выходил за экран
+            if (backgroundLevel2.Focusable == false)
+            {
+                if (Canvas.GetLeft(hero) >= 1400)
+                {
+                    Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
+                    //goRight = false;
+                }
+            }
+
+            if (backgroundLevel2.Focusable == true)
+            {
+                if (Canvas.GetLeft(hero) <= 1610)
+                {
+                    Canvas.SetLeft(hero, Canvas.GetLeft(hero) + 10);
+                    //goLeft = false;
+                }
+            }
+
             //if (Canvas.GetLeft(backgroundLevel2) > 3200)
             //{
             //    Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
@@ -160,7 +169,7 @@ namespace Game_Treasure_Hunter
             //    goLeft = false;
             //}
 
-            if(goLeft == true && Canvas.GetLeft(hero) > 0)
+            if (goLeft == true && Canvas.GetLeft(hero) > 0)
             {
                 Canvas.SetLeft(hero, Canvas.GetLeft(hero) - player.Speed);
             }
@@ -1372,10 +1381,15 @@ namespace Game_Treasure_Hunter
 
                     if (playerHitBox.IntersectsWith(doorHitBox1))
                     {
-                        if (gem == 3 && trollOne.Health == 0)
+                        if (gem == 3 && trollOne.Health <= 0)
                         {
+                            backgroundLevel2.Focusable = true;
+                            gem = 0;
+                            treasuresScore.Foreground = Brushes.White;
                             Canvas.SetLeft(hero, 1624);
                             Canvas.SetTop(hero, 580);
+                            Canvas.SetLeft(myGrid, 1630);
+                            Canvas.SetTop(myGrid, 10);
                         }
                         
                     }
@@ -1427,9 +1441,9 @@ namespace Game_Treasure_Hunter
                 entry.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/doorOpen.png"));
                 door1.Fill = entry;
                 treasuresScore.Foreground = Brushes.Yellow;
-                if(trollOne.Health == 0)
+                if(trollOne.Health <= 0)
                 {
-                   treasuresScore.Content = "Сокровища: " + gem + Environment.NewLine + "Первый уровень пройден!";
+                   treasuresScore.Content = "Сокровища: " + gem + Environment.NewLine + "Первый уровень" + Environment.NewLine + "пройден!";
                 }
                 
                 //MessageBox.Show("Первый уровень пройден!", "TREASURE HUNTER");
@@ -1467,6 +1481,7 @@ namespace Game_Treasure_Hunter
         {
             if(e.Key == Key.Left)
             {
+                //scroll.LineLeft();
                 goLeft = true;
                 playerSpriteIndex ++;
                 if(playerSpriteIndex > 10)
@@ -1480,6 +1495,7 @@ namespace Game_Treasure_Hunter
 
             if(e.Key == Key.Right)
             {
+                //scroll.LineRight();
                 goRight = true;
                 playerSpriteIndex ++;
                 if (playerSpriteIndex > 10)
@@ -1880,7 +1896,7 @@ namespace Game_Treasure_Hunter
         {
             gameOver = true;
             gameTimer.Stop();
-            healthScore.Content = "Здоровье: "+ player.Health + Environment.NewLine + msg + Environment.NewLine +"Нажмите R чтобы начать игру заново";
+            healthScore.Content = "Здоровье: "+ player.Health + Environment.NewLine + msg + Environment.NewLine +"Нажмите R" + Environment.NewLine +"чтобы начать игру заново"+ Environment.NewLine + "заново";
         }
 
         private void Pause()
@@ -2554,6 +2570,19 @@ namespace Game_Treasure_Hunter
                 }
             }
         }
+
+        //private void Window_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if(Keyboard.IsKeyDown(Key.A))
+        //    {
+        //        scroll.LineLeft();
+        //    }
+
+        //    if(Keyboard.IsKeyDown(Key.D))
+        //    {
+        //        scroll.LineRight();
+        //    }
+        //}
 
         private void MotionLevelThree()
         {
