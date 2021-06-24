@@ -38,7 +38,7 @@ namespace Game_Treasure_Hunter
         //для движения платформ
         int horizontalSpeedPlatform = 3;
         int verticalSpeedPlatform = 3;
-        int verticalSpeedSpike = 3;
+        double verticalSpeedSpike = 0.5;
         //для создания пулей врагов
         double speedEnemyBullet = 10;
         int bulletTimer = 0;
@@ -132,7 +132,7 @@ namespace Game_Treasure_Hunter
             // чтоб игрок не выходил за экран
             if (backgroundLevel2.Focusable == false)
             {
-                if (Canvas.GetLeft(hero) >= 1430)
+                if (Canvas.GetLeft(hero) >= 1460)
                 {
                     Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
                     //goRight = false;
@@ -147,7 +147,23 @@ namespace Game_Treasure_Hunter
                     //goLeft = false;
                 }
             }
+            if(backgroundLevel2.Focusable == true)
+            {
+                if (Canvas.GetLeft(hero) >= 3060)
+                {
+                    Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
+                }
+            }
+            
 
+            if (backgroundLevel3.Focusable == true )
+            {
+                if (Canvas.GetLeft(hero) <= 3210)
+                {
+                    Canvas.SetLeft(hero, Canvas.GetLeft(hero) + 10);
+                    //goLeft = false;
+                }
+            }
             //if (Canvas.GetLeft(backgroundLevel2) > 3200)
             //{
             //    Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
@@ -356,7 +372,7 @@ namespace Game_Treasure_Hunter
                     Rect robHitBox = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
                     if (robHitBox.IntersectsWith(playerHitBox))
                     {
-                        robotSpriteIndex += 0.5;
+                        robotSpriteIndex += 0.2;
                         if (robotSpriteIndex > 18)
                         {
                             robotSpriteIndex = 1;
@@ -520,11 +536,11 @@ namespace Game_Treasure_Hunter
 
                     if (snakeHitBox2.IntersectsWith(playerHitBox))
                     {
-                        if (Canvas.GetLeft(animal) < 3097)
+                        if (Canvas.GetLeft(animal) > 3097)
                         {
                             snake.AttackLeft();
                         }
-                        if (Canvas.GetLeft(animal) > 2671)
+                        if (Canvas.GetLeft(animal) < 2671)
                         {
                             snake.AttackRight();
                         }
@@ -594,11 +610,23 @@ namespace Game_Treasure_Hunter
                     }
 
                     Rect bulletHitBox = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
-                    if (Canvas.GetLeft(y) < 30 )
+
+                    if (backgroundLevel2.Focusable == false)
                     {
-                        itemRemover.Add(y);
+                        if (Canvas.GetLeft(y) > 1430 || Canvas.GetLeft(y) < 30)
+                        {
+                            itemRemover.Add(y);
+                        }
                     }
 
+                   
+                    if(backgroundLevel2.Focusable == true)
+                    {
+                        if (Canvas.GetLeft(y) > 3000 || Canvas.GetLeft(y) < 1615)
+                        {
+                            itemRemover.Add(y);
+                        }
+                    }
                     foreach(var z in MyCanvas.Children.OfType<Rectangle>())
                     {
                         if(z is Rectangle && (string)z.Tag == "stone")
@@ -789,14 +817,13 @@ namespace Game_Treasure_Hunter
 
                     foreach(var q in MyCanvas.Children.OfType<Rectangle>())
                     {
-                        if(q.Name.ToString() == "enemy1" || q.Name.ToString() == "enemy2")
+                        if(q.Name.ToString() == "enemy1")
                         {
                             Rect enemyHitBox = new Rect(Canvas.GetLeft(q), Canvas.GetTop(q), q.Width, q.Height);
                             if (bulletHitBox.IntersectsWith(enemyHitBox))
                             {
                                 itemRemover.Add(y);
                                 enemy.Health -= 1;
-                                enemyTwo.Health -= 1;
                                 enemySpriteIndex += 0.5;
                                 if (enemySpriteIndex > 8)
                                 {
@@ -804,10 +831,8 @@ namespace Game_Treasure_Hunter
                                 }
                                 enemy.HurtSprites(enemySpriteIndex);
                                 enemy1.Fill = enemy.enemySprite;
-                                enemyTwo.HurtSprites(enemySpriteIndex);
-                                enemy2.Fill = enemyTwo.enemySprite;
                             }
-                            if (enemy.Health <= 0 || enemyTwo.Health <= 0)
+                            if (enemy.Health <= 0)
                             {
                                 enemySpriteIndex += 0.5;
                                 if (enemySpriteIndex > 8)
@@ -816,6 +841,31 @@ namespace Game_Treasure_Hunter
                                 }
                                 enemy.DieSprites(enemySpriteIndex);
                                 enemy1.Fill = enemy.enemySprite;
+                            }
+                        }
+
+                        if (q.Name.ToString() == "enemy2")
+                        {
+                            Rect enemyHitBox2 = new Rect(Canvas.GetLeft(q), Canvas.GetTop(q), q.Width, q.Height);
+                            if (bulletHitBox.IntersectsWith(enemyHitBox2))
+                            {
+                                itemRemover.Add(y);
+                                enemyTwo.Health -= 1;
+                                enemySpriteIndex += 0.5;
+                                if (enemySpriteIndex > 8)
+                                {
+                                    enemySpriteIndex = 1;
+                                }
+                                enemyTwo.HurtSprites(enemySpriteIndex);
+                                enemy2.Fill = enemyTwo.enemySprite;
+                            }
+                            if (enemyTwo.Health <= 0)
+                            {
+                                enemySpriteIndex += 0.5;
+                                if (enemySpriteIndex > 8)
+                                {
+                                    itemRemover.Add(q);
+                                }
                                 enemyTwo.DieSprites(enemySpriteIndex);
                                 enemy2.Fill = enemyTwo.enemySprite;
                             }
@@ -824,14 +874,13 @@ namespace Game_Treasure_Hunter
 
                     foreach(var g in MyCanvas.Children.OfType<Rectangle>())
                     {
-                        if(g.Name.ToString() == "shooter1" || g.Name.ToString() == "shooter2")
+                        if(g.Name.ToString() == "shooter1")
                         {
                             Rect shooterHitBox = new Rect(Canvas.GetLeft(g), Canvas.GetTop(g), g.Width, g.Height);
                             if (bulletHitBox.IntersectsWith(shooterHitBox))
                             {
                                 itemRemover.Add(y);
                                 shooterOne.Health -= 1;
-                                shooterTwo.Health -= 1;
                                 shooterSpriteIndex += 0.5;
                                 if (shooterSpriteIndex > 10)
                                 {
@@ -839,10 +888,8 @@ namespace Game_Treasure_Hunter
                                 }
                                 shooterOne.HurtSprites(shooterSpriteIndex);
                                 shooter1.Fill = shooterOne.shooterSprite;
-                                shooterTwo.HurtSprites(shooterSpriteIndex);
-                                shooter2.Fill = shooterTwo.shooterSprite;
                             }
-                            if (shooterOne.Health <= 0 || shooterTwo.Health <= 0)
+                            if (shooterOne.Health <= 0)
                             {
                                 shooterSpriteIndex += 0.5;
                                 if (shooterSpriteIndex > 10)
@@ -851,6 +898,31 @@ namespace Game_Treasure_Hunter
                                 }
                                 shooterOne.DieSprites(shooterSpriteIndex);
                                 shooter1.Fill = shooterOne.shooterSprite;
+                            }
+                        }
+
+                        if (g.Name.ToString() == "shooter2")
+                        {
+                            Rect shooterHitBox2 = new Rect(Canvas.GetLeft(g), Canvas.GetTop(g), g.Width, g.Height);
+                            if (bulletHitBox.IntersectsWith(shooterHitBox2))
+                            {
+                                itemRemover.Add(y);
+                                shooterTwo.Health -= 1;
+                                shooterSpriteIndex += 0.5;
+                                if (shooterSpriteIndex > 10)
+                                {
+                                    shooterSpriteIndex = 1;
+                                }
+                                shooterTwo.HurtSprites(shooterSpriteIndex);
+                                shooter2.Fill = shooterTwo.shooterSprite;
+                            }
+                            if (shooterTwo.Health <= 0)
+                            {
+                                shooterSpriteIndex += 0.5;
+                                if (shooterSpriteIndex > 10)
+                                {
+                                    itemRemover.Add(g);
+                                }
                                 shooterTwo.DieSprites(shooterSpriteIndex);
                                 shooter2.Fill = shooterOne.shooterSprite;
                             }
@@ -896,7 +968,7 @@ namespace Game_Treasure_Hunter
                             {
                                 itemRemover.Add(y);
                                 terrorist.Health -= 1;
-                                terroristSpriteIndex += 0.5;
+                                terroristSpriteIndex += 0.2;
                                 if (terroristSpriteIndex > 6)
                                 {
                                     terroristSpriteIndex = 1;
@@ -936,7 +1008,7 @@ namespace Game_Treasure_Hunter
                             }
                             if (robot.Health <= 0)
                             {
-                                robotSpriteIndex += 0.5;
+                                robotSpriteIndex +=2;
                                 if (robotSpriteIndex > 15)
                                 {
                                     itemRemover.Add(i);
@@ -1105,7 +1177,7 @@ namespace Game_Treasure_Hunter
                     }
                 }
 
-                if((string)x.Tag =="spike")
+                if ((string)x.Tag == "spike")
                 {
                     Rect spikeHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (playerHitBox.IntersectsWith(spikeHitBox))
@@ -1114,7 +1186,7 @@ namespace Game_Treasure_Hunter
                     }
                 }
 
-                if((string)x.Tag == "coin")
+                if ((string)x.Tag == "coin")
                 {
                     Rect coinHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (playerHitBox.IntersectsWith(coinHitBox))
@@ -1135,7 +1207,7 @@ namespace Game_Treasure_Hunter
                     if (playerHitBox.IntersectsWith(bulletsHitBox))
                     {
                         itemRemover.Add(x);
-                        bulletsScore += 5;
+                        bulletsScore += 10;
                     }
                 }
 
@@ -1207,7 +1279,11 @@ namespace Game_Treasure_Hunter
 
                 if(x is Rectangle && (string)x.Tag == "enemyBullet2")
                 {
-                    //Canvas.SetLeft(x,Canvas.GetLeft(x) + speedEnemyBullet );  
+                    if (shooterTwo.Speed < 0)
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) - speedEnemyBullet);
+
+                    if (shooterTwo.Speed > 0)
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) + speedEnemyBullet);
 
                     if (Canvas.GetLeft(x) > 2450 || Canvas.GetLeft(x) < 1630)
                     {
@@ -1411,12 +1487,18 @@ namespace Game_Treasure_Hunter
                 if(x.Name.ToString() == "door2")
                 {
                     Rect doorHitBox2 = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-                    if(gem == 3 && robot.Health == 0)
-                       {
+                    if(gem == 3 && robot.Health <= 0)
+                    {
                         if (playerHitBox.IntersectsWith(doorHitBox2))
                         {
+                            backgroundLevel2.Focusable = false;
+                            backgroundLevel3.Focusable = true;
+                            gem = 0;
+                            treasuresScore.Foreground = Brushes.White;
                             Canvas.SetLeft(hero, 3242);
                             Canvas.SetTop(hero, 632);
+                            Canvas.SetLeft(myGrid, 3230);
+                            Canvas.SetTop(myGrid, 10);
                         }
                     }
                 }
@@ -1458,20 +1540,26 @@ namespace Game_Treasure_Hunter
                 {
                    treasuresScore.Content = "Сокровища: " + gem + Environment.NewLine + "Первый уровень" + Environment.NewLine + "пройден!";
                 }
+
                 
+
                 //MessageBox.Show("Первый уровень пройден!", "TREASURE HUNTER");
             }
 
-            if(gem == 3 && robot.Health == 0)
+            if (gem == 3 && backgroundLevel2.Focusable == true)
             {
                 ImageBrush doorOpen = new ImageBrush();
                 doorOpen.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/doorOpen_02.png"));
                 door2.Fill = doorOpen;
-                treasuresScore.Foreground = Brushes.Yellow;
-                MessageBox.Show("Второй уровень пройден!", "TREASURE HUNTER");
+                //treasuresScore.Foreground = Brushes.Yellow;
+                if (robot.Health <= 0)
+                {
+                    treasuresScore.Content = "Сокровища: " + gem + Environment.NewLine + "Второй уровень" + Environment.NewLine + "пройден!";
+                }
+                //MessageBox.Show("Второй уровень пройден!", "TREASURE HUNTER");
             }
 
-            if(gem == 3 && ninjaBoss.Health == 0 && bear.Health == 0)
+            if (gem == 3 && ninjaBoss.Health == 0 && bear.Health == 0)
             {
                 ImageBrush chestImage = new ImageBrush();
                 chestImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/Treasure_open.png"));
@@ -1790,10 +1878,10 @@ namespace Game_Treasure_Hunter
             shooter2.Fill = shooterTwo.shooterSprite;
             terrorist.RunSprites(1);
             terror.Fill = terrorist.terroristSprite;
+            terror.Stroke = Brushes.Black;
             robot.RunSprites(1);
             robo.Fill = robot.robotSprite;
-            //snake.UploadingImage();
-            //snake.InitPictures();
+            robo.Stroke = Brushes.Black;
             Canvas.SetTop(snake.snakeOne,571);
             Canvas.SetLeft(snake.snakeOne, 3097);
             //MyCanvas.Children.Add(snake.snakeOne);
@@ -2027,16 +2115,22 @@ namespace Game_Treasure_Hunter
             // положение от куда стреляют
             Canvas.SetLeft(enemyBullet, Canvas.GetLeft(shooter1) + shooter1.Height/2);
             Canvas.SetTop(enemyBullet, Canvas.GetTop(shooter1) + shooter1.Height/2 +24);
+
             Canvas.SetLeft(enemyBullet2, Canvas.GetLeft(shooter2) + shooter2.Height/2);
-            Canvas.SetTop(enemyBullet2, Canvas.GetTop(shooter2) - shooter2.Height / 2 + 24);
+            Canvas.SetTop(enemyBullet2, Canvas.GetTop(shooter2) + shooter2.Height / 2 + 24);
+
             Canvas.SetLeft(enemyBullet3, Canvas.GetTop(terror) + (terror.Height / 2) - 10);
             Canvas.SetTop(enemyBullet3, Canvas.GetLeft(terror) - enemyBullet3.Width);
+
             if(Canvas.GetTop(hero) < 260 && Canvas.GetTop(hero) > 145 && shooterOne.Health > 0)
             {
                 MyCanvas.Children.Add(enemyBullet);
             }
-           
-            MyCanvas.Children.Add(enemyBullet2);
+           if(Canvas.GetTop(hero) < 400 && Canvas.GetTop(hero) > 120 && shooterTwo.Health > 0)
+           {
+                MyCanvas.Children.Add(enemyBullet2);
+           }
+            
             MyCanvas.Children.Add(enemyBullet3);
 
 
@@ -2052,30 +2146,30 @@ namespace Game_Treasure_Hunter
             //    speedEnemyBullet++;
             //    Canvas.SetLeft(enemyBullet, Canvas.GetLeft(enemyBullet) + speedEnemyBullet);
             //}
-            if (Canvas.GetLeft(shooter2) < 1878 || Canvas.GetLeft(shooter2) == 1858)
-            {
-                speedEnemyBullet++;
-                Canvas.SetLeft(enemyBullet2, Canvas.GetLeft(enemyBullet2) - speedEnemyBullet);
-            }
-            if (Canvas.GetLeft(shooter2) > 1836 || Canvas.GetLeft(shooter2) == 1856)
-            {
-                //MyCanvas.Children.Add(enemyBullet2);
-                speedEnemyBullet++;
-                Canvas.SetLeft(enemyBullet2, Canvas.GetLeft(enemyBullet2) + speedEnemyBullet);
-            }
+            //if (Canvas.GetLeft(shooter2) < 1878 || Canvas.GetLeft(shooter2) == 1858)
+            //{
+            //    speedEnemyBullet++;
+            //    Canvas.SetLeft(enemyBullet2, Canvas.GetLeft(enemyBullet2) - speedEnemyBullet);
+            //}
+            //if (Canvas.GetLeft(shooter2) > 1836 || Canvas.GetLeft(shooter2) == 1856)
+            //{
+            //    //MyCanvas.Children.Add(enemyBullet2);
+            //    speedEnemyBullet++;
+            //    Canvas.SetLeft(enemyBullet2, Canvas.GetLeft(enemyBullet2) + speedEnemyBullet);
+            //}
 
-            if (Canvas.GetLeft(terror) < 2214 || Canvas.GetLeft(terror) == 2194)
-            {
+            //if (Canvas.GetLeft(terror) < 2214 || Canvas.GetLeft(terror) == 2194)
+            //{
 
-                speedEnemyBullet++;
-                Canvas.SetLeft(enemyBullet3, Canvas.GetLeft(enemyBullet3) - speedEnemyBullet);
-            }
-            if (Canvas.GetLeft(terror) > 2174 || Canvas.GetLeft(terror) == 2194)
-            {
-                //MyCanvas.Children.Add(enemyBullet3);
-                speedEnemyBullet++;
-                Canvas.SetLeft(enemyBullet3, Canvas.GetLeft(enemyBullet3) + speedEnemyBullet);
-            }
+            //    speedEnemyBullet++;
+            //    Canvas.SetLeft(enemyBullet3, Canvas.GetLeft(enemyBullet3) - speedEnemyBullet);
+            //}
+            //if (Canvas.GetLeft(terror) > 2174 || Canvas.GetLeft(terror) == 2194)
+            //{
+            //    //MyCanvas.Children.Add(enemyBullet3);
+            //    speedEnemyBullet++;
+            //    Canvas.SetLeft(enemyBullet3, Canvas.GetLeft(enemyBullet3) + speedEnemyBullet);
+            //}
         }
 
         private void GunFireMaker()
@@ -2353,221 +2447,165 @@ namespace Game_Treasure_Hunter
         {
             Canvas.SetTop(spike5, Canvas.GetTop(spike5) - verticalSpeedSpike);
 
-            if (Canvas.GetTop(spike5) > 500)
-                verticalSpeedSpike++;
+            if (Canvas.GetTop(spike5) < 656)
+            {
+                verticalSpeedSpike--;
+            }
+                
 
-            if (Canvas.GetTop(spike5) > 650)
+            if (Canvas.GetTop(spike5) > 731)
             {
                 verticalSpeedSpike++;
             }
 
             Canvas.SetTop(spike6, Canvas.GetTop(spike6) + verticalSpeedSpike);
           
-            if (Canvas.GetTop(spike6) < 650)
-                verticalSpeedSpike--;
-
-            if (Canvas.GetTop(spike6) < 500)
+            if (Canvas.GetTop(spike6) > 731)
             {
                 verticalSpeedSpike--;
             }
 
-            Canvas.SetLeft(soldier, Canvas.GetLeft(soldier) - soldierOne.Speed);
-            if (Canvas.GetLeft(soldier) < 2175 || Canvas.GetLeft(soldier) > 1983)
+            if (Canvas.GetTop(spike6) < 656)
             {
-                soldierOne.Speed = -soldierOne.Speed;
+                verticalSpeedSpike++;
             }
-            if (Canvas.GetLeft(soldier) < 2175)
+
+            Canvas.SetLeft(soldier, Canvas.GetLeft(soldier) + soldierOne.Speed);
+
+            soldierSpriteIndex += 0.5;
+            if (soldierSpriteIndex > 10)
             {
-                soldierSpriteIndex += 0.5;
-                if (soldierSpriteIndex > 10)
-                {
-                    soldierSpriteIndex = 1;
-                }
-                soldierOne.RunSprites(soldierSpriteIndex);
-                soldier.Fill = soldierOne.soldierSprite;
+                soldierSpriteIndex = 1;
+            }
+            soldierOne.RunSprites(soldierSpriteIndex);
+            soldier.Fill = soldierOne.soldierSprite;
+
+            if (Canvas.GetLeft(soldier) > 2175)
+            {
+                soldierOne.Speed--;
                 soldier.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
             }
-            if (Canvas.GetLeft(soldier) < 2056 || Canvas.GetLeft(soldier) == 2076)
-            {
-                soldierOne.Speed = 0;
-                soldierSpriteIndex += 0.5;
-                if (soldierSpriteIndex > 10)
-                {
-                    soldierOne.Speed = -5;
-                    soldierSpriteIndex = 1;
-                }
-                soldierOne.IdleSoSprites(soldierSpriteIndex);
-                soldier.Fill = soldierOne.soldierSprite;
-            }
+            //if (Canvas.GetLeft(soldier) < 2056 || Canvas.GetLeft(soldier) == 2076)
+            //{
+            //    soldierOne.Speed = 0;
+            //    soldierSpriteIndex += 0.5;
+            //    if (soldierSpriteIndex > 10)
+            //    {
+            //        soldierOne.Speed = -5;
+            //        soldierSpriteIndex = 1;
+            //    }
+            //    soldierOne.IdleSoSprites(soldierSpriteIndex);
+            //    soldier.Fill = soldierOne.soldierSprite;
+            //}
 
-            if (Canvas.GetLeft(soldier) > 1983)
+            if (Canvas.GetLeft(soldier) < 1983)
             {
-                soldierSpriteIndex += 0.5;
-                if (soldierSpriteIndex > 10)
-                {
-                    soldierSpriteIndex = 1;
-                }
-                soldierOne.RunSprites(soldierSpriteIndex);
-                soldier.Fill = soldierOne.soldierSprite;
+                soldierOne.Speed++;
                 soldier.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
             }
 
             Canvas.SetLeft(shooter2, Canvas.GetLeft(shooter2) + shooterTwo.Speed);
-            if (Canvas.GetLeft(shooter2) < 2136 || Canvas.GetLeft(shooter2) > 1624)
-            {
-                shooterTwo.Speed = -shooterTwo.Speed;
-            }
-            if (Canvas.GetLeft(shooter2) < 2136)
-            {
-                shooterSpriteIndex += 0.5;
-                if (shooterSpriteIndex > 10)
-                {
-                    shooterSpriteIndex = 1;
-                }
-                shooterTwo.RunSprites(shooterSpriteIndex);
-                shooter2.Fill = shooterTwo.shooterSprite;
-                if (Canvas.GetLeft(shooter2) < 1878 || Canvas.GetLeft(shooter2) == 1858)
-                {
-                    shooterTwo.Speed = 0;
-                    shooterSpriteIndex += 0.5;
-                    if (shooterSpriteIndex > 10)
-                    {
-                        shooterTwo.Speed = -5;
-                        shooterSpriteIndex = 1;
-                    }
-                    shooterTwo.AttackSprites(shooterSpriteIndex);
-                    shooter2.Fill = shooterTwo.shooterSprite;
-                }
 
+            shooterSpriteIndex += 0.5;
+            if (shooterSpriteIndex > 10)
+            {
+                shooterSpriteIndex = 1;
+            }
+            shooterTwo.RunSprites(shooterSpriteIndex);
+            shooter2.Fill = shooterTwo.shooterSprite;
+           
+            if (Canvas.GetLeft(shooter2) > 2136)
+            {
+                shooterTwo.Speed--;
                 shooter2.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
             }
-            if (Canvas.GetLeft(shooter2) > 1624)
+
+            if (Canvas.GetTop(hero) < 400 && Canvas.GetTop(hero) > 120)
             {
+                //shooterTwo.Speed = 0;
                 shooterSpriteIndex += 0.5;
                 if (shooterSpriteIndex > 10)
                 {
                     shooterSpriteIndex = 1;
                 }
-                shooterTwo.RunSprites(shooterSpriteIndex);
+                shooterTwo.AttackSprites(shooterSpriteIndex);
                 shooter2.Fill = shooterTwo.shooterSprite;
-                if (Canvas.GetLeft(shooter2) > 1836 || Canvas.GetLeft(shooter2) == 1856)
-                {
-                    shooterTwo.Speed = 0;
-                    shooterSpriteIndex += 0.5;
-                    if (shooterSpriteIndex > 10)
-                    {
-                        shooterTwo.Speed = 5;
-                        shooterSpriteIndex = 1;
-                    }
-                    shooterTwo.AttackSprites(shooterSpriteIndex);
-                    shooter2.Fill = shooterTwo.shooterSprite;
-                }
+            }
+
+            if (Canvas.GetLeft(shooter2) < 1624)
+            {
+                shooterTwo.Speed++;
                 shooter2.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
             }
 
-            Canvas.SetLeft(terror, Canvas.GetLeft(terror) - terrorist.Speed);
-            if (Canvas.GetLeft(terror) < 2438 || Canvas.GetLeft(terror) > 1762)
-            {
-                terrorist.Speed = -terrorist.Speed;
-            }
-            if (Canvas.GetLeft(terror) < 2438)
-            {
-                terroristSpriteIndex += 0.5;
-                if (terroristSpriteIndex > 8)
-                {
-                    terroristSpriteIndex = 1;
-                }
-                terrorist.RunSprites(terroristSpriteIndex);
-                terror.Fill = terrorist.terroristSprite;
-                if (Canvas.GetLeft(terror) < 2214 || Canvas.GetLeft(terror) == 2194)
-                {
-                    terrorist.Speed = 0;
-                    terroristSpriteIndex += 0.5;
-                    if (terroristSpriteIndex > 4)
-                    {
-                        terrorist.Speed = -5;
-                        terroristSpriteIndex = 1;
-                    }
-                    terrorist.ShootSprites(terroristSpriteIndex);
-                    terror.Fill = terrorist.terroristSprite;
-                }
+            Canvas.SetLeft(terror, Canvas.GetLeft(terror) + terrorist.Speed);
 
+            terroristSpriteIndex += 0.5;
+            if (terroristSpriteIndex > 8)
+            {
+                terroristSpriteIndex = 1;
+            }
+            terrorist.RunSprites(terroristSpriteIndex);
+            terror.Fill = terrorist.terroristSprite;
+
+           
+            if (Canvas.GetLeft(terror) > 2438)
+            {
+                terrorist.Speed--;
                 terror.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
             }
-            if (Canvas.GetLeft(terror) > 1762)
+
+            //if (Canvas.GetLeft(terror) < 2214 || Canvas.GetLeft(terror) == 2194)
+            //{
+            //    terrorist.Speed = 0;
+            //    terroristSpriteIndex += 0.5;
+            //    if (terroristSpriteIndex > 4)
+            //    {
+            //        terrorist.Speed = -5;
+            //        terroristSpriteIndex = 1;
+            //    }
+            //    terrorist.ShootSprites(terroristSpriteIndex);
+            //    terror.Fill = terrorist.terroristSprite;
+            //}
+
+            if (Canvas.GetLeft(terror) < 1782)
             {
-                terroristSpriteIndex += 0.5;
-                if (terroristSpriteIndex > 8)
-                {
-                    terroristSpriteIndex = 1;
-                }
-                terrorist.RunSprites(terroristSpriteIndex);
-                terror.Fill = terrorist.terroristSprite;
-                if (Canvas.GetLeft(terror) > 2174 || Canvas.GetLeft(terror) == 2194)
-                {
-                    terrorist.Speed = 0;
-                    terroristSpriteIndex += 0.5;
-                    if (terroristSpriteIndex > 4)
-                    {
-                        terrorist.Speed = 5;
-                        terroristSpriteIndex = 1;
-                    }
-                    terrorist.ShootSprites(terroristSpriteIndex);
-                    terror.Fill = terrorist.terroristSprite;
-                }
+                terrorist.Speed++;
                 terror.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
             }
 
-            Canvas.SetLeft(robo, Canvas.GetLeft(robo) - robot.Speed);
-            if (Canvas.GetLeft(robo) < 2921 || Canvas.GetLeft(robo) > 2537)
+            Canvas.SetLeft(robo, Canvas.GetLeft(robo) + robot.Speed);
+            robotSpriteIndex += 0.5;
+            if (robotSpriteIndex > 12)
             {
-                robot.Speed = -robot.Speed;
+                robotSpriteIndex = 1;
             }
-            if (Canvas.GetLeft(robo) < 2921)
-            {
-                robotSpriteIndex += 0.5;
-                if (robotSpriteIndex > 12)
-                {
-                    robotSpriteIndex = 1;
-                }
-                robot.RunSprites(robotSpriteIndex);
-                robo.Fill = robot.robotSprite;
-                if (Canvas.GetLeft(robo) < 2758 || Canvas.GetLeft(robo) == 2738)
-                {
-                    robot.Speed = 0;
-                    robotSpriteIndex += 0.5;
-                    if (robotSpriteIndex > 16)
-                    {
-                        robot.Speed = -5;
-                        robotSpriteIndex = 1;
-                    }
-                    robot.LazerSprites(robotSpriteIndex);
-                    robo.Fill = robot.robotSprite;
-                }
+            robot.RunSprites(robotSpriteIndex);
+            robo.Fill = robot.robotSprite;
 
+            if (Canvas.GetLeft(robo) > 2921)
+            {
+                robot.Speed--;
                 robo.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
             }
-            if (Canvas.GetLeft(robo) > 2537)
+
+
+            //if (Canvas.GetLeft(robo) < 2758 || Canvas.GetLeft(robo) == 2738)
+            //{
+            //    robot.Speed = 0;
+            //    robotSpriteIndex += 0.5;
+            //    if (robotSpriteIndex > 16)
+            //    {
+            //        robot.Speed = -5;
+            //        robotSpriteIndex = 1;
+            //    }
+            //    robot.LazerSprites(robotSpriteIndex);
+            //    robo.Fill = robot.robotSprite;
+            //}
+
+            if (Canvas.GetLeft(robo) < 2537)
             {
-                robotSpriteIndex += 0.5;
-                if (robotSpriteIndex > 12)
-                {
-                    robotSpriteIndex = 1;
-                }
-                robot.RunSprites(robotSpriteIndex);
-                robo.Fill = robot.robotSprite;
-                if (Canvas.GetLeft(robo) > 2718 || Canvas.GetLeft(robo) == 2738)
-                {
-                    robot.Speed = 0;
-                    robotSpriteIndex += 0.5;
-                    if (robotSpriteIndex > 16)
-                    {
-                        robot.Speed = 5;
-                        robotSpriteIndex = 1;
-                    }
-                    robot.LazerSprites(robotSpriteIndex);
-                    robo.Fill = robot.robotSprite;
-                }
+                robot.Speed++;
                 robo.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
             }
 
@@ -2575,18 +2613,20 @@ namespace Game_Treasure_Hunter
             {
                 if((string)s.Tag == "snake")
                 {
-                    Canvas.SetLeft(s, Canvas.GetLeft(s) - snake.Speed);
-                    if(Canvas.GetLeft(s) < 3097 || Canvas.GetLeft(s) > 2671)
-                    {
-                        snake.Speed = -snake.Speed;
-                    }
+                    Canvas.SetLeft(s, Canvas.GetLeft(s) + snake.Speed);
+                    //if(Canvas.GetLeft(s) < 3097 || Canvas.GetLeft(s) > 2671)
+                    //{
+                    //    snake.Speed = -snake.Speed;
+                    //}
 
-                    if(Canvas.GetLeft(s) < 3097)
+                    if(Canvas.GetLeft(s) > 3097)
                     {
+                        snake.Speed--;
                         snake.MoveLeft();
                     }
-                    if(Canvas.GetLeft(s) > 2671)
+                    if(Canvas.GetLeft(s) < 2671)
                     {
+                        snake.Speed++;
                         snake.MoveRight();
                     }
                 }

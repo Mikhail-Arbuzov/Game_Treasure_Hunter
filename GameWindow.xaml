@@ -30,7 +30,7 @@
                 <Rectangle x:Name="platform5" Tag="platforma" Fill="Pink" Height="104" Canvas.Left="1339" Canvas.Top="301" Width="256"/>
                 <Rectangle x:Name="platform6" Tag="platforma" Fill="Pink" Height="104" Canvas.Left="1078" Canvas.Top="342" Width="256"/>
                 <Rectangle x:Name="snow" Fill="Gray" Height="64" Canvas.Left="571" Width="1024"/>
-                <Rectangle x:Name="door1" Fill="Black" Height="160" Canvas.Left="1404" Width="130" Canvas.Top="141" RenderTransformOrigin="0.074,0.475"/>
+                <Rectangle x:Name="door1" Fill="Black" Height="160" Canvas.Left="1393" Width="130" Canvas.Top="143" RenderTransformOrigin="0.074,0.475"/>
                 <Rectangle x:Name="shooter1" Fill="Brown" Height="128" Canvas.Left="151" Canvas.Top="130" Width="128"/>
                 <Rectangle x:Name="enemy1" Fill="LightCyan" Height="128" Canvas.Left="1055" Canvas.Top="53" Width="128"/>
                 <Rectangle x:Name="troll" Fill="GhostWhite" Height="256" Canvas.Left="1339" Canvas.Top="486" Width="256"/>
@@ -43,29 +43,29 @@
                 <Rectangle x:Name="coin7" Tag="coin" Fill="Gold" Height="38" Canvas.Left="1012" Canvas.Top="143" Width="38" RenderTransformOrigin="-0.074,2.642"/>
                 <Rectangle x:Name="coin8" Tag="coin" Fill="Gold" Height="38" Canvas.Left="1104" Canvas.Top="304" Width="38" RenderTransformOrigin="-0.074,2.642"/>
                 <Rectangle x:Name="coin9" Tag="coin" Fill="Gold" Height="38" Canvas.Left="1147" Canvas.Top="304" Width="38" RenderTransformOrigin="-0.074,2.642"/>
-                <Rectangle x:Name="coin10" Tag="coin" Fill="Gold" Height="38" Canvas.Left="1361" Canvas.Top="263" Width="38" RenderTransformOrigin="-0.074,2.642"/>
+                <Rectangle x:Name="coin10" Tag="coin" Fill="Gold" Height="38" Canvas.Left="1350" Canvas.Top="265" Width="38" RenderTransformOrigin="-0.074,2.642"/>
                 <Rectangle x:Name="healthRect" Tag="healths" Fill="Red" Height="32" Canvas.Left="956" Canvas.Top="149" Width="32" RenderTransformOrigin="0.738,0.488"/>
                 <Rectangle x:Name="speedRect" Tag="speeds" Fill="Coral" Height="32" Canvas.Left="356" Canvas.Top="226" Width="32" RenderTransformOrigin="1.638,0.387"/>
                 <Rectangle x:Name="amethyst" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="892" Canvas.Top="149" Width="32" RenderTransformOrigin="1.638,0.387"/>
-                <Rectangle x:Name="emerald" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="1476" Canvas.Top="269" Width="32" RenderTransformOrigin="1.638,0.387"/>
+                <Rectangle x:Name="emerald" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="1208" Canvas.Top="310" Width="32" RenderTransformOrigin="1.638,0.387"/>
                 <Rectangle x:Name="ruby" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="1491" Canvas.Top="710" Width="32" RenderTransformOrigin="1.638,0.387"/>
-                <Rectangle x:Name="bulletsRect" Tag="bullets" Fill="DarkSlateBlue" Height="32" Canvas.Left="1208" Canvas.Top="310" Width="32" RenderTransformOrigin="1.638,0.387"/>
+                <Rectangle x:Name="bulletsRect" Tag="bullets" Fill="DarkSlateBlue" Height="32" Canvas.Left="1491" Canvas.Top="271" Width="32" RenderTransformOrigin="1.638,0.387"/>
 
                 <Rectangle x:Name="ground5" Tag="ground" Fill="Gray" Height="92" Canvas.Left="1600" Canvas.Top="708" Width="533"/>
                 <Rectangle x:Name="ground6" Tag="ground" Fill="Gray" Height="92" Canvas.Left="2133" Canvas.Top="708" Width="533"/>
-                <Rectangle x:Name="spike5" Tag="spike" Fill="Aqua" Height="64" Canvas.Left="2691" Canvas.Top="650" Width="48" />
-                <Rectangle x:Name="spike6" Tag="spike" Fill="Aqua" Height="64" Canvas.Left="2842" Canvas.Top="500" Width="48" />
+                <Rectangle x:Name="spike5" Tag="spike" Fill="Aqua" Height="64" Canvas.Left="2691" Canvas.Top="731" Width="48" />
+                <Rectangle x:Name="spike6" Tag="spike" Fill="Aqua" Height="64" Canvas.Left="2760" Canvas.Top="656" Width="48" />
                 <Rectangle x:Name="ground7" Tag="ground" Fill="Gray" Height="92" Canvas.Left="2666" Canvas.Top="708" Width="533"/>
                 <Rectangle x:Name="grass" Fill="Green" Height="90" Canvas.Left="1983" Canvas.Top="618" Width="150"/>
-                <Rectangle x:Name="surface1" Tag="surface" Fill="Red" Height="18" Canvas.Left="1762" Canvas.Top="491" Width="200"/>
-                <Rectangle x:Name="surface2" Tag="surface" Fill="Red" Height="18" Canvas.Left="1983" Canvas.Top="434" Width="320"/>
-                <Rectangle x:Name="surface3" Tag="surface" Fill="Red" Height="18" Canvas.Left="1624" Canvas.Top="263" Width="640"/>
-                <Rectangle x:Name="surface4" Tag="surface" Fill="Red" Height="18" Canvas.Left="2537" Canvas.Top="367" Width="640"/>
-                <Rectangle x:Name="surface5" Tag="surface" Fill="Red" Height="18" Canvas.Left="2354" Canvas.Top="434" Width="160"/>
+                <Rectangle x:Name="surface1" Tag="surface" Fill="#ae703e" Height="18" Canvas.Left="1762" Canvas.Top="491" Width="200"/>
+                <Rectangle x:Name="surface2" Tag="surface" Fill="#ae703e" Height="18" Canvas.Left="1983" Canvas.Top="434" Width="320"/>
+                <Rectangle x:Name="surface3" Tag="surface" Fill="#955f36" Height="18" Canvas.Left="1624" Canvas.Top="263" Width="640"/>
+                <Rectangle x:Name="surface4" Tag="surface" Fill="#976036" Height="18" Canvas.Left="2537" Canvas.Top="354" Width="640"/>
+                <Rectangle x:Name="surface5" Tag="surface" Fill="#ae703e" Height="18" Canvas.Left="2354" Canvas.Top="434" Width="160"/>
                 <Rectangle x:Name="box1" Tag="box" Fill="Bisque" Height="200" Canvas.Left="1762" Canvas.Top="486" Width="200"/>
                 <Rectangle x:Name="box2" Tag="box" Fill="Bisque" Height="160" Canvas.Left="1983" Canvas.Top="427" Width="320"/>
                 <Rectangle x:Name="box3" Tag="box" Fill="Bisque" Height="160" Canvas.Left="2354" Canvas.Top="427" Width="160"/>
-                <Rectangle x:Name="box4" Tag="box" Fill="Bisque" Height="128" Canvas.Left="2537" Canvas.Top="363" Width="640"/>
+                <Rectangle x:Name="box4" Tag="box" Fill="Bisque" Height="128" Canvas.Left="2537" Canvas.Top="355" Width="640"/>
                 <Rectangle x:Name="box5" Tag="box" Fill="Bisque" Height="101" Canvas.Left="1624" Canvas.Top="258" Width="640"/>
                 <Rectangle x:Name="cactus" Fill="DarkGreen" Height="96" Canvas.Left="1671" Canvas.Top="395" Width="86" RenderTransformOrigin="0.437,0.696"/>
                 <Rectangle x:Name="signArrow" Fill="Brown" Height="100" Canvas.Left="2566" Canvas.Top="586" Width="100"/>
@@ -86,8 +86,8 @@
                 <Rectangle x:Name="speedRect1" Tag="speeds" Fill="Coral" Height="32" Canvas.Left="2438" Canvas.Top="390" Width="32"/>
                 <Rectangle x:Name="bulletsRect1" Tag="bullets" Fill="Black" Height="32" Canvas.Left="2251" Canvas.Top="395" Width="32"/>
                 <Rectangle x:Name="sapphire" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="1874" Canvas.Top="226" Width="32"/>
-                <Rectangle x:Name="diamond" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="3125" Canvas.Top="327" Width="32"/>
-                <Rectangle x:Name="bloodStone" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="3145" Canvas.Top="676" Width="32"/>
+                <Rectangle x:Name="diamond" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="3025" Canvas.Top="327" Width="32"/>
+                <Rectangle x:Name="bloodStone" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="3045" Canvas.Top="676" Width="32"/>
 
                 <Rectangle x:Name="ground8" Tag ="ground" Fill="Blue" Height="40" Canvas.Left="3199" Canvas.Top="760" Width="508"/>
                 <Rectangle x:Name="ground9" Tag ="ground" Fill="Blue" Height="40" Canvas.Left="3707" Canvas.Top="760" Width="584"/>
@@ -141,7 +141,7 @@
 
             </Canvas>
         </ScrollViewer>
-        </StackPanel>
+    </StackPanel>
 
 
 </Window>

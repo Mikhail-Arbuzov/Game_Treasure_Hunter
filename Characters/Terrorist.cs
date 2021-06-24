@@ -22,7 +22,7 @@ namespace Game_Treasure_Hunter
             }
             set
             {
-                if (value > 0)
+               //if (value > 0)
                     health = value;
             }
         }
