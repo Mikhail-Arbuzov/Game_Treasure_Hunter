@@ -69,7 +69,7 @@
                 <Rectangle x:Name="box5" Tag="box" Fill="Bisque" Height="101" Canvas.Left="1624" Canvas.Top="258" Width="640"/>
                 <Rectangle x:Name="cactus" Fill="DarkGreen" Height="96" Canvas.Left="1671" Canvas.Top="395" Width="86" RenderTransformOrigin="0.437,0.696"/>
                 <Rectangle x:Name="signArrow" Fill="Brown" Height="100" Canvas.Left="2566" Canvas.Top="586" Width="100"/>
-                <Rectangle x:Name="door2" Fill="Chocolate" Height="160" Canvas.Left="1648" Canvas.Top="98" Width="130"/>
+                <Rectangle x:Name="door2" Fill="Chocolate" Height="160" Canvas.Left="1648" Canvas.Top="100" Width="130"/>
                 <Rectangle x:Name="soldier" Fill="CadetBlue" Height="128" Canvas.Left="2175" Canvas.Top="299" Width="128"/>
                 <Rectangle x:Name="shooter2" Fill="CadetBlue" Height="128" Canvas.Left="1624" Canvas.Top="130" Width="128"/>
                 <Rectangle x:Name="terror" Fill="DarkBlue" Height="160" Canvas.Left="2438" Canvas.Top="548" Width="128"/>

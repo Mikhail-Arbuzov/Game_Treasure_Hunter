@@ -130,7 +130,7 @@ namespace Game_Treasure_Hunter
             treasuresScore.Content = "Сокровища: " + gem;
 
             // чтоб игрок не выходил за экран
-            if (backgroundLevel2.Focusable == false)
+            if (backgroundLevel.Focusable == false && backgroundLevel3.Focusable == false && backgroundLevel2.Focusable == false)
             {
                 if (Canvas.GetLeft(hero) >= 1460)
                 {
@@ -147,16 +147,16 @@ namespace Game_Treasure_Hunter
                     //goLeft = false;
                 }
             }
-            if(backgroundLevel2.Focusable == true)
+            if (backgroundLevel3.Focusable == false)
             {
                 if (Canvas.GetLeft(hero) >= 3060)
                 {
                     Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
                 }
             }
-            
 
-            if (backgroundLevel3.Focusable == true )
+
+            if (backgroundLevel3.Focusable == true)
             {
                 if (Canvas.GetLeft(hero) <= 3210)
                 {
@@ -164,6 +164,15 @@ namespace Game_Treasure_Hunter
                     //goLeft = false;
                 }
             }
+
+            //if (backgroundLevel.Focusable == false)
+            //{
+            //    if (Canvas.GetLeft(hero) >= 4660)
+            //    {
+            //        Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
+            //        //goRight = false;
+            //    }
+            //}
             //if (Canvas.GetLeft(backgroundLevel2) > 3200)
             //{
             //    Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
@@ -1491,8 +1500,8 @@ namespace Game_Treasure_Hunter
                     {
                         if (playerHitBox.IntersectsWith(doorHitBox2))
                         {
-                            backgroundLevel2.Focusable = false;
                             backgroundLevel3.Focusable = true;
+                            backgroundLevel2.Focusable = false;
                             gem = 0;
                             treasuresScore.Foreground = Brushes.White;
                             Canvas.SetLeft(hero, 3242);
