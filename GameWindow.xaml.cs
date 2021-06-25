@@ -36,7 +36,8 @@ namespace Game_Treasure_Hunter
         int limit = 25;
         int stoneSpeed = 10;
         //для движения платформ
-        int horizontalSpeedPlatform = 3;
+        double horizontalSpeedPlatform = 3;
+        double horizontalSpeedPlatform2 = 3;
         int verticalSpeedPlatform = 3;
         double verticalSpeedSpike = 0.5;
         //для создания пулей врагов
@@ -59,6 +60,9 @@ namespace Game_Treasure_Hunter
         int score;
         int bulletsScore;
         int gem;
+
+        //double limitTimePosition = 60;
+        //double timePosition = 60;
 
         Player player;
         Wolf wolf;
@@ -237,7 +241,7 @@ namespace Game_Treasure_Hunter
                 GunFireMaker();
                 bulletTimer = bulletTimerLimit;
             }
-            //взаимодействие врагов с игроком
+            //взаимодействие врагов с игроком 
             playerHitBox = new Rect(Canvas.GetLeft(hero), Canvas.GetTop(hero), hero.Width, hero.Height);
 
             foreach(var foe in MyCanvas.Children.OfType<Rectangle>())
@@ -268,6 +272,7 @@ namespace Game_Treasure_Hunter
                         player.HurtSprites(playerSpriteIndex);
                         hero.Fill = player.playerSprite;
                     }
+
                 }
 
                 if(foe.Name.ToString() == "shooter1" || foe.Name.ToString() == "shooter2")
@@ -519,11 +524,11 @@ namespace Game_Treasure_Hunter
                     {
                         if (Canvas.GetLeft(animal) < Canvas.GetLeft(ground13))
                         {
-                            bear.AttackLeft();
+                            bear.AttackRight();
                         }
                         if (Canvas.GetLeft(animal) + animal.Width > Canvas.GetLeft(ground13) + ground13.Width)
                         {
-                            bear.AttackRight();
+                             bear.AttackLeft();
                         }
                     }
                     if (playerHitBox.IntersectsWith(bearHitBox2))
@@ -620,7 +625,7 @@ namespace Game_Treasure_Hunter
 
                     Rect bulletHitBox = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
 
-                    if (backgroundLevel2.Focusable == false)
+                    if (backgroundLevel.Focusable == false && backgroundLevel3.Focusable == false && backgroundLevel2.Focusable == false)
                     {
                         if (Canvas.GetLeft(y) > 1430 || Canvas.GetLeft(y) < 30)
                         {
@@ -636,7 +641,16 @@ namespace Game_Treasure_Hunter
                             itemRemover.Add(y);
                         }
                     }
-                    foreach(var z in MyCanvas.Children.OfType<Rectangle>())
+
+
+                    if (backgroundLevel3.Focusable == true )
+                    {
+                        if (Canvas.GetLeft(y) > 4660 || Canvas.GetLeft(y) < 3215)
+                        {
+                            itemRemover.Add(y);
+                        }
+                    }
+                    foreach (var z in MyCanvas.Children.OfType<Rectangle>())
                     {
                         if(z is Rectangle && (string)z.Tag == "stone")
                         {
@@ -1090,14 +1104,13 @@ namespace Game_Treasure_Hunter
 
                     foreach(var n in MyCanvas.Children.OfType<Rectangle>())
                     {
-                        if(n.Name.ToString() == "ninja1" || n.Name.ToString() == "ninja2")
+                        if(n.Name.ToString() == "ninja1")
                         {
                             Rect ninjaHitBox = new Rect(Canvas.GetLeft(n), Canvas.GetTop(n), n.Width, n.Height);
                             if (bulletHitBox.IntersectsWith(ninjaHitBox))
                             {
                                 itemRemover.Add(y);
                                 ninja.Health -= 1;
-                                ninjaTwo.Health -= 1;
                                 ninjaSpriteIndex += 0.5;
                                 if (ninjaSpriteIndex > 2)
                                 {
@@ -1105,10 +1118,9 @@ namespace Game_Treasure_Hunter
                                 }
                                 ninja.HurtSprites(ninjaSpriteIndex);
                                 ninja1.Fill = ninja.ninjaSprite;
-                                ninjaTwo.HurtSprites(ninjaSpriteIndex);
-                                ninja2.Fill = ninjaTwo.ninjaSprite;
+                                
                             }
-                            if (ninja.Health <= 0 || ninjaTwo.Health <= 0)
+                            if (ninja.Health <= 0 )
                             {
                                 ninjaSpriteIndex += 0.5;
                                 if (ninjaSpriteIndex > 10)
@@ -1117,6 +1129,31 @@ namespace Game_Treasure_Hunter
                                 }
                                 ninja.DieSprites(ninjaSpriteIndex);
                                 ninja1.Fill = ninja.ninjaSprite;
+                            }
+                        }
+
+                        if(n.Name.ToString() == "ninja2")
+                        {
+                            Rect ninjaHitBox2 = new Rect(Canvas.GetLeft(n), Canvas.GetTop(n), n.Width, n.Height);
+                            if (bulletHitBox.IntersectsWith(ninjaHitBox2))
+                            {
+                                itemRemover.Add(y);
+                                ninjaTwo.Health -= 1;
+                                ninjaSpriteIndex += 0.5;
+                                if (ninjaSpriteIndex > 2)
+                                {
+                                    ninjaSpriteIndex = 1;
+                                }
+                                ninjaTwo.HurtSprites(ninjaSpriteIndex);
+                                ninja2.Fill = ninjaTwo.ninjaSprite;
+                            }
+                            if (ninjaTwo.Health <= 0)
+                            {
+                                ninjaSpriteIndex += 0.5;
+                                if (ninjaSpriteIndex > 10)
+                                {
+                                    itemRemover.Add(n);
+                                }
                                 ninjaTwo.DieSprites(ninjaSpriteIndex);
                                 ninja2.Fill = ninjaTwo.ninjaSprite;
                             }
@@ -1138,14 +1175,14 @@ namespace Game_Treasure_Hunter
                         Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
                     }
                     
-                    if(x.Name.ToString() == "ground10")
-                    {
-                        if (goRight == true && playerHitBox.IntersectsWith(groundHitBox))
-                        {
-                            Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
-                            goRight = false;
-                        }
-                    }
+                    //if(x.Name.ToString() == "ground10")
+                    //{
+                    //    if (goRight == true && playerHitBox.IntersectsWith(groundHitBox))
+                    //    {
+                    //        Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
+                    //        goRight = false;
+                    //    }
+                    //}
                 }
 
                 if((string)x.Tag == "platforma")
@@ -1166,24 +1203,24 @@ namespace Game_Treasure_Hunter
                         }
                     }
 
-                    //if (x.Name.ToString() == "platform2")
-                    //{
-                    //    if (playerHitBox.IntersectsWith(platformHitBox))
-                    //    {
-                    //        Canvas.SetTop(hero, Canvas.GetTop(hero) + verticalSpeedPlatform);
-                    //    }
-                    //}
-
-                
-
-                    if (x.Name.ToString() == "platform7")
+                    if (x.Name.ToString() == "surface10")
                     {
-                        if (goRight == true && playerHitBox.IntersectsWith(platformHitBox))
+                        if (playerHitBox.IntersectsWith(platformHitBox))
                         {
-                            Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
-                            goRight = false;
+                            Canvas.SetTop(hero, Canvas.GetTop(hero) + horizontalSpeedPlatform2);
                         }
                     }
+
+
+
+                    //if (x.Name.ToString() == "platform7")
+                    //{
+                    //    if (goRight == true && playerHitBox.IntersectsWith(platformHitBox))
+                    //    {
+                    //        Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
+                    //        goRight = false;
+                    //    }
+                    //}
                 }
 
                 if ((string)x.Tag == "spike")
@@ -1515,7 +1552,7 @@ namespace Game_Treasure_Hunter
                 if(x.Name.ToString() == "chest")
                 {
                     Rect chestHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-                    if(gem == 3 && ninjaBoss.Health == 0 && bear.Health == 0)
+                    if(gem == 3 && ninjaBoss.Health >= 0 && bear.Health >= 0)
                        {
                         if (playerHitBox.IntersectsWith(chestHitBox))
                         {
@@ -1568,7 +1605,7 @@ namespace Game_Treasure_Hunter
                 //MessageBox.Show("Второй уровень пройден!", "TREASURE HUNTER");
             }
 
-            if (gem == 3 && ninjaBoss.Health == 0 && bear.Health == 0)
+            if (gem == 3 && backgroundLevel3.Focusable == true)
             {
                 ImageBrush chestImage = new ImageBrush();
                 chestImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/Treasure_open.png"));
@@ -1962,7 +1999,7 @@ namespace Game_Treasure_Hunter
             //MyCanvas.Children.Add(bear.bearOne);
             //hog.UploadingImage();
             //hog.InitPictures();
-            Canvas.SetTop(hog.hogOne,393);
+            Canvas.SetTop(hog.hogOne,593);
             Canvas.SetLeft(hog.hogOne, 4443);
             //MyCanvas.Children.Add(hog.hogOne);
             //bird.UploadingImage();
@@ -2281,14 +2318,14 @@ namespace Game_Treasure_Hunter
         private void MotionLevelOne()
         {
             Canvas.SetLeft(platform1, Canvas.GetLeft(platform1) + horizontalSpeedPlatform); //настроил
-            if (Canvas.GetLeft(platform1) < 604)
+            if (Canvas.GetLeft(platform1) > 604)
             {
-                horizontalSpeedPlatform = - horizontalSpeedPlatform;
+                horizontalSpeedPlatform--;
             }
 
             if(Canvas.GetLeft(platform1) < 410)
             {
-                horizontalSpeedPlatform = -horizontalSpeedPlatform;
+                horizontalSpeedPlatform ++;
             }
 
             Canvas.SetTop(platform2, Canvas.GetTop(platform2) + verticalSpeedPlatform);
@@ -2662,26 +2699,38 @@ namespace Game_Treasure_Hunter
             {
                 verticalSpeedPlatform = -verticalSpeedPlatform;
             }
-            Canvas.SetLeft(platform10, Canvas.GetLeft(platform10) + horizontalSpeedPlatform);
-            if (Canvas.GetLeft(platform10) < 4067 || Canvas.GetLeft(platform10) > 3547)
+            Canvas.SetLeft(platform10, Canvas.GetLeft(platform10) + horizontalSpeedPlatform2);
+            Canvas.SetLeft(surface10, Canvas.GetLeft(surface10) + horizontalSpeedPlatform2);
+            //if (Canvas.GetLeft(platform10) < 4067 || Canvas.GetLeft(platform10) > 3547)
+            //{
+            //    horizontalSpeedPlatform = -horizontalSpeedPlatform;
+            //}
+
+            if(Canvas.GetLeft(platform10) > 4067 && Canvas.GetLeft(surface10) > 4067)
             {
-                horizontalSpeedPlatform = -horizontalSpeedPlatform;
+                horizontalSpeedPlatform2--;
             }
 
-            foreach(var b in MyCanvas.Children.OfType<Image>())
+            if (Canvas.GetLeft(platform10) < 3547 && Canvas.GetLeft(surface10) < 3547)
             {
-                //if((string)b.Tag == "bird")
-                //{
-                //    Canvas.SetLeft(b, Canvas.GetLeft(b) + bird.Speed);
-                //    bird.MoveRight();
-                //    if (Canvas.GetLeft(b) > 4685)
-                //    {
-                //        bird.Speed = -bird.Speed;
-                //        Canvas.SetLeft(b, 3227);
-                //    }
-                //}
+                horizontalSpeedPlatform2++;
+            }
 
-                if((string)b.Tag == "bear")
+            foreach (var b in MyCanvas.Children.OfType<Image>())
+            {
+                if ((string)b.Tag == "bird")
+                {
+                    Canvas.SetLeft(b, Canvas.GetLeft(b) + bird.Speed);
+                    bird.MoveRight();
+                    if (Canvas.GetLeft(b) > 4685)
+                    {
+                        Canvas.SetLeft(b, 3227);
+                        bird.Speed++;
+                        
+                    }
+                }
+
+                if ((string)b.Tag == "bear")
                 {
                     Canvas.SetLeft(b, Canvas.GetLeft(b) + bear.Speed);
                     if(Canvas.GetLeft(b) < Canvas.GetLeft(ground13) || Canvas.GetLeft(b) + b.Width > Canvas.GetLeft(ground13) + ground13.Width)
@@ -2691,12 +2740,12 @@ namespace Game_Treasure_Hunter
 
                     if(Canvas.GetLeft(b) < Canvas.GetLeft(ground13))
                     {
-                        bear.MoveLeft();
+                        bear.MoveRight();
                     }
 
                     if(Canvas.GetLeft(b) + b.Width > Canvas.GetLeft(ground13) + ground13.Width)
                     {
-                        bear.MoveRight();
+                         bear.MoveLeft();
                     }
                 }
 
@@ -2710,209 +2759,169 @@ namespace Game_Treasure_Hunter
 
                     if (Canvas.GetLeft(b) < Canvas.GetLeft(ground10))
                     {
-                        hog.MoveLeft();
+                        hog.MoveRight();
                     }
 
                     if (Canvas.GetLeft(b) + b.Width > Canvas.GetLeft(ground10) + ground10.Width)
                     {
-                        hog.MoveRight();
+                         hog.MoveLeft();
                     }
+                }
+            }
+
+            //смена спрайтов персонажей взависимости от пересечения персонажей определенной позиции
+
+            
+            foreach (var element in MyCanvas.Children.OfType<Rectangle>())
+            {
+                if (element.Name.ToString() == "enemy2")
+                {
+                   
+                    Rect enHitBox2 = new Rect(Canvas.GetLeft(element), Canvas.GetTop(element), element.Width, element.Height);
+                    Rect positionHitBox4 = new Rect(Canvas.GetLeft(position4), Canvas.GetTop(position4), position4.Width, position4.Height);
+                    if (enHitBox2.IntersectsWith(positionHitBox4))
+                    {
+                        //enemyTwo.Speed = 0;
+                        enemySpriteIndex += 0.5;
+                        if (enemySpriteIndex > 12)
+                        {
+                            enemySpriteIndex = 1;
+                            //enemyTwo.Speed = 1;
+                        }
+                        enemyTwo.IdleEnSprites(enemySpriteIndex);
+                        enemy2.Fill = enemyTwo.enemySprite;
+                    }
+
                 }
             }
 
             Canvas.SetLeft(enemy2, Canvas.GetLeft(enemy2) + enemyTwo.Speed);
-            if (Canvas.GetLeft(enemy2) < 4139 || Canvas.GetLeft(enemy2) > 3459)
+
+            enemySpriteIndex += 0.5;
+            if (enemySpriteIndex > 8)
             {
-                enemyTwo.Speed = -enemyTwo.Speed;
+                enemySpriteIndex = 1;
             }
-            if (Canvas.GetLeft(enemy2) < 4139)
+            enemyTwo.RunSprites(enemySpriteIndex);
+            enemy2.Fill = enemyTwo.enemySprite;
+
+            if (Canvas.GetLeft(enemy2) > 4139)
             {
-                enemySpriteIndex += 0.5;
-                if (enemySpriteIndex > 8)
-                {
-                    enemySpriteIndex = 1;
-                }
-                enemyTwo.RunSprites(enemySpriteIndex);
-                enemy2.Fill = enemyTwo.enemySprite;
+                enemyTwo.Speed--;
                 enemy2.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-             }
-
-            if (Canvas.GetLeft(enemy2) < 3914 || Canvas.GetLeft(enemy2) == 3894)
-            {
-                enemyTwo.Speed = 0;
-                enemySpriteIndex += 0.5;
-                if (enemySpriteIndex > 12)
-                {
-                    enemyTwo.Speed = -5;
-                    enemySpriteIndex = 1;
-                }
-                enemyTwo.IdleEnSprites(enemySpriteIndex);
-                enemy2.Fill = enemyTwo.enemySprite;
             }
 
-            if (Canvas.GetLeft(enemy2) > 3459)
+            if (Canvas.GetLeft(enemy2) < 3459)
             {
-                enemySpriteIndex += 0.5;
-                if (enemySpriteIndex > 8)
-                {
-                    enemySpriteIndex = 1;
-                }
-                enemyTwo.RunSprites(enemySpriteIndex);
-                enemy2.Fill = enemyTwo.enemySprite;
+                enemyTwo.Speed++;
                 enemy2.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
             }
 
-            Canvas.SetLeft(ninja2, Canvas.GetLeft(ninja2) - ninjaTwo.Speed);
-            if (Canvas.GetLeft(ninja2) < 4669 || Canvas.GetLeft(ninja2) > 4416)
+
+
+            Canvas.SetLeft(ninja2, Canvas.GetLeft(ninja2) + ninjaTwo.Speed);
+
+            ninjaTwoSpriteIndex += 0.5;
+            if (ninjaTwoSpriteIndex > 10)
             {
-                ninjaTwo.Speed = -ninjaTwo.Speed;
+                ninjaTwoSpriteIndex = 1;
             }
-            if (Canvas.GetLeft(ninja2) < 4669)
+            ninjaTwo.RunSprites(ninjaTwoSpriteIndex);
+            ninja2.Fill = ninjaTwo.ninjaSprite;
+
+            if (Canvas.GetLeft(ninja2) > 4669)
             {
-                ninjaTwoSpriteIndex += 0.5;
-                if (ninjaTwoSpriteIndex > 10)
-                {
-                    ninjaTwoSpriteIndex = 1;
-                }
-                ninjaTwo.RunSprites(ninjaTwoSpriteIndex);
-                ninja2.Fill = ninjaTwo.ninjaSprite;
-
-                if (Canvas.GetLeft(ninja2) < 4583 || Canvas.GetLeft(ninja2) == 4563)
-                {
-                    ninjaTwo.Speed = 0;
-                    ninjaTwoSpriteIndex += 0.5;
-                    if (ninjaTwoSpriteIndex > 10)
-                    {
-                        ninjaTwo.Speed = -5;
-                        ninjaTwoSpriteIndex = 1;
-                    }
-                    ninjaTwo.ThrowSprites(ninjaTwoSpriteIndex);
-                    ninja2.Fill = ninjaTwo.ninjaSprite;
-                }
-
+                ninjaTwo.Speed--;
                 ninja2.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
             }
-            if (Canvas.GetLeft(ninja2) > 4416)
-            {
-                ninjaTwoSpriteIndex += 0.5;
-                if (ninjaTwoSpriteIndex > 10)
-                {
-                    ninjaTwoSpriteIndex = 1;
-                }
-                ninjaTwo.RunSprites(ninjaTwoSpriteIndex);
-                ninja2.Fill = ninjaTwo.ninjaSprite;
 
-                if (Canvas.GetLeft(ninja2) > 4543 || Canvas.GetLeft(ninja2) == 4563)
-                {
-                    ninjaTwo.Speed = 0;
-                    ninjaTwoSpriteIndex += 0.5;
-                    if (ninjaTwoSpriteIndex > 10)
-                    {
-                        ninjaTwo.Speed = 5;
-                        ninjaTwoSpriteIndex = 1;
-                    }
-                    ninjaTwo.ThrowSprites(ninjaTwoSpriteIndex);
-                    ninja2.Fill = ninjaTwo.ninjaSprite;
-                }
+            //if (Canvas.GetLeft(ninja2) < 4583 || Canvas.GetLeft(ninja2) == 4563)
+            //{
+            //    ninjaTwo.Speed = 0;
+            //    ninjaTwoSpriteIndex += 0.5;
+            //    if (ninjaTwoSpriteIndex > 10)
+            //    {
+            //        ninjaTwo.Speed = -5;
+            //        ninjaTwoSpriteIndex = 1;
+            //    }
+            //    ninjaTwo.ThrowSprites(ninjaTwoSpriteIndex);
+            //    ninja2.Fill = ninjaTwo.ninjaSprite;
+            //}
+
+            if (Canvas.GetLeft(ninja2) < 4416)
+            {
+                ninjaTwo.Speed++;
                 ninja2.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
             }
 
-            Canvas.SetLeft(ninjaBow, Canvas.GetLeft(ninjaBow) - ninjaBoss.Speed);
-            if (Canvas.GetLeft(ninjaBow) < 3990 || Canvas.GetLeft(ninjaBow) > 3520)
+            Canvas.SetLeft(ninjaBow, Canvas.GetLeft(ninjaBow) + ninjaBoss.Speed);
+
+            ninjaBossSpriteIndex += 0.5;
+            if (ninjaBossSpriteIndex > 16)
             {
-                ninjaBoss.Speed = -ninjaBoss.Speed;
+                ninjaBossSpriteIndex = 1;
             }
-            if (Canvas.GetLeft(ninjaBow) < 3990)
+            ninjaBoss.RunSprites(ninjaBossSpriteIndex);
+            ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
+
+            //if (Canvas.GetLeft(ninjaBow) < 3839 || Canvas.GetLeft(ninjaBow) == 3819)
+            //{
+            //    ninjaBoss.Speed = 0;
+            //    ninjaBossSpriteIndex += 0.5;
+            //    if (ninjaBossSpriteIndex > 22)
+            //    {
+            //        ninjaBoss.Speed = -5;
+            //        ninjaBossSpriteIndex = 1;
+            //    }
+            //    ninjaBoss.AttackSprites(ninjaBossSpriteIndex);
+            //    ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
+            //}
+
+            if (Canvas.GetLeft(ninjaBow) > 3990)
             {
-                ninjaBossSpriteIndex += 0.5;
-                if (ninjaBossSpriteIndex > 16)
-                {
-                    ninjaBossSpriteIndex = 1;
-                }
-                ninjaBoss.RunSprites(ninjaBossSpriteIndex);
-                ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
-
-                if (Canvas.GetLeft(ninjaBow) < 3839 || Canvas.GetLeft(ninjaBow) == 3819)
-                {
-                    ninjaBoss.Speed = 0;
-                    ninjaBossSpriteIndex += 0.5;
-                    if (ninjaBossSpriteIndex > 22)
-                    {
-                        ninjaBoss.Speed = -5;
-                        ninjaBossSpriteIndex = 1;
-                    }
-                    ninjaBoss.AttackSprites(ninjaBossSpriteIndex);
-                    ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
-                }
-
+                ninjaBoss.Speed--;
                 ninjaBow.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
             }
-            if (Canvas.GetLeft(ninjaBow) > 3520)
+            if (Canvas.GetLeft(ninjaBow) < 3520)
             {
-                ninjaBossSpriteIndex += 0.5;
-                if (ninjaBossSpriteIndex > 16)
-                {
-                    ninjaBossSpriteIndex = 1;
-                }
-                ninjaBoss.RunSprites(ninjaBossSpriteIndex);
-                ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
-
-                if (Canvas.GetLeft(ninjaBow) > 3799 || Canvas.GetLeft(ninjaBow) == 3819)
-                {
-                    ninjaBoss.Speed = 0;
-                    ninjaBossSpriteIndex += 0.5;
-                    if (ninjaBossSpriteIndex > 22)
-                    {
-                        ninjaBoss.Speed = 5;
-                        ninjaBossSpriteIndex = 1;
-                    }
-                    ninjaBoss.AttackSprites(ninjaBossSpriteIndex);
-                    ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
-                }
+                ninjaBoss.Speed++;
                 ninjaBow.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
             }
 
-            if (Canvas.GetLeft(ninjaBow) < 3722 || Canvas.GetLeft(ninjaBow) == 3712)
-            {
-                ninjaBoss.Speed = 0;
-                ninjaBossSpriteIndex += 0.5;
-                if (ninjaBossSpriteIndex > 12)
-                {
-                    ninjaBoss.Speed = -5;
-                    ninjaBossSpriteIndex = 1;
-                }
-                ninjaBoss.IdleNiSprites(ninjaBossSpriteIndex);
-                ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
-            }
+            //if (Canvas.GetLeft(ninjaBow) < 3722 || Canvas.GetLeft(ninjaBow) == 3712)
+            //{
+            //    ninjaBoss.Speed = 0;
+            //    ninjaBossSpriteIndex += 0.5;
+            //    if (ninjaBossSpriteIndex > 12)
+            //    {
+            //        ninjaBoss.Speed = -5;
+            //        ninjaBossSpriteIndex = 1;
+            //    }
+            //    ninjaBoss.IdleNiSprites(ninjaBossSpriteIndex);
+            //    ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
+            //}
 
             Canvas.SetLeft(ninja1, Canvas.GetLeft(ninja1) + ninja.Speed);
-            if (Canvas.GetLeft(ninja1) < 3645 || Canvas.GetLeft(ninja1) > 3259)
+            ninjaSpriteIndex += 0.5;
+            if (ninjaSpriteIndex > 10)
             {
-                ninja.Speed = -ninja.Speed;
+                ninjaSpriteIndex = 1;
             }
-            if (Canvas.GetLeft(ninja1) < 3645)
+            ninja.RunSprites(ninjaSpriteIndex);
+            ninja1.Fill = ninja.ninjaSprite;
+            
+            if (Canvas.GetLeft(ninja1) > 3645)
             {
-                ninjaSpriteIndex += 0.5;
-                if (ninjaSpriteIndex > 10)
-                {
-                    ninjaSpriteIndex = 1;
-                }
-                ninja.RunSprites(ninjaSpriteIndex);
-                ninja1.Fill = ninja.ninjaSprite;
+                ninja.Speed--;
                 ninja1.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
             }
 
-            if (Canvas.GetLeft(ninja1) > 3259)
+            if (Canvas.GetLeft(ninja1) < 3259)
             {
-                ninjaSpriteIndex += 0.5;
-                if (ninjaSpriteIndex > 10)
-                {
-                    ninjaSpriteIndex = 1;
-                }
-                ninja.RunSprites(ninjaSpriteIndex);
-                ninja1.Fill = ninja.ninjaSprite;
+                ninja.Speed++;
                 ninja1.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
             }
+
         }
     }
 }

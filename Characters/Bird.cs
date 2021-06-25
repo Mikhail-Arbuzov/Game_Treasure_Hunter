@@ -17,7 +17,7 @@ namespace Game_Treasure_Hunter
         int totalBirdFrames;
         int birdCurrentFrame;
         int health;
-        int speed;
+        double speed;
         string mark;
         string path;
         int width;
@@ -116,12 +116,12 @@ namespace Game_Treasure_Hunter
             }
             set
             {
-                if (value > 0)
+                //if (value > 0)
                     health = value;
             }
         }
 
-        public int Speed
+        public double Speed
         {
             get
             {
@@ -144,7 +144,7 @@ namespace Game_Treasure_Hunter
             TotalBirdFrames = totalBirdframes1;
             BirdCurrentFrame = birdCurrentFrame1;
             Health = 2;
-            Speed = 5;
+            Speed = 1;
         }
 
         public void UploadingImage()
