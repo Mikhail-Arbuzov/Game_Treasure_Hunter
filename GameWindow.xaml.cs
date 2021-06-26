@@ -60,7 +60,7 @@ namespace Game_Treasure_Hunter
         int score;
         int bulletsScore;
         int gem;
-
+       
         //double limitTimePosition = 60;
         //double timePosition = 60;
 
@@ -308,7 +308,7 @@ namespace Game_Treasure_Hunter
                     Rect trHitBox = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
                     if (trHitBox.IntersectsWith(playerHitBox))
                     {
-                        trollSpriteIndex += 0.5;
+                        trollSpriteIndex += 0.2;
                         if (trollSpriteIndex > 10)
                         {
                             trollSpriteIndex = 1;
@@ -1203,13 +1203,7 @@ namespace Game_Treasure_Hunter
                         }
                     }
 
-                    if (x.Name.ToString() == "surface10")
-                    {
-                        if (playerHitBox.IntersectsWith(platformHitBox))
-                        {
-                            Canvas.SetTop(hero, Canvas.GetTop(hero) + horizontalSpeedPlatform2);
-                        }
-                    }
+                   
 
 
 
@@ -1277,22 +1271,29 @@ namespace Game_Treasure_Hunter
                     }
                 }
 
-                if((string)x.Tag == "speeds")
-                {
-                    Rect speedBonusHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-                    if (playerHitBox.IntersectsWith(speedBonusHitBox))
-                    {
-                        itemRemover.Add(x);
-                        player.Speed += 15;
-                        for (int counterSpeedBonus = 30; counterSpeedBonus > 0; counterSpeedBonus--)
-                        {
-                            if(counterSpeedBonus <= 15)
-                                  player.Speed -= 1;
-                        }
-                    }
-                }
+                //if((string)x.Tag == "speeds")
+                //{
+                //    Rect speedBonusHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+                //    if (playerHitBox.IntersectsWith(speedBonusHitBox))
+                //    {
+                //        itemRemover.Add(x);
+                //        player.Speed += 3;
+                //        for (int counterSpeedBonus = 30; counterSpeedBonus < 10; counterSpeedBonus--)
+                //        {
+                //            //if (counterSpeedBonus <= 5)
+                //                player.Speed -= 3;
+                //            //counterSpeedBonus = 30;
+                //            if (counterSpeedBonus <= 8)
+                //            {
+                //                break;
+                //            }
+                //        }
+                //    }
+                //}
 
-                if(x is Rectangle && (string)x.Tag == "enemyBullet")
+               
+
+                if (x is Rectangle && (string)x.Tag == "enemyBullet")
                 {
                     
                     if (shooterOne.Speed < 0)
@@ -1482,6 +1483,14 @@ namespace Game_Treasure_Hunter
                         player.ForceJump = 8;
                         //player.JumpSpeed = 0;
                         Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
+                    }
+
+                    if (x.Name.ToString() == "surface10")
+                    {
+                        if (playerHitBox.IntersectsWith(surfaceHitBox))
+                        {
+                            Canvas.SetTop(hero, Canvas.GetTop(hero) + horizontalSpeedPlatform2);
+                        }
                     }
                 }
 
@@ -1841,9 +1850,7 @@ namespace Game_Treasure_Hunter
             shooter1.Fill = shooterOne.shooterSprite;
             trollOne.RunSprites(1);
             troll.Fill = trollOne.trollSprite;
-            //wolf.UploadingImage();
-            //wolf.InitPictures();
-            Canvas.SetTop(wolf.wolfOne, 644);
+            Canvas.SetTop(wolf.wolfOne, 677);
             Canvas.SetLeft(wolf.wolfOne, 1012);
             
             ImageBrush coin = new ImageBrush();
@@ -1927,7 +1934,7 @@ namespace Game_Treasure_Hunter
             terror.Stroke = Brushes.Black;
             robot.RunSprites(1);
             robo.Fill = robot.robotSprite;
-            robo.Stroke = Brushes.Black;
+            //robo.Stroke = Brushes.Black;
             Canvas.SetTop(snake.snakeOne,571);
             Canvas.SetLeft(snake.snakeOne, 3097);
             //MyCanvas.Children.Add(snake.snakeOne);
@@ -2725,7 +2732,7 @@ namespace Game_Treasure_Hunter
                     if (Canvas.GetLeft(b) > 4685)
                     {
                         Canvas.SetLeft(b, 3227);
-                        bird.Speed++;
+                        bird.Speed+=0.5;
                         
                     }
                 }
@@ -2740,11 +2747,13 @@ namespace Game_Treasure_Hunter
 
                     if(Canvas.GetLeft(b) < Canvas.GetLeft(ground13))
                     {
+                        bear.BearCurrentFrame--;
                         bear.MoveRight();
                     }
 
                     if(Canvas.GetLeft(b) + b.Width > Canvas.GetLeft(ground13) + ground13.Width)
                     {
+                         bear.BearCurrentFrame++;
                          bear.MoveLeft();
                     }
                 }

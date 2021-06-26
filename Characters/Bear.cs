@@ -156,7 +156,7 @@ namespace Game_Treasure_Hunter
         public CroppedBitmap GetFrame(int frame)
         {
             int frameX = (frame % TotalBearFrames) * Width;
-            return new CroppedBitmap(spriteBearImage, new System.Windows.Int32Rect(frameX + 50, FrameY, Width, Height));
+            return new CroppedBitmap(spriteBearImage, new System.Windows.Int32Rect(frameX+50 , FrameY, Width+11, Height));
         }
 
         public void InitPictures()
