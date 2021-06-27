@@ -13,6 +13,11 @@ namespace Game_Treasure_Hunter
         int health;
         int speed;
         public ImageBrush enemySprite = new ImageBrush();
+        //продолжительность того или иного действия персонажа
+        public int IdleStateDuration = 100;
+        public int OtherStatesDuration = 400;
+        public bool IsIdle = false;
+        public int StateFrameCounter = 0;
 
         public int Health
         {

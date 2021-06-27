@@ -8,6 +8,13 @@ using System.Windows.Media.Imaging;
 
 namespace Game_Treasure_Hunter
 {
+
+    public enum Direction
+    {
+        Left = 1,
+        Right = 2
+    }
+
     public class Player:ICharacterAnimationSprites
     {
         int health;
@@ -15,7 +22,13 @@ namespace Game_Treasure_Hunter
         int jumpSpeed;
         int forceJump;
         public ImageBrush playerSprite = new ImageBrush();
-         
+        //для работы  бонуса ускорения игрока 
+        public int speedupStateDuration = 2000;
+        public int timeActionsSpeedup = 0;
+        public bool speedup = false;
+
+        public Direction Direction { get; set; } = Direction.Right;
+
         public int Health
         {
             get

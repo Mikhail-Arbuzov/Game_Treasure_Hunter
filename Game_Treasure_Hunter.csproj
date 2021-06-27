@@ -82,6 +82,9 @@
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Characters\Hog.cs" />
+    <Compile Include="GameWindowEngine.cs" />
+    <Compile Include="GameWindowLevels.cs" />
+    <Compile Include="GameWindowMethods.cs" />
     <Compile Include="Interfaces\ICharacterAnimationSprites.cs" />
     <Compile Include="Interfaces\IWorkingFrames.cs" />
     <Compile Include="MainWindow.xaml.cs">
