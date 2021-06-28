@@ -59,34 +59,7 @@ namespace Game_Treasure_Hunter
                 }
             }
 
-            //if (backgroundLevel.Focusable == false)
-            //{
-            //    if (Canvas.GetLeft(hero) >= 4660)
-            //    {
-            //        Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
-            //        //goRight = false;
-            //    }
-            //}
-            //if (Canvas.GetLeft(backgroundLevel2) > 3200)
-            //{
-            //    Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
-            //    goRight = false;
-            //}
-            //if (Canvas.GetLeft(backgroundLevel2) < 1600)
-            //{
-            //    Canvas.SetLeft(hero, Canvas.GetLeft(hero) + 10);
-            //    goLeft = false;
-            //}
-            //if (Canvas.GetLeft(backgroundLevel3) > 4800)
-            //{
-            //    Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
-            //    goRight = false;
-            //}
-            //if (Canvas.GetLeft(backgroundLevel3) < 3200)
-            //{
-            //    Canvas.SetLeft(hero, Canvas.GetLeft(hero) + 10);
-            //    goLeft = false;
-            //}
+
 
             if (goLeft == true && Canvas.GetLeft(hero) > 0)
             {
@@ -98,8 +71,6 @@ namespace Game_Treasure_Hunter
                 Canvas.SetLeft(hero, Canvas.GetLeft(hero) + player.Speed);
             }
 
-
-           
 
 
             //движение прыжка
@@ -1204,11 +1175,11 @@ namespace Game_Treasure_Hunter
                     if (shooterOne.Speed > 0)
                         Canvas.SetLeft(x, Canvas.GetLeft(x) + speedEnemyBullet);
 
-
                     if (Canvas.GetLeft(x) > 600 || Canvas.GetLeft(x) < 30)
                     {
                         itemRemover.Add(x);
                     }
+
 
                     Rect enemyBulletHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
 
@@ -1233,6 +1204,7 @@ namespace Game_Treasure_Hunter
 
                     if (shooterTwo.Speed > 0)
                         Canvas.SetLeft(x, Canvas.GetLeft(x) + speedEnemyBullet);
+
 
                     if (Canvas.GetLeft(x) > 2450 || Canvas.GetLeft(x) < 1630)
                     {
@@ -1307,12 +1279,22 @@ namespace Game_Treasure_Hunter
 
                 if (x is Rectangle && (string)x.Tag == "kunai")
                 {
-                    //Canvas.SetLeft(x,Canvas.GetLeft(x) + speedEnemyBullet);  
+                    if(Canvas.GetLeft(x) < Canvas.GetLeft(ninja2) + ninja2.Height)
+                    {
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) - speedEnemyArrows);
+                    }
+                    if(Canvas.GetLeft(x) > Canvas.GetLeft(ninja2))
+                    {
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) + speedEnemyArrows);
+                    }
 
-                    if (Canvas.GetLeft(x) > 4650 || Canvas.GetLeft(x) < 3260)
+                   
+                    
+                    if (Canvas.GetLeft(x) > 4750 || Canvas.GetLeft(x) < 3260)
                     {
                         itemRemover.Add(x);
                     }
+                    
 
                     Rect kunaiHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
 
@@ -1332,7 +1314,14 @@ namespace Game_Treasure_Hunter
 
                 if (x is Rectangle && (string)x.Tag == "arrow")
                 {
-                    //Canvas.SetLeft(x,Canvas.GetLeft(x) + speedEnemyBullet);  
+                    if (Canvas.GetLeft(x) < Canvas.GetLeft(ninjaBow) + ninjaBow.Height)
+                    {
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) - speedEnemyArrows);
+                    }
+                    if (Canvas.GetLeft(x) > Canvas.GetLeft(ninjaBow))
+                    {
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) + speedEnemyArrows);
+                    }
 
                     if (Canvas.GetLeft(x) > 4650 || Canvas.GetLeft(x) < 3260)
                     {

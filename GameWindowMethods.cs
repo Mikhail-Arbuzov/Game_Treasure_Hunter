@@ -123,8 +123,8 @@ namespace Game_Treasure_Hunter
             Canvas.SetLeft(enemyBullet2, Canvas.GetLeft(shooter2) + shooter2.Height / 2);
             Canvas.SetTop(enemyBullet2, Canvas.GetTop(shooter2) + shooter2.Height / 2 + 24);
 
-            Canvas.SetLeft(enemyBullet3, Canvas.GetTop(terror) + (terror.Height / 2) - 10);
-            Canvas.SetTop(enemyBullet3, Canvas.GetLeft(terror) - enemyBullet3.Width);
+            //Canvas.SetLeft(enemyBullet3, Canvas.GetTop(terror) + (terror.Height / 2) - 10);
+            //Canvas.SetTop(enemyBullet3, Canvas.GetLeft(terror) - enemyBullet3.Width);
 
             if (Canvas.GetTop(hero) < 260 && Canvas.GetTop(hero) > 145 && shooterOne.Health > 0)
             {
@@ -135,7 +135,7 @@ namespace Game_Treasure_Hunter
                 MyCanvas.Children.Add(enemyBullet2);
             }
 
-            MyCanvas.Children.Add(enemyBullet3);
+            //MyCanvas.Children.Add(enemyBullet3);
 
 
             //направление полета пули
@@ -217,60 +217,89 @@ namespace Game_Treasure_Hunter
 
             Canvas.SetLeft(newLazer, Canvas.GetTop(robo) + (robo.Height / 2) - 30);
             Canvas.SetTop(newLazer, Canvas.GetLeft(robo) - newLazer.Width);
-            Canvas.SetLeft(newKunai, Canvas.GetTop(ninja2) + (ninja2.Height / 2) + 6);
-            Canvas.SetTop(newKunai, Canvas.GetLeft(ninja2) - newKunai.Width);
-            Canvas.SetLeft(newArrow, Canvas.GetTop(ninjaBow) + (ninjaBow.Height / 2) - 10);
-            Canvas.SetTop(newArrow, Canvas.GetLeft(ninjaBow) - newArrow.Width);
-            if (robotSpriteIndex == 14)
+
+            if (ninjaTwo.Direction == DirectionNinja.Right)
             {
-                MyCanvas.Children.Add(newLazer);
+                Canvas.SetLeft(newKunai, (Canvas.GetLeft(ninja2) + ninja2.Height)+10);
+                Canvas.SetTop(newKunai, Canvas.GetTop(ninja2) + ninja2.Height / 2 + 6);
             }
 
-            if (ninjaTwoSpriteIndex == 4)
+            if (ninjaTwo.Direction == DirectionNinja.Left)
+            {
+                newKunai.Fill = kunaiImage2;
+                Canvas.SetLeft(newKunai, Canvas.GetLeft(ninja2));
+                Canvas.SetTop(newKunai, Canvas.GetTop(ninja2) + ninja2.Height / 2 + 6);
+            }
+
+            if(ninjaBoss.Direction == DirectionNinjaBoss.Right)
+            {
+                Canvas.SetLeft(newArrow, Canvas.GetLeft(ninjaBow) + ninjaBow.Height);
+                Canvas.SetTop(newArrow, Canvas.GetTop(ninjaBow) + ninjaBow.Height/2 + 2);
+            }
+
+            if (ninjaBoss.Direction == DirectionNinjaBoss.Left)
+            {
+                newArrow.Fill = arrowImage2;
+                Canvas.SetLeft(newArrow, Canvas.GetLeft(ninjaBow));
+                Canvas.SetTop(newArrow, Canvas.GetTop(ninjaBow) + ninjaBow.Height/2 + 2);
+            }
+
+
+            //if (robotSpriteIndex == 14)
+            //{
+            //    MyCanvas.Children.Add(newLazer);
+            //}
+
+            if (ninjaTwo.Throw && ninjaTwo.Health >= 0)
             {
                 MyCanvas.Children.Add(newKunai);
             }
 
-            if (ninjaBossSpriteIndex == 4)
+            if(ninjaBoss.Shoot && ninjaBoss.Health >= 0)
             {
                 MyCanvas.Children.Add(newArrow);
             }
 
-            if (Canvas.GetLeft(robo) < 2758 || Canvas.GetLeft(robo) == 2738)
-            {
+            //if (ninjaBossSpriteIndex == 17)
+            //{
+            //    MyCanvas.Children.Add(newArrow);
+            //}
 
-                newLazer.Fill = lazerImage2;
-                speedEnemyBullet++;
-                Canvas.SetLeft(newLazer, Canvas.GetLeft(newLazer) - speedEnemyBullet);
-            }
-            if (Canvas.GetLeft(robo) > 2718 || Canvas.GetLeft(robo) == 2738)
-            {
-                speedEnemyBullet++;
-                Canvas.SetLeft(newLazer, Canvas.GetLeft(newLazer) + speedEnemyBullet);
-            }
-            if (Canvas.GetLeft(ninja2) < 4583 || Canvas.GetLeft(ninja2) == 4563)
-            {
-                newKunai.Fill = kunaiImage2;
-                speedEnemyBullet++;
-                Canvas.SetLeft(newKunai, Canvas.GetLeft(newKunai) - speedEnemyBullet);
-            }
-            if (Canvas.GetLeft(ninja2) > 4543 || Canvas.GetLeft(ninja2) == 4563)
-            {
-                speedEnemyBullet++;
-                Canvas.SetLeft(newKunai, Canvas.GetLeft(newKunai) + speedEnemyBullet);
-            }
+            //if (Canvas.GetLeft(robo) < 2758 || Canvas.GetLeft(robo) == 2738)
+            //{
 
-            if (Canvas.GetLeft(ninjaBow) < 3839 || Canvas.GetLeft(ninjaBow) == 3819)
-            {
-                newArrow.Fill = arrowImage2;
-                speedEnemyBullet++;
-                Canvas.SetLeft(newArrow, Canvas.GetLeft(newArrow) - speedEnemyBullet);
-            }
-            if (Canvas.GetLeft(ninjaBow) > 3799 || Canvas.GetLeft(ninjaBow) == 3819)
-            {
-                speedEnemyBullet++;
-                Canvas.SetLeft(newArrow, Canvas.GetLeft(newArrow) + speedEnemyBullet);
-            }
+            //    newLazer.Fill = lazerImage2;
+            //    speedEnemyBullet++;
+            //    Canvas.SetLeft(newLazer, Canvas.GetLeft(newLazer) - speedEnemyBullet);
+            //}
+            //if (Canvas.GetLeft(robo) > 2718 || Canvas.GetLeft(robo) == 2738)
+            //{
+            //    speedEnemyBullet++;
+            //    Canvas.SetLeft(newLazer, Canvas.GetLeft(newLazer) + speedEnemyBullet);
+            //}
+            //if (Canvas.GetLeft(ninja2) < 4583 || Canvas.GetLeft(ninja2) == 4563)
+            //{
+            //    newKunai.Fill = kunaiImage2;
+            //    speedEnemyBullet++;
+            //    Canvas.SetLeft(newKunai, Canvas.GetLeft(newKunai) - speedEnemyBullet);
+            //}
+            //if (Canvas.GetLeft(ninja2) > 4543 || Canvas.GetLeft(ninja2) == 4563)
+            //{
+            //    speedEnemyBullet++;
+            //    Canvas.SetLeft(newKunai, Canvas.GetLeft(newKunai) + speedEnemyBullet);
+            //}
+
+            //if (Canvas.GetLeft(ninjaBow) < 3839 || Canvas.GetLeft(ninjaBow) == 3819)
+            //{
+            //    newArrow.Fill = arrowImage2;
+            //    speedEnemyBullet++;
+            //    Canvas.SetLeft(newArrow, Canvas.GetLeft(newArrow) - speedEnemyBullet);
+            //}
+            //if (Canvas.GetLeft(ninjaBow) > 3799 || Canvas.GetLeft(ninjaBow) == 3819)
+            //{
+            //    speedEnemyBullet++;
+            //    Canvas.SetLeft(newArrow, Canvas.GetLeft(newArrow) + speedEnemyBullet);
+            //}
         }
     }
 }

@@ -393,11 +393,7 @@ namespace Game_Treasure_Hunter
             }
             Canvas.SetLeft(platform10, Canvas.GetLeft(platform10) + horizontalSpeedPlatform2);
             Canvas.SetLeft(surface10, Canvas.GetLeft(surface10) + horizontalSpeedPlatform2);
-            //if (Canvas.GetLeft(platform10) < 4067 || Canvas.GetLeft(platform10) > 3547)
-            //{
-            //    horizontalSpeedPlatform = -horizontalSpeedPlatform;
-            //}
-
+           
             if (Canvas.GetLeft(platform10) > 4067 && Canvas.GetLeft(surface10) > 4067)
             {
                 horizontalSpeedPlatform2--;
@@ -489,7 +485,7 @@ namespace Game_Treasure_Hunter
             //    }
             //}
 
-            // действия врага
+            // смена действий второго врага
             if (enemyTwo.IsIdle)
             {
                 if (enemySpriteIndex > 12)
@@ -539,88 +535,196 @@ namespace Game_Treasure_Hunter
             }
 
 
-
-            Canvas.SetLeft(ninja2, Canvas.GetLeft(ninja2) + ninjaTwo.Speed);
-
-            ninjaTwoSpriteIndex += 0.5;
-            if (ninjaTwoSpriteIndex > 10)
+            //смена действий второго ниндзи
+            if(ninjaTwo.Health >= 0)
             {
-                ninjaTwoSpriteIndex = 1;
-            }
-            ninjaTwo.RunSprites(ninjaTwoSpriteIndex);
-            ninja2.Fill = ninjaTwo.ninjaSprite;
+                if (ninjaTwo.Throw)
+                {
+                    ninjaTwoSpriteIndex += 0.5;
+                    if (ninjaTwoSpriteIndex > 10)
+                    {
+                        ninjaTwoSpriteIndex = 1;
+                    }
+                    ninjaTwo.ThrowSprites(ninjaTwoSpriteIndex);
+                    ninja2.Fill = ninjaTwo.ninjaSprite;
+                }
+                else
+                {
+                    Canvas.SetLeft(ninja2, Canvas.GetLeft(ninja2) + ninjaTwo.Speed);
 
-            if (Canvas.GetLeft(ninja2) > 4669)
+                    ninjaTwoSpriteIndex += 0.5;
+                    if (ninjaTwoSpriteIndex > 10)
+                    {
+                        ninjaTwoSpriteIndex = 1;
+                    }
+                    ninjaTwo.RunSprites(ninjaTwoSpriteIndex);
+                    ninja2.Fill = ninjaTwo.ninjaSprite;
+
+                    if (Canvas.GetLeft(ninja2) > 4669)
+                    {
+                        ninjaTwo.Direction = DirectionNinja.Left;
+                        ninjaTwo.Speed--;
+                        ninja2.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                    }
+
+                    if (Canvas.GetLeft(ninja2) < 4416)
+                    {
+                        ninjaTwo.Direction = DirectionNinja.Right;
+                        ninjaTwo.Speed++;
+                        ninja2.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    }
+                }
+
+                ninjaTwo.StateFrameCounter++;
+                if (ninjaTwo.Throw && ninjaTwo.StateFrameCounter >= ninjaTwo.ThrowStateDuration)
+                {
+                    ninjaTwo.Throw = false;
+                    ninjaTwo.StateFrameCounter = 0;
+                    ninjaTwoSpriteIndex = 0;
+                }
+                else if (!ninjaTwo.Throw && ninjaTwo.StateFrameCounter >= ninjaTwo.RunStatesDuration)
+                {
+                    ninjaTwo.Throw = true;
+                    ninjaTwo.StateFrameCounter = 0;
+                    //ninjaTwoSpriteIndex += 0.5;
+                }
+            }
+           
+
+            //смена действий  ниндзи босса
+           
+            if(ninjaBoss.Health >= 0)
             {
-                ninjaTwo.Speed--;
-                ninja2.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-            }
+                if (ninjaBoss.Shoot)
+                {
+                    ninjaBossSpriteIndex += 0.5;
+                    if (ninjaBossSpriteIndex > 22)
+                    {
+                        ninjaBossSpriteIndex = 1;
+                    }
+                    ninjaBoss.AttackSprites(ninjaBossSpriteIndex);
+                    ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
+                }
 
-            //if (Canvas.GetLeft(ninja2) < 4583 || Canvas.GetLeft(ninja2) == 4563)
+                else if (ninjaBoss.Idles)
+                {
+                    ninjaBossSpriteIndex += 0.5;
+                    if (ninjaBossSpriteIndex > 12)
+                    {
+                        ninjaBossSpriteIndex = 1;
+                    }
+                    ninjaBoss.IdleNiSprites(ninjaBossSpriteIndex);
+                    ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
+                }
+
+                else
+                {
+                    Canvas.SetLeft(ninjaBow, Canvas.GetLeft(ninjaBow) + ninjaBoss.Speed);
+
+                    ninjaBossSpriteIndex += 0.5;
+                    if (ninjaBossSpriteIndex > 16)
+                    {
+                        ninjaBossSpriteIndex = 1;
+                    }
+                    ninjaBoss.RunSprites(ninjaBossSpriteIndex);
+                    ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
+
+                    if (Canvas.GetLeft(ninjaBow) > 3990)
+                    {
+                        ninjaBoss.Direction = DirectionNinjaBoss.Left;
+                        ninjaBoss.Speed--;
+                        ninjaBow.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                    }
+                    if (Canvas.GetLeft(ninjaBow) < 3290)
+                    {
+                        ninjaBoss.Direction = DirectionNinjaBoss.Right;
+                        ninjaBoss.Speed++;
+                        ninjaBow.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    }
+                }
+
+
+                ninjaBoss.StateFrameCounter++;
+                ninjaBoss.StateFrameCounter2 += 0.5;
+
+
+                if (ninjaBoss.Duration && ninjaBoss.StateFrameCounter2 >= 100)
+                {
+                    ninjaBoss.Duration = false;
+                    ninjaBoss.StateFrameCounter2 = 0;
+                    if (ninjaBoss.Shoot && ninjaBoss.StateFrameCounter >= ninjaBoss.ShootStateDuration)
+                    {
+                        ninjaBoss.Shoot = false;
+                        ninjaBoss.StateFrameCounter = 0;
+                        ninjaBossSpriteIndex = 0;
+                    }
+                    else if (!ninjaBoss.Shoot && ninjaBoss.StateFrameCounter >= ninjaBoss.RunStateDuration)
+                    {
+                        ninjaBoss.Shoot = true;
+                        ninjaBoss.StateFrameCounter = 0;
+                    }
+                }
+
+                if (!ninjaBoss.Duration && ninjaBoss.StateFrameCounter2 >= 100)
+                {
+                    ninjaBoss.Duration = true;
+                    ninjaBoss.StateFrameCounter2 = 0;
+                    if (ninjaBoss.Idles && ninjaBoss.StateFrameCounter >= ninjaBoss.IdleStateDuration)
+                    {
+                        ninjaBoss.Idles = false;
+                        ninjaBoss.StateFrameCounter = 0;
+                        ninjaBossSpriteIndex = 0;
+                    }
+                    else if (!ninjaBoss.Idles && ninjaBoss.StateFrameCounter >= ninjaBoss.RunStateDuration)
+                    {
+                        ninjaBoss.Idles = true;
+                        ninjaBoss.StateFrameCounter = 0;
+                    }
+                }
+            }
+           
+           
+
+            //int ninjaBossState = rand.Next(1, 2);
+            //switch(ninjaBossState)
             //{
-            //    ninjaTwo.Speed = 0;
-            //    ninjaTwoSpriteIndex += 0.5;
-            //    if (ninjaTwoSpriteIndex > 10)
-            //    {
-            //        ninjaTwo.Speed = -5;
-            //        ninjaTwoSpriteIndex = 1;
-            //    }
-            //    ninjaTwo.ThrowSprites(ninjaTwoSpriteIndex);
-            //    ninja2.Fill = ninjaTwo.ninjaSprite;
+            //    case 1:
+            //        if (ninjaBoss.Idles && ninjaBoss.StateFrameCounter >= ninjaBoss.IdleStateDuration)
+            //        {
+            //            //ninjaBoss.Shoot = true;
+            //            ninjaBoss.Idles = false;
+            //            //ninjaBoss.State = State.Running;
+            //            ninjaTwo.StateFrameCounter = 0;
+            //            ninjaBossSpriteIndex = 0;
+            //        }
+            //        else if (!ninjaBoss.Idles && ninjaBoss.StateFrameCounter >= ninjaBoss.RunStateDuration)
+            //        {
+            //            //ninjaBoss.Shoot = false;
+            //            ninjaBoss.Idles = true;
+            //            //ninjaBoss.State = State.Inactive;
+            //            ninjaTwo.StateFrameCounter = 0;
+            //            //ninjaBossSpriteIndex = 0;
+            //        }
+            //        break;
+            //    case 2:
+            //        if (ninjaBoss.Shoot && ninjaBoss.StateFrameCounter >= ninjaBoss.ShootStateDuration)
+            //        {
+            //            ninjaBoss.Shoot = false;
+            //            //ninjaBoss.Idles = false;
+            //            //ninjaBoss.State = State.Shooting;
+            //            ninjaTwo.StateFrameCounter = 0;
+            //            ninjaBossSpriteIndex = 0;
+            //        }
+            //        else if (!ninjaBoss.Shoot && ninjaBoss.StateFrameCounter >= ninjaBoss.RunStateDuration)
+            //        {
+            //            ninjaBoss.Shoot = true;
+            //            ninjaTwo.StateFrameCounter = 0;
+            //        }
+            //        break;
             //}
 
-            if (Canvas.GetLeft(ninja2) < 4416)
-            {
-                ninjaTwo.Speed++;
-                ninja2.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
-            }
 
-            Canvas.SetLeft(ninjaBow, Canvas.GetLeft(ninjaBow) + ninjaBoss.Speed);
 
-            ninjaBossSpriteIndex += 0.5;
-            if (ninjaBossSpriteIndex > 16)
-            {
-                ninjaBossSpriteIndex = 1;
-            }
-            ninjaBoss.RunSprites(ninjaBossSpriteIndex);
-            ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
-
-            //if (Canvas.GetLeft(ninjaBow) < 3839 || Canvas.GetLeft(ninjaBow) == 3819)
-            //{
-            //    ninjaBoss.Speed = 0;
-            //    ninjaBossSpriteIndex += 0.5;
-            //    if (ninjaBossSpriteIndex > 22)
-            //    {
-            //        ninjaBoss.Speed = -5;
-            //        ninjaBossSpriteIndex = 1;
-            //    }
-            //    ninjaBoss.AttackSprites(ninjaBossSpriteIndex);
-            //    ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
-            //}
-
-            if (Canvas.GetLeft(ninjaBow) > 3990)
-            {
-                ninjaBoss.Speed--;
-                ninjaBow.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-            }
-            if (Canvas.GetLeft(ninjaBow) < 3520)
-            {
-                ninjaBoss.Speed++;
-                ninjaBow.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
-            }
-
-            //if (Canvas.GetLeft(ninjaBow) < 3722 || Canvas.GetLeft(ninjaBow) == 3712)
-            //{
-            //    ninjaBoss.Speed = 0;
-            //    ninjaBossSpriteIndex += 0.5;
-            //    if (ninjaBossSpriteIndex > 12)
-            //    {
-            //        ninjaBoss.Speed = -5;
-            //        ninjaBossSpriteIndex = 1;
-            //    }
-            //    ninjaBoss.IdleNiSprites(ninjaBossSpriteIndex);
-            //    ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
-            //}
 
             Canvas.SetLeft(ninja1, Canvas.GetLeft(ninja1) + ninja.Speed);
             ninjaSpriteIndex += 0.5;

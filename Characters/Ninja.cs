@@ -8,11 +8,24 @@ using System.Windows.Media.Imaging;
 
 namespace Game_Treasure_Hunter
 {
+    public enum DirectionNinja
+    {
+        Left = 1,
+        Right = 2
+    }
     public class Ninja:ICharacterAnimationSprites
     {
         int health;
         int speed;
         public ImageBrush ninjaSprite = new ImageBrush();
+
+        //продолжительность того или иного действия персонажа
+        public int ThrowStateDuration = 100;
+        public int RunStatesDuration = 300;
+        public bool Throw = false;
+        public int StateFrameCounter = 0;
+
+        public DirectionNinja Direction { get; set; } = DirectionNinja.Right;
 
         public int Health
         {

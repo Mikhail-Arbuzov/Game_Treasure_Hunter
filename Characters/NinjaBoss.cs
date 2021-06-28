@@ -9,11 +9,37 @@ using System.Windows.Media.Imaging;
 
 namespace Game_Treasure_Hunter
 {
+    public enum DirectionNinjaBoss
+    {
+        Left = 1,
+        Right = 2
+    }
+
+    public enum State
+    {
+        Running = 1,
+        Inactive = 2,
+        Shooting = 3
+    }
+
     public class NinjaBoss:ICharacterAnimationSprites
     {
         int health;
         int speed;
         public ImageBrush ninjaBossSprite = new ImageBrush();
+
+        //продолжительность того или иного действия персонажа
+        public int ShootStateDuration = 100;
+        public int RunStateDuration = 200;
+        public int IdleStateDuration = 100;
+        public bool Shoot = false;
+        public bool Idles = false;
+        public int StateFrameCounter = 0;
+        public bool Duration = false;
+        public double StateFrameCounter2 = 0;
+
+        public DirectionNinjaBoss Direction { get; set; } = DirectionNinjaBoss.Right;
+        public State State { get; set; } = State.Running;
 
         public int Health
         {

@@ -42,6 +42,7 @@ namespace Game_Treasure_Hunter
         double verticalSpeedSpike = 0.5;
         //для создания пулей врагов
         double speedEnemyBullet = 10;
+        double speedEnemyArrows = 10;
         int bulletTimer = 0;
         int bulletTimerLimit = 90;
         //для переключения спрайтов
@@ -61,7 +62,7 @@ namespace Game_Treasure_Hunter
         int bulletsScore;
         int gem;
 
-       
+        //int ninjaBossState = 0;
 
         Player player;
         Wolf wolf;
