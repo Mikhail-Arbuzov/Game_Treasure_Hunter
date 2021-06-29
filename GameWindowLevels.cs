@@ -413,52 +413,79 @@ namespace Game_Treasure_Hunter
                     if (Canvas.GetLeft(b) > 4685)
                     {
                         Canvas.SetLeft(b, 3227);
-                        bird.Speed += 0.5;
+                        //bird.Speed +=2;
 
                     }
                 }
 
                 if ((string)b.Tag == "bear")
                 {
-                    Canvas.SetLeft(b, Canvas.GetLeft(b) + bear.Speed);
-                    if (Canvas.GetLeft(b) < Canvas.GetLeft(ground13) || Canvas.GetLeft(b) + b.Width > Canvas.GetLeft(ground13) + ground13.Width)
+                    Canvas.SetLeft(b, Canvas.GetLeft(b) - bear.Speed);
+                    bear.MoveLeft();
+                    if (Canvas.GetLeft(b) > 4645)
                     {
-                        bear.Speed = -bear.Speed;
+                        bear.Speed++;
+                        bear.bearOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+
                     }
 
-                    if (Canvas.GetLeft(b) < Canvas.GetLeft(ground13))
+                    if (Canvas.GetLeft(b) < 4400)
                     {
-                        bear.BearCurrentFrame--;
-                        bear.MoveRight();
+                        bear.Speed--;
+                        bear.bearOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                        //bear.MoveRight();
                     }
+                    //if (Canvas.GetLeft(b) < Canvas.GetLeft(ground13) || Canvas.GetLeft(b) + b.Width > Canvas.GetLeft(ground13) + ground13.Width)
+                    //{
+                    //    bear.Speed = -bear.Speed;
+                    //}
 
-                    if (Canvas.GetLeft(b) + b.Width > Canvas.GetLeft(ground13) + ground13.Width)
-                    {
-                        bear.BearCurrentFrame++;
-                        bear.MoveLeft();
-                    }
+                    ////if (Canvas.GetLeft(b) < Canvas.GetLeft(ground13))
+                    ////{
+                    ////    bear.BearCurrentFrame--;
+                    ////    bear.MoveRight();
+                    ////}
+
+                    //if (Canvas.GetLeft(b) + b.Width > Canvas.GetLeft(ground13) + ground13.Width)
+                    //{
+                    //    //bear.BearCurrentFrame++;
+                    //    bear.MoveLeft();
+                    //}
                 }
 
                 if ((string)b.Tag == "hog")
                 {
                     Canvas.SetLeft(b, Canvas.GetLeft(b) + hog.Speed);
-                    if (Canvas.GetLeft(b) < Canvas.GetLeft(ground10) || Canvas.GetLeft(b) + b.Width > Canvas.GetLeft(ground10) + ground10.Width)
+                    hog.MoveRight();
+                    if(Canvas.GetLeft(b) > 4443)
                     {
-                        hog.Speed = -hog.Speed;
+                        hog.Speed--;
+                        hog.hogOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
                     }
 
-                    if (Canvas.GetLeft(b) < Canvas.GetLeft(ground10))
+                    if (Canvas.GetLeft(b) < 4280)
                     {
-                        hog.MoveRight();
+                        hog.Speed++;
+                        hog.hogOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
                     }
 
-                    if (Canvas.GetLeft(b) + b.Width > Canvas.GetLeft(ground10) + ground10.Width)
-                    {
-                        hog.MoveLeft();
-                    }
+                    //    if (Canvas.GetLeft(b) < Canvas.GetLeft(ground10) || Canvas.GetLeft(b) + b.Width > Canvas.GetLeft(ground10) + ground10.Width)
+                    //    {
+                    //        hog.Speed = -hog.Speed;
+                    //    }
+
+                    //    if (Canvas.GetLeft(b) < Canvas.GetLeft(ground10))
+                    //    {
+                    //        hog.MoveRight();
+                    //    }
+
+                    //    if (Canvas.GetLeft(b) + b.Width > Canvas.GetLeft(ground10) + ground10.Width)
+                    //    {
+                    //        hog.MoveLeft();
+                    //    }
                 }
             }
-
+           
             //смена спрайтов персонажей взависимости от пересечения персонажей определенной позиции
 
 

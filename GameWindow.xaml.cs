@@ -104,7 +104,7 @@ namespace Game_Treasure_Hunter
             trollOne = new Troll();
             wolf = new Wolf("pack://application:,,,/Sprites/SpritesWolf/Wolf.png", 141, 191, 98, "wolf", 3, 0);
             bear = new Bear("pack://application:,,,/Sprites/SpritesBear/m_Bear.png", 180, 135, 160, "bear", 8, 0);
-            hog = new Hog("pack://application:,,,/Sprites/SpritesHog/m_zp.png", 120, 192, 120, "hog", 3, 0);
+            hog = new Hog("pack://application:,,,/Sprites/SpritesHog/m_zp.png", 120, 196, 120, "hog", 3, 0);
             bird = new Bird("pack://application:,,,/Sprites/SpritesBird/Bird_Black.png", 0, 96, 96, "bird", 4, 0);
             snake = new Snake("pack://application:,,,/Sprites/SpritesSnake/snake.png", 80, 80, 80, "snake", 4, 0);
             wolf.UploadingImage();
@@ -548,12 +548,13 @@ namespace Game_Treasure_Hunter
             ImageBrush dmImage = new ImageBrush();
             dmImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/m_diamond.png"));
             diamond1.Fill = dmImage;
-            ImageBrush treeImage = new ImageBrush();
-            treeImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/tree.png"));
-            tree.Fill = treeImage;
-            ImageBrush trImage = new ImageBrush();
-            trImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/tree2.png"));
-            tree2.Fill = trImage;
+            // прямоугольники деревья
+            //ImageBrush treeImage = new ImageBrush();
+            //treeImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/tree.png"));
+            //tree.Fill = treeImage;
+            //ImageBrush trImage = new ImageBrush();
+            //trImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/tree2.png"));
+            //tree2.Fill = trImage;
 
             gameTimer.Start();
         }

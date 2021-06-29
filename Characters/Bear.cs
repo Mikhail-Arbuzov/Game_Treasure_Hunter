@@ -13,10 +13,12 @@ namespace Game_Treasure_Hunter
     {
         BitmapImage spriteBearImage = new BitmapImage();
         public Image bearOne = new Image();
+        double current = 0;
+
         int totalBearFrames;
         int bearCurrentFrame;
         int health;
-        int speed;
+        double speed;
         string mark;
         string path;
         int width;
@@ -120,7 +122,7 @@ namespace Game_Treasure_Hunter
             }
         }
 
-        public int Speed
+        public double Speed
         {
             get
             {
@@ -143,7 +145,7 @@ namespace Game_Treasure_Hunter
             TotalBearFrames = totalBearframes1;
             BearCurrentFrame = bearCurrentFrame1;
             Health = 8;
-            Speed = 5;
+            Speed = 2;
         }
 
         public void UploadingImage()
@@ -155,8 +157,8 @@ namespace Game_Treasure_Hunter
 
         public CroppedBitmap GetFrame(int frame)
         {
-            int frameX = (frame % TotalBearFrames) * Width;
-            return new CroppedBitmap(spriteBearImage, new System.Windows.Int32Rect(frameX+50 , FrameY, Width+11, Height));
+            int frameX = (frame % TotalBearFrames) * 140;
+            return new CroppedBitmap(spriteBearImage, new System.Windows.Int32Rect(frameX+50, FrameY, Width, Height)); 
         }
 
         public void InitPictures()
@@ -167,21 +169,31 @@ namespace Game_Treasure_Hunter
             bearOne.Source = GetFrame(0);
         }
 
-        public void MoveRight()
-        {
-            BearCurrentFrame--;
-            if (BearCurrentFrame < 0)
-                BearCurrentFrame += TotalBearFrames;
-
-            bearOne.Source = GetFrame(BearCurrentFrame);
-            bearOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-        }
+        //public void MoveRight()
+        //{
+        //    BearCurrentFrame-=1;
+        //    if (BearCurrentFrame < 0)
+        //        BearCurrentFrame += TotalBearFrames;
+        //    bearOne.Source = GetFrame(BearCurrentFrame);
+        //    //bearOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+        //}
 
         public void MoveLeft()
         {
-            BearCurrentFrame = (BearCurrentFrame + 1) % TotalBearFrames;
+            //BearCurrentFrame+=1;
+            //if(BearCurrentFrame > TotalBearFrames)
+            //{
+            //    BearCurrentFrame = 0;
+            //}
+            current += 0.2;
+            if(current >=1)
+            {
+                BearCurrentFrame = (BearCurrentFrame + 1) % TotalBearFrames;
+                current = 0;
+            }
+            
             bearOne.Source = GetFrame(BearCurrentFrame);
-            bearOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+            //bearOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
         }
 
         public CroppedBitmap ClippingFrame(int f)

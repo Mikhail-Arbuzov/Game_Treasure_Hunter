@@ -14,6 +14,8 @@ namespace Game_Treasure_Hunter
     {
         BitmapImage spriteBirdImage = new BitmapImage();
         public Image birdOne = new Image();
+        double countActions;
+        
         int totalBirdFrames;
         int birdCurrentFrame;
         int health;
@@ -144,7 +146,7 @@ namespace Game_Treasure_Hunter
             TotalBirdFrames = totalBirdframes1;
             BirdCurrentFrame = birdCurrentFrame1;
             Health = 2;
-            Speed = 1;
+            Speed = 3.5;
         }
 
         public void UploadingImage()
@@ -168,21 +170,31 @@ namespace Game_Treasure_Hunter
             birdOne.Source = GetFrame(0);
         }
 
-        public void MoveLeft()
-        {
-            BirdCurrentFrame--;
-            if (BirdCurrentFrame < 0)
-                BirdCurrentFrame += TotalBirdFrames;
+        //public void MoveLeft()
+        //{
+        //    BirdCurrentFrame--;
+        //    if (BirdCurrentFrame < 0)
+        //        BirdCurrentFrame += TotalBirdFrames;
 
-            birdOne.Source = GetFrame(BirdCurrentFrame);
-            birdOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-        }
+        //    birdOne.Source = GetFrame(BirdCurrentFrame);
+        //    birdOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+        //}
 
         public void MoveRight()
         {
-            BirdCurrentFrame = (birdCurrentFrame + 1) % TotalBirdFrames;
+            countActions += 0.2;
+            if(countActions >= 1)
+            {
+                BirdCurrentFrame = (BirdCurrentFrame + 1) % TotalBirdFrames;
+                countActions = 0;
+            }
+            //BirdCurrentFrame += 1;
+            //if (BirdCurrentFrame > TotalBirdFrames)
+            //{
+            //    BirdCurrentFrame = 0;
+            //}
             birdOne.Source = GetFrame(BirdCurrentFrame);
-            birdOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+            //birdOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
         }
     }
 }

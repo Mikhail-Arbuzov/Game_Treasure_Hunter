@@ -526,7 +526,6 @@
     <Resource Include="Sprites\SpritesSnow\snow_02.png" />
     <Resource Include="Sprites\SpritesSnow\snow_03.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Sprites\SpritesSoldier\solder_Attack_00.png" />
     <Resource Include="Sprites\SpritesSoldier\solder_Attack_01.png" />
@@ -671,6 +670,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Sprites\SpritesWolf\Wolf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="back.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\treeOne1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\korni.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

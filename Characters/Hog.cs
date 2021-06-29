@@ -14,6 +14,9 @@ namespace Game_Treasure_Hunter
     {
         BitmapImage spriteHogImage = new BitmapImage();
         public Image hogOne = new Image();
+
+        double count = 0;
+
         int totalHogFrames;
         int hogCurrentFrame;
         int health;
@@ -144,7 +147,7 @@ namespace Game_Treasure_Hunter
             TotalHogFrames = totalHogframes1;
             HogCurrentFrame = hogCurrentFrame1;
             Health = 3;
-            Speed = 5;
+            Speed = 1;
         }
 
         public void UploadingImage()
@@ -168,21 +171,27 @@ namespace Game_Treasure_Hunter
             hogOne.Source = GetFrame(0);
         }
 
-        public void MoveLeft()
-        {
-            HogCurrentFrame--;
-            if (HogCurrentFrame < 0)
-                HogCurrentFrame += TotalHogFrames;
+        //public void MoveLeft()
+        //{
+        //    HogCurrentFrame--;
+        //    if (HogCurrentFrame < 0)
+        //        HogCurrentFrame += TotalHogFrames;
 
-            hogOne.Source = GetFrame(HogCurrentFrame);
-            hogOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-        }
+        //    hogOne.Source = GetFrame(HogCurrentFrame);
+        //    hogOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+        //}
 
         public void MoveRight()
         {
-            HogCurrentFrame = (HogCurrentFrame + 1) % TotalHogFrames;
+            count += 0.2;
+            if(count >=4)
+            {
+                HogCurrentFrame = (HogCurrentFrame + 1) % TotalHogFrames;
+                count = 0;
+            }
+          
             hogOne.Source = GetFrame(HogCurrentFrame);
-            hogOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+            //hogOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
         }
     }
 }
