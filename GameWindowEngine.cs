@@ -388,14 +388,16 @@ namespace Game_Treasure_Hunter
 
                     if (bearHitBox2.IntersectsWith(playerHitBox))
                     {
-                        if (Canvas.GetLeft(animal) < Canvas.GetLeft(ground13))
-                        {
-                            bear.AttackRight();
-                        }
-                        if (Canvas.GetLeft(animal) + animal.Width > Canvas.GetLeft(ground13) + ground13.Width)
-                        {
-                            bear.AttackLeft();
-                        }
+
+                        bear.AttackLeft();
+                        //if (Canvas.GetLeft(animal) < Canvas.GetLeft(ground13))
+                        //{
+                        //    bear.AttackRight();
+                        //}
+                        //if (Canvas.GetLeft(animal) + animal.Width > Canvas.GetLeft(ground13) + ground13.Width)
+                        //{
+                           
+                        //}
                     }
                     if (playerHitBox.IntersectsWith(bearHitBox2))
                     {
@@ -1090,14 +1092,14 @@ namespace Game_Treasure_Hunter
                     //}
                 }
 
-                //if ((string)x.Tag == "spike")
-                //{
-                //    Rect spikeHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-                //    if (playerHitBox.IntersectsWith(spikeHitBox))
-                //    {
-                //        player.Health = -10;
-                //    }
-                //}
+                if ((string)x.Tag == "spike")
+                {
+                    Rect spikeHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+                    if (playerHitBox.IntersectsWith(spikeHitBox))
+                    {
+                        player.Health = -10;
+                    }
+                }
 
                 if ((string)x.Tag == "coin")
                 {
@@ -1486,8 +1488,6 @@ namespace Game_Treasure_Hunter
                 {
                     treasuresScore.Content = "Сокровища: " + gem + Environment.NewLine + "Первый уровень" + Environment.NewLine + "пройден!";
                 }
-
-
 
                 //MessageBox.Show("Первый уровень пройден!", "TREASURE HUNTER");
             }

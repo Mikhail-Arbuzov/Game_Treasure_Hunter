@@ -208,21 +208,27 @@ namespace Game_Treasure_Hunter
         {
             bearOne.Width = 180;
             bearOne.Height = 160;
-            BearCurrentFrame = (BearCurrentFrame + 1) % 3;
+
+            current += 0.2;
+            if (current >= 3)
+            {
+                BearCurrentFrame = (BearCurrentFrame + 1) % 3;
+                current = 0;
+            }
             bearOne.Source = ClippingFrame(BearCurrentFrame);
-            bearOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+            //bearOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
         }
 
-        public void AttackRight()
-        {
-            bearOne.Width = 180;
-            bearOne.Height = 160;
-            BearCurrentFrame--;
-            if (BearCurrentFrame < 0)
-                BearCurrentFrame += 3;
+        //public void AttackRight()
+        //{
+        //    bearOne.Width = 180;
+        //    bearOne.Height = 160;
+        //    BearCurrentFrame--;
+        //    if (BearCurrentFrame < 0)
+        //        BearCurrentFrame += 3;
 
-            bearOne.Source = ClippingFrame(BearCurrentFrame);
-            bearOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-        }
+        //    bearOne.Source = ClippingFrame(BearCurrentFrame);
+        //    bearOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+        //}
     }
 }
