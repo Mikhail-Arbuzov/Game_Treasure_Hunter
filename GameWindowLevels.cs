@@ -221,143 +221,228 @@ namespace Game_Treasure_Hunter
                 verticalSpeedSpike++;
             }
 
-            Canvas.SetLeft(soldier, Canvas.GetLeft(soldier) + soldierOne.Speed);
+            //действия солдата
 
-            soldierSpriteIndex += 0.5;
-            if (soldierSpriteIndex > 10)
+            if(soldierOne.Idle)
             {
-                soldierSpriteIndex = 1;
-            }
-            soldierOne.RunSprites(soldierSpriteIndex);
-            soldier.Fill = soldierOne.soldierSprite;
-
-            if (Canvas.GetLeft(soldier) > 2175)
-            {
-                soldierOne.Speed--;
-                soldier.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-            }
-            //if (Canvas.GetLeft(soldier) < 2056 || Canvas.GetLeft(soldier) == 2076)
-            //{
-            //    soldierOne.Speed = 0;
-            //    soldierSpriteIndex += 0.5;
-            //    if (soldierSpriteIndex > 10)
-            //    {
-            //        soldierOne.Speed = -5;
-            //        soldierSpriteIndex = 1;
-            //    }
-            //    soldierOne.IdleSoSprites(soldierSpriteIndex);
-            //    soldier.Fill = soldierOne.soldierSprite;
-            //}
-
-            if (Canvas.GetLeft(soldier) < 1983)
-            {
-                soldierOne.Speed++;
-                soldier.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
-            }
-
-            Canvas.SetLeft(shooter2, Canvas.GetLeft(shooter2) + shooterTwo.Speed);
-
-            shooterSpriteIndex += 0.5;
-            if (shooterSpriteIndex > 10)
-            {
-                shooterSpriteIndex = 1;
-            }
-            shooterTwo.RunSprites(shooterSpriteIndex);
-            shooter2.Fill = shooterTwo.shooterSprite;
-
-            if (Canvas.GetLeft(shooter2) > 2136)
-            {
-                shooterTwo.Speed--;
-                shooter2.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-            }
-
-            if (Canvas.GetTop(hero) < 400 && Canvas.GetTop(hero) > 120)
-            {
-                //shooterTwo.Speed = 0;
-                shooterSpriteIndex += 0.5;
-                if (shooterSpriteIndex > 10)
+                soldierSpriteIndex += 0.5;
+                if (soldierSpriteIndex > 10)
                 {
-                    shooterSpriteIndex = 1;
+                    soldierSpriteIndex = 1;
                 }
-                shooterTwo.AttackSprites(shooterSpriteIndex);
-                shooter2.Fill = shooterTwo.shooterSprite;
+                soldierOne.IdleSoSprites(soldierSpriteIndex);
+                soldier.Fill = soldierOne.soldierSprite;
             }
-
-            if (Canvas.GetLeft(shooter2) < 1624)
+            else
             {
-                shooterTwo.Speed++;
-                shooter2.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                Canvas.SetLeft(soldier, Canvas.GetLeft(soldier) + soldierOne.Speed);
+
+                soldierSpriteIndex += 0.5;
+                if (soldierSpriteIndex > 10)
+                {
+                    soldierSpriteIndex = 1;
+                }
+                soldierOne.RunSprites(soldierSpriteIndex);
+                soldier.Fill = soldierOne.soldierSprite;
+
+                if (Canvas.GetLeft(soldier) > 2175)
+                {
+                    soldierOne.Speed--;
+                    soldier.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                }
+
+                if (Canvas.GetLeft(soldier) < 1983)
+                {
+                    soldierOne.Speed++;
+                    soldier.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                }
             }
 
-            Canvas.SetLeft(terror, Canvas.GetLeft(terror) + terrorist.Speed);
-
-            terroristSpriteIndex += 0.5;
-            if (terroristSpriteIndex > 8)
+            soldierOne.StateFrameCounter++;
+            if(soldierOne.Idle && soldierOne.StateFrameCounter >= soldierOne.IdleStatesDuration)
             {
-                terroristSpriteIndex = 1;
+                soldierOne.Idle = false;
+                soldierOne.StateFrameCounter = 0;
+                soldierSpriteIndex = 0;
             }
-            terrorist.RunSprites(terroristSpriteIndex);
-            terror.Fill = terrorist.terroristSprite;
-
-
-            if (Canvas.GetLeft(terror) > 2438)
+            else if (!soldierOne.Idle && soldierOne.StateFrameCounter >= soldierOne.RunStatesDuration)
             {
-                terrorist.Speed--;
-                terror.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                soldierOne.Idle = true;
+                soldierOne.StateFrameCounter = 0;
             }
 
-            //if (Canvas.GetLeft(terror) < 2214 || Canvas.GetLeft(terror) == 2194)
+            //действия второго стрелка
+            if(shooterTwo.Health > 0)
+            {
+                if (shooterTwo.Shoot)
+                {
+                    shooterSpriteIndex += 0.5;
+                    if (shooterSpriteIndex > 10)
+                    {
+                        shooterSpriteIndex = 1;
+                    }
+                    shooterTwo.AttackSprites(shooterSpriteIndex);
+                    shooter2.Fill = shooterTwo.shooterSprite;
+                }
+                else
+                {
+                    Canvas.SetLeft(shooter2, Canvas.GetLeft(shooter2) + shooterTwo.Speed);
+
+                    shooterSpriteIndex += 0.5;
+                    if (shooterSpriteIndex > 10)
+                    {
+                        shooterSpriteIndex = 1;
+                    }
+                    shooterTwo.RunSprites(shooterSpriteIndex);
+                    shooter2.Fill = shooterTwo.shooterSprite;
+
+                    if (Canvas.GetLeft(shooter2) > 2136)
+                    {
+                        shooterTwo.Direction = DirectionShooter.Left;
+                        shooterTwo.Speed--;
+                        shooter2.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                    }
+
+                    if (Canvas.GetLeft(shooter2) < 1624)
+                    {
+                        shooterTwo.Direction = DirectionShooter.Right;
+                        shooterTwo.Speed++;
+                        shooter2.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    }
+                }
+
+                shooterTwo.StateFrameCounter++;
+                if (shooterTwo.Shoot && shooterTwo.StateFrameCounter >= shooterTwo.ShootStateDuration)
+                {
+                    shooterTwo.Shoot = false;
+                    shooterTwo.StateFrameCounter = 0;
+                    shooterSpriteIndex = 0;
+                }
+                else if (!shooterTwo.Shoot && shooterTwo.StateFrameCounter >= shooterTwo.RunStatesDuration)
+                {
+                    shooterTwo.Shoot = true;
+                    shooterTwo.StateFrameCounter = 0;
+                    //shooterSpriteIndex = 0;
+                }
+            }
+
+            //if (Canvas.GetTop(hero) < 400 && Canvas.GetTop(hero) > 120)
             //{
-            //    terrorist.Speed = 0;
-            //    terroristSpriteIndex += 0.5;
-            //    if (terroristSpriteIndex > 4)
+            //    //shooterTwo.Speed = 0;
+            //    shooterSpriteIndex += 0.5;
+            //    if (shooterSpriteIndex > 10)
             //    {
-            //        terrorist.Speed = -5;
-            //        terroristSpriteIndex = 1;
+            //        shooterSpriteIndex = 1;
             //    }
-            //    terrorist.ShootSprites(terroristSpriteIndex);
-            //    terror.Fill = terrorist.terroristSprite;
+            //    shooterTwo.AttackSprites(shooterSpriteIndex);
+            //    shooter2.Fill = shooterTwo.shooterSprite;
             //}
 
-            if (Canvas.GetLeft(terror) < 1782)
+            // действия террориста
+            if(terrorist.Health > 0)
             {
-                terrorist.Speed++;
-                terror.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                if (terrorist.Shoot)
+                {
+                    terroristSpriteIndex += 0.5;
+                    if (terroristSpriteIndex > 4)
+                    {
+                        terroristSpriteIndex = 1;
+                    }
+                    terrorist.ShootSprites(terroristSpriteIndex);
+                    terror.Fill = terrorist.terroristSprite;
+                }
+                else
+                {
+                    Canvas.SetLeft(terror, Canvas.GetLeft(terror) + terrorist.Speed);
+
+                    terroristSpriteIndex += 0.5;
+                    if (terroristSpriteIndex > 8)
+                    {
+                        terroristSpriteIndex = 1;
+                    }
+                    terrorist.RunSprites(terroristSpriteIndex);
+                    terror.Fill = terrorist.terroristSprite;
+
+
+                    if (Canvas.GetLeft(terror) > 2438)
+                    {
+                        terrorist.Direction = DirectionTerrorist.Left;
+                        terrorist.Speed--;
+                        terror.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                    }
+
+                    if (Canvas.GetLeft(terror) < 1782)
+                    {
+                        terrorist.Direction = DirectionTerrorist.Right;
+                        terrorist.Speed++;
+                        terror.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    }
+                }
+
+                terrorist.StateFrameCounter++;
+                if (terrorist.Shoot && terrorist.StateFrameCounter >= terrorist.ShootStateDuration)
+                {
+                    terrorist.Shoot = false;
+                    terrorist.StateFrameCounter = 0;
+                    terroristSpriteIndex = 0;
+                }
+                else if (!terrorist.Shoot && terrorist.StateFrameCounter >= terrorist.RunStatesDuration)
+                {
+                    terrorist.Shoot = true;
+                    terrorist.StateFrameCounter = 0;
+                }
             }
 
-            Canvas.SetLeft(robo, Canvas.GetLeft(robo) + robot.Speed);
-            robotSpriteIndex += 0.5;
-            if (robotSpriteIndex > 12)
+            //действия робота
+            if(robot.Health > 0)
             {
-                robotSpriteIndex = 1;
-            }
-            robot.RunSprites(robotSpriteIndex);
-            robo.Fill = robot.robotSprite;
+                if (robot.Shoot)
+                {
+                    robotSpriteIndex += 0.5;
+                    if (robotSpriteIndex > 16)
+                    {
+                        robotSpriteIndex = 1;
+                    }
+                    robot.LazerSprites(robotSpriteIndex);
+                    robo.Fill = robot.robotSprite;
+                }
+                else
+                {
+                    Canvas.SetLeft(robo, Canvas.GetLeft(robo) + robot.Speed);
+                    robotSpriteIndex += 0.5;
+                    if (robotSpriteIndex > 12)
+                    {
+                        robotSpriteIndex = 1;
+                    }
+                    robot.RunSprites(robotSpriteIndex);
+                    robo.Fill = robot.robotSprite;
 
-            if (Canvas.GetLeft(robo) > 2921)
-            {
-                robot.Speed--;
-                robo.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-            }
+                    if (Canvas.GetLeft(robo) > 2921)
+                    {
+                        robot.Direction = DirectionRobot.Left;
+                        robot.Speed--;
+                        robo.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                    }
 
-
-            //if (Canvas.GetLeft(robo) < 2758 || Canvas.GetLeft(robo) == 2738)
-            //{
-            //    robot.Speed = 0;
-            //    robotSpriteIndex += 0.5;
-            //    if (robotSpriteIndex > 16)
-            //    {
-            //        robot.Speed = -5;
-            //        robotSpriteIndex = 1;
-            //    }
-            //    robot.LazerSprites(robotSpriteIndex);
-            //    robo.Fill = robot.robotSprite;
-            //}
-
-            if (Canvas.GetLeft(robo) < 2537)
-            {
-                robot.Speed++;
-                robo.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    if (Canvas.GetLeft(robo) < 2537)
+                    {
+                        robot.Direction = DirectionRobot.Right;
+                        robot.Speed++;
+                        robo.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    }
+                }
+                robot.StateFrameCounter++;
+                if (robot.Shoot && robot.StateFrameCounter >= robot.ShootStateDuration)
+                {
+                    robot.Shoot = false;
+                    robot.StateFrameCounter = 0;
+                    robotSpriteIndex = 0;
+                }
+                else if (!robot.Shoot && robot.StateFrameCounter >= robot.RunStatesDuration)
+                {
+                    robot.Shoot = true;
+                    robot.StateFrameCounter = 0;
+                }
             }
 
             foreach (var s in MyCanvas.Children.OfType<Image>())
@@ -365,6 +450,7 @@ namespace Game_Treasure_Hunter
                 if ((string)s.Tag == "snake")
                 {
                     Canvas.SetLeft(s, Canvas.GetLeft(s) + snake.Speed);
+                    snake.MoveRight();
                     //if(Canvas.GetLeft(s) < 3097 || Canvas.GetLeft(s) > 2671)
                     //{
                     //    snake.Speed = -snake.Speed;
@@ -373,12 +459,12 @@ namespace Game_Treasure_Hunter
                     if (Canvas.GetLeft(s) > 3097)
                     {
                         snake.Speed--;
-                        snake.MoveLeft();
+                        snake.snakeOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
                     }
                     if (Canvas.GetLeft(s) < 2671)
                     {
                         snake.Speed++;
-                        snake.MoveRight();
+                        snake.snakeOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
                     }
                 }
             }
@@ -563,7 +649,7 @@ namespace Game_Treasure_Hunter
 
 
             //смена действий второго ниндзи
-            if(ninjaTwo.Health >= 0)
+            if(ninjaTwo.Health > 0)
             {
                 if (ninjaTwo.Throw)
                 {
@@ -620,7 +706,7 @@ namespace Game_Treasure_Hunter
 
             //смена действий  ниндзи босса
            
-            if(ninjaBoss.Health >= 0)
+            if(ninjaBoss.Health > 0)
             {
                 if (ninjaBoss.Shoot)
                 {
@@ -752,7 +838,7 @@ namespace Game_Treasure_Hunter
 
 
 
-
+            //бег первого ниндзи
             Canvas.SetLeft(ninja1, Canvas.GetLeft(ninja1) + ninja.Speed);
             ninjaSpriteIndex += 0.5;
             if (ninjaSpriteIndex > 10)

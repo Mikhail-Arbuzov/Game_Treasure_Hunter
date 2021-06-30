@@ -110,33 +110,54 @@ namespace Game_Treasure_Hunter
             Rectangle enemyBullet3 = new Rectangle
             {
                 Tag = "enemyBullet3",
-                Height = 10,
-                Width = 20,
+                Height = 5,
+                Width = 10,
                 Fill = Brushes.Yellow,
-                Stroke = Brushes.Black,
+                Stroke = Brushes.White,
                 StrokeThickness = 2
             };
-            // положение от куда стреляют
+            // положение откуда стреляют
             Canvas.SetLeft(enemyBullet, Canvas.GetLeft(shooter1) + shooter1.Height / 2);
             Canvas.SetTop(enemyBullet, Canvas.GetTop(shooter1) + shooter1.Height / 2 + 24);
 
-            Canvas.SetLeft(enemyBullet2, Canvas.GetLeft(shooter2) + shooter2.Height / 2);
-            Canvas.SetTop(enemyBullet2, Canvas.GetTop(shooter2) + shooter2.Height / 2 + 24);
+            if(shooterTwo.Direction == DirectionShooter.Right)
+            {
+                Canvas.SetLeft(enemyBullet2, Canvas.GetLeft(shooter2) + shooter2.Height);
+                Canvas.SetTop(enemyBullet2, Canvas.GetTop(shooter2) + shooter2.Height / 2 + 24);
+            }
 
-            //Canvas.SetLeft(enemyBullet3, Canvas.GetTop(terror) + (terror.Height / 2) - 10);
-            //Canvas.SetTop(enemyBullet3, Canvas.GetLeft(terror) - enemyBullet3.Width);
+            if(shooterTwo.Direction == DirectionShooter.Left)
+            {
+                Canvas.SetLeft(enemyBullet2, Canvas.GetLeft(shooter2) - 10);
+                Canvas.SetTop(enemyBullet2, Canvas.GetTop(shooter2) + shooter2.Height / 2 + 24);
+            }
+           
+            if(terrorist.Direction == DirectionTerrorist.Right)
+            {
+                Canvas.SetLeft(enemyBullet3, Canvas.GetLeft(terror) + terror.Height);
+                Canvas.SetTop(enemyBullet3, Canvas.GetTop(terror) + terror.Height / 2 - 10);
+            }
+
+            if (terrorist.Direction == DirectionTerrorist.Left)
+            {
+                Canvas.SetLeft(enemyBullet3, Canvas.GetLeft(terror));
+                Canvas.SetTop(enemyBullet3, Canvas.GetTop(terror) + terror.Height / 2 - 10);
+            }
+
 
             if (Canvas.GetTop(hero) < 260 && Canvas.GetTop(hero) > 145 && shooterOne.Health > 0)
             {
                 MyCanvas.Children.Add(enemyBullet);
             }
-            if (Canvas.GetTop(hero) < 400 && Canvas.GetTop(hero) > 120 && shooterTwo.Health > 0)
+            if (shooterTwo.Shoot && shooterTwo.Health >= 0)
             {
                 MyCanvas.Children.Add(enemyBullet2);
             }
 
-            //MyCanvas.Children.Add(enemyBullet3);
-
+            if(terrorist.Shoot && terrorist.Health >= 0)
+            {
+                MyCanvas.Children.Add(enemyBullet3);
+            }
 
             //направление полета пули
             //if (Canvas.GetLeft(shooter1) < 407)
@@ -215,8 +236,18 @@ namespace Game_Treasure_Hunter
                 Fill = arrowImage
             };
 
-            Canvas.SetLeft(newLazer, Canvas.GetTop(robo) + (robo.Height / 2) - 30);
-            Canvas.SetTop(newLazer, Canvas.GetLeft(robo) - newLazer.Width);
+            if(robot.Direction == DirectionRobot.Right)
+            {
+                Canvas.SetLeft(newLazer, Canvas.GetLeft(robo) + robo.Height);
+                Canvas.SetTop(newLazer, Canvas.GetTop(robo) + robo.Height / 2 - 30);
+            }
+
+            if (robot.Direction == DirectionRobot.Left)
+            {
+                newLazer.Fill = lazerImage2;
+                Canvas.SetLeft(newLazer, Canvas.GetLeft(robo));
+                Canvas.SetTop(newLazer, Canvas.GetTop(robo) + robo.Height / 2 - 30);
+            }
 
             if (ninjaTwo.Direction == DirectionNinja.Right)
             {
@@ -245,10 +276,10 @@ namespace Game_Treasure_Hunter
             }
 
 
-            //if (robotSpriteIndex == 14)
-            //{
-            //    MyCanvas.Children.Add(newLazer);
-            //}
+            if (robot.Shoot && robot.Health >= 0)
+            {
+                MyCanvas.Children.Add(newLazer);
+            }
 
             if (ninjaTwo.Throw && ninjaTwo.Health >= 0)
             {

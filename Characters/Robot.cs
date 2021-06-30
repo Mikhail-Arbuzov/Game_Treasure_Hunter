@@ -8,11 +8,24 @@ using System.Windows.Media.Imaging;
 
 namespace Game_Treasure_Hunter
 {
+    public enum DirectionRobot
+    {
+        Left = 1,
+        Right = 2
+    }
+
     public class Robot:ICharacterAnimationSprites
     {
         int health;
         int speed;
         public ImageBrush robotSprite = new ImageBrush();
+
+        //продолжительность того или иного действия персонажа
+        public int ShootStateDuration = 200;
+        public int RunStatesDuration = 500;
+        public bool Shoot = false;
+        public int StateFrameCounter = 0;
+        public DirectionRobot Direction { get; set; } = DirectionRobot.Right;
 
         public int Health
         {

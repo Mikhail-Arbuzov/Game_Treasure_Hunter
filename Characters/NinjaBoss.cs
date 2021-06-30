@@ -15,12 +15,12 @@ namespace Game_Treasure_Hunter
         Right = 2
     }
 
-    public enum State
-    {
-        Running = 1,
-        Inactive = 2,
-        Shooting = 3
-    }
+    //public enum State
+    //{
+    //    Running = 1,
+    //    Inactive = 2,
+    //    Shooting = 3
+    //}
 
     public class NinjaBoss:ICharacterAnimationSprites
     {
@@ -39,7 +39,7 @@ namespace Game_Treasure_Hunter
         public double StateFrameCounter2 = 0;
 
         public DirectionNinjaBoss Direction { get; set; } = DirectionNinjaBoss.Right;
-        public State State { get; set; } = State.Running;
+        //public State State { get; set; } = State.Running;
 
         public int Health
         {

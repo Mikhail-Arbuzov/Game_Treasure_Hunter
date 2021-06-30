@@ -8,11 +8,23 @@ using System.Windows.Media.Imaging;
 
 namespace Game_Treasure_Hunter
 {
+    public enum DirectionTerrorist
+    {
+        Left = 1,
+        Right = 2
+    }
     public class Terrorist:ICharacterAnimationSprites
     {
         int health;
         int speed;
         public ImageBrush terroristSprite = new ImageBrush();
+
+        //продолжительность того или иного действия персонажа
+        public int ShootStateDuration = 100;
+        public int RunStatesDuration = 400;
+        public bool Shoot = false;
+        public int StateFrameCounter = 0;
+        public DirectionTerrorist Direction { get; set; } = DirectionTerrorist.Right;
 
         public int Health
         {

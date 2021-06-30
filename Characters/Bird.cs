@@ -14,7 +14,7 @@ namespace Game_Treasure_Hunter
     {
         BitmapImage spriteBirdImage = new BitmapImage();
         public Image birdOne = new Image();
-        double countActions;
+        double countActions = 0;
         
         int totalBirdFrames;
         int birdCurrentFrame;

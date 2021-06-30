@@ -418,14 +418,15 @@ namespace Game_Treasure_Hunter
 
                     if (snakeHitBox2.IntersectsWith(playerHitBox))
                     {
-                        if (Canvas.GetLeft(animal) > 3097)
-                        {
-                            snake.AttackLeft();
-                        }
-                        if (Canvas.GetLeft(animal) < 2671)
-                        {
-                            snake.AttackRight();
-                        }
+                        snake.AttackRight();
+                        //if (Canvas.GetLeft(animal) > 3097)
+                        //{
+                        //    snake.AttackLeft();
+                        //}
+                        //if (Canvas.GetLeft(animal) < 2671)
+                        //{
+
+                        //}
                     }
                     if (playerHitBox.IntersectsWith(snakeHitBox2))
                     {
@@ -1201,14 +1202,19 @@ namespace Game_Treasure_Hunter
 
                 if (x is Rectangle && (string)x.Tag == "enemyBullet2")
                 {
-                    if (shooterTwo.Speed < 0)
+                  
+                    if (Canvas.GetLeft(x) < Canvas.GetLeft(shooter2) + shooter2.Height)
+                    {
                         Canvas.SetLeft(x, Canvas.GetLeft(x) - speedEnemyBullet);
-
-                    if (shooterTwo.Speed > 0)
+                    }
+                       
+                    if (Canvas.GetLeft(x) > Canvas.GetLeft(shooter2))
+                    {
                         Canvas.SetLeft(x, Canvas.GetLeft(x) + speedEnemyBullet);
+                    }
+                        
 
-
-                    if (Canvas.GetLeft(x) > 2450 || Canvas.GetLeft(x) < 1630)
+                    if (Canvas.GetLeft(x) > 2650 || Canvas.GetLeft(x) < 1630)
                     {
                         itemRemover.Add(x);
                     }
@@ -1231,9 +1237,16 @@ namespace Game_Treasure_Hunter
 
                 if (x is Rectangle && (string)x.Tag == "enemyBullet3")
                 {
-                    //Canvas.SetLeft(x,Canvas.GetLeft(x) + speedEnemyBullet);  
+                    if(Canvas.GetLeft(x) < Canvas.GetLeft(terror) + terror.Height)
+                    {
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) - speedEnemyBullet);
+                    }
+                    if (Canvas.GetLeft(x) > Canvas.GetLeft(terror))
+                    {
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) + speedEnemyBullet);
+                    }
 
-                    if (Canvas.GetLeft(x) > 2450 || Canvas.GetLeft(x) < 1630)
+                    if (Canvas.GetLeft(x) > 2850 || Canvas.GetLeft(x) < 1730)
                     {
                         itemRemover.Add(x);
                     }
@@ -1256,7 +1269,16 @@ namespace Game_Treasure_Hunter
 
                 if (x is Rectangle && (string)x.Tag == "lazer")
                 {
-                    //Canvas.SetLeft(x,Canvas.GetLeft(x) + speedEnemyBullet);  
+                    if(Canvas.GetLeft(x) < Canvas.GetLeft(robo) + robo.Height)
+                    {
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) - speedEnemyArrows);
+                    }
+
+                    if (Canvas.GetLeft(x) > Canvas.GetLeft(robo))
+                    {
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) + speedEnemyArrows);
+                    }
+
 
                     if (Canvas.GetLeft(x) > 3180 || Canvas.GetLeft(x) < 1630)
                     {

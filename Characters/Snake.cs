@@ -13,6 +13,8 @@ namespace Game_Treasure_Hunter
     {
         BitmapImage spriteSnakeImage = new BitmapImage();
         public Image snakeOne = new Image();
+        double countActions = 0;
+
         int totalSnakeFrames;
         int snakeCurrentFrame;
         int health;
@@ -143,7 +145,7 @@ namespace Game_Treasure_Hunter
             TotalSnakeFrames = totalSnakeFrames1;
             SnakeCurrentFrame = snakeCurrentFrame1;
             Health = 2;
-            Speed = 5;
+            Speed = 1;
         }
 
         public void UploadingImage()
@@ -167,21 +169,27 @@ namespace Game_Treasure_Hunter
             snakeOne.Source = GetFrame(0);
         }
 
-        public void MoveLeft()
-        {
-            SnakeCurrentFrame--;
-            if (SnakeCurrentFrame < 0)
-                SnakeCurrentFrame += TotalSnakeFrames;
+        //public void MoveLeft()
+        //{
+        //    SnakeCurrentFrame--;
+        //    if (SnakeCurrentFrame < 0)
+        //        SnakeCurrentFrame += TotalSnakeFrames;
 
-            snakeOne.Source = GetFrame(SnakeCurrentFrame);
-            snakeOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-        }
+        //    snakeOne.Source = GetFrame(SnakeCurrentFrame);
+        //    snakeOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+        //}
 
         public void MoveRight()
         {
-            SnakeCurrentFrame = (SnakeCurrentFrame + 1) % TotalSnakeFrames;
+            countActions += 0.2;
+            if(countActions >=2)
+            {
+                SnakeCurrentFrame = (SnakeCurrentFrame + 1) % TotalSnakeFrames;
+                countActions = 0;
+            }
+           
             snakeOne.Source = GetFrame(SnakeCurrentFrame);
-            snakeOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+            //snakeOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
         }
 
 
@@ -195,19 +203,24 @@ namespace Game_Treasure_Hunter
 
         public void AttackRight()
         {
-            SnakeCurrentFrame = (SnakeCurrentFrame + 1) % 4;
+            countActions += 0.2;
+            if(countActions >= 2)
+            {
+                SnakeCurrentFrame = (SnakeCurrentFrame + 1) % 4;
+                countActions = 0;
+            }
             snakeOne.Source = ClippingFrame(SnakeCurrentFrame);
-            snakeOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+            //snakeOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
         }
 
-        public void AttackLeft()
-        {
-            SnakeCurrentFrame--;
-            if (SnakeCurrentFrame < 0)
-                SnakeCurrentFrame += 4;
+        //public void AttackLeft()
+        //{
+        //    SnakeCurrentFrame--;
+        //    if (SnakeCurrentFrame < 0)
+        //        SnakeCurrentFrame += 4;
 
-            snakeOne.Source = ClippingFrame(SnakeCurrentFrame);
-            snakeOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-        }
+        //    snakeOne.Source = ClippingFrame(SnakeCurrentFrame);
+        //    snakeOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+        //}
     }
 }
