@@ -360,14 +360,15 @@ namespace Game_Treasure_Hunter
 
                     if (wolfHitBox2.IntersectsWith(playerHitBox))
                     {
-                        if (Canvas.GetLeft(animal) < Canvas.GetLeft(ground4))
-                        {
-                            wolf.AttackLeft();
-                        }
-                        if (Canvas.GetLeft(animal) + animal.Width > Canvas.GetLeft(ground4) + ground4.Width)
-                        {
-                            wolf.AttackRight();
-                        }
+                        wolf.AttackRight();
+                        //if (Canvas.GetLeft(animal) < Canvas.GetLeft(ground4))
+                        //{
+                        //    wolf.AttackLeft();
+                        //}
+                        //if (Canvas.GetLeft(animal) + animal.Width > Canvas.GetLeft(ground4) + ground4.Width)
+                        //{
+                        //    wolf.AttackRight();
+                        //}
                     }
                     if (playerHitBox.IntersectsWith(wolfHitBox2))
                     {
@@ -1171,14 +1172,23 @@ namespace Game_Treasure_Hunter
 
                 if (x is Rectangle && (string)x.Tag == "enemyBullet")
                 {
+                    //1-й способ
+                    //if (shooterOne.Speed < 0)
+                    //    Canvas.SetLeft(x, Canvas.GetLeft(x) - speedEnemyBullet);
 
-                    if (shooterOne.Speed < 0)
+                    //if (shooterOne.Speed > 0)
+                    //    Canvas.SetLeft(x, Canvas.GetLeft(x) + speedEnemyBullet);
+                    if (Canvas.GetLeft(x) < Canvas.GetLeft(shooter1) + shooter1.Height)
+                    {
                         Canvas.SetLeft(x, Canvas.GetLeft(x) - speedEnemyBullet);
+                    }
 
-                    if (shooterOne.Speed > 0)
+                    if (Canvas.GetLeft(x) > Canvas.GetLeft(shooter1))
+                    {
                         Canvas.SetLeft(x, Canvas.GetLeft(x) + speedEnemyBullet);
+                    }
 
-                    if (Canvas.GetLeft(x) > 600 || Canvas.GetLeft(x) < 30)
+                    if (Canvas.GetLeft(x) > 1400 || Canvas.GetLeft(x) < 30)
                     {
                         itemRemover.Add(x);
                     }
@@ -1189,7 +1199,7 @@ namespace Game_Treasure_Hunter
                     if (playerHitBox.IntersectsWith(enemyBulletHitBox))
                     {
                         player.Health -= 2;
-                        itemRemover.Add(x);
+                        
                         playerSpriteIndex += 0.5;
                         if (playerSpriteIndex > 10)
                         {
@@ -1197,6 +1207,7 @@ namespace Game_Treasure_Hunter
                         }
                         player.HurtSprites(playerSpriteIndex);
                         hero.Fill = player.playerSprite;
+                        itemRemover.Add(x);
                     }
                 }
 
@@ -1224,7 +1235,6 @@ namespace Game_Treasure_Hunter
                     if (playerHitBox.IntersectsWith(enemyBulletHitBox2))
                     {
                         player.Health -= 2;
-                        itemRemover.Add(x);
                         playerSpriteIndex += 0.5;
                         if (playerSpriteIndex > 10)
                         {
@@ -1232,6 +1242,7 @@ namespace Game_Treasure_Hunter
                         }
                         player.HurtSprites(playerSpriteIndex);
                         hero.Fill = player.playerSprite;
+                        itemRemover.Add(x);
                     }
                 }
 
@@ -1256,7 +1267,6 @@ namespace Game_Treasure_Hunter
                     if (playerHitBox.IntersectsWith(enemyBulletHitBox3))
                     {
                         player.Health -= 2;
-                        itemRemover.Add(x);
                         playerSpriteIndex += 0.5;
                         if (playerSpriteIndex > 10)
                         {
@@ -1264,6 +1274,7 @@ namespace Game_Treasure_Hunter
                         }
                         player.HurtSprites(playerSpriteIndex);
                         hero.Fill = player.playerSprite;
+                        itemRemover.Add(x);
                     }
                 }
 

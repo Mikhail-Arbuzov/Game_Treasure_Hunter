@@ -14,6 +14,8 @@ namespace Game_Treasure_Hunter
     {
         BitmapImage spriteWolfImage = new BitmapImage();
         public Image wolfOne = new Image();
+        double countActions = 0;
+
         int totalWolfFrames;
         int wolfCurrentFrame;
         int health;
@@ -159,7 +161,7 @@ namespace Game_Treasure_Hunter
         public CroppedBitmap GetFrame(int frame)
         {
           
-            int frameX = (frame % TotalWolfFrames) * Width;
+            int frameX = (frame % TotalWolfFrames) * 210;
             return new CroppedBitmap(spriteWolfImage, new System.Windows.Int32Rect(frameX, FrameY, Width, Height));
 
         }
@@ -175,52 +177,63 @@ namespace Game_Treasure_Hunter
             //GameWindow.MyCanvas.Children.Add(wolfOne);
         }
 
-        public void MoveLeft()
-        {
-            WolfCurrentFrame--;
-            if (WolfCurrentFrame < 0)
-                WolfCurrentFrame += TotalWolfFrames;
+        //public void MoveLeft()
+        //{
+        //    WolfCurrentFrame--;
+        //    if (WolfCurrentFrame < 0)
+        //        WolfCurrentFrame += TotalWolfFrames;
 
-            wolfOne.Source = GetFrame(WolfCurrentFrame);
-            wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-        }
+        //    wolfOne.Source = GetFrame(WolfCurrentFrame);
+        //    wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+        //}
 
         public void MoveRight()
         {
-            WolfCurrentFrame = (WolfCurrentFrame + 1) % TotalWolfFrames;
+            countActions += 0.2;
+            if(countActions >= 1)
+            {
+                WolfCurrentFrame = (WolfCurrentFrame + 1) % TotalWolfFrames;
+                countActions = 0;
+            }
+           
             wolfOne.Source = GetFrame(WolfCurrentFrame);
-            wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+            //wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
         }
 
         public CroppedBitmap ClippingFrame(int f)
         {
-            const int w = 190;
-            const int h = 140;
+            const int w = 210;
+            const int h = 143;
             int frameX2 = (f % 3) * w;
             return new CroppedBitmap(spriteWolfImage, new System.Windows.Int32Rect(frameX2, 439, w, h));
         }
 
         public void AttackRight()
         {
-            wolfOne.Width = 190;
-            wolfOne.Height = 140;
-            WolfCurrentFrame = (WolfCurrentFrame + 1) % 3;
-            wolfOne.Source = ClippingFrame(WolfCurrentFrame);
-            wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
-        }
-
-        public void AttackLeft()
-        {
-            wolfOne.Width = 190;
-            wolfOne.Height = 140;
-            WolfCurrentFrame--;
-            if(WolfCurrentFrame < 0)
+            wolfOne.Width = 210;
+            wolfOne.Height = 143;
+            countActions += 0.2;
+            if(countActions >= 8)
             {
-                WolfCurrentFrame += 3;
+                WolfCurrentFrame = (WolfCurrentFrame + 1) % 3;
+                countActions = 0;
             }
-
             wolfOne.Source = ClippingFrame(WolfCurrentFrame);
-            wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+            //wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
         }
+
+        //public void AttackLeft()
+        //{
+        //    wolfOne.Width = 190;
+        //    wolfOne.Height = 140;
+        //    WolfCurrentFrame--;
+        //    if(WolfCurrentFrame < 0)
+        //    {
+        //        WolfCurrentFrame += 3;
+        //    }
+
+        //    wolfOne.Source = ClippingFrame(WolfCurrentFrame);
+        //    wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+        //}
     }
 }

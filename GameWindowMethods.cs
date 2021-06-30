@@ -105,7 +105,7 @@ namespace Game_Treasure_Hunter
                 Width = 20,
                 Fill = Brushes.Yellow,
                 Stroke = Brushes.Black,
-                StrokeThickness = 2
+                StrokeThickness = 1
             };
             Rectangle enemyBullet3 = new Rectangle
             {
@@ -117,10 +117,19 @@ namespace Game_Treasure_Hunter
                 StrokeThickness = 2
             };
             // положение откуда стреляют
-            Canvas.SetLeft(enemyBullet, Canvas.GetLeft(shooter1) + shooter1.Height / 2);
-            Canvas.SetTop(enemyBullet, Canvas.GetTop(shooter1) + shooter1.Height / 2 + 24);
+            if (shooterOne.Direction == DirectionShooter.Right)
+            {
+                Canvas.SetLeft(enemyBullet, Canvas.GetLeft(shooter1) + shooter1.Height);
+                Canvas.SetTop(enemyBullet, Canvas.GetTop(shooter1) + shooter1.Height / 2 + 24);
+            }
 
-            if(shooterTwo.Direction == DirectionShooter.Right)
+            if (shooterOne.Direction == DirectionShooter.Left)
+            {
+                Canvas.SetLeft(enemyBullet, Canvas.GetLeft(shooter1) - 10);
+                Canvas.SetTop(enemyBullet, Canvas.GetTop(shooter1) + shooter1.Height / 2 + 24);
+            }
+
+            if (shooterTwo.Direction == DirectionShooter.Right)
             {
                 Canvas.SetLeft(enemyBullet2, Canvas.GetLeft(shooter2) + shooter2.Height);
                 Canvas.SetTop(enemyBullet2, Canvas.GetTop(shooter2) + shooter2.Height / 2 + 24);
@@ -144,11 +153,15 @@ namespace Game_Treasure_Hunter
                 Canvas.SetTop(enemyBullet3, Canvas.GetTop(terror) + terror.Height / 2 - 10);
             }
 
-
-            if (Canvas.GetTop(hero) < 260 && Canvas.GetTop(hero) > 145 && shooterOne.Health > 0)
+            if(shooterOne.Shoot && shooterOne.Health > 0)
             {
                 MyCanvas.Children.Add(enemyBullet);
             }
+            //1-й способ
+            //if (Canvas.GetTop(hero) < 260 && Canvas.GetTop(hero) > 145 && shooterOne.Health > 0)
+            //{
+            //    MyCanvas.Children.Add(enemyBullet);
+            //}
             if (shooterTwo.Shoot && shooterTwo.Health >= 0)
             {
                 MyCanvas.Children.Add(enemyBullet2);

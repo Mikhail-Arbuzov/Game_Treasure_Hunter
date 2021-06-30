@@ -102,7 +102,7 @@ namespace Game_Treasure_Hunter
             ninjaBoss = new NinjaBoss();
             robot = new Robot();
             trollOne = new Troll();
-            wolf = new Wolf("pack://application:,,,/Sprites/SpritesWolf/Wolf.png", 141, 191, 98, "wolf", 3, 0);
+            wolf = new Wolf("pack://application:,,,/Sprites/SpritesWolf/Wolf.png", 141, 189, 98, "wolf", 6, 0);
             bear = new Bear("pack://application:,,,/Sprites/SpritesBear/m_Bear.png", 180, 135, 160, "bear", 8, 0);
             hog = new Hog("pack://application:,,,/Sprites/SpritesHog/m_zp.png", 120, 196, 120, "hog", 3, 0);
             bird = new Bird("pack://application:,,,/Sprites/SpritesBird/Bird_Black.png", 0, 96, 96, "bird", 4, 0);
@@ -362,7 +362,7 @@ namespace Game_Treasure_Hunter
             shooter1.Fill = shooterOne.shooterSprite;
             trollOne.RunSprites(1);
             troll.Fill = trollOne.trollSprite;
-            Canvas.SetTop(wolf.wolfOne, 677);
+            Canvas.SetTop(wolf.wolfOne, 655);
             Canvas.SetLeft(wolf.wolfOne, 1012);
             
             ImageBrush coin = new ImageBrush();
