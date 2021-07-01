@@ -62,7 +62,8 @@ namespace Game_Treasure_Hunter
         int bulletsScore;
         int gem;
 
-        double countDie = 0;
+        //double countDie = 0;
+        //double countDie2 = 0;
         //double countHurt = 0;
 
         Player player;
@@ -363,7 +364,7 @@ namespace Game_Treasure_Hunter
             shooter1.Fill = shooterOne.shooterSprite;
             trollOne.RunSprites(1);
             troll.Fill = trollOne.trollSprite;
-            troll.Stroke = Brushes.Red;
+            //troll.Stroke = Brushes.Red;
             Canvas.SetTop(wolf.wolfOne, 665);
             Canvas.SetLeft(wolf.wolfOne, 1012);
             

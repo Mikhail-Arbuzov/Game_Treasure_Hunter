@@ -106,8 +106,8 @@ namespace Game_Treasure_Hunter
                 }
                 shooterOne.DieSprites(shooterSpriteIndex);
                 shooter1.Fill = shooterOne.shooterSprite;
-                countDie += 0.2;
-                if (countDie > 10)
+                shooterOne.countDie += 0.2;
+                if (shooterOne.countDie > 10)
                 {
                     itemRemover.Add(shooter1);
                 }
@@ -182,7 +182,7 @@ namespace Game_Treasure_Hunter
             else
             {
                 enemySpriteIndex +=0.5;
-                if (enemySpriteIndex >= 9)
+                if (enemySpriteIndex > 9)
                 {
                     itemRemover.Add(enemy1);
                    
@@ -274,13 +274,13 @@ namespace Game_Treasure_Hunter
                 trollSpriteIndex+= 0.5;
                 //if (trollSpriteIndex >= 10)
                 //{
-                //   trollSpriteIndex = 1;
+                //    trollSpriteIndex = 9;
                 //    //itemRemover.Add(troll);
                 //}
                 trollOne.DieSprites(trollSpriteIndex);
                 troll.Fill = trollOne.trollSprite;
-                countDie += 0.2;
-                if (countDie > 12)
+                trollOne.countDie += 0.2;
+                if (trollOne.countDie > 14)
                 {
                     itemRemover.Add(troll);
                 }

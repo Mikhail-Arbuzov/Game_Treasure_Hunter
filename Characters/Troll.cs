@@ -15,6 +15,8 @@ namespace Game_Treasure_Hunter
         int speed;
         public ImageBrush trollSprite = new ImageBrush();
 
+        public double countDie = 0;
+
         //продолжительность того или иного действия персонажа
         public int IdleStateDuration = 200;
         public int WalkStatesDuration = 400;

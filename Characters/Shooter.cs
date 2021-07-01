@@ -21,6 +21,8 @@ namespace Game_Treasure_Hunter
         //public bool life = false;
         public ImageBrush shooterSprite = new ImageBrush();
 
+        public double countDie = 0;
+
         //продолжительность того или иного действия персонажа
         public int ShootStateDuration = 100;
         public int RunStatesDuration = 300;
