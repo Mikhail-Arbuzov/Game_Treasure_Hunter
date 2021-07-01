@@ -112,87 +112,152 @@ namespace Game_Treasure_Hunter
 
             foreach (var foe in MyCanvas.Children.OfType<Rectangle>())
             {
-                if (foe.Name.ToString() == "enemy1" || foe.Name.ToString() == "enemy2")
+                if (foe.Name.ToString() == "enemy1")
                 {
                     Rect enHitBox = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
-                    if (enHitBox.IntersectsWith(playerHitBox))
+                    if(enemy.Health > 0)
                     {
-                        enemySpriteIndex += 0.5;
-                        if (enemySpriteIndex > 8)
+                        if (enHitBox.IntersectsWith(playerHitBox))
                         {
-                            enemySpriteIndex = 1;
-                        }
-                        enemy.AttackSprites(enemySpriteIndex);
-                        enemy1.Fill = enemy.enemySprite;
-                        enemyTwo.AttackSprites(enemySpriteIndex);
-                        enemy2.Fill = enemyTwo.enemySprite;
-                    }
-                    if (playerHitBox.IntersectsWith(enHitBox))
-                    {
-                        player.Health -= 1;
-                        playerSpriteIndex += 0.5;
-                        if (playerSpriteIndex > 10)
-                        {
-                            playerSpriteIndex = 1;
-                        }
-                        player.HurtSprites(playerSpriteIndex);
-                        hero.Fill = player.playerSprite;
-                    }
+                            enemySpriteIndex += 0.5;
+                            if (enemySpriteIndex > 8)
+                            {
+                                enemySpriteIndex = 1;
+                            }
+                            enemy.AttackSprites(enemySpriteIndex);
+                            enemy1.Fill = enemy.enemySprite;
 
+                        }
+                        if (playerHitBox.IntersectsWith(enHitBox))
+                        {
+                            player.Health -= 1;
+                            playerSpriteIndex += 0.5;
+                            if (playerSpriteIndex > 10)
+                            {
+                                playerSpriteIndex = 1;
+                            }
+                            player.HurtSprites(playerSpriteIndex);
+                            hero.Fill = player.playerSprite;
+                        }
+                    }
                 }
 
-                if (foe.Name.ToString() == "shooter1" || foe.Name.ToString() == "shooter2")
+                if(foe.Name.ToString() == "enemy2")
+                {
+                    Rect enHitBox2 = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
+                    if(enemyTwo.Health > 0)
+                    {
+                        if (enHitBox2.IntersectsWith(playerHitBox))
+                        {
+                            enemySpriteIndex += 0.5;
+                            if (enemySpriteIndex > 8)
+                            {
+                                enemySpriteIndex = 1;
+                            }
+
+                            enemyTwo.AttackSprites(enemySpriteIndex);
+                            enemy2.Fill = enemyTwo.enemySprite;
+                        }
+                        if (playerHitBox.IntersectsWith(enHitBox2))
+                        {
+                            player.Health -= 1;
+                            playerSpriteIndex += 0.5;
+                            if (playerSpriteIndex > 10)
+                            {
+                                playerSpriteIndex = 1;
+                            }
+                            player.HurtSprites(playerSpriteIndex);
+                            hero.Fill = player.playerSprite;
+                        }
+                    }
+                }
+
+                if (foe.Name.ToString() == "shooter1")
                 {
                     Rect shHitBox = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
-                    if (shHitBox.IntersectsWith(playerHitBox))
+                    if(shooterOne.Health > 0)
                     {
-                        shooterSpriteIndex += 0.5;
-                        if (shooterSpriteIndex > 10)
+                        if (shHitBox.IntersectsWith(playerHitBox))
                         {
-                            shooterSpriteIndex = 1;
+                            shooterSpriteIndex += 0.5;
+                            if (shooterSpriteIndex > 10)
+                            {
+                                shooterSpriteIndex = 1;
+                            }
+                            shooterOne.AttackSprites(shooterSpriteIndex);
+                            shooter1.Fill = shooterOne.shooterSprite;
                         }
-                        shooterOne.AttackSprites(shooterSpriteIndex);
-                        shooter1.Fill = shooterOne.shooterSprite;
-                        shooterTwo.AttackSprites(shooterSpriteIndex);
-                        shooter2.Fill = shooterTwo.shooterSprite;
-                    }
-                    if (playerHitBox.IntersectsWith(shHitBox))
+                        if (playerHitBox.IntersectsWith(shHitBox))
+                        {
+                            player.Health -= 1;
+                            playerSpriteIndex += 0.5;
+                            if (playerSpriteIndex > 10)
+                            {
+                                playerSpriteIndex = 1;
+                            }
+                            player.HurtSprites(playerSpriteIndex);
+                            hero.Fill = player.playerSprite;
+                        }
+                    }  
+                }
+
+                if(foe.Name.ToString() == "shooter2")
+                {
+                    Rect shHitBox2 = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
+                    if(shooterTwo.Health > 0)
                     {
-                        player.Health -= 1;
-                        playerSpriteIndex += 0.5;
-                        if (playerSpriteIndex > 10)
+                        if (shHitBox2.IntersectsWith(playerHitBox))
                         {
-                            playerSpriteIndex = 1;
+                            shooterSpriteIndex += 0.5;
+                            if (shooterSpriteIndex > 10)
+                            {
+                                shooterSpriteIndex = 1;
+                            }
+                            shooterTwo.AttackSprites(shooterSpriteIndex);
+                            shooter2.Fill = shooterTwo.shooterSprite;
                         }
-                        player.HurtSprites(playerSpriteIndex);
-                        hero.Fill = player.playerSprite;
+                        if (playerHitBox.IntersectsWith(shHitBox2))
+                        {
+                            player.Health -= 1;
+                            playerSpriteIndex += 0.5;
+                            if (playerSpriteIndex > 10)
+                            {
+                                playerSpriteIndex = 1;
+                            }
+                            player.HurtSprites(playerSpriteIndex);
+                            hero.Fill = player.playerSprite;
+                        }
                     }
                 }
 
                 if (foe.Name.ToString() == "troll")
                 {
                     Rect trHitBox = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
-                    if (trHitBox.IntersectsWith(playerHitBox))
+                    if(trollOne.Health > 0)
                     {
-                        trollSpriteIndex += 0.2;
-                        if (trollSpriteIndex > 10)
+                        if (trHitBox.IntersectsWith(playerHitBox))
                         {
-                            trollSpriteIndex = 1;
+                            trollSpriteIndex += 0.5;
+                            if (trollSpriteIndex > 10)
+                            {
+                                trollSpriteIndex = 0;
+                            }
+                            trollOne.AttackSprites(trollSpriteIndex);
+                            troll.Fill = trollOne.trollSprite;
                         }
-                        trollOne.AttackSprites(trollSpriteIndex);
-                        troll.Fill = trollOne.trollSprite;
-                    }
-                    if (playerHitBox.IntersectsWith(trHitBox))
-                    {
-                        player.Health -= 3;
-                        playerSpriteIndex += 0.5;
-                        if (playerSpriteIndex > 10)
+                        if (playerHitBox.IntersectsWith(trHitBox))
                         {
-                            playerSpriteIndex = 1;
+                            player.Health -= 1;
+                            playerSpriteIndex += 0.5;
+                            if (playerSpriteIndex > 10)
+                            {
+                                playerSpriteIndex = 1;
+                            }
+                            player.HurtSprites(playerSpriteIndex);
+                            hero.Fill = player.playerSprite;
                         }
-                        player.HurtSprites(playerSpriteIndex);
-                        hero.Fill = player.playerSprite;
                     }
+                    
                 }
 
                 if (foe.Name.ToString() == "terror")
@@ -722,26 +787,30 @@ namespace Game_Treasure_Hunter
                             Rect enemyHitBox = new Rect(Canvas.GetLeft(q), Canvas.GetTop(q), q.Width, q.Height);
                             if (bulletHitBox.IntersectsWith(enemyHitBox))
                             {
-                                itemRemover.Add(y);
-                                enemy.Health -= 1;
                                 enemySpriteIndex += 0.5;
+
+                                if (enemySpriteIndex > 5)
+                                {
+                                    enemy.Health -= 1;
+                                }
                                 if (enemySpriteIndex > 8)
                                 {
-                                    enemySpriteIndex = 1;
+                                    enemySpriteIndex = 0;
                                 }
                                 enemy.HurtSprites(enemySpriteIndex);
                                 enemy1.Fill = enemy.enemySprite;
+                                itemRemover.Add(y);
                             }
-                            if (enemy.Health <= 0)
-                            {
-                                enemySpriteIndex += 0.5;
-                                if (enemySpriteIndex > 8)
-                                {
-                                    itemRemover.Add(q);
-                                }
-                                enemy.DieSprites(enemySpriteIndex);
-                                enemy1.Fill = enemy.enemySprite;
-                            }
+                            //if (enemy.Health <= 0)
+                            //{
+                            //    enemySpriteIndex += 0.5;
+                            //    if (enemySpriteIndex > 8)
+                            //    {
+                            //        itemRemover.Add(q);
+                            //    }
+                            //    enemy.DieSprites(enemySpriteIndex);
+                            //    enemy1.Fill = enemy.enemySprite;
+                            //}
                         }
 
                         if (q.Name.ToString() == "enemy2")
@@ -779,26 +848,32 @@ namespace Game_Treasure_Hunter
                             Rect shooterHitBox = new Rect(Canvas.GetLeft(g), Canvas.GetTop(g), g.Width, g.Height);
                             if (bulletHitBox.IntersectsWith(shooterHitBox))
                             {
-                                itemRemover.Add(y);
-                                shooterOne.Health -= 1;
-                                shooterSpriteIndex += 0.5;
+                                shooterSpriteIndex+=0.5;
+
+                                if (shooterSpriteIndex > 6)
+                                {
+                                    shooterOne.Health -= 1;
+                                }
                                 if (shooterSpriteIndex > 10)
                                 {
-                                    shooterSpriteIndex = 1;
+                                    shooterSpriteIndex = 0;
                                 }
                                 shooterOne.HurtSprites(shooterSpriteIndex);
                                 shooter1.Fill = shooterOne.shooterSprite;
+
+                                itemRemover.Add(y);
                             }
-                            if (shooterOne.Health <= 0)
-                            {
-                                shooterSpriteIndex += 0.5;
-                                if (shooterSpriteIndex > 10)
-                                {
-                                    itemRemover.Add(g);
-                                }
-                                shooterOne.DieSprites(shooterSpriteIndex);
-                                shooter1.Fill = shooterOne.shooterSprite;
-                            }
+                            //if (shooterOne.Health <= 0)
+                            //{
+                            //    shooterSpriteIndex += 0.2;
+                            //    shooterOne.DieSprites(shooterSpriteIndex);
+                            //    shooter1.Fill = shooterOne.shooterSprite;
+                            //    countDie += 0.2;
+                            //    if (countDie > 10)
+                            //    {
+                            //        itemRemover.Add(shooter1);
+                            //    }
+                            //}
                         }
 
                         if (g.Name.ToString() == "shooter2")
@@ -926,26 +1001,29 @@ namespace Game_Treasure_Hunter
                             Rect trollHitBox = new Rect(Canvas.GetLeft(j), Canvas.GetTop(j), j.Width, j.Height);
                             if (bulletHitBox.IntersectsWith(trollHitBox))
                             {
-                                itemRemover.Add(y);
-                                trollOne.Health -= 1;
                                 trollSpriteIndex += 0.5;
+                                if(trollSpriteIndex > 6)
+                                {
+                                    trollOne.Health -= 1;
+                                }
                                 if (trollSpriteIndex > 10)
                                 {
                                     trollSpriteIndex = 1;
                                 }
                                 trollOne.HurtSprites(trollSpriteIndex);
                                 troll.Fill = trollOne.trollSprite;
+                                itemRemover.Add(y);
                             }
-                            if (trollOne.Health <= 0)
-                            {
-                                trollSpriteIndex += 0.5;
-                                if (trollSpriteIndex > 10)
-                                {
-                                    itemRemover.Add(j);
-                                }
-                                trollOne.DieSprites(trollSpriteIndex);
-                                troll.Fill = trollOne.trollSprite;
-                            }
+                            //if (trollOne.Health <= 0)
+                            //{
+                            //    trollSpriteIndex += 0.5;
+                            //    if (trollSpriteIndex > 10)
+                            //    {
+                            //        itemRemover.Add(j);
+                            //    }
+                            //    trollOne.DieSprites(trollSpriteIndex);
+                            //    troll.Fill = trollOne.trollSprite;
+                            //}
                         }
                     }
 

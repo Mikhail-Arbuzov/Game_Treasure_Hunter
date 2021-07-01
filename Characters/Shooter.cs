@@ -18,6 +18,7 @@ namespace Game_Treasure_Hunter
     {
         int health;
         int speed;
+        //public bool life = false;
         public ImageBrush shooterSprite = new ImageBrush();
 
         //продолжительность того или иного действия персонажа

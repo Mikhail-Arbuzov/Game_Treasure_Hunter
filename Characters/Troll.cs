@@ -172,31 +172,31 @@ namespace Game_Treasure_Hunter
                     trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Dead_00.png"));
                     break;
                 case 2:
-                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Hurt_01.png"));
+                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Dead_01.png"));
                     break;
                 case 3:
-                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Hurt_02.png"));
+                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Dead_02.png"));
                     break;
                 case 4:
-                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Hurt_03.png"));
+                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Dead_03.png"));
                     break;
                 case 5:
-                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Hurt_04.png"));
+                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Dead_04.png"));
                     break;
                 case 6:
-                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Hurt_05.png"));
+                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Dead_05.png"));
                     break;
                 case 7:
-                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Hurt_06.png"));
+                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Dead_06.png"));
                     break;
                 case 8:
-                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Hurt_07.png"));
+                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Dead_07.png"));
                     break;
                 case 9:
-                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Hurt_08.png"));
+                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Dead_08.png"));
                     break;
                 case 10:
-                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Hurt_09.png"));
+                    trollSprite.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Sprites/SpritesTroll/troll_Dead_09.png"));
                     break;
             }
         }

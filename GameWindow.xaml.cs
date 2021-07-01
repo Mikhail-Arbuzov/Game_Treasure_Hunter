@@ -62,7 +62,8 @@ namespace Game_Treasure_Hunter
         int bulletsScore;
         int gem;
 
-        //int ninjaBossState = 0;
+        double countDie = 0;
+        //double countHurt = 0;
 
         Player player;
         Wolf wolf;
@@ -362,7 +363,8 @@ namespace Game_Treasure_Hunter
             shooter1.Fill = shooterOne.shooterSprite;
             trollOne.RunSprites(1);
             troll.Fill = trollOne.trollSprite;
-            Canvas.SetTop(wolf.wolfOne, 655);
+            troll.Stroke = Brushes.Red;
+            Canvas.SetTop(wolf.wolfOne, 665);
             Canvas.SetLeft(wolf.wolfOne, 1012);
             
             ImageBrush coin = new ImageBrush();

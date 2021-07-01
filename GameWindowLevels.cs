@@ -97,6 +97,22 @@ namespace Game_Treasure_Hunter
                     //shooterSpriteIndex = 0;
                 }
             }
+            else
+            {
+                shooterSpriteIndex +=0.5;
+                if(shooterSpriteIndex >=10)
+                {
+                    shooterSpriteIndex = 9;
+                }
+                shooterOne.DieSprites(shooterSpriteIndex);
+                shooter1.Fill = shooterOne.shooterSprite;
+                countDie += 0.2;
+                if (countDie > 10)
+                {
+                    itemRemover.Add(shooter1);
+                }
+            }
+           
 
             //1-й способ
             //if (Canvas.GetTop(hero) < 260 && Canvas.GetTop(hero) > 145)
@@ -112,53 +128,67 @@ namespace Game_Treasure_Hunter
             //}
 
             //действия первого врага
-            if (enemy.IsIdle)
+            if(enemy.Health > 0)
             {
-                enemySpriteIndex += 0.5;
-                if (enemySpriteIndex > 12)
+                if (enemy.IsIdle)
                 {
-                    enemySpriteIndex = 1;
+                    enemySpriteIndex += 0.5;
+                    if (enemySpriteIndex > 12)
+                    {
+                        enemySpriteIndex = 1;
 
+                    }
+                    enemy.IdleEnSprites(enemySpriteIndex);
+                    enemy1.Fill = enemyTwo.enemySprite;
                 }
-                enemy.IdleEnSprites(enemySpriteIndex);
-                enemy1.Fill = enemyTwo.enemySprite;
+                else
+                {
+                    Canvas.SetLeft(enemy1, Canvas.GetLeft(enemy1) + enemy.Speed);
+
+                    enemySpriteIndex += 0.5;
+                    if (enemySpriteIndex > 8)
+                    {
+                        enemySpriteIndex = 1;
+                    }
+                    enemy.RunSprites(enemySpriteIndex);
+                    enemy1.Fill = enemy.enemySprite;
+
+
+                    if (Canvas.GetLeft(enemy1) > 1055)
+                    {
+                        enemy.Speed--;
+                        enemy1.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                    }
+
+                    if (Canvas.GetLeft(enemy1) < 799)
+                    {
+                        enemy.Speed++;
+                        enemy1.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    }
+                }
+                enemy.StateFrameCounter++;
+                if (enemy.IsIdle && enemy.StateFrameCounter >= enemy.IdleStateDuration)
+                {
+                    enemy.IsIdle = false;
+                    enemy.StateFrameCounter = 0;
+                    enemySpriteIndex = 0;
+                }
+                else if (!enemy.IsIdle && enemy.StateFrameCounter >= enemy.OtherStatesDuration)
+                {
+                    enemy.IsIdle = true;
+                    enemy.StateFrameCounter = 0;
+                }
             }
             else
             {
-                Canvas.SetLeft(enemy1, Canvas.GetLeft(enemy1) + enemy.Speed);
-
-                enemySpriteIndex += 0.5;
-                if (enemySpriteIndex > 8)
+                enemySpriteIndex +=0.5;
+                if (enemySpriteIndex >= 9)
                 {
-                    enemySpriteIndex = 1;
+                    itemRemover.Add(enemy1);
+                   
                 }
-                enemy.RunSprites(enemySpriteIndex);
+                enemy.DieSprites(enemySpriteIndex);
                 enemy1.Fill = enemy.enemySprite;
-
-
-                if (Canvas.GetLeft(enemy1) > 1055)
-                {
-                    enemy.Speed--;
-                    enemy1.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-                }
-
-                if (Canvas.GetLeft(enemy1) < 799)
-                {
-                    enemy.Speed++;
-                    enemy1.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
-                }
-            }
-            enemy.StateFrameCounter++;
-            if (enemy.IsIdle && enemy.StateFrameCounter >= enemy.IdleStateDuration)
-            {
-                enemy.IsIdle = false;
-                enemy.StateFrameCounter = 0;
-                enemySpriteIndex = 0;
-            }
-            else if (!enemy.IsIdle && enemy.StateFrameCounter >= enemy.OtherStatesDuration)
-            {
-                enemy.IsIdle = true;
-                enemy.StateFrameCounter = 0;
             }
 
 
@@ -190,52 +220,72 @@ namespace Game_Treasure_Hunter
             }
 
             //действия Троля
-            if(trollOne.Idle)
+            if(trollOne.Health > 0)
             {
-                trollSpriteIndex += 0.5;
-                if (trollSpriteIndex > 10)
+                if (trollOne.Idle)
                 {
-                    trollSpriteIndex = 1;
+                    trollSpriteIndex += 0.5;
+                    if (trollSpriteIndex > 10)
+                    {
+                        trollSpriteIndex = 1;
+                    }
+                    trollOne.IdleTrSprites(trollSpriteIndex);
+                    troll.Fill = trollOne.trollSprite;
                 }
-                trollOne.IdleTrSprites(trollSpriteIndex);
-                troll.Fill = trollOne.trollSprite;
+                else
+                {
+                    Canvas.SetLeft(troll, Canvas.GetLeft(troll) + trollOne.Speed);
+                    trollSpriteIndex +=0.5;
+                    if (trollSpriteIndex > 10)
+                    {
+                        trollSpriteIndex = 0;
+                    }
+                    trollOne.RunSprites(trollSpriteIndex);
+                    troll.Fill = trollOne.trollSprite;
+
+                    if (Canvas.GetLeft(troll) > 1339)
+                    {
+                        trollOne.Speed--;
+                        troll.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                    }
+
+                    if (Canvas.GetLeft(troll) < 784)
+                    {
+                        trollOne.Speed++;
+                        troll.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    }
+                }
+
+                trollOne.StateFrameCounter++;
+                if (trollOne.Idle && trollOne.StateFrameCounter >= trollOne.IdleStateDuration)
+                {
+                    trollOne.Idle = false;
+                    trollOne.StateFrameCounter = 0;
+                    trollSpriteIndex = 0;
+                }
+                else if (!trollOne.Idle && trollOne.StateFrameCounter >= trollOne.WalkStatesDuration)
+                {
+                    trollOne.Idle = true;
+                    trollOne.StateFrameCounter = 0;
+                }
             }
             else
             {
-                Canvas.SetLeft(troll, Canvas.GetLeft(troll) + trollOne.Speed);
-                trollSpriteIndex += 0.5;
-                if (trollSpriteIndex > 9)
-                {
-                    trollSpriteIndex = 0;
-                }
-                trollOne.RunSprites(trollSpriteIndex);
+                trollSpriteIndex+= 0.5;
+                //if (trollSpriteIndex >= 10)
+                //{
+                //   trollSpriteIndex = 1;
+                //    //itemRemover.Add(troll);
+                //}
+                trollOne.DieSprites(trollSpriteIndex);
                 troll.Fill = trollOne.trollSprite;
-
-                if (Canvas.GetLeft(troll) > 1339)
+                countDie += 0.2;
+                if (countDie > 12)
                 {
-                    trollOne.Speed--;
-                    troll.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-                }
-
-                if (Canvas.GetLeft(troll) < 784)
-                {
-                    trollOne.Speed++;
-                    troll.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    itemRemover.Add(troll);
                 }
             }
-
-            trollOne.StateFrameCounter++;
-            if(trollOne.Idle && trollOne.StateFrameCounter >= trollOne.IdleStateDuration)
-            {
-                trollOne.Idle = false;
-                trollOne.StateFrameCounter = 0;
-                trollSpriteIndex = 0;
-            }
-            else if (!trollOne.Idle && trollOne.StateFrameCounter >= trollOne.WalkStatesDuration)
-            {
-                trollOne.Idle = true;
-                trollOne.StateFrameCounter = 0;
-            }
+           
 
             //снег
             snowSpriteIndex += 0.5;
