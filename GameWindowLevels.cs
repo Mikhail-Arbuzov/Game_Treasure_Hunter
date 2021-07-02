@@ -100,14 +100,14 @@ namespace Game_Treasure_Hunter
             else
             {
                 shooterSpriteIndex +=0.5;
-                if(shooterSpriteIndex >=10)
-                {
-                    shooterSpriteIndex = 9;
-                }
+                //if(shooterSpriteIndex >=10)
+                //{
+                //    shooterSpriteIndex = 9;
+                //}
                 shooterOne.DieSprites(shooterSpriteIndex);
                 shooter1.Fill = shooterOne.shooterSprite;
                 shooterOne.countDie += 0.2;
-                if (shooterOne.countDie > 10)
+                if (shooterOne.countDie > 14)
                 {
                     itemRemover.Add(shooter1);
                 }

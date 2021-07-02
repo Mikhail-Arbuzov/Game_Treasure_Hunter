@@ -305,16 +305,17 @@ namespace Game_Treasure_Hunter
 
         private void StartGame()
         {
-
-            //Canvas.SetLeft(backgroundLevel, 0);
-            //Canvas.SetLeft(backgroundLevel2, 1600);
-            //Canvas.SetLeft(backgroundLevel3, 3200);
+            
             Canvas.SetLeft(hero, 31);
             Canvas.SetTop(hero, 422);
             //Canvas.SetLeft(hero, 3242);
             //Canvas.SetTop(hero, 632);
             //scroll.ScrollToHorizontalOffset(3200);
-
+            healthProgress.Value = trollOne.Health;
+            healthProgress.Minimum = 0;
+            healthProgress.Maximum = 5;
+            healthProgress.Foreground = Brushes.Purple;
+            healthProgress.Opacity = 0.2;
             score = 0;
             bulletsScore = 20;
             gem = 0;
@@ -355,6 +356,7 @@ namespace Game_Treasure_Hunter
             ImageBrush entry1 = new ImageBrush();
             entry1.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/doorClose.png"));
             door1.Fill = entry1;
+            door1.Stroke = Brushes.Red;
             player.IdleSprites(1);
             hero.Fill = player.playerSprite;
             hero.Stroke = Brushes.Black;

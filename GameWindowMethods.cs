@@ -83,8 +83,10 @@ namespace Game_Treasure_Hunter
             };
             Canvas.SetTop(newStone, -50);
             Canvas.SetLeft(newStone, rand.Next(1228, 1280));
-            MyCanvas.Children.Add(newStone);
-
+            if(gem < 3)
+            {
+                MyCanvas.Children.Add(newStone);
+            }
         }
 
         private void EnemyBulletMaker()
@@ -153,7 +155,7 @@ namespace Game_Treasure_Hunter
                 Canvas.SetTop(enemyBullet3, Canvas.GetTop(terror) + terror.Height / 2 - 10);
             }
 
-            if(shooterOne.Shoot && shooterOne.Health > 0)
+            if(shooterOne.Shoot && shooterOne.Health > 0 && gem < 3)
             {
                 MyCanvas.Children.Add(enemyBullet);
             }

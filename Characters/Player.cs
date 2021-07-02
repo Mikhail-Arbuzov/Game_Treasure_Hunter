@@ -83,7 +83,7 @@ namespace Game_Treasure_Hunter
         public Player()
         {
             Health = 30;
-            Speed = 5;
+            Speed = 6;
             JumpSpeed = 10;
             //ForceJump = 8;
         }

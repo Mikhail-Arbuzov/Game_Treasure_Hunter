@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TREASURE HUNTER" Height="825" Width="800">
     <StackPanel>
-        <ScrollViewer x:Name="scroll" CanContentScroll="False" Height="800" Width="1600" HorizontalScrollBarVisibility ="Hidden" VerticalScrollBarVisibility ="Hidden">
+        <ScrollViewer x:Name="scroll" CanContentScroll="False" Height="800" Width="1600" HorizontalScrollBarVisibility ="Hidden" VerticalScrollBarVisibility ="Hidden" IsHitTestVisible="False">
             <Canvas x:Name="MyCanvas" Height="800" Width="4800" Focusable="True"  KeyDown="KeyIsDown" KeyUp="KeyIsUp">
                 
                <Rectangle x:Name="backgroundLevel" Fill="Green" Canvas.Left="0"  Height="800"  Width="1600" />
@@ -30,7 +30,7 @@
                <Rectangle x:Name="platform5" Tag="platforma" Fill="Pink" Height="104" Canvas.Left="1339" Canvas.Top="301" Width="256"/>
                <Rectangle x:Name="platform6" Tag="platforma" Fill="Pink" Height="104" Canvas.Left="1078" Canvas.Top="342" Width="256"/>
                <Rectangle x:Name="snow" Fill="Gray" Height="64" Canvas.Left="571" Width="1024"/>
-               <Rectangle x:Name="door1" Fill="Black" Height="160" Canvas.Left="1393" Width="130" Canvas.Top="143" RenderTransformOrigin="0.074,0.475"/>
+               <Rectangle x:Name="door1" Fill="Black" Height="160" Canvas.Left="1393" Width="130" Canvas.Top="143" />
                <Rectangle x:Name="shooter1" Fill="Brown" Height="128" Canvas.Left="151" Canvas.Top="130" Width="128"/>
                <Rectangle x:Name="enemy1" Fill="LightCyan" Height="128" Canvas.Left="1055" Canvas.Top="53" Width="128"/>
                <Rectangle x:Name="troll" Fill="GhostWhite" Height="280" Canvas.Left="1339" Canvas.Top="510" Width="256"/>
@@ -144,12 +144,16 @@
                    <ColumnDefinition Width="130"/>
                    <ColumnDefinition Width="120"/>
                    <ColumnDefinition Width="180"/>
+                   <ColumnDefinition Width="160"/>
+                   <ColumnDefinition Width="100"/>
                  </Grid.ColumnDefinitions>
                    <Label x:Name="healthScore" Content="Здоровье: 6"  FontSize="18" FontWeight ="Bold" Foreground="White" Grid.Column="0"/>
                    <Label x:Name="catridgesScore" Content="Патроны: 10" FontSize="18" FontWeight ="Bold" Foreground="White" Grid.Column="1"/>
                    <Label x:Name="coinScore" Content="Монеты: 0" FontSize="18" FontWeight ="Bold" Foreground="White" Grid.Column="2"/>
                    <Label x:Name="treasuresScore" Content="Сокровища: 0" FontSize="18" FontWeight ="Bold" Foreground="White" Grid.Column="3"/>
-               </Grid>
+                   <Label x:Name="healthBoss" Content="Здоровье Босса:" FontSize="18" FontWeight ="Bold"  Foreground="White" Grid.Column="4"/>
+                   <ProgressBar x:Name="healthProgress" Margin="0,14,0,120"  Orientation="Horizontal"  Height="10" Grid.Column="5"/>
+                </Grid>
 
             </Canvas>
         </ScrollViewer>

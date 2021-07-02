@@ -23,6 +23,7 @@ namespace Game_Treasure_Hunter
             coinScore.Content = "Монеты: " + score;
             catridgesScore.Content = "Патроны: " + bulletsScore;
             treasuresScore.Content = "Сокровища: " + gem;
+            healthBoss.Content = "Здоровье Босса: " + healthProgress.Value;
 
             //чтоб игрок не выходил за экран
             if (backgroundLevel.Focusable == false && backgroundLevel3.Focusable == false && backgroundLevel2.Focusable == false)
@@ -655,6 +656,7 @@ namespace Game_Treasure_Hunter
                                 itemRemover.Add(y);
 
                                 bear.Health -= 3;
+                                healthProgress.Value-= 3;
                                 if (bear.Health <= 0)
                                 {
                                     itemToRemover.Add(be);
@@ -973,6 +975,7 @@ namespace Game_Treasure_Hunter
                             {
                                 itemRemover.Add(y);
                                 robot.Health -= 1;
+                                healthProgress.Value -= 1;
                                 robotSpriteIndex += 0.5;
                                 if (robotSpriteIndex > 2)
                                 {
@@ -1005,6 +1008,7 @@ namespace Game_Treasure_Hunter
                                 if(trollSpriteIndex > 6)
                                 {
                                     trollOne.Health -= 1;
+                                    healthProgress.Value -= 1;
                                 }
                                 if (trollSpriteIndex > 10)
                                 {
@@ -1036,6 +1040,7 @@ namespace Game_Treasure_Hunter
                             {
                                 itemRemover.Add(y);
                                 ninjaBoss.Health -= 1;
+                                healthProgress.Value -= 1;
                                 ninjaBossSpriteIndex += 0.5;
                                 if (ninjaBossSpriteIndex > 10)
                                 {
@@ -1531,9 +1536,12 @@ namespace Game_Treasure_Hunter
                     {
                         if (gem == 3 && trollOne.Health <= 0)
                         {
+                            backgroundLevel.Focusable = false;
                             backgroundLevel2.Focusable = true;
                             gem = 0;
                             treasuresScore.Foreground = Brushes.White;
+                            healthProgress.Value = robot.Health;
+                            healthProgress.Foreground = Brushes.Green;
                             Canvas.SetLeft(hero, 1624);
                             Canvas.SetTop(hero, 580);
                             Canvas.SetLeft(myGrid, 1630);
@@ -1554,6 +1562,10 @@ namespace Game_Treasure_Hunter
                             backgroundLevel2.Focusable = false;
                             gem = 0;
                             treasuresScore.Foreground = Brushes.White;
+                            healthProgress.Value = ninjaBoss.Health + bear.Health;
+                            healthProgress.Minimum = 0;
+                            healthProgress.Maximum = 13;
+                            healthProgress.Foreground = Brushes.Red;
                             Canvas.SetLeft(hero, 3242);
                             Canvas.SetTop(hero, 632);
                             Canvas.SetLeft(myGrid, 3230);
@@ -1600,7 +1612,21 @@ namespace Game_Treasure_Hunter
                     treasuresScore.Content = "Сокровища: " + gem + Environment.NewLine + "Первый уровень" + Environment.NewLine + "пройден!";
                 }
 
-                //MessageBox.Show("Первый уровень пройден!", "TREASURE HUNTER");
+                if(enemy.Health > 0)
+                {
+                    itemRemover.Add(enemy1);
+                }
+                if(shooterOne.Health > 0)
+                {
+                    itemRemover.Add(shooter1);
+                }
+                //if (stoneCounter > 0)
+                //{
+                //    stoneCounter = 0;
+                //    limit = 0;
+                //    stoneSpeed = 0;
+                //}
+
             }
 
             if (gem == 3 && backgroundLevel2.Focusable == true)
@@ -1608,7 +1634,7 @@ namespace Game_Treasure_Hunter
                 ImageBrush doorOpen = new ImageBrush();
                 doorOpen.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/doorOpen_02.png"));
                 door2.Fill = doorOpen;
-                //treasuresScore.Foreground = Brushes.Yellow;
+                treasuresScore.Foreground = Brushes.Yellow;
                 if (robot.Health <= 0)
                 {
                     treasuresScore.Content = "Сокровища: " + gem + Environment.NewLine + "Второй уровень" + Environment.NewLine + "пройден!";
