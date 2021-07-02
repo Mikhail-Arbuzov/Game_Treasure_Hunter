@@ -72,7 +72,18 @@ namespace Game_Treasure_Hunter
                 Canvas.SetLeft(hero, Canvas.GetLeft(hero) + player.Speed);
             }
 
-
+            //остановка работы бонуса ускорение игрока 
+            player.timeActionsSpeedup++;
+            if(player.timeActionsSpeedup >=750)
+            {
+                player.timeActionsSpeedup = 0;
+            }
+            if (player.speedup && player.timeActionsSpeedup > player.speedupStateDuration)
+            {
+                player.speedup = false;
+                player.timeActionsSpeedup = 0;
+                player.Speed = 6;
+            }
 
             //движение прыжка
             Canvas.SetTop(hero, Canvas.GetTop(hero) + player.JumpSpeed);
@@ -264,78 +275,87 @@ namespace Game_Treasure_Hunter
                 if (foe.Name.ToString() == "terror")
                 {
                     Rect terHitBox = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
-                    if (terHitBox.IntersectsWith(playerHitBox))
+                    if(terrorist.Health > 0)
                     {
-                        terroristSpriteIndex += 0.5;
-                        if (terroristSpriteIndex > 6)
+                        if (terHitBox.IntersectsWith(playerHitBox))
                         {
-                            terroristSpriteIndex = 1;
+                            terroristSpriteIndex += 0.5;
+                            if (terroristSpriteIndex > 6)
+                            {
+                                terroristSpriteIndex = 1;
+                            }
+                            terrorist.AttackSprites(terroristSpriteIndex);
+                            terror.Fill = terrorist.terroristSprite;
                         }
-                        terrorist.AttackSprites(terroristSpriteIndex);
-                        terror.Fill = terrorist.terroristSprite;
-                    }
-                    if (playerHitBox.IntersectsWith(terHitBox))
-                    {
-                        player.Health -= 2;
-                        playerSpriteIndex += 0.5;
-                        if (playerSpriteIndex > 10)
+                        if (playerHitBox.IntersectsWith(terHitBox))
                         {
-                            playerSpriteIndex = 1;
+                            player.Health -= 2;
+                            playerSpriteIndex += 0.5;
+                            if (playerSpriteIndex > 10)
+                            {
+                                playerSpriteIndex = 1;
+                            }
+                            player.HurtSprites(playerSpriteIndex);
+                            hero.Fill = player.playerSprite;
                         }
-                        player.HurtSprites(playerSpriteIndex);
-                        hero.Fill = player.playerSprite;
                     }
                 }
 
                 if (foe.Name.ToString() == "soldier")
                 {
                     Rect soHitBox = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
-                    if (soHitBox.IntersectsWith(playerHitBox))
+                    if(soldierOne.Health > 0)
                     {
-                        soldierSpriteIndex += 0.5;
-                        if (soldierSpriteIndex > 6)
+                        if (soHitBox.IntersectsWith(playerHitBox))
                         {
-                            soldierSpriteIndex = 1;
+                            soldierSpriteIndex += 0.5;
+                            if (soldierSpriteIndex > 6)
+                            {
+                                soldierSpriteIndex = 1;
+                            }
+                            soldierOne.AttackSprites(soldierSpriteIndex);
+                            soldier.Fill = soldierOne.soldierSprite;
                         }
-                        soldierOne.AttackSprites(soldierSpriteIndex);
-                        soldier.Fill = soldierOne.soldierSprite;
-                    }
-                    if (playerHitBox.IntersectsWith(soHitBox))
-                    {
-                        player.Health -= 1;
-                        playerSpriteIndex += 0.5;
-                        if (playerSpriteIndex > 10)
+                        if (playerHitBox.IntersectsWith(soHitBox))
                         {
-                            playerSpriteIndex = 1;
+                            player.Health -= 1;
+                            playerSpriteIndex += 0.5;
+                            if (playerSpriteIndex > 10)
+                            {
+                                playerSpriteIndex = 1;
+                            }
+                            player.HurtSprites(playerSpriteIndex);
+                            hero.Fill = player.playerSprite;
                         }
-                        player.HurtSprites(playerSpriteIndex);
-                        hero.Fill = player.playerSprite;
                     }
                 }
 
                 if (foe.Name.ToString() == "robo")
                 {
                     Rect robHitBox = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
-                    if (robHitBox.IntersectsWith(playerHitBox))
+                    if(robot.Health > 0)
                     {
-                        robotSpriteIndex += 0.2;
-                        if (robotSpriteIndex > 18)
+                        if (robHitBox.IntersectsWith(playerHitBox))
                         {
-                            robotSpriteIndex = 1;
+                            robotSpriteIndex += 0.2;
+                            if (robotSpriteIndex > 18)
+                            {
+                                robotSpriteIndex = 1;
+                            }
+                            robot.AttackSprites(robotSpriteIndex);
+                            robo.Fill = robot.robotSprite;
                         }
-                        robot.AttackSprites(robotSpriteIndex);
-                        robo.Fill = robot.robotSprite;
-                    }
-                    if (playerHitBox.IntersectsWith(robHitBox))
-                    {
-                        player.Health -= 3;
-                        playerSpriteIndex += 0.5;
-                        if (playerSpriteIndex > 10)
+                        if (playerHitBox.IntersectsWith(robHitBox))
                         {
-                            playerSpriteIndex = 1;
+                            player.Health -= 3;
+                            playerSpriteIndex += 0.5;
+                            if (playerSpriteIndex > 10)
+                            {
+                                playerSpriteIndex = 1;
+                            }
+                            player.HurtSprites(playerSpriteIndex);
+                            hero.Fill = player.playerSprite;
                         }
-                        player.HurtSprites(playerSpriteIndex);
-                        hero.Fill = player.playerSprite;
                     }
                 }
 
@@ -883,26 +903,29 @@ namespace Game_Treasure_Hunter
                             Rect shooterHitBox2 = new Rect(Canvas.GetLeft(g), Canvas.GetTop(g), g.Width, g.Height);
                             if (bulletHitBox.IntersectsWith(shooterHitBox2))
                             {
-                                itemRemover.Add(y);
-                                shooterTwo.Health -= 1;
                                 shooterSpriteIndex += 0.5;
+                                if(shooterSpriteIndex > 6)
+                                {
+                                    shooterTwo.Health -= 1;
+                                }
                                 if (shooterSpriteIndex > 10)
                                 {
-                                    shooterSpriteIndex = 1;
+                                    shooterSpriteIndex = 0;
                                 }
                                 shooterTwo.HurtSprites(shooterSpriteIndex);
                                 shooter2.Fill = shooterTwo.shooterSprite;
+                                itemRemover.Add(y);
                             }
-                            if (shooterTwo.Health <= 0)
-                            {
-                                shooterSpriteIndex += 0.5;
-                                if (shooterSpriteIndex > 10)
-                                {
-                                    itemRemover.Add(g);
-                                }
-                                shooterTwo.DieSprites(shooterSpriteIndex);
-                                shooter2.Fill = shooterOne.shooterSprite;
-                            }
+                            //if (shooterTwo.Health <= 0)
+                            //{
+                            //    shooterSpriteIndex += 0.5;
+                            //    if (shooterSpriteIndex > 10)
+                            //    {
+                            //        itemRemover.Add(g);
+                            //    }
+                            //    shooterTwo.DieSprites(shooterSpriteIndex);
+                            //    shooter2.Fill = shooterOne.shooterSprite;
+                            //}
                         }
                     }
 
@@ -913,26 +936,29 @@ namespace Game_Treasure_Hunter
                             Rect soldierHitBox = new Rect(Canvas.GetLeft(h), Canvas.GetTop(h), h.Width, h.Height);
                             if (bulletHitBox.IntersectsWith(soldierHitBox))
                             {
-                                itemRemover.Add(y);
-                                soldierOne.Health -= 1;
                                 soldierSpriteIndex += 0.5;
+                                if(soldierSpriteIndex > 6)
+                                {
+                                    soldierOne.Health -= 1;
+                                }
                                 if (soldierSpriteIndex > 10)
                                 {
-                                    soldierSpriteIndex = 1;
+                                    soldierSpriteIndex = 0;
                                 }
                                 soldierOne.HurtSprites(soldierSpriteIndex);
                                 soldier.Fill = soldierOne.soldierSprite;
+                                itemRemover.Add(y);
                             }
-                            if (soldierOne.Health <= 0)
-                            {
-                                soldierSpriteIndex += 0.5;
-                                if (soldierSpriteIndex > 10)
-                                {
-                                    itemRemover.Add(h);
-                                }
-                                soldierOne.DieSprites(soldierSpriteIndex);
-                                soldier.Fill = soldierOne.soldierSprite;
-                            }
+                            //if (soldierOne.Health <= 0)
+                            //{
+                            //    soldierSpriteIndex += 0.5;
+                            //    if (soldierSpriteIndex > 10)
+                            //    {
+                            //        itemRemover.Add(h);
+                            //    }
+                            //    soldierOne.DieSprites(soldierSpriteIndex);
+                            //    soldier.Fill = soldierOne.soldierSprite;
+                            //}
                         }
                     }
 
@@ -943,26 +969,29 @@ namespace Game_Treasure_Hunter
                             Rect terroristHitBox = new Rect(Canvas.GetLeft(t), Canvas.GetTop(t), t.Width, t.Height);
                             if (bulletHitBox.IntersectsWith(terroristHitBox))
                             {
-                                itemRemover.Add(y);
-                                terrorist.Health -= 1;
-                                terroristSpriteIndex += 0.2;
+                                terroristSpriteIndex += 0.5;
+                                if(terroristSpriteIndex > 4)
+                                {
+                                    terrorist.Health -= 1;
+                                }
                                 if (terroristSpriteIndex > 6)
                                 {
-                                    terroristSpriteIndex = 1;
+                                    terroristSpriteIndex = 0;
                                 }
                                 terrorist.HurtSprites(terroristSpriteIndex);
                                 terror.Fill = terrorist.terroristSprite;
+                                itemRemover.Add(y);
                             }
-                            if (terrorist.Health <= 0)
-                            {
-                                terroristSpriteIndex ++;
-                                if (terroristSpriteIndex > 9)
-                                {
-                                    itemRemover.Add(t);
-                                }
-                                terrorist.DieSprites(terroristSpriteIndex);
-                                terror.Fill = terrorist.terroristSprite;
-                            }
+                            //if (terrorist.Health <= 0)
+                            //{
+                            //    terroristSpriteIndex +=0.5;
+                            //    if (terroristSpriteIndex > 9)
+                            //    {
+                            //        itemRemover.Add(t);
+                            //    }
+                            //    terrorist.DieSprites(terroristSpriteIndex);
+                            //    terror.Fill = terrorist.terroristSprite;
+                            //}
                         }
                     }
 
@@ -979,21 +1008,21 @@ namespace Game_Treasure_Hunter
                                 robotSpriteIndex += 0.5;
                                 if (robotSpriteIndex > 2)
                                 {
-                                    robotSpriteIndex = 1;
+                                    robotSpriteIndex = 0;
                                 }
                                 robot.HurtSprites(robotSpriteIndex);
                                 robo.Fill = robot.robotSprite;
                             }
-                            if (robot.Health <= 0)
-                            {
-                                robotSpriteIndex += 2;
-                                if (robotSpriteIndex > 15)
-                                {
-                                    itemRemover.Add(i);
-                                }
-                                robot.DieSprites(robotSpriteIndex);
-                                robo.Fill = robot.robotSprite;
-                            }
+                            //if (robot.Health <= 0)
+                            //{
+                            //    robotSpriteIndex += 2;
+                            //    if (robotSpriteIndex > 15)
+                            //    {
+                            //        itemRemover.Add(i);
+                            //    }
+                            //    robot.DieSprites(robotSpriteIndex);
+                            //    robo.Fill = robot.robotSprite;
+                            //}
                         }
                     }
 
@@ -1236,19 +1265,12 @@ namespace Game_Treasure_Hunter
                     Rect speedBonusHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (playerHitBox.IntersectsWith(speedBonusHitBox))
                     {
-                        itemRemover.Add(x);
-                        player.Speed += 3;
+                        player.Speed = 9;
                         player.speedup = true;
+                        itemRemover.Add(x);
                     }
 
-                    //остановка работы бонуса ускорение игрока 
-                    player.timeActionsSpeedup++;
-                    if (player.speedup && player.timeActionsSpeedup > player.speedupStateDuration)
-                    {
-                        player.speedup = false;
-                        player.timeActionsSpeedup = 0;
-                        player.Speed = 5;
-                    }
+                    
 
                 }
 
@@ -1620,12 +1642,6 @@ namespace Game_Treasure_Hunter
                 {
                     itemRemover.Add(shooter1);
                 }
-                //if (stoneCounter > 0)
-                //{
-                //    stoneCounter = 0;
-                //    limit = 0;
-                //    stoneSpeed = 0;
-                //}
 
             }
 
@@ -1639,7 +1655,20 @@ namespace Game_Treasure_Hunter
                 {
                     treasuresScore.Content = "Сокровища: " + gem + Environment.NewLine + "Второй уровень" + Environment.NewLine + "пройден!";
                 }
-                //MessageBox.Show("Второй уровень пройден!", "TREASURE HUNTER");
+                if(shooterTwo.Health > 0)
+                {
+                    itemRemover.Add(shooter2);
+                }
+
+                if(soldierOne.Health > 0)
+                {
+                    itemRemover.Add(soldier);
+                }
+
+                if(terrorist.Health > 0)
+                {
+                    itemRemover.Add(terror);
+                }
             }
 
             if (gem == 3 && backgroundLevel3.Focusable == true)

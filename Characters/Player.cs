@@ -23,7 +23,7 @@ namespace Game_Treasure_Hunter
         int forceJump;
         public ImageBrush playerSprite = new ImageBrush();
         //для работы  бонуса ускорения игрока 
-        public int speedupStateDuration = 2000;
+        public int speedupStateDuration = 700;
         public int timeActionsSpeedup = 0;
         public bool speedup = false;
 

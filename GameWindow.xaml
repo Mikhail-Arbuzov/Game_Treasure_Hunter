@@ -83,8 +83,8 @@
                <Rectangle x:Name="coin16" Tag="coin" Fill="Gold" Height="38" Canvas.Left="1808" Canvas.Top="220" Width="38" RenderTransformOrigin="-0.105,0.705"/>
                <Rectangle x:Name="coin17" Tag="coin" Fill="Gold" Height="38" Canvas.Left="2566" Canvas.Top="320" Width="38" RenderTransformOrigin="-0.105,0.705"/>
                <Rectangle x:Name="coin18" Tag="coin" Fill="Gold" Height="38" Canvas.Left="3011" Canvas.Top="671" Width="38" RenderTransformOrigin="-0.105,0.705"/>
-               <Rectangle x:Name="healthRect1" Tag="healths" Fill="Red" Height="32" Canvas.Left="2376" Canvas.Top="390" Width="32" RenderTransformOrigin="0.55,0.513"/>
-               <Rectangle x:Name="speedRect1" Tag="speeds" Fill="Coral" Height="32" Canvas.Left="2438" Canvas.Top="390" Width="32"/>
+               <Rectangle x:Name="healthRect1" Tag="healths" Fill="Red" Height="32" Canvas.Left="2376" Canvas.Top="390" Width="32" />
+               <Rectangle x:Name="speedRect1" Tag="speeds" Fill="Coral" Height="32" Canvas.Left="2438" Canvas.Top="400" Width="32"/>
                <Rectangle x:Name="bulletsRect1" Tag="bullets" Fill="Black" Height="32" Canvas.Left="2251" Canvas.Top="395" Width="32"/>
                <Rectangle x:Name="sapphire" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="1874" Canvas.Top="226" Width="32"/>
                <Rectangle x:Name="diamond" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="3025" Canvas.Top="327" Width="32"/>

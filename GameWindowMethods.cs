@@ -164,12 +164,12 @@ namespace Game_Treasure_Hunter
             //{
             //    MyCanvas.Children.Add(enemyBullet);
             //}
-            if (shooterTwo.Shoot && shooterTwo.Health >= 0)
+            if (shooterTwo.Shoot && shooterTwo.Health > 0 && gem < 3)
             {
                 MyCanvas.Children.Add(enemyBullet2);
             }
 
-            if(terrorist.Shoot && terrorist.Health >= 0)
+            if(terrorist.Shoot && terrorist.Health > 0 && gem < 3)
             {
                 MyCanvas.Children.Add(enemyBullet3);
             }
@@ -291,7 +291,7 @@ namespace Game_Treasure_Hunter
             }
 
 
-            if (robot.Shoot && robot.Health >= 0)
+            if (robot.Shoot && robot.Health > 0)
             {
                 MyCanvas.Children.Add(newLazer);
             }

@@ -333,57 +333,72 @@ namespace Game_Treasure_Hunter
             }
 
             //действия солдата
-
-            if(soldierOne.Idle)
+            if(soldierOne.Health > 0)
             {
-                soldierSpriteIndex += 0.5;
-                if (soldierSpriteIndex > 10)
+                if (soldierOne.Idle)
                 {
-                    soldierSpriteIndex = 1;
+                    soldierSpriteIndex += 0.5;
+                    if (soldierSpriteIndex > 10)
+                    {
+                        soldierSpriteIndex = 1;
+                    }
+                    soldierOne.IdleSoSprites(soldierSpriteIndex);
+                    soldier.Fill = soldierOne.soldierSprite;
                 }
-                soldierOne.IdleSoSprites(soldierSpriteIndex);
-                soldier.Fill = soldierOne.soldierSprite;
+                else
+                {
+                    Canvas.SetLeft(soldier, Canvas.GetLeft(soldier) + soldierOne.Speed);
+
+                    soldierSpriteIndex += 0.5;
+                    if (soldierSpriteIndex > 10)
+                    {
+                        soldierSpriteIndex = 1;
+                    }
+                    soldierOne.RunSprites(soldierSpriteIndex);
+                    soldier.Fill = soldierOne.soldierSprite;
+
+                    if (Canvas.GetLeft(soldier) > 2175)
+                    {
+                        soldierOne.Speed--;
+                        soldier.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                    }
+
+                    if (Canvas.GetLeft(soldier) < 1983)
+                    {
+                        soldierOne.Speed++;
+                        soldier.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    }
+                }
+
+                soldierOne.StateFrameCounter++;
+                if (soldierOne.Idle && soldierOne.StateFrameCounter >= soldierOne.IdleStatesDuration)
+                {
+                    soldierOne.Idle = false;
+                    soldierOne.StateFrameCounter = 0;
+                    soldierSpriteIndex = 0;
+                }
+                else if (!soldierOne.Idle && soldierOne.StateFrameCounter >= soldierOne.RunStatesDuration)
+                {
+                    soldierOne.Idle = true;
+                    soldierOne.StateFrameCounter = 0;
+                }
             }
             else
             {
-                Canvas.SetLeft(soldier, Canvas.GetLeft(soldier) + soldierOne.Speed);
-
                 soldierSpriteIndex += 0.5;
-                if (soldierSpriteIndex > 10)
-                {
-                    soldierSpriteIndex = 1;
-                }
-                soldierOne.RunSprites(soldierSpriteIndex);
+                soldierOne.DieSprites(soldierSpriteIndex);
                 soldier.Fill = soldierOne.soldierSprite;
-
-                if (Canvas.GetLeft(soldier) > 2175)
+                soldierOne.countDie += 0.2;
+                if(soldierOne.countDie > 14)
                 {
-                    soldierOne.Speed--;
-                    soldier.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                    itemRemover.Add(soldier);
                 }
-
-                if (Canvas.GetLeft(soldier) < 1983)
-                {
-                    soldierOne.Speed++;
-                    soldier.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
-                }
+                
             }
 
-            soldierOne.StateFrameCounter++;
-            if(soldierOne.Idle && soldierOne.StateFrameCounter >= soldierOne.IdleStatesDuration)
-            {
-                soldierOne.Idle = false;
-                soldierOne.StateFrameCounter = 0;
-                soldierSpriteIndex = 0;
-            }
-            else if (!soldierOne.Idle && soldierOne.StateFrameCounter >= soldierOne.RunStatesDuration)
-            {
-                soldierOne.Idle = true;
-                soldierOne.StateFrameCounter = 0;
-            }
 
             //действия второго стрелка
-            if(shooterTwo.Health > 0)
+            if (shooterTwo.Health > 0)
             {
                 if (shooterTwo.Shoot)
                 {
@@ -436,6 +451,17 @@ namespace Game_Treasure_Hunter
                     //shooterSpriteIndex = 0;
                 }
             }
+            else
+            {
+                shooterSpriteIndex += 0.5;
+                shooterTwo.DieSprites(shooterSpriteIndex);
+                shooter2.Fill = shooterOne.shooterSprite;
+                shooterTwo.countDie += 0.2;
+                if (shooterTwo.countDie > 14)
+                {
+                    itemRemover.Add(shooter2);
+                }
+            }
 
             //if (Canvas.GetTop(hero) < 400 && Canvas.GetTop(hero) > 120)
             //{
@@ -450,7 +476,7 @@ namespace Game_Treasure_Hunter
             //}
 
             // действия террориста
-            if(terrorist.Health > 0)
+            if (terrorist.Health > 0)
             {
                 if (terrorist.Shoot)
                 {
@@ -503,6 +529,21 @@ namespace Game_Treasure_Hunter
                     terrorist.StateFrameCounter = 0;
                 }
             }
+            else
+            {
+                terroristSpriteIndex += 0.5;
+                if (terroristSpriteIndex > 10)
+                {
+                    itemRemover.Add(terror);
+                }
+                terrorist.DieSprites(terroristSpriteIndex);
+                terror.Fill = terrorist.terroristSprite;
+                //terrorist.countDie += 0.2;
+                //if(terrorist.countDie > 13)
+                //{
+                //    itemRemover.Add(terror);
+                //}  
+            }
 
             //действия робота
             if(robot.Health > 0)
@@ -554,6 +595,16 @@ namespace Game_Treasure_Hunter
                     robot.Shoot = true;
                     robot.StateFrameCounter = 0;
                 }
+            }
+            else
+            {
+                robotSpriteIndex +=0.5;
+                if (robotSpriteIndex > 19)
+                {
+                    itemRemover.Add(robo);
+                }
+                robot.DieSprites(robotSpriteIndex);
+                robo.Fill = robot.robotSprite;
             }
 
             foreach (var s in MyCanvas.Children.OfType<Image>())
