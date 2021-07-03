@@ -296,12 +296,12 @@ namespace Game_Treasure_Hunter
                 MyCanvas.Children.Add(newLazer);
             }
 
-            if (ninjaTwo.Throw && ninjaTwo.Health >= 0)
+            if (ninjaTwo.Throw && ninjaTwo.Health > 0)
             {
                 MyCanvas.Children.Add(newKunai);
             }
 
-            if(ninjaBoss.Shoot && ninjaBoss.Health >= 0)
+            if(ninjaBoss.Shoot && ninjaBoss.Health > 0)
             {
                 MyCanvas.Children.Add(newArrow);
             }

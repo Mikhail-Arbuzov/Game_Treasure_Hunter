@@ -356,7 +356,7 @@ namespace Game_Treasure_Hunter
             ImageBrush entry1 = new ImageBrush();
             entry1.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/doorClose.png"));
             door1.Fill = entry1;
-            door1.Stroke = Brushes.Red;
+            //door1.Stroke = Brushes.Red;
             player.IdleSprites(1);
             hero.Fill = player.playerSprite;
             hero.Stroke = Brushes.Black;
@@ -448,7 +448,7 @@ namespace Game_Treasure_Hunter
             shooter2.Fill = shooterTwo.shooterSprite;
             terrorist.RunSprites(1);
             terror.Fill = terrorist.terroristSprite;
-            terror.Stroke = Brushes.Black;
+            //terror.Stroke = Brushes.Black;
             robot.RunSprites(1);
             robo.Fill = robot.robotSprite;
             //robo.Stroke = Brushes.Black;

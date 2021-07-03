@@ -69,7 +69,7 @@ namespace Game_Treasure_Hunter
 
         public NinjaBoss()
         {
-            Health = 5;
+            Health = 8;
             Speed = 5;
         }
 

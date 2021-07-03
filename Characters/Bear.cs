@@ -144,7 +144,7 @@ namespace Game_Treasure_Hunter
             Mark = mark1;
             TotalBearFrames = totalBearframes1;
             BearCurrentFrame = bearCurrentFrame1;
-            Health = 8;
+            Health = 5;
             Speed = 2;
         }
 

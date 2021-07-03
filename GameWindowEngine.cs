@@ -362,79 +362,91 @@ namespace Game_Treasure_Hunter
                 if (foe.Name.ToString() == "ninja1")
                 {
                     Rect ninjHitBox = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
-                    if (ninjHitBox.IntersectsWith(playerHitBox))
+                    if(ninja.Health > 0)
                     {
-                        ninjaSpriteIndex += 0.5;
-                        if (ninjaSpriteIndex > 10)
+                        if (ninjHitBox.IntersectsWith(playerHitBox))
                         {
-                            ninjaSpriteIndex = 1;
+                            ninjaSpriteIndex += 0.5;
+                            if (ninjaSpriteIndex > 10)
+                            {
+                                ninjaSpriteIndex = 1;
+                            }
+                            ninja.AttackSprites(ninjaSpriteIndex);
+                            ninja1.Fill = ninja.ninjaSprite;
                         }
-                        ninja.AttackSprites(ninjaSpriteIndex);
-                        ninja1.Fill = ninja.ninjaSprite;
-                    }
-                    if (playerHitBox.IntersectsWith(ninjHitBox))
-                    {
-                        player.Health -= 1;
-                        playerSpriteIndex += 0.5;
-                        if (playerSpriteIndex > 10)
+                        if (playerHitBox.IntersectsWith(ninjHitBox))
                         {
-                            playerSpriteIndex = 1;
+                            player.Health -= 1;
+                            playerSpriteIndex += 0.5;
+                            if (playerSpriteIndex > 10)
+                            {
+                                playerSpriteIndex = 1;
+                            }
+                            player.HurtSprites(playerSpriteIndex);
+                            hero.Fill = player.playerSprite;
                         }
-                        player.HurtSprites(playerSpriteIndex);
-                        hero.Fill = player.playerSprite;
                     }
+                    
                 }
 
                 if (foe.Name.ToString() == "ninja2")
                 {
                     Rect niHitBox = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
-                    if (niHitBox.IntersectsWith(playerHitBox))
+                    if(ninjaTwo.Health > 0)
                     {
-                        ninjaTwoSpriteIndex += 0.5;
-                        if (ninjaTwoSpriteIndex > 10)
+                        if (niHitBox.IntersectsWith(playerHitBox))
                         {
-                            ninjaTwoSpriteIndex = 1;
+                            ninjaTwoSpriteIndex += 0.5;
+                            if (ninjaTwoSpriteIndex > 10)
+                            {
+                                ninjaTwoSpriteIndex = 1;
+                            }
+                            ninjaTwo.ThrowSprites(ninjaTwoSpriteIndex);
+                            ninja2.Fill = ninjaTwo.ninjaSprite;
                         }
-                        ninjaTwo.ThrowSprites(ninjaTwoSpriteIndex);
-                        ninja2.Fill = ninjaTwo.ninjaSprite;
-                    }
-                    if (playerHitBox.IntersectsWith(niHitBox))
-                    {
-                        player.Health -= 2;
-                        playerSpriteIndex += 0.5;
-                        if (playerSpriteIndex > 10)
+                        if (playerHitBox.IntersectsWith(niHitBox))
                         {
-                            playerSpriteIndex = 1;
+                            player.Health -= 2;
+                            playerSpriteIndex += 0.5;
+                            if (playerSpriteIndex > 10)
+                            {
+                                playerSpriteIndex = 1;
+                            }
+                            player.HurtSprites(playerSpriteIndex);
+                            hero.Fill = player.playerSprite;
                         }
-                        player.HurtSprites(playerSpriteIndex);
-                        hero.Fill = player.playerSprite;
                     }
+                   
                 }
 
                 if (foe.Name.ToString() == "ninjaBow")
                 {
                     Rect nbHitBox = new Rect(Canvas.GetLeft(foe), Canvas.GetTop(foe), foe.Width, foe.Height);
-                    if (nbHitBox.IntersectsWith(playerHitBox))
+                    if(ninjaBoss.Health > 0)
                     {
-                        ninjaBossSpriteIndex += 0.5;
-                        if (ninjaBossSpriteIndex > 22)
+                        if (nbHitBox.IntersectsWith(playerHitBox))
                         {
-                            ninjaBossSpriteIndex = 1;
+                            ninjaBossSpriteIndex += 0.5;
+                            if (ninjaBossSpriteIndex > 22)
+                            {
+                                ninjaBossSpriteIndex = 1;
+                            }
+                            ninjaBoss.AttackSprites(ninjaBossSpriteIndex);
+                            ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
                         }
-                        ninjaBoss.AttackSprites(ninjaBossSpriteIndex);
-                        ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
-                    }
-                    if (playerHitBox.IntersectsWith(nbHitBox))
-                    {
-                        player.Health -= 3;
-                        playerSpriteIndex += 0.5;
-                        if (playerSpriteIndex > 10)
+                        if (playerHitBox.IntersectsWith(nbHitBox))
                         {
-                            playerSpriteIndex = 1;
+                            player.Health -= 3;
+                            playerSpriteIndex += 0.5;
+                            if (playerSpriteIndex > 10)
+                            {
+                                playerSpriteIndex = 1;
+                            }
+                            player.HurtSprites(playerSpriteIndex);
+                            hero.Fill = player.playerSprite;
                         }
-                        player.HurtSprites(playerSpriteIndex);
-                        hero.Fill = player.playerSprite;
                     }
+                   
                 }
             }
 
@@ -674,9 +686,7 @@ namespace Game_Treasure_Hunter
                             if (bulletHitBox.IntersectsWith(bearHitBox))
                             {
                                 itemRemover.Add(y);
-
-                                bear.Health -= 3;
-                                healthProgress.Value-= 3;
+                                bear.Health -= 1;
                                 if (bear.Health <= 0)
                                 {
                                     itemToRemover.Add(be);
@@ -840,26 +850,29 @@ namespace Game_Treasure_Hunter
                             Rect enemyHitBox2 = new Rect(Canvas.GetLeft(q), Canvas.GetTop(q), q.Width, q.Height);
                             if (bulletHitBox.IntersectsWith(enemyHitBox2))
                             {
-                                itemRemover.Add(y);
-                                enemyTwo.Health -= 1;
                                 enemySpriteIndex += 0.5;
+                                if(enemySpriteIndex > 5)
+                                {
+                                    enemyTwo.Health -= 1;
+                                }
                                 if (enemySpriteIndex > 8)
                                 {
-                                    enemySpriteIndex = 1;
+                                    enemySpriteIndex = 0;
                                 }
                                 enemyTwo.HurtSprites(enemySpriteIndex);
                                 enemy2.Fill = enemyTwo.enemySprite;
+                                itemRemover.Add(y);
                             }
-                            if (enemyTwo.Health <= 0)
-                            {
-                                enemySpriteIndex += 0.5;
-                                if (enemySpriteIndex > 8)
-                                {
-                                    itemRemover.Add(q);
-                                }
-                                enemyTwo.DieSprites(enemySpriteIndex);
-                                enemy2.Fill = enemyTwo.enemySprite;
-                            }
+                            //if (enemyTwo.Health <= 0)
+                            //{
+                            //    enemySpriteIndex += 0.5;
+                            //    if (enemySpriteIndex > 8)
+                            //    {
+                            //        itemRemover.Add(q);
+                            //    }
+                            //    enemyTwo.DieSprites(enemySpriteIndex);
+                            //    enemy2.Fill = enemyTwo.enemySprite;
+                            //}
                         }
                     }
 
@@ -1067,27 +1080,30 @@ namespace Game_Treasure_Hunter
                             Rect ninjaBossHitBox = new Rect(Canvas.GetLeft(m), Canvas.GetTop(m), m.Width, m.Height);
                             if (bulletHitBox.IntersectsWith(ninjaBossHitBox))
                             {
-                                itemRemover.Add(y);
-                                ninjaBoss.Health -= 1;
-                                healthProgress.Value -= 1;
                                 ninjaBossSpriteIndex += 0.5;
+                                if(ninjaBossSpriteIndex > 6)
+                                {
+                                    ninjaBoss.Health -= 1;
+                                    healthProgress.Value -= 1;
+                                }
                                 if (ninjaBossSpriteIndex > 10)
                                 {
-                                    ninjaBossSpriteIndex = 1;
+                                    ninjaBossSpriteIndex = 0;
                                 }
                                 ninjaBoss.HurtSprites(ninjaBossSpriteIndex);
                                 ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
+                                itemRemover.Add(y);
                             }
-                            if (ninjaBoss.Health <= 0)
-                            {
-                                ninjaBossSpriteIndex += 0.5;
-                                if (ninjaBossSpriteIndex > 15)
-                                {
-                                    itemRemover.Add(m);
-                                }
-                                ninjaBoss.DieSprites(ninjaBossSpriteIndex);
-                                ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
-                            }
+                            //if (ninjaBoss.Health <= 0)
+                            //{
+                            //    ninjaBossSpriteIndex += 0.5;
+                            //    if (ninjaBossSpriteIndex > 15)
+                            //    {
+                            //        itemRemover.Add(m);
+                            //    }
+                            //    ninjaBoss.DieSprites(ninjaBossSpriteIndex);
+                            //    ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
+                            //}
                         }
                     }
 
@@ -1109,16 +1125,16 @@ namespace Game_Treasure_Hunter
                                 ninja1.Fill = ninja.ninjaSprite;
 
                             }
-                            if (ninja.Health <= 0)
-                            {
-                                ninjaSpriteIndex += 0.5;
-                                if (ninjaSpriteIndex > 10)
-                                {
-                                    itemRemover.Add(n);
-                                }
-                                ninja.DieSprites(ninjaSpriteIndex);
-                                ninja1.Fill = ninja.ninjaSprite;
-                            }
+                            //if (ninja.Health <= 0)
+                            //{
+                            //    ninjaSpriteIndex += 0.5;
+                            //    if (ninjaSpriteIndex > 10)
+                            //    {
+                            //        itemRemover.Add(n);
+                            //    }
+                            //    ninja.DieSprites(ninjaSpriteIndex);
+                            //    ninja1.Fill = ninja.ninjaSprite;
+                            //}
                         }
 
                         if (n.Name.ToString() == "ninja2")
@@ -1128,24 +1144,24 @@ namespace Game_Treasure_Hunter
                             {
                                 itemRemover.Add(y);
                                 ninjaTwo.Health -= 1;
-                                ninjaSpriteIndex += 0.5;
-                                if (ninjaSpriteIndex > 2)
+                                ninjaTwoSpriteIndex += 0.5;
+                                if (ninjaTwoSpriteIndex > 2)
                                 {
-                                    ninjaSpriteIndex = 1;
+                                    ninjaTwoSpriteIndex = 1;
                                 }
-                                ninjaTwo.HurtSprites(ninjaSpriteIndex);
+                                ninjaTwo.HurtSprites(ninjaTwoSpriteIndex);
                                 ninja2.Fill = ninjaTwo.ninjaSprite;
                             }
-                            if (ninjaTwo.Health <= 0)
-                            {
-                                ninjaSpriteIndex += 0.5;
-                                if (ninjaSpriteIndex > 10)
-                                {
-                                    itemRemover.Add(n);
-                                }
-                                ninjaTwo.DieSprites(ninjaSpriteIndex);
-                                ninja2.Fill = ninjaTwo.ninjaSprite;
-                            }
+                            //if (ninjaTwo.Health <= 0)
+                            //{
+                            //    ninjaSpriteIndex += 0.5;
+                            //    if (ninjaSpriteIndex > 10)
+                            //    {
+                            //        itemRemover.Add(n);
+                            //    }
+                            //    ninjaTwo.DieSprites(ninjaSpriteIndex);
+                            //    ninja2.Fill = ninjaTwo.ninjaSprite;
+                            //}
                         }
                     }
                 }
@@ -1487,7 +1503,7 @@ namespace Game_Treasure_Hunter
                 if (x is Rectangle && (string)x.Tag == "stone")
                 {
                     Canvas.SetTop(x, Canvas.GetTop(x) + stoneSpeed);
-                    if (Canvas.GetTop(x) > 342)
+                    if (Canvas.GetTop(x) > 278)
                     {
                         itemRemover.Add(x);
                     }
@@ -1584,9 +1600,10 @@ namespace Game_Treasure_Hunter
                             backgroundLevel2.Focusable = false;
                             gem = 0;
                             treasuresScore.Foreground = Brushes.White;
-                            healthProgress.Value = ninjaBoss.Health + bear.Health;
+                            healthBoss.Foreground = Brushes.LightGray;
+                            healthProgress.Value = ninjaBoss.Health;
                             healthProgress.Minimum = 0;
-                            healthProgress.Maximum = 13;
+                            healthProgress.Maximum = 8;
                             healthProgress.Foreground = Brushes.Red;
                             Canvas.SetLeft(hero, 3242);
                             Canvas.SetTop(hero, 632);
@@ -1599,7 +1616,7 @@ namespace Game_Treasure_Hunter
                 if (x.Name.ToString() == "chest")
                 {
                     Rect chestHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-                    if (gem == 3 && ninjaBoss.Health <= 0 && bear.Health <= 0)
+                    if (gem == 3 && ninjaBoss.Health <= 0 )
                     {
                         if (playerHitBox.IntersectsWith(chestHitBox))
                         {
@@ -1677,6 +1694,18 @@ namespace Game_Treasure_Hunter
                 chestImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/Treasure_open.png"));
                 chest.Fill = chestImage;
                 treasuresScore.Foreground = Brushes.Yellow;
+                //if(ninja.Health > 0)
+                //{
+                //    itemRemover.Add(ninja1);
+                //}
+                //if(ninjaTwo.Health > 0)
+                //{
+                //    itemRemover.Add(ninja2);
+                //}
+                //if(bird.Health > 0)
+                //{
+                //    itemToRemover.Add(bird.birdOne);
+                //}
             }
 
             foreach (Rectangle item in itemRemover)

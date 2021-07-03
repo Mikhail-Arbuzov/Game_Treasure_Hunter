@@ -761,57 +761,69 @@ namespace Game_Treasure_Hunter
             //}
 
             // смена действий второго врага
-            if (enemyTwo.IsIdle)
+            if(enemyTwo.Health > 0)
             {
-                if (enemySpriteIndex > 12)
+                if (enemyTwo.IsIdle)
                 {
-                    enemySpriteIndex = 1;
-                    
+                    if (enemySpriteIndex > 12)
+                    {
+                        enemySpriteIndex = 1;
+
+                    }
+                    enemyTwo.IdleEnSprites(enemySpriteIndex);
+                    enemy2.Fill = enemyTwo.enemySprite;
                 }
-                enemyTwo.IdleEnSprites(enemySpriteIndex);
-                enemy2.Fill = enemyTwo.enemySprite;
+                else
+                {
+                    Canvas.SetLeft(enemy2, Canvas.GetLeft(enemy2) + enemyTwo.Speed);
+
+                    enemySpriteIndex += 0.5;
+                    if (enemySpriteIndex > 8)
+                    {
+                        enemySpriteIndex = 1;
+                    }
+                    enemyTwo.RunSprites(enemySpriteIndex);
+                    enemy2.Fill = enemyTwo.enemySprite;
+
+                    if (Canvas.GetLeft(enemy2) > 4139)
+                    {
+                        enemyTwo.Speed--;
+                        enemy2.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                    }
+
+                    if (Canvas.GetLeft(enemy2) < 3459)
+                    {
+                        enemyTwo.Speed++;
+                        enemy2.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    }
+                }
+                enemyTwo.StateFrameCounter++;
+                if (enemyTwo.IsIdle && enemyTwo.StateFrameCounter >= enemyTwo.IdleStateDuration)
+                {
+                    enemyTwo.IsIdle = false;
+                    enemyTwo.StateFrameCounter = 0;
+                    enemySpriteIndex = 0;
+                }
+                else if (!enemyTwo.IsIdle && enemyTwo.StateFrameCounter >= enemyTwo.OtherStatesDuration)
+                {
+                    enemyTwo.IsIdle = true;
+                    enemyTwo.StateFrameCounter = 0;
+                    enemySpriteIndex += 0.5;
+                }
             }
             else
             {
-                Canvas.SetLeft(enemy2, Canvas.GetLeft(enemy2) + enemyTwo.Speed);
-
                 enemySpriteIndex += 0.5;
-                if (enemySpriteIndex > 8)
+                if (enemySpriteIndex > 11)
                 {
-                    enemySpriteIndex = 1;
+                    itemRemover.Add(enemy2);
                 }
-                enemyTwo.RunSprites(enemySpriteIndex);
+                enemyTwo.DieSprites(enemySpriteIndex);
                 enemy2.Fill = enemyTwo.enemySprite;
-
-                if (Canvas.GetLeft(enemy2) > 4139)
-                {
-                    enemyTwo.Speed--;
-                    enemy2.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-                }
-
-                if (Canvas.GetLeft(enemy2) < 3459)
-                {
-                    enemyTwo.Speed++;
-                    enemy2.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
-                }
             }
-            enemyTwo.StateFrameCounter++;
-            if (enemyTwo.IsIdle && enemyTwo.StateFrameCounter >= enemyTwo.IdleStateDuration)
-            {
-                enemyTwo.IsIdle = false;
-                enemyTwo.StateFrameCounter = 0;
-                enemySpriteIndex = 0;
-            }
-            else if (!enemyTwo.IsIdle && enemyTwo.StateFrameCounter >= enemyTwo.OtherStatesDuration)
-            {
-                enemyTwo.IsIdle = true;
-                enemyTwo.StateFrameCounter = 0;
-                enemySpriteIndex += 0.5;
-            }
-
 
             //смена действий второго ниндзи
-            if(ninjaTwo.Health > 0)
+            if (ninjaTwo.Health > 0)
             {
                 if (ninjaTwo.Throw)
                 {
@@ -863,6 +875,22 @@ namespace Game_Treasure_Hunter
                     ninjaTwo.StateFrameCounter = 0;
                     //ninjaTwoSpriteIndex += 0.5;
                 }
+            }
+            else
+            {
+                ninjaTwoSpriteIndex += 0.5;
+                if(ninjaTwoSpriteIndex > 14)
+                {
+                   itemRemover.Add(ninja2);
+                }
+                ninjaTwo.DieSprites(ninjaTwoSpriteIndex);
+                ninja2.Fill = ninjaTwo.ninjaSprite;
+                //ninjaTwo.countDie += 0.2;
+                //if(ninjaTwo.countDie > 14)
+                //{
+                //    itemRemover.Add(ninja2);
+                //}
+                
             }
            
 
@@ -957,6 +985,16 @@ namespace Game_Treasure_Hunter
                     }
                 }
             }
+            else
+            {
+                ninjaBossSpriteIndex += 0.5;
+                if (ninjaBossSpriteIndex > 19)
+                {
+                    itemRemover.Add(ninjaBow);
+                }
+                ninjaBoss.DieSprites(ninjaBossSpriteIndex);
+                ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
+            }
            
            
 
@@ -1001,25 +1039,43 @@ namespace Game_Treasure_Hunter
 
 
             //бег первого ниндзи
-            Canvas.SetLeft(ninja1, Canvas.GetLeft(ninja1) + ninja.Speed);
-            ninjaSpriteIndex += 0.5;
-            if (ninjaSpriteIndex > 10)
+            if(ninja.Health > 0)
             {
-                ninjaSpriteIndex = 1;
-            }
-            ninja.RunSprites(ninjaSpriteIndex);
-            ninja1.Fill = ninja.ninjaSprite;
+                Canvas.SetLeft(ninja1, Canvas.GetLeft(ninja1) + ninja.Speed);
+                ninjaSpriteIndex += 0.5;
+                if (ninjaSpriteIndex > 10)
+                {
+                    ninjaSpriteIndex = 1;
+                }
+                ninja.RunSprites(ninjaSpriteIndex);
+                ninja1.Fill = ninja.ninjaSprite;
 
-            if (Canvas.GetLeft(ninja1) > 3645)
-            {
-                ninja.Speed--;
-                ninja1.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-            }
+                if (Canvas.GetLeft(ninja1) > 3645)
+                {
+                    ninja.Speed--;
+                    ninja1.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                }
 
-            if (Canvas.GetLeft(ninja1) < 3259)
+                if (Canvas.GetLeft(ninja1) < 3259)
+                {
+                    ninja.Speed++;
+                    ninja1.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                }
+            }
+            else
             {
-                ninja.Speed++;
-                ninja1.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                ninjaSpriteIndex += 0.5;
+                if (ninjaSpriteIndex > 14)
+                {
+                    itemRemover.Add(ninja1);
+                }
+                ninja.DieSprites(ninjaSpriteIndex);
+                ninja1.Fill = ninja.ninjaSprite;
+                //ninja.countDie += 0.2;
+                //if (ninja.countDie > 14)
+                //{
+                //    itemRemover.Add(ninja1);
+                //}
             }
 
         }
