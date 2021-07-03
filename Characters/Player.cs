@@ -28,6 +28,8 @@ namespace Game_Treasure_Hunter
         public bool speedup = false;
 
         public Direction Direction { get; set; } = Direction.Right;
+        //для скорости прыжка вниз
+        public int jumpDownSpeed = 0;
 
         public int Health
         {

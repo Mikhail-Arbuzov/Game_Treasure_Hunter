@@ -21,7 +21,7 @@ namespace Game_Treasure_Hunter
     public partial class GameWindow : Window
     {
         DispatcherTimer gameTimer = new DispatcherTimer();
-        bool goLeft, goRight;
+        bool goLeft, goRight,goDown;
         bool gameOver;
         bool jumping;
         double speedBullet = 10;
@@ -181,6 +181,23 @@ namespace Game_Treasure_Hunter
                 }
             }
 
+            if(e.Key == Key.Down)
+            {
+                goDown = true;
+                player.ForceJump = -8;
+                player.jumpDownSpeed = 10;
+                player.JumpSprites();
+                hero.Fill = player.playerSprite;
+                if (Keyboard.IsKeyDown(Key.Left))
+                {
+                    hero.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                }
+                if (Keyboard.IsKeyDown(Key.Right))
+                {
+                    hero.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                }
+            }
+
             if (e.Key == Key.R && gameOver == true)
             {
                 GameWindow game = new GameWindow();
@@ -200,6 +217,11 @@ namespace Game_Treasure_Hunter
             {
                 //goUp = false;
                 jumping = false;
+            }
+
+            if(e.Key == Key.Down)
+            {
+                goDown = false;
             }
 
 
@@ -244,11 +266,11 @@ namespace Game_Treasure_Hunter
                 {
                     MyCanvas.Children.Add(newBullet);
                 }
-
-                playerSpriteIndex ++;
+                
+                playerSpriteIndex +=0.5;
                 if(playerSpriteIndex > 10)
                 {
-                    playerSpriteIndex = 1;
+                    playerSpriteIndex = 0;
                 }
                 player.AttackSprites(playerSpriteIndex);
                 hero.Fill = player.playerSprite;

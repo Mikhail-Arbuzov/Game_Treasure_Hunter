@@ -60,8 +60,18 @@ namespace Game_Treasure_Hunter
                 }
             }
 
-
-
+            //игрок в покое
+            //if((!goLeft && !goRight && !jumping && !goDown) && (!Keyboard.IsKeyDown(Key.Space)) && player.Health > 0)
+            //{
+            //    playerSpriteIndex += 0.5;
+            //    if (playerSpriteIndex > 10)
+            //    {
+            //        playerSpriteIndex = 0;
+            //    }
+            //    player.IdleSprites(playerSpriteIndex);
+            //    hero.Fill = player.playerSprite;
+            //}
+            //движение игрока
             if (goLeft == true && Canvas.GetLeft(hero) > 0)
             {
                 Canvas.SetLeft(hero, Canvas.GetLeft(hero) - player.Speed);
@@ -101,11 +111,12 @@ namespace Game_Treasure_Hunter
             {
                 player.JumpSpeed = 10;
             }
-
-            //if (Canvas.GetTop(hero) + (hero.Height * 2) > this.MyCanvas.ActualHeight)
-            //{
-            //    Canvas.SetTop(hero, -80);
-            //}
+            //для работы прыжка вниз
+            if (goDown && Canvas.GetTop(hero) + (hero.Height * 2) <= this.MyCanvas.ActualHeight)
+            {
+                //Canvas.SetTop(hero, -80);
+                Canvas.SetTop(hero, Canvas.GetTop(hero) + player.jumpDownSpeed);
+            }
             // движение объектов игры
             MotionLevelOne();
             MotionLevelTwo();
@@ -1193,12 +1204,16 @@ namespace Game_Treasure_Hunter
                 if ((string)x.Tag == "platforma")
                 {
                     Rect platformHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-                    if (playerHitBox.IntersectsWith(platformHitBox))
+                    if(!goDown)
                     {
-                        player.ForceJump = 8;
-                        //player.JumpSpeed = 0;
-                        Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
+                        if (playerHitBox.IntersectsWith(platformHitBox))
+                        {
+                            player.ForceJump = 8;
+                            //player.JumpSpeed = 0;
+                            Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
+                        }
                     }
+                   
 
                     if (x.Name.ToString() == "platform1")
                     {
@@ -1525,13 +1540,16 @@ namespace Game_Treasure_Hunter
                 if ((string)x.Tag == "surface")
                 {
                     Rect surfaceHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-                    if (playerHitBox.IntersectsWith(surfaceHitBox))
+                    if(!goDown)
                     {
-                        player.ForceJump = 8;
-                        //player.JumpSpeed = 0;
-                        Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
+                        if (playerHitBox.IntersectsWith(surfaceHitBox))
+                        {
+                            player.ForceJump = 8;
+                            //player.JumpSpeed = 0;
+                            Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
+                        }
                     }
-
+                    
                     if (x.Name.ToString() == "surface10")
                     {
                         if (playerHitBox.IntersectsWith(surfaceHitBox))
