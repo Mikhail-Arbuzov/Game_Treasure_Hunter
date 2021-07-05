@@ -30,6 +30,8 @@ namespace Game_Treasure_Hunter
         public Direction Direction { get; set; } = Direction.Right;
         //для скорости прыжка вниз
         public int jumpDownSpeed = 0;
+        //для смены спрайтов стрельбы и покоя
+        public bool shoot = false;
 
         public int Health
         {

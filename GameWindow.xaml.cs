@@ -47,6 +47,7 @@ namespace Game_Treasure_Hunter
         int bulletTimerLimit = 90;
         //для переключения спрайтов
         double playerSpriteIndex = 0;
+        double playerSpriteIndex2 = 0;
         double enemySpriteIndex = 0;
         double soldierSpriteIndex = 0;
         double shooterSpriteIndex = 0;
@@ -270,7 +271,7 @@ namespace Game_Treasure_Hunter
                 playerSpriteIndex +=0.5;
                 if(playerSpriteIndex > 10)
                 {
-                    playerSpriteIndex = 0;
+                    playerSpriteIndex = 1;
                 }
                 player.AttackSprites(playerSpriteIndex);
                 hero.Fill = player.playerSprite;

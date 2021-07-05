@@ -61,16 +61,30 @@ namespace Game_Treasure_Hunter
             }
 
             //игрок в покое
-            //if((!goLeft && !goRight && !jumping && !goDown) && (!Keyboard.IsKeyDown(Key.Space)) && player.Health > 0)
-            //{
-            //    playerSpriteIndex += 0.5;
-            //    if (playerSpriteIndex > 10)
-            //    {
-            //        playerSpriteIndex = 0;
-            //    }
-            //    player.IdleSprites(playerSpriteIndex);
-            //    hero.Fill = player.playerSprite;
-            //}
+            if(!player.shoot)
+            {
+                if ((!goLeft && !goRight && !jumping && !goDown) && (!Keyboard.IsKeyDown(Key.Space)) && player.Health > 0)
+                {
+                    playerSpriteIndex2 += 0.5;
+                    if (playerSpriteIndex2 > 10)
+                    {
+                        playerSpriteIndex2 = 0;
+                    }
+                    player.IdleSprites(playerSpriteIndex2);
+                    hero.Fill = player.playerSprite;
+                }
+            }
+           
+            if(Keyboard.IsKeyDown(Key.Space))
+            {
+                player.shoot = true;
+                playerSpriteIndex2 = 0;
+            }
+            else
+            {
+                player.shoot = false;
+            }
+
             //движение игрока
             if (goLeft == true && Canvas.GetLeft(hero) > 0)
             {
@@ -1649,8 +1663,8 @@ namespace Game_Treasure_Hunter
             {
                 player.Health = 0;
                 healthScore.Foreground = Brushes.Red;
-                playerSpriteIndex += 0.2;
-                if (playerSpriteIndex > 10)
+                playerSpriteIndex += 0.5;
+                if (playerSpriteIndex > 12)
                 {
                     ShowGameOver("Вы проиграли!!!");
                 }
