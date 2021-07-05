@@ -1718,6 +1718,10 @@ namespace Game_Treasure_Hunter
                 {
                     itemRemover.Add(terror);
                 }
+                if(snake.Health > 0)
+                {
+                    itemToRemover.Add(snake.snakeOne);
+                }
             }
 
             if (gem == 3 && backgroundLevel3.Focusable == true)

@@ -267,7 +267,11 @@ namespace Game_Treasure_Hunter
                 {
                     MyCanvas.Children.Add(newBullet);
                 }
-                
+                if(bulletsScore <=0)
+                {
+                    bulletsScore = 0;
+                }
+
                 playerSpriteIndex +=0.5;
                 if(playerSpriteIndex > 10)
                 {
