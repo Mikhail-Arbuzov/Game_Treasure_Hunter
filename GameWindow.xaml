@@ -128,7 +128,7 @@
                <Rectangle x:Name="healthRect3" Tag="healths" Fill="Red" Height="32" Canvas.Left="3437" Canvas.Top="151" Width="32"/>
                <Rectangle x:Name="speedRect3" Tag="speeds" Fill="Coral" Height="32" Canvas.Left="3587" Canvas.Top="728" Width="32"/>
                <Rectangle x:Name="bulletsRect3" Tag="bullets" Fill="#FF9C9595" Height="32" Canvas.Left="3990" Canvas.Top="728" Width="32" RenderTransformOrigin="0.588,0.575"/>
-               <Rectangle x:Name="sapphire1" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="4543" Canvas.Top="151" Width="32" RenderTransformOrigin="0.537,0.488"/>
+               <Rectangle x:Name="sapphire1" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="4525" Canvas.Top="151" Width="32" RenderTransformOrigin="0.537,0.488"/>
                <Rectangle x:Name="garnet" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="3882" Canvas.Top="434" Width="32" RenderTransformOrigin="0.537,0.488"/>
                <Rectangle x:Name="diamond1" Tag="treasure" Fill="BlueViolet" Height="32" Canvas.Left="4435" Canvas.Top="483" Width="32" RenderTransformOrigin="0.537,0.488"/>
                <!--<Rectangle x:Name="tree" Fill="#FF2BE2D8" Height="232" Canvas.Left="3485" Canvas.Top="254" Width="29"/>-->

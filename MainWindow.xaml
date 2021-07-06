@@ -45,6 +45,23 @@
                 </DataGrid>
             </Expander>
 
+            <Expander IsExpanded="False" Margin ="21,5,18.6,5" Padding="5" Background="#FFB3D6F0" BorderBrush="Black" >
+                <Expander.Header >
+                    <StackPanel Orientation ="Horizontal" >
+                        <Image Source="ImagesMenu\settings.png" Height="35" />
+                        <TextBlock Text="           Настройки" FontSize ="30" FontWeight="Bold"  />
+                    </StackPanel>
+                </Expander.Header>
+
+                <GroupBox Margin="5" Padding="10" Header="Сложность игры">
+                    <StackPanel>
+                        <RadioButton x:Name="normal" Margin="0,0,0,5" GroupName="complexity" Checked="normal_Checked">Normal</RadioButton>
+                        <RadioButton x:Name="hard" GroupName="complexity" Checked="hard_Checked">Hard</RadioButton>
+
+                    </StackPanel>
+                </GroupBox>
+            </Expander>
+
             <Button x:Name="button2" Margin="175,5,174.6,5" Height="56" Background="Gray" Click="button2_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="ImagesMenu\logout.png" Width="32" Height="32"/>

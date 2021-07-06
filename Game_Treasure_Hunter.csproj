@@ -680,5 +680,11 @@
   <ItemGroup>
     <Resource Include="Images\korni.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ImagesMenu\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Bush.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

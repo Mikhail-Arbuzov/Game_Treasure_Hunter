@@ -126,11 +126,17 @@ namespace Game_Treasure_Hunter
                 player.JumpSpeed = 10;
             }
             //для работы прыжка вниз
-            if (goDown && Canvas.GetTop(hero) + (hero.Height * 2) <= this.MyCanvas.ActualHeight)
+            if(!jumpDown)
             {
-                //Canvas.SetTop(hero, -80);
-                Canvas.SetTop(hero, Canvas.GetTop(hero) + player.jumpDownSpeed);
+                if (goDown && Canvas.GetTop(hero) + (hero.Height * 2) <= this.MyCanvas.ActualHeight)
+                {
+                    //Canvas.SetTop(hero, -80);
+                    Canvas.SetTop(hero, Canvas.GetTop(hero) + player.jumpDownSpeed);
+                }
             }
+     
+           
+
             // движение объектов игры
             MotionLevelOne();
             MotionLevelTwo();
@@ -1375,7 +1381,7 @@ namespace Game_Treasure_Hunter
                     }
                         
 
-                    if (Canvas.GetLeft(x) > 2650 || Canvas.GetLeft(x) < 1630)
+                    if (Canvas.GetLeft(x) > 3100 || Canvas.GetLeft(x) < 1630)
                     {
                         itemRemover.Add(x);
                     }
@@ -1573,6 +1579,23 @@ namespace Game_Treasure_Hunter
                     }
                 }
 
+                if((string)x.Tag =="bush")
+                {
+                    Rect bushHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+                    if (playerHitBox.IntersectsWith(bushHitBox))
+                    {
+                        playerSpriteIndex += 0.5;
+                        if (playerSpriteIndex > 10)
+                        {
+                            player.Health -= 1;
+                            playerSpriteIndex = 0;
+                        }
+                        player.HurtSprites(playerSpriteIndex);
+                        hero.Fill = player.playerSprite;
+                        //player.ForceJump = 8;
+                        Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
+                    }
+                }
                 //if (x.Name.ToString() =="grass")
                 //{
                 //    Rect grassHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
@@ -1691,6 +1714,10 @@ namespace Game_Treasure_Hunter
                 {
                     itemRemover.Add(shooter1);
                 }
+                //if(wolf.Health > 0)
+                //{
+                //    itemToRemover.Add(wolf.wolfOne);
+                //}
 
             }
 

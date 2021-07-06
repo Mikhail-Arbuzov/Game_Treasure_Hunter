@@ -24,6 +24,7 @@ namespace Game_Treasure_Hunter
         bool goLeft, goRight,goDown;
         bool gameOver;
         bool jumping;
+        public bool jumpDown;
         double speedBullet = 10;
         Rect playerHitBox;// для проверки пересечения с другими игровыми объектами
         //для стирания элементов игры
@@ -60,14 +61,14 @@ namespace Game_Treasure_Hunter
         double snowSpriteIndex = 0;
         //счетчики бонусов 
         int score;
-        int bulletsScore;
+        public int bulletsScore = 20;
         int gem;
 
         //double countDie = 0;
         //double countDie2 = 0;
         //double countHurt = 0;
 
-        Player player;
+        public Player player;
         Wolf wolf;
         Bear bear;
         Hog hog;
@@ -89,6 +90,7 @@ namespace Game_Treasure_Hunter
         public GameWindow()
         {
             InitializeComponent();
+           
             MyCanvas.Focus();
             gameTimer.Tick += GameEngine;
             gameTimer.Interval = TimeSpan.FromMilliseconds(20);
@@ -181,23 +183,26 @@ namespace Game_Treasure_Hunter
                     hero.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
                 }
             }
-
-            if(e.Key == Key.Down)
+            if(!jumpDown)
             {
-                goDown = true;
-                player.ForceJump = -8;
-                player.jumpDownSpeed = 10;
-                player.JumpSprites();
-                hero.Fill = player.playerSprite;
-                if (Keyboard.IsKeyDown(Key.Left))
+                if (e.Key == Key.Down)
                 {
-                    hero.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-                }
-                if (Keyboard.IsKeyDown(Key.Right))
-                {
-                    hero.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    goDown = true;
+                    player.ForceJump = -8;
+                    player.jumpDownSpeed = 10;
+                    player.JumpSprites();
+                    hero.Fill = player.playerSprite;
+                    if (Keyboard.IsKeyDown(Key.Left))
+                    {
+                        hero.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                    }
+                    if (Keyboard.IsKeyDown(Key.Right))
+                    {
+                        hero.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                    }
                 }
             }
+            
 
             if (e.Key == Key.R && gameOver == true)
             {
@@ -344,7 +349,7 @@ namespace Game_Treasure_Hunter
             healthProgress.Foreground = Brushes.Purple;
             healthProgress.Opacity = 0.2;
             score = 0;
-            bulletsScore = 20;
+            //bulletsScore = 20;
             gem = 0;
             gameOver = false;
             jumping = false;
