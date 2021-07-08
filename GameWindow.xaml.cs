@@ -86,6 +86,11 @@ namespace Game_Treasure_Hunter
         Robot robot;
         Troll trollOne;
 
+        //для озвучки игры
+        public MediaPlayer backgroundMedia = new MediaPlayer();
+        public bool turnOffsong = false;//для отключения фонового звука уровней
+        MediaPlayer backgroundMediaTwo = new MediaPlayer();
+        MediaPlayer backgroundMediaThree = new MediaPlayer();
 
         public GameWindow()
         {
@@ -208,7 +213,8 @@ namespace Game_Treasure_Hunter
             {
                 GameWindow game = new GameWindow();
                 game.Show();
-                this.Close();
+                game.backgroundMedia.Play();//включить фоновый звук на первом уровне
+                this.Close();            
             }
 
             if (e.Key == Key.Escape)
@@ -337,7 +343,9 @@ namespace Game_Treasure_Hunter
 
         private void StartGame()
         {
-            
+            backgroundMedia.Open(new Uri(@"../../GameSounds/gory.mp3", UriKind.Relative));
+            backgroundMediaTwo.Open(new Uri(@"../../GameSounds/beloe_solnce_pustyni.mp3", UriKind.Relative));
+            backgroundMediaThree.Open(new Uri(@"../../GameSounds/forest.mp3", UriKind.Relative));
             Canvas.SetLeft(hero, 31);
             Canvas.SetTop(hero, 422);
             //Canvas.SetLeft(hero, 3242);

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Game_Treasure_Hunter
 {
     /// <summary>
@@ -21,14 +22,25 @@ namespace Game_Treasure_Hunter
     public partial class MainWindow : Window
     {
         GameWindow gameWindow = new GameWindow();
+        MediaPlayer songMenu;
+       
+
         public MainWindow()
         {
             InitializeComponent();
+            //загрузка и включения музыки в меню
+            songMenu = new MediaPlayer();
+            songMenu.Open(new Uri(@"../../GameSounds/RockPrivet.wma", UriKind.Relative));
+            songMenu.Play();
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            
+            songMenu.Stop();
+            if (turnOn.IsChecked == true)
+            {
+                gameWindow.backgroundMedia.Play();//запуск звука фона первого раунда
+            }
             gameWindow.Show();
             this.Close();
         }
@@ -38,6 +50,7 @@ namespace Game_Treasure_Hunter
             Environment.Exit(0);
         }
 
+        //переключение сложности игры
         private void normal_Checked(object sender, RoutedEventArgs e)
         {
             gameWindow.bulletsScore = 17;
@@ -76,6 +89,19 @@ namespace Game_Treasure_Hunter
             Canvas.SetLeft(bulletsRect4, 4558);
             Canvas.SetTop(bulletsRect4, 151);
             gameWindow.MyCanvas.Children.Add(bulletsRect4);
+        }
+
+        //включение и отключение  фонового звука в игре 
+        private void turnOnChecked(object sender, RoutedEventArgs e)
+        {
+            songMenu.Position = new TimeSpan(0, 0, 1);
+            songMenu.Play(); 
+        }
+
+        private void turnOffChecked(object sender, RoutedEventArgs e)
+        {
+            songMenu.Stop();
+            gameWindow.turnOffsong = true;
         }
     }
 }

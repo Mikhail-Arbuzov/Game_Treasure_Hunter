@@ -25,7 +25,7 @@ namespace Game_Treasure_Hunter
             treasuresScore.Content = "Сокровища: " + gem;
             healthBoss.Content = "Здоровье Босса: " + healthProgress.Value;
 
-            //чтоб игрок не выходил за экран
+            //чтоб игрок не выходил за экран а также настройка фонового звука уровней
             if (backgroundLevel.Focusable == false && backgroundLevel3.Focusable == false && backgroundLevel2.Focusable == false)
             {
                 if (Canvas.GetLeft(hero) >= 1460)
@@ -33,6 +33,17 @@ namespace Game_Treasure_Hunter
                     Canvas.SetLeft(hero, Canvas.GetLeft(hero) - 10);
                     //goRight = false;
                 }
+                //для повтора фонового звука на первом уровне
+                if (!turnOffsong)
+                {
+                    if (backgroundMedia.Position >= new TimeSpan(0, 1, 4))
+                    {
+                        backgroundMedia.Position = new TimeSpan(0, 0, 1);
+                        backgroundMedia.Play();
+                    }
+                }
+               
+               
             }
 
             if (backgroundLevel2.Focusable == true)
@@ -58,6 +69,17 @@ namespace Game_Treasure_Hunter
                 {
                     Canvas.SetLeft(hero, Canvas.GetLeft(hero) + 10);
                 }
+                //для повтора фонового звука на третьем уровне
+                if (!turnOffsong)
+                {
+                    if (backgroundMediaThree.Position >= new TimeSpan(0, 0, 59))
+                    {
+                        backgroundMediaThree.Position = new TimeSpan(0, 0, 1);
+                        backgroundMediaThree.Play();
+                    }
+                }
+                
+
             }
 
             //игрок в покое
@@ -1629,12 +1651,22 @@ namespace Game_Treasure_Hunter
                     {
                         if (gem == 3 && trollOne.Health <= 0)
                         {
+                            //переключение фонового звука
+                            if (!turnOffsong)
+                            {
+                                backgroundMedia.Stop();
+                                backgroundMediaTwo.Play();
+                            }
+                            //смена фокуса фона локации уровня
                             backgroundLevel.Focusable = false;
                             backgroundLevel2.Focusable = true;
+                            //сброс счетчика бонуса сокровищ и смена его цвета
                             gem = 0;
                             treasuresScore.Foreground = Brushes.White;
+                            //переключения здоровья нового босса и смена цвета уровня его здоровья
                             healthProgress.Value = robot.Health;
                             healthProgress.Foreground = Brushes.Green;
+                            //перемещение игрока и указателей игровых характеристик 
                             Canvas.SetLeft(hero, 1624);
                             Canvas.SetTop(hero, 580);
                             Canvas.SetLeft(myGrid, 1630);
@@ -1651,6 +1683,11 @@ namespace Game_Treasure_Hunter
                     {
                         if (playerHitBox.IntersectsWith(doorHitBox2))
                         {
+                            if(!turnOffsong)
+                            {
+                                backgroundMediaTwo.Stop();
+                                backgroundMediaThree.Play();
+                            }
                             backgroundLevel3.Focusable = true;
                             backgroundLevel2.Focusable = false;
                             gem = 0;
@@ -1675,6 +1712,7 @@ namespace Game_Treasure_Hunter
                     {
                         if (playerHitBox.IntersectsWith(chestHitBox))
                         {
+                            backgroundMediaThree.Stop();
                             healthScore.Foreground = Brushes.Green;
                             ShowGameOver("Победа!!!\nСокровища\nнайдены!");
                         }
@@ -1693,6 +1731,9 @@ namespace Game_Treasure_Hunter
                 }
                 player.DieSprites(playerSpriteIndex);
                 hero.Fill = player.playerSprite;
+                backgroundMedia.Stop();
+                backgroundMediaTwo.Stop();
+                backgroundMediaThree.Stop();
             }
 
             if (gem == 3 && (backgroundLevel.Focusable == false && backgroundLevel3.Focusable == false && backgroundLevel2.Focusable == false))

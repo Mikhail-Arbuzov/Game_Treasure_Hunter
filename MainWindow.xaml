@@ -53,11 +53,15 @@
                     </StackPanel>
                 </Expander.Header>
 
-                <GroupBox Margin="5" Padding="10" Header="Сложность игры">
+                <GroupBox Margin="5" Padding="10" >
                     <StackPanel>
+                        <TextBlock Margin="0,0,0,5" FontWeight="Bold" HorizontalAlignment="Center" Foreground="Gray" Text="Сложность игры "/>
                         <RadioButton x:Name="normal" Margin="0,0,0,5" GroupName="complexity" Checked="normal_Checked">Normal</RadioButton>
                         <RadioButton x:Name="hard" GroupName="complexity" Checked="hard_Checked">Hard</RadioButton>
-
+                        
+                        <TextBlock Margin="0,5,0,5" FontWeight="Bold" HorizontalAlignment="Center" Foreground="Gray" Text="Фоновая музыка в игре"/>
+                        <CheckBox x:Name="turnOn" Margin="0,0,0,5" Content="Вкл" Checked="turnOnChecked"/>
+                        <CheckBox x:Name="turnOff" Content="Выкл" Checked="turnOffChecked"/>
                     </StackPanel>
                 </GroupBox>
             </Expander>

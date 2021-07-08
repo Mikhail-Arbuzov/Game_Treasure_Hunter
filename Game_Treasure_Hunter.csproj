@@ -686,5 +686,58 @@
   <ItemGroup>
     <Resource Include="Images\Bush.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="GameSounds\arrows.mp3" />
+    <Content Include="GameSounds\atakujuschaja-zmeja.mp3" />
+    <Content Include="GameSounds\bearAttack.mp3" />
+    <Content Include="GameSounds\beloe_solnce_pustyni.mp3" />
+    <Content Include="GameSounds\blaster.mp3" />
+    <Content Include="GameSounds\bonus.mp3" />
+    <Content Include="GameSounds\bonusspeed.mp3" />
+    <Content Include="GameSounds\bullet.mp3" />
+    <Content Include="GameSounds\bulletsScore.mp3" />
+    <Content Include="GameSounds\coin..mp3" />
+    <Content Include="GameSounds\deathNinja.mp3" />
+    <Content Include="GameSounds\deathplayer.mp3" />
+    <Content Include="GameSounds\deathSoldier.mp3" />
+    <Content Include="GameSounds\dieNinjaboss.mp3" />
+    <Content Include="GameSounds\dooropen.mp3" />
+    <Content Include="GameSounds\dyhanie-medvedja.mp3" />
+    <Content Include="GameSounds\enemyDie.mp3" />
+    <Content Include="GameSounds\final.mp3" />
+    <Content Include="GameSounds\forest.mp3" />
+    <Content Include="GameSounds\gameover.mp3" />
+    <Content Include="GameSounds\gory.mp3" />
+    <Content Include="GameSounds\hog.mp3" />
+    <Content Include="GameSounds\kingal.mp3" />
+    <Content Include="GameSounds\kingal2.mp3" />
+    <Content Include="GameSounds\klubnichki.mp3" />
+    <Content Include="GameSounds\kunai.mp3" />
+    <Content Include="GameSounds\levelstop.mp3" />
+    <Content Include="GameSounds\playerBol.mp3" />
+    <Content Include="GameSounds\playerShoot.mp3" />
+    <Content Include="GameSounds\ranenie1.mp3" />
+    <Content Include="GameSounds\ranenie2.mp3" />
+    <Content Include="GameSounds\robotAttack.mp3" />
+    <Content Include="GameSounds\robotdie.mp3" />
+    <Content Include="GameSounds\robotshoot.mp3" />
+    <Content Include="GameSounds\rockfall.mp3" />
+    <Content Include="GameSounds\RockPrivet.wma" />
+    <Content Include="GameSounds\runrobot.mp3" />
+    <Content Include="GameSounds\shooter.mp3" />
+    <Content Include="GameSounds\sword.mp3" />
+    <Content Include="GameSounds\terror.mp3" />
+    <Content Include="GameSounds\terroristDie.mp3" />
+    <Content Include="GameSounds\treasure.mp3" />
+    <Content Include="GameSounds\trollAttack.wma" />
+    <Content Include="GameSounds\trollDie .wma" />
+    <Content Include="GameSounds\trollIdle.mp3" />
+    <Content Include="GameSounds\trollWalk.mp3" />
+    <Content Include="GameSounds\wolfAttack.mp3" />
+    <Content Include="GameSounds\wolfdie.mp3" />
+    <Content Include="GameSounds\zvuk-avtomata.mp3" />
+    <Content Include="GameSounds\zvuk-vorony.mp3" />
+    <Content Include="GameSounds\zvuk-zmeya.mp3" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
