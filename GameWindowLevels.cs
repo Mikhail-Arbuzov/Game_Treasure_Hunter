@@ -51,6 +51,12 @@ namespace Game_Treasure_Hunter
                     shooterSpriteIndex += 0.5;
                     if (shooterSpriteIndex > 10)
                     {
+                        if (soundsGame)
+                        {
+                            shooterSounds.Open(new Uri(@"../../GameSounds/shooter.mp3", UriKind.Relative));
+                            shooterSounds.Position = new TimeSpan(0, 0, 0);
+                            shooterSounds.Play();
+                        }    
                         shooterSpriteIndex = 1;
                     }
                     shooterOne.AttackSprites(shooterSpriteIndex);
@@ -224,6 +230,7 @@ namespace Game_Treasure_Hunter
             {
                 if (trollOne.Idle)
                 {
+                    trollWalkSounds.Stop();
                     trollSpriteIndex += 0.5;
                     if (trollSpriteIndex > 10)
                     {
@@ -231,9 +238,14 @@ namespace Game_Treasure_Hunter
                     }
                     trollOne.IdleTrSprites(trollSpriteIndex);
                     troll.Fill = trollOne.trollSprite;
+                    if (soundsGame)//звук рыка троля
+                    {
+                        trollIdleSounds.Play();
+                    }
                 }
                 else
                 {
+                    trollIdleSounds.Stop();
                     Canvas.SetLeft(troll, Canvas.GetLeft(troll) + trollOne.Speed);
                     trollSpriteIndex +=0.5;
                     if (trollSpriteIndex > 10)
@@ -242,6 +254,15 @@ namespace Game_Treasure_Hunter
                     }
                     trollOne.RunSprites(trollSpriteIndex);
                     troll.Fill = trollOne.trollSprite;
+                    if (soundsGame && !soundTrollRun)//звук хотьбы троля
+                    {
+                        trollWalkSounds.Play();
+                        if(trollWalkSounds.Position >= new TimeSpan(0,0,8))
+                        {
+                            trollWalkSounds.Position = new TimeSpan(0, 0, 1);
+                            trollWalkSounds.Play();
+                        }
+                    }
 
                     if (Canvas.GetLeft(troll) > 1339)
                     {
@@ -405,6 +426,13 @@ namespace Game_Treasure_Hunter
                     shooterSpriteIndex += 0.5;
                     if (shooterSpriteIndex > 10)
                     {
+                        if(backgroundLevel2.Focusable == true)
+                        {
+                            shooterSounds.Open(new Uri(@"../../GameSounds/shooter.mp3", UriKind.Relative));
+                            shooterSounds.Position = new TimeSpan(0, 0, 0);
+                            shooterSounds.Play();
+                        }
+                        
                         shooterSpriteIndex = 1;
                     }
                     shooterTwo.AttackSprites(shooterSpriteIndex);

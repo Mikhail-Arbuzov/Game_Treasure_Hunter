@@ -42,7 +42,16 @@ namespace Game_Treasure_Hunter
                         backgroundMedia.Play();
                     }
                 }
-               
+                //звук камнепада в первом уровне
+                if (soundsGame && gem < 3)
+                {
+                    stonesSound.Play();
+                    if(stonesSound.Position >= new TimeSpan(0,0,5))
+                    {
+                        stonesSound.Position = new TimeSpan(0, 0, 1);
+                        stonesSound.Play();
+                    }
+                }
                
             }
 
@@ -172,6 +181,8 @@ namespace Game_Treasure_Hunter
                 GunFireMaker();
                 bulletTimer = bulletTimerLimit;
             }
+
+            
             //взаимодействие врагов с игроком 
             playerHitBox = new Rect(Canvas.GetLeft(hero), Canvas.GetTop(hero), hero.Width, hero.Height);
 
@@ -187,7 +198,10 @@ namespace Game_Treasure_Hunter
                             enemySpriteIndex += 0.5;
                             if (enemySpriteIndex > 8)
                             {
-                                enemySpriteIndex = 1;
+                                enemySounds.Open(new Uri(@"../../GameSounds/kingal.mp3", UriKind.Relative));
+                                enemySounds.Position = new TimeSpan(0, 0, 0);
+                                enemySounds.Play();
+                                enemySpriteIndex = 0;
                             }
                             enemy.AttackSprites(enemySpriteIndex);
                             enemy1.Fill = enemy.enemySprite;
@@ -200,6 +214,9 @@ namespace Game_Treasure_Hunter
                             if (playerSpriteIndex > 10)
                             {
                                 playerSpriteIndex = 1;
+                                playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                                playerMedia.Position = new TimeSpan(0, 0, 0);
+                                playerMedia.Play();
                             }
                             player.HurtSprites(playerSpriteIndex);
                             hero.Fill = player.playerSprite;
@@ -217,7 +234,10 @@ namespace Game_Treasure_Hunter
                             enemySpriteIndex += 0.5;
                             if (enemySpriteIndex > 8)
                             {
-                                enemySpriteIndex = 1;
+                                enemySounds.Open(new Uri(@"../../GameSounds/kingal.mp3", UriKind.Relative));
+                                enemySounds.Position = new TimeSpan(0, 0, 0);
+                                enemySounds.Play();
+                                enemySpriteIndex = 0;
                             }
 
                             enemyTwo.AttackSprites(enemySpriteIndex);
@@ -230,6 +250,9 @@ namespace Game_Treasure_Hunter
                             if (playerSpriteIndex > 10)
                             {
                                 playerSpriteIndex = 1;
+                                playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                                playerMedia.Position = new TimeSpan(0, 0, 0);
+                                playerMedia.Play();
                             }
                             player.HurtSprites(playerSpriteIndex);
                             hero.Fill = player.playerSprite;
@@ -248,6 +271,9 @@ namespace Game_Treasure_Hunter
                             if (shooterSpriteIndex > 10)
                             {
                                 shooterSpriteIndex = 1;
+                                shooterSounds.Open(new Uri(@"../../GameSounds/shooter.mp3", UriKind.Relative));
+                                shooterSounds.Position = new TimeSpan(0, 0, 0);
+                                shooterSounds.Play();
                             }
                             shooterOne.AttackSprites(shooterSpriteIndex);
                             shooter1.Fill = shooterOne.shooterSprite;
@@ -259,6 +285,9 @@ namespace Game_Treasure_Hunter
                             if (playerSpriteIndex > 10)
                             {
                                 playerSpriteIndex = 1;
+                                playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                                playerMedia.Position = new TimeSpan(0, 0, 0);
+                                playerMedia.Play();
                             }
                             player.HurtSprites(playerSpriteIndex);
                             hero.Fill = player.playerSprite;
@@ -277,6 +306,9 @@ namespace Game_Treasure_Hunter
                             if (shooterSpriteIndex > 10)
                             {
                                 shooterSpriteIndex = 1;
+                                shooterSounds.Open(new Uri(@"../../GameSounds/shooter.mp3", UriKind.Relative));
+                                shooterSounds.Position = new TimeSpan(0, 0, 0);
+                                shooterSounds.Play();
                             }
                             shooterTwo.AttackSprites(shooterSpriteIndex);
                             shooter2.Fill = shooterTwo.shooterSprite;
@@ -288,6 +320,9 @@ namespace Game_Treasure_Hunter
                             if (playerSpriteIndex > 10)
                             {
                                 playerSpriteIndex = 1;
+                                playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                                playerMedia.Position = new TimeSpan(0, 0, 0);
+                                playerMedia.Play();
                             }
                             player.HurtSprites(playerSpriteIndex);
                             hero.Fill = player.playerSprite;
@@ -302,6 +337,8 @@ namespace Game_Treasure_Hunter
                     {
                         if (trHitBox.IntersectsWith(playerHitBox))
                         {
+                            soundTrollRun = true;
+                            trollAttackSounds.Play();
                             trollSpriteIndex += 0.5;
                             if (trollSpriteIndex > 10)
                             {
@@ -309,6 +346,7 @@ namespace Game_Treasure_Hunter
                             }
                             trollOne.AttackSprites(trollSpriteIndex);
                             troll.Fill = trollOne.trollSprite;
+                           
                         }
                         if (playerHitBox.IntersectsWith(trHitBox))
                         {
@@ -317,6 +355,9 @@ namespace Game_Treasure_Hunter
                             if (playerSpriteIndex > 10)
                             {
                                 playerSpriteIndex = 1;
+                                playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                                playerMedia.Position = new TimeSpan(0, 0, 0);
+                                playerMedia.Play();
                             }
                             player.HurtSprites(playerSpriteIndex);
                             hero.Fill = player.playerSprite;
@@ -347,6 +388,9 @@ namespace Game_Treasure_Hunter
                             if (playerSpriteIndex > 10)
                             {
                                 playerSpriteIndex = 1;
+                                playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                                playerMedia.Position = new TimeSpan(0, 0, 0);
+                                playerMedia.Play();
                             }
                             player.HurtSprites(playerSpriteIndex);
                             hero.Fill = player.playerSprite;
@@ -376,6 +420,9 @@ namespace Game_Treasure_Hunter
                             if (playerSpriteIndex > 10)
                             {
                                 playerSpriteIndex = 1;
+                                playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                                playerMedia.Position = new TimeSpan(0, 0, 0);
+                                playerMedia.Play();
                             }
                             player.HurtSprites(playerSpriteIndex);
                             hero.Fill = player.playerSprite;
@@ -405,6 +452,9 @@ namespace Game_Treasure_Hunter
                             if (playerSpriteIndex > 10)
                             {
                                 playerSpriteIndex = 1;
+                                playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                                playerMedia.Position = new TimeSpan(0, 0, 0);
+                                playerMedia.Play();
                             }
                             player.HurtSprites(playerSpriteIndex);
                             hero.Fill = player.playerSprite;
@@ -434,6 +484,9 @@ namespace Game_Treasure_Hunter
                             if (playerSpriteIndex > 10)
                             {
                                 playerSpriteIndex = 1;
+                                playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                                playerMedia.Position = new TimeSpan(0, 0, 0);
+                                playerMedia.Play();
                             }
                             player.HurtSprites(playerSpriteIndex);
                             hero.Fill = player.playerSprite;
@@ -464,6 +517,9 @@ namespace Game_Treasure_Hunter
                             if (playerSpriteIndex > 10)
                             {
                                 playerSpriteIndex = 1;
+                                playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                                playerMedia.Position = new TimeSpan(0, 0, 0);
+                                playerMedia.Play();
                             }
                             player.HurtSprites(playerSpriteIndex);
                             hero.Fill = player.playerSprite;
@@ -494,6 +550,9 @@ namespace Game_Treasure_Hunter
                             if (playerSpriteIndex > 10)
                             {
                                 playerSpriteIndex = 1;
+                                playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                                playerMedia.Position = new TimeSpan(0, 0, 0);
+                                playerMedia.Play();
                             }
                             player.HurtSprites(playerSpriteIndex);
                             hero.Fill = player.playerSprite;
@@ -511,6 +570,8 @@ namespace Game_Treasure_Hunter
 
                     if (wolfHitBox2.IntersectsWith(playerHitBox))
                     {
+                        //wolfAttackSounds.Position = new TimeSpan(0, 0, 1);
+                        wolfAttackSounds.Play();
                         wolf.AttackRight();
                         //if (Canvas.GetLeft(animal) < Canvas.GetLeft(ground4))
                         //{
@@ -528,6 +589,9 @@ namespace Game_Treasure_Hunter
                         if (playerSpriteIndex > 10)
                         {
                             playerSpriteIndex = 1;
+                            playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                            playerMedia.Position = new TimeSpan(0, 0, 0);
+                            playerMedia.Play();
                         }
                         player.HurtSprites(playerSpriteIndex);
                         hero.Fill = player.playerSprite;
@@ -558,6 +622,9 @@ namespace Game_Treasure_Hunter
                         if (playerSpriteIndex > 10)
                         {
                             playerSpriteIndex = 1;
+                            playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                            playerMedia.Position = new TimeSpan(0, 0, 0);
+                            playerMedia.Play();
                         }
                         player.HurtSprites(playerSpriteIndex);
                         hero.Fill = player.playerSprite;
@@ -587,6 +654,9 @@ namespace Game_Treasure_Hunter
                         if (playerSpriteIndex > 10)
                         {
                             playerSpriteIndex = 1;
+                            playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                            playerMedia.Position = new TimeSpan(0, 0, 0);
+                            playerMedia.Play();
                         }
                         player.HurtSprites(playerSpriteIndex);
                         hero.Fill = player.playerSprite;
@@ -678,7 +748,7 @@ namespace Game_Treasure_Hunter
                     //    itemRemover.Add(y);
                     //}
 
-                        foreach (var z in MyCanvas.Children.OfType<Rectangle>())
+                    foreach (var z in MyCanvas.Children.OfType<Rectangle>())
                     {
                         if (z is Rectangle && (string)z.Tag == "stone")
                         {
@@ -703,6 +773,7 @@ namespace Game_Treasure_Hunter
                                 wolf.Health -= 1;
                                 if (wolf.Health <= 0)
                                 {
+                                    wolfDieSounds.Play();
                                     itemToRemover.Add(wf);
                                 }
                             }
@@ -886,16 +957,12 @@ namespace Game_Treasure_Hunter
                                 enemy1.Fill = enemy.enemySprite;
                                 itemRemover.Add(y);
                             }
-                            //if (enemy.Health <= 0)
-                            //{
-                            //    enemySpriteIndex += 0.5;
-                            //    if (enemySpriteIndex > 8)
-                            //    {
-                            //        itemRemover.Add(q);
-                            //    }
-                            //    enemy.DieSprites(enemySpriteIndex);
-                            //    enemy1.Fill = enemy.enemySprite;
-                            //}
+                            if (enemy.Health <= 0)
+                            {
+                                enemySounds.Open(new Uri(@"../../GameSounds/enemyDie.mp3", UriKind.Relative));
+                                enemySounds.Position = new TimeSpan(0, 0, 0);
+                                enemySounds.Play();
+                            }
                         }
 
                         if (q.Name.ToString() == "enemy2")
@@ -916,16 +983,12 @@ namespace Game_Treasure_Hunter
                                 enemy2.Fill = enemyTwo.enemySprite;
                                 itemRemover.Add(y);
                             }
-                            //if (enemyTwo.Health <= 0)
-                            //{
-                            //    enemySpriteIndex += 0.5;
-                            //    if (enemySpriteIndex > 8)
-                            //    {
-                            //        itemRemover.Add(q);
-                            //    }
-                            //    enemyTwo.DieSprites(enemySpriteIndex);
-                            //    enemy2.Fill = enemyTwo.enemySprite;
-                            //}
+                            if (enemyTwo.Health <= 0)
+                            {
+                                enemySounds.Open(new Uri(@"../../GameSounds/enemyDie.mp3", UriKind.Relative));
+                                enemySounds.Position = new TimeSpan(0, 0, 0);
+                                enemySounds.Play();
+                            }
                         }
                     }
 
@@ -940,6 +1003,9 @@ namespace Game_Treasure_Hunter
 
                                 if (shooterSpriteIndex > 6)
                                 {
+                                    //shooterSounds.Open(new Uri(@"../../GameSounds/ranenie2.mp3", UriKind.Relative));
+                                    //shooterSounds.Position = new TimeSpan(0, 0, 0);
+                                    //shooterSounds.Play();
                                     shooterOne.Health -= 1;
                                 }
                                 if (shooterSpriteIndex > 10)
@@ -951,17 +1017,12 @@ namespace Game_Treasure_Hunter
 
                                 itemRemover.Add(y);
                             }
-                            //if (shooterOne.Health <= 0)
-                            //{
-                            //    shooterSpriteIndex += 0.2;
-                            //    shooterOne.DieSprites(shooterSpriteIndex);
-                            //    shooter1.Fill = shooterOne.shooterSprite;
-                            //    countDie += 0.2;
-                            //    if (countDie > 10)
-                            //    {
-                            //        itemRemover.Add(shooter1);
-                            //    }
-                            //}
+                            if (shooterOne.Health <= 0)
+                            {
+                                shooterSounds.Open(new Uri(@"../../GameSounds/deathSoldier.mp3", UriKind.Relative));
+                                shooterSounds.Position = new TimeSpan(0, 0, 0);
+                                shooterSounds.Play();
+                            }
                         }
 
                         if (g.Name.ToString() == "shooter2")
@@ -982,16 +1043,12 @@ namespace Game_Treasure_Hunter
                                 shooter2.Fill = shooterTwo.shooterSprite;
                                 itemRemover.Add(y);
                             }
-                            //if (shooterTwo.Health <= 0)
-                            //{
-                            //    shooterSpriteIndex += 0.5;
-                            //    if (shooterSpriteIndex > 10)
-                            //    {
-                            //        itemRemover.Add(g);
-                            //    }
-                            //    shooterTwo.DieSprites(shooterSpriteIndex);
-                            //    shooter2.Fill = shooterOne.shooterSprite;
-                            //}
+                            if (shooterTwo.Health <= 0)
+                            {
+                                shooterSounds.Open(new Uri(@"../../GameSounds/deathSoldier.mp3", UriKind.Relative));
+                                shooterSounds.Position = new TimeSpan(0, 0, 0);
+                                shooterSounds.Play();
+                            }
                         }
                     }
 
@@ -1113,16 +1170,12 @@ namespace Game_Treasure_Hunter
                                 troll.Fill = trollOne.trollSprite;
                                 itemRemover.Add(y);
                             }
-                            //if (trollOne.Health <= 0)
-                            //{
-                            //    trollSpriteIndex += 0.5;
-                            //    if (trollSpriteIndex > 10)
-                            //    {
-                            //        itemRemover.Add(j);
-                            //    }
-                            //    trollOne.DieSprites(trollSpriteIndex);
-                            //    troll.Fill = trollOne.trollSprite;
-                            //}
+                            if (trollOne.Health <= 0)
+                            {
+                                trollSounds.Open(new Uri(@"../../GameSounds/trollDie .wma", UriKind.Relative));
+                                trollSounds.Position = new TimeSpan(0, 0, 0);
+                                trollSounds.Play();
+                            }
                         }
                     }
 
@@ -1293,12 +1346,19 @@ namespace Game_Treasure_Hunter
                     Rect coinHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (playerHitBox.IntersectsWith(coinHitBox))
                     {
+                        bonusMedia.Open(new Uri(@"../../GameSounds/bonus.mp3", UriKind.Relative));
+                        bonusMedia.Position = new TimeSpan(0, 0, 0);
+                        bonusMedia.Play();
                         itemRemover.Add(x);
                         score += 1;
                         if (score >= 7)
                         {
+                            bonusMedia.Stop();
+                            mediaBullets.Open(new Uri(@"../../GameSounds/coin..mp3", UriKind.Relative));
+                            mediaBullets.Position = new TimeSpan(0, 0, 0);
+                            mediaBullets.Play();
                             bulletsScore += 8;
-                            score = 0;
+                            score = 0; 
                         }
                     }
                 }
@@ -1308,6 +1368,9 @@ namespace Game_Treasure_Hunter
                     Rect bulletsHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (playerHitBox.IntersectsWith(bulletsHitBox))
                     {
+                        bonusSounds.Open(new Uri(@"../../GameSounds/bullet.mp3", UriKind.Relative));
+                        bonusSounds.Position = new TimeSpan(0, 0, 0);
+                        bonusSounds.Play();
                         itemRemover.Add(x);
                         bulletsScore += 10;
                     }
@@ -1318,6 +1381,9 @@ namespace Game_Treasure_Hunter
                     Rect healthsHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (playerHitBox.IntersectsWith(healthsHitBox))
                     {
+                        bonusSounds.Open(new Uri(@"../../GameSounds/bulletsScore.mp3", UriKind.Relative));
+                        bonusSounds.Position = new TimeSpan(0, 0, 0);
+                        bonusSounds.Play();
                         itemRemover.Add(x);
                         player.Health += 5;
                     }
@@ -1328,6 +1394,9 @@ namespace Game_Treasure_Hunter
                     Rect treasureHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (playerHitBox.IntersectsWith(treasureHitBox))
                     {
+                        bonusSounds.Open(new Uri(@"../../GameSounds/treasure.mp3", UriKind.Relative));
+                        bonusSounds.Position = new TimeSpan(0, 0, 0);
+                        bonusSounds.Play();
                         itemRemover.Add(x);
                         gem += 1;
                     }
@@ -1338,12 +1407,13 @@ namespace Game_Treasure_Hunter
                     Rect speedBonusHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (playerHitBox.IntersectsWith(speedBonusHitBox))
                     {
+                        bonusSounds.Open(new Uri(@"../../GameSounds/bonusspeed.mp3", UriKind.Relative));
+                        bonusSounds.Position = new TimeSpan(0, 0, 0);
+                        bonusSounds.Play();
                         player.Speed = 9;
                         player.speedup = true;
                         itemRemover.Add(x);
                     }
-
-                    
 
                 }
 
@@ -1611,6 +1681,9 @@ namespace Game_Treasure_Hunter
                         {
                             player.Health -= 1;
                             playerSpriteIndex = 0;
+                            playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                            playerMedia.Position = new TimeSpan(0, 0, 0);
+                            playerMedia.Play();
                         }
                         player.HurtSprites(playerSpriteIndex);
                         hero.Fill = player.playerSprite;
@@ -1637,6 +1710,9 @@ namespace Game_Treasure_Hunter
                         if (playerSpriteIndex > 10)
                         {
                             playerSpriteIndex = 1;
+                            playerMedia.Open(new Uri(@"../../GameSounds/playerBol.mp3", UriKind.Relative));
+                            playerMedia.Position = new TimeSpan(0, 0, 0);
+                            playerMedia.Play();
                         }
                         player.HurtSprites(playerSpriteIndex);
                         hero.Fill = player.playerSprite;
@@ -1652,9 +1728,10 @@ namespace Game_Treasure_Hunter
                         if (gem == 3 && trollOne.Health <= 0)
                         {
                             //переключение фонового звука
+                            levelEnd.Stop();
                             if (!turnOffsong)
                             {
-                                backgroundMedia.Stop();
+                                //backgroundMedia.Stop();
                                 backgroundMediaTwo.Play();
                             }
                             //смена фокуса фона локации уровня
@@ -1683,9 +1760,9 @@ namespace Game_Treasure_Hunter
                     {
                         if (playerHitBox.IntersectsWith(doorHitBox2))
                         {
-                            if(!turnOffsong)
+                            if (!turnOffsong)
                             {
-                                backgroundMediaTwo.Stop();
+                                //backgroundMediaTwo.Stop();
                                 backgroundMediaThree.Play();
                             }
                             backgroundLevel3.Focusable = true;
@@ -1728,22 +1805,33 @@ namespace Game_Treasure_Hunter
                 if (playerSpriteIndex > 12)
                 {
                     ShowGameOver("Вы проиграли!!!");
+                    playerMedia.Open(new Uri(@"../../GameSounds/deathplayer.mp3", UriKind.Relative));
+                    playerMedia.Position = new TimeSpan(0, 0, 0);
+                    playerMedia.Play();
                 }
                 player.DieSprites(playerSpriteIndex);
                 hero.Fill = player.playerSprite;
+                //отключение лишних звуков
                 backgroundMedia.Stop();
                 backgroundMediaTwo.Stop();
                 backgroundMediaThree.Stop();
-            }
+                trollWalkSounds.Stop();
 
+            }
+            
+           
             if (gem == 3 && (backgroundLevel.Focusable == false && backgroundLevel3.Focusable == false && backgroundLevel2.Focusable == false))
             {
                 ImageBrush entry = new ImageBrush();
                 entry.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/doorOpen.png"));
                 door1.Fill = entry;
                 treasuresScore.Foreground = Brushes.Yellow;
+
+
                 if (trollOne.Health <= 0)
                 {
+                    backgroundMedia.Stop();
+                    levelEnd.Play();//звук об окончании первого уровня
                     treasuresScore.Content = "Сокровища: " + gem + Environment.NewLine + "Первый уровень" + Environment.NewLine + "пройден!";
                 }
 
@@ -1753,13 +1841,13 @@ namespace Game_Treasure_Hunter
                 }
                 if(shooterOne.Health > 0)
                 {
+                    shooterSounds.Stop();
                     itemRemover.Add(shooter1);
                 }
                 //if(wolf.Health > 0)
                 //{
                 //    itemToRemover.Add(wolf.wolfOne);
                 //}
-
             }
 
             if (gem == 3 && backgroundLevel2.Focusable == true)
@@ -1768,12 +1856,17 @@ namespace Game_Treasure_Hunter
                 doorOpen.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/doorOpen_02.png"));
                 door2.Fill = doorOpen;
                 treasuresScore.Foreground = Brushes.Yellow;
+
+               
                 if (robot.Health <= 0)
                 {
+                    backgroundMediaTwo.Stop();
+                    doorOpenMedia.Play();//звук об окончании второго уровня
                     treasuresScore.Content = "Сокровища: " + gem + Environment.NewLine + "Второй уровень" + Environment.NewLine + "пройден!";
                 }
                 if(shooterTwo.Health > 0)
                 {
+                    shooterSounds.Stop();
                     itemRemover.Add(shooter2);
                 }
 
@@ -1798,6 +1891,7 @@ namespace Game_Treasure_Hunter
                 chestImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/Treasure_open.png"));
                 chest.Fill = chestImage;
                 treasuresScore.Foreground = Brushes.Yellow;
+                openBox.Play();//звук открытия сундука
                 //if(ninja.Health > 0)
                 //{
                 //    itemRemover.Add(ninja1);

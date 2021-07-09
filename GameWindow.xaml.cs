@@ -24,7 +24,7 @@ namespace Game_Treasure_Hunter
         bool goLeft, goRight,goDown;
         bool gameOver;
         bool jumping;
-        public bool jumpDown;
+        public bool jumpDown;//для включения и отключения прыжка вниз
         double speedBullet = 10;
         Rect playerHitBox;// для проверки пересечения с другими игровыми объектами
         //для стирания элементов игры
@@ -89,8 +89,27 @@ namespace Game_Treasure_Hunter
         //для озвучки игры
         public MediaPlayer backgroundMedia = new MediaPlayer();
         public bool turnOffsong = false;//для отключения фонового звука уровней
+        public bool soundsGame = false;//запустить или отключить звуки из игры
+        bool soundTrollRun = false;//для отключения звука хотьбы троля
+        //double timeStopSong = 0;
         MediaPlayer backgroundMediaTwo = new MediaPlayer();
         MediaPlayer backgroundMediaThree = new MediaPlayer();
+        MediaPlayer playerMedia = new MediaPlayer();
+        MediaPlayer levelEnd = new MediaPlayer();
+        MediaPlayer doorOpenMedia = new MediaPlayer();
+        MediaPlayer openBox = new MediaPlayer();
+        MediaPlayer mediaBullets = new MediaPlayer();
+        MediaPlayer bonusMedia = new MediaPlayer();
+        MediaPlayer bonusSounds = new MediaPlayer();
+        MediaPlayer enemySounds = new MediaPlayer();
+        MediaPlayer shooterSounds = new MediaPlayer();
+        MediaPlayer trollSounds = new MediaPlayer();
+        MediaPlayer trollAttackSounds = new MediaPlayer();
+        MediaPlayer trollWalkSounds = new MediaPlayer();
+        MediaPlayer trollIdleSounds = new MediaPlayer();
+        MediaPlayer stonesSound = new MediaPlayer();
+        MediaPlayer wolfAttackSounds = new MediaPlayer();
+        MediaPlayer wolfDieSounds = new MediaPlayer();
 
         public GameWindow()
         {
@@ -134,6 +153,7 @@ namespace Game_Treasure_Hunter
             MyCanvas.Children.Add(bird.birdOne);
 
             StartGame();
+            LoadingSounds();//метод по загрузке более продолжительных звуков в игре
         }
 
         
@@ -214,6 +234,7 @@ namespace Game_Treasure_Hunter
                 GameWindow game = new GameWindow();
                 game.Show();
                 game.backgroundMedia.Play();//включить фоновый звук на первом уровне
+                game.soundsGame = true;//запустить звуки из игры
                 this.Close();            
             }
 
@@ -276,6 +297,9 @@ namespace Game_Treasure_Hunter
                 bulletsScore--;
                 if(bulletsScore > 0)
                 {
+                    playerMedia.Open(new Uri(@"../../GameSounds/playerShoot.mp3", UriKind.Relative));
+                    playerMedia.Position = new TimeSpan(0, 0, 0);
+                    playerMedia.Play();
                     MyCanvas.Children.Add(newBullet);
                 }
                 if(bulletsScore <=0)
@@ -300,6 +324,7 @@ namespace Game_Treasure_Hunter
                     //speedBullet++;
                     //Canvas.SetLeft(newBullet, Canvas.GetLeft(newBullet) + speedBullet);
                 }
+               
             }
 
             if (e.Key == Key.Left)
@@ -625,7 +650,21 @@ namespace Game_Treasure_Hunter
             }
         }
 
-      
+        private void LoadingSounds()
+        {
+            levelEnd.Open(new Uri(@"../../GameSounds/klubnichki.mp3", UriKind.Relative));
+            doorOpenMedia.Open(new Uri(@"../../GameSounds/dooropen.mp3", UriKind.Relative));
+            openBox.Open(new Uri(@"../../GameSounds/final.mp3", UriKind.Relative));
+            trollAttackSounds.Open(new Uri(@"../../GameSounds/trollAttack.wma", UriKind.Relative));
+            trollWalkSounds.Open(new Uri(@"../../GameSounds/trollWalk.mp3", UriKind.Relative));
+            trollIdleSounds.Open(new Uri(@"../../GameSounds/trollIdle.mp3", UriKind.Relative));
+            stonesSound.Open(new Uri(@"../../GameSounds/rockfall.mp3", UriKind.Relative));
+            wolfAttackSounds.Open(new Uri(@"../../GameSounds/wolfAttack.mp3", UriKind.Relative));
+            wolfDieSounds.Open(new Uri(@"../../GameSounds/wolfdie.mp3", UriKind.Relative));
+            
+        }
+
+
 
         //private void Window_KeyDown(object sender, KeyEventArgs e)
         //{

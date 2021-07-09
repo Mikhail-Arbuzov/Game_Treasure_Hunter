@@ -42,6 +42,7 @@ namespace Game_Treasure_Hunter
                 gameWindow.backgroundMedia.Play();//запуск звука фона первого раунда
             }
             gameWindow.Show();
+            gameWindow.soundsGame = true;//запустить звуки из игры
             this.Close();
         }
 
