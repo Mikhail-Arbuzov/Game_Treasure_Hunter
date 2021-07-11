@@ -110,6 +110,10 @@ namespace Game_Treasure_Hunter
         MediaPlayer stonesSound = new MediaPlayer();
         MediaPlayer wolfAttackSounds = new MediaPlayer();
         MediaPlayer wolfDieSounds = new MediaPlayer();
+        MediaPlayer robotRunSounds = new MediaPlayer();
+        MediaPlayer robotSounds = new MediaPlayer();
+        MediaPlayer robotLazerSounds = new MediaPlayer();
+        MediaPlayer robotAttackSounds = new MediaPlayer();
 
         public GameWindow()
         {
@@ -661,7 +665,9 @@ namespace Game_Treasure_Hunter
             stonesSound.Open(new Uri(@"../../GameSounds/rockfall.mp3", UriKind.Relative));
             wolfAttackSounds.Open(new Uri(@"../../GameSounds/wolfAttack.mp3", UriKind.Relative));
             wolfDieSounds.Open(new Uri(@"../../GameSounds/wolfdie.mp3", UriKind.Relative));
-            
+            robotRunSounds.Open(new Uri(@"../../GameSounds/runrobot.mp3", UriKind.Relative));
+            robotAttackSounds.Open(new Uri(@"../../GameSounds/robotAttack.mp3", UriKind.Relative));
+
         }
 
 

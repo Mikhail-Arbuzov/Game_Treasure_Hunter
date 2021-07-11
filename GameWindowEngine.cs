@@ -437,6 +437,15 @@ namespace Game_Treasure_Hunter
                     {
                         if (robHitBox.IntersectsWith(playerHitBox))
                         {
+                            robotRunSounds.Stop();
+                            robotLazerSounds.Stop();
+                            //звук удара щипцем робота
+                            robotAttackSounds.Play();
+                            if(robotAttackSounds.Position >= new TimeSpan(0,0,1))
+                            {
+                                robotAttackSounds.Position = new TimeSpan(0, 0, 0);
+                                robotAttackSounds.Play();
+                            }
                             robotSpriteIndex += 0.2;
                             if (robotSpriteIndex > 18)
                             {
@@ -1136,16 +1145,12 @@ namespace Game_Treasure_Hunter
                                 robot.HurtSprites(robotSpriteIndex);
                                 robo.Fill = robot.robotSprite;
                             }
-                            //if (robot.Health <= 0)
-                            //{
-                            //    robotSpriteIndex += 2;
-                            //    if (robotSpriteIndex > 15)
-                            //    {
-                            //        itemRemover.Add(i);
-                            //    }
-                            //    robot.DieSprites(robotSpriteIndex);
-                            //    robo.Fill = robot.robotSprite;
-                            //}
+                            if (robot.Health <= 0)
+                            {
+                                robotSounds.Open(new Uri(@"../../GameSounds/robotdie.mp3", UriKind.Relative));
+                                robotSounds.Position = new TimeSpan(0, 0, 0);
+                                robotSounds.Play();
+                            }
                         }
                     }
 
@@ -1816,6 +1821,7 @@ namespace Game_Treasure_Hunter
                 backgroundMediaTwo.Stop();
                 backgroundMediaThree.Stop();
                 trollWalkSounds.Stop();
+                robotRunSounds.Stop();
 
             }
             

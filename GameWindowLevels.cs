@@ -578,9 +578,16 @@ namespace Game_Treasure_Hunter
             {
                 if (robot.Shoot)
                 {
+                    robotRunSounds.Stop();
                     robotSpriteIndex += 0.5;
                     if (robotSpriteIndex > 16)
                     {
+                        if(backgroundLevel2.Focusable == true)//звук лазера
+                        {
+                            robotLazerSounds.Open(new Uri(@"../../GameSounds/blaster.mp3", UriKind.Relative));
+                            robotLazerSounds.Position = new TimeSpan(0, 0, 0);
+                            robotLazerSounds.Play();
+                        }
                         robotSpriteIndex = 1;
                     }
                     robot.LazerSprites(robotSpriteIndex);
@@ -596,7 +603,16 @@ namespace Game_Treasure_Hunter
                     }
                     robot.RunSprites(robotSpriteIndex);
                     robo.Fill = robot.robotSprite;
-
+                    
+                    if (soundsGame && backgroundLevel2.Focusable == true && robot.Health > 0)//звук бега робота
+                    {
+                        robotRunSounds.Play();
+                        if(robotRunSounds.Position >= new TimeSpan(0,0,14))
+                        {
+                            robotRunSounds.Position = new TimeSpan(0, 0, 1);
+                            robotRunSounds.Play();
+                        }
+                    }    
                     if (Canvas.GetLeft(robo) > 2921)
                     {
                         robot.Direction = DirectionRobot.Left;
