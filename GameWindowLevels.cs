@@ -667,7 +667,7 @@ namespace Game_Treasure_Hunter
                 {
                     Canvas.SetLeft(s, Canvas.GetLeft(s) + snake.Speed);
                     snake.MoveRight();
-                    if (soundsGame && backgroundLevel2.Focusable == true && snake.Health > 0)//шипения змени когда ползет
+                    if (soundsGame && backgroundLevel2.Focusable == true && snake.Health > 0)//шипения змеи когда ползет
                     {
                         snakeSound.Play();
                         if (snakeSound.Position >= new TimeSpan(0, 0, 9))
@@ -721,6 +721,15 @@ namespace Game_Treasure_Hunter
                 {
                     Canvas.SetLeft(b, Canvas.GetLeft(b) + bird.Speed);
                     bird.MoveRight();
+                    if (soundsGame && backgroundLevel3.Focusable == true && bird.Health > 0)
+                    {
+                        birdSound.Play();//карканье птицы
+                        if(birdSound.Position >= new TimeSpan(0,0,6))
+                        {
+                            birdSound.Position = new TimeSpan(0, 0, 0);
+                            birdSound.Play();
+                        }
+                    }
                     if (Canvas.GetLeft(b) > 4685)
                     {
                         Canvas.SetLeft(b, 3227);
@@ -733,6 +742,16 @@ namespace Game_Treasure_Hunter
                 {
                     Canvas.SetLeft(b, Canvas.GetLeft(b) - bear.Speed);
                     bear.MoveLeft();
+                    if (soundsGame && backgroundLevel3.Focusable == true && bear.Health > 0)
+                    {
+                        bearSound.Play();//дыхание медведя при хотьбе
+                        if (bearSound.Position >= new TimeSpan(0,0,5))
+                        {
+                            bearSound.Position = new TimeSpan(0, 0, 0);
+                            bearSound.Play();
+                        }
+                    }
+
                     if (Canvas.GetLeft(b) > 4645)
                     {
                         bear.Speed++;
@@ -768,6 +787,15 @@ namespace Game_Treasure_Hunter
                 {
                     Canvas.SetLeft(b, Canvas.GetLeft(b) + hog.Speed);
                     hog.MoveRight();
+                    if (soundsGame && backgroundLevel3.Focusable == true && hog.Health > 0)
+                    {
+                        hogSound.Play();// звук кабана
+                        if(hogSound.Position >= new TimeSpan(0,0,15))
+                        {
+                            hogSound.Position = new TimeSpan(0, 0, 1);
+                            hogSound.Play();
+                        }
+                    }
                     if(Canvas.GetLeft(b) > 4443)
                     {
                         hog.Speed--;
@@ -893,6 +921,12 @@ namespace Game_Treasure_Hunter
                     ninjaTwoSpriteIndex += 0.5;
                     if (ninjaTwoSpriteIndex > 10)
                     {
+                        if (soundsGame && backgroundLevel3.Focusable == true && ninjaTwo.Health > 0)
+                        {
+                            ninjaSounds.Open(new Uri(@"../../GameSounds/kunai.mp3", UriKind.Relative));//звук броска kunai
+                            ninjaSounds.Position = new TimeSpan(0, 0, 0);
+                            ninjaSounds.Play();
+                        }
                         ninjaTwoSpriteIndex = 1;
                     }
                     ninjaTwo.ThrowSprites(ninjaTwoSpriteIndex);
@@ -966,6 +1000,12 @@ namespace Game_Treasure_Hunter
                     ninjaBossSpriteIndex += 0.5;
                     if (ninjaBossSpriteIndex > 22)
                     {
+                        if (soundsGame && backgroundLevel3.Focusable == true && ninjaBoss.Health > 0)
+                        {
+                            ninjaBossSounds.Open(new Uri(@"../../GameSounds/arrows.mp3", UriKind.Relative));//звук стрельбы из лука
+                            ninjaBossSounds.Position = new TimeSpan(0, 0, 0);
+                            ninjaBossSounds.Play();
+                        }
                         ninjaBossSpriteIndex = 1;
                     }
                     ninjaBoss.AttackSprites(ninjaBossSpriteIndex);

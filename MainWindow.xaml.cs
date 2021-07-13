@@ -48,6 +48,7 @@ namespace Game_Treasure_Hunter
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
+            songMenu.Close();//закрытие аудио файла из меню
             Environment.Exit(0);
         }
 
@@ -103,6 +104,11 @@ namespace Game_Treasure_Hunter
         {
             songMenu.Stop();
             gameWindow.turnOffsong = true;
+        }
+
+        private void mainWindow_Closed(object sender, EventArgs e)
+        {
+            songMenu.Close();
         }
     }
 }

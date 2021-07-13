@@ -490,6 +490,9 @@ namespace Game_Treasure_Hunter
                             ninjaSpriteIndex += 0.5;
                             if (ninjaSpriteIndex > 10)
                             {
+                                ninjaSounds.Open(new Uri(@"../../GameSounds/sword.mp3", UriKind.Relative));//звук взмаха мечем
+                                ninjaSounds.Position = new TimeSpan(0, 0, 0);
+                                ninjaSounds.Play();
                                 ninjaSpriteIndex = 1;
                             }
                             ninja.AttackSprites(ninjaSpriteIndex);
@@ -523,6 +526,13 @@ namespace Game_Treasure_Hunter
                             ninjaTwoSpriteIndex += 0.5;
                             if (ninjaTwoSpriteIndex > 10)
                             {
+                                if (soundsGame && backgroundLevel3.Focusable == true && ninjaTwo.Health > 0)
+                                {
+                                    ninjaSounds.Open(new Uri(@"../../GameSounds/kunai.mp3", UriKind.Relative));//звук броска kunai
+                                    ninjaSounds.Position = new TimeSpan(0, 0, 0);
+                                    ninjaSounds.Play();
+                                }
+                                
                                 ninjaTwoSpriteIndex = 1;
                             }
                             ninjaTwo.ThrowSprites(ninjaTwoSpriteIndex);
@@ -556,6 +566,12 @@ namespace Game_Treasure_Hunter
                             ninjaBossSpriteIndex += 0.5;
                             if (ninjaBossSpriteIndex > 22)
                             {
+                                if (soundsGame && backgroundLevel3.Focusable == true && ninjaBoss.Health > 0)
+                                {
+                                    ninjaBossSounds.Open(new Uri(@"../../GameSounds/arrows.mp3", UriKind.Relative));//звук стрельбы из лука
+                                    ninjaBossSounds.Position = new TimeSpan(0, 0, 0);
+                                    ninjaBossSounds.Play();
+                                }
                                 ninjaBossSpriteIndex = 1;
                             }
                             ninjaBoss.AttackSprites(ninjaBossSpriteIndex);
@@ -622,7 +638,13 @@ namespace Game_Treasure_Hunter
 
                     if (bearHitBox2.IntersectsWith(playerHitBox))
                     {
-
+                        bearSound.Stop();
+                        bearAttackSound.Play();//рычание медведя при атаке
+                        if(bearAttackSound.Position >= new TimeSpan(0,0,7))
+                        {
+                            bearAttackSound.Position = new TimeSpan(0, 0, 1);
+                            bearAttackSound.Play();
+                        }
                         bear.AttackLeft();
                         //if (Canvas.GetLeft(animal) < Canvas.GetLeft(ground13))
                         //{
@@ -838,6 +860,7 @@ namespace Game_Treasure_Hunter
                                 bear.Health -= 1;
                                 if (bear.Health <= 0)
                                 {
+                                    bearSound.Stop();//остановить звук дыхания медведя
                                     itemToRemover.Add(be);
                                 }
                             }
@@ -917,6 +940,7 @@ namespace Game_Treasure_Hunter
                                 hog.Health -= 1;
                                 if (hog.Health <= 0)
                                 {
+                                    hogSound.Stop();
                                     itemToRemover.Add(k);
                                 }
                             }
@@ -945,6 +969,7 @@ namespace Game_Treasure_Hunter
                                 bird.Health -= 1;
                                 if (bird.Health <= 0)
                                 {
+                                    birdSound.Stop();
                                     itemToRemover.Add(p);
                                 }
                             }
@@ -1156,6 +1181,8 @@ namespace Game_Treasure_Hunter
                             }
                             if (robot.Health <= 0)
                             {
+                                robotRunSounds.Stop();
+                                robotLazerSounds.Stop();
                                 robotSounds.Open(new Uri(@"../../GameSounds/robotdie.mp3", UriKind.Relative));
                                 robotSounds.Position = new TimeSpan(0, 0, 0);
                                 robotSounds.Play();
@@ -1214,16 +1241,12 @@ namespace Game_Treasure_Hunter
                                 ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
                                 itemRemover.Add(y);
                             }
-                            //if (ninjaBoss.Health <= 0)
-                            //{
-                            //    ninjaBossSpriteIndex += 0.5;
-                            //    if (ninjaBossSpriteIndex > 15)
-                            //    {
-                            //        itemRemover.Add(m);
-                            //    }
-                            //    ninjaBoss.DieSprites(ninjaBossSpriteIndex);
-                            //    ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
-                            //}
+                            if (ninjaBoss.Health <= 0)
+                            {
+                                ninjaBossSounds.Open(new Uri(@"../../GameSounds/dieNinjaboss.mp3", UriKind.Relative));
+                                ninjaBossSounds.Position = new TimeSpan(0, 0, 0);
+                                ninjaBossSounds.Play();
+                            }
                         }
                     }
 
@@ -1245,16 +1268,12 @@ namespace Game_Treasure_Hunter
                                 ninja1.Fill = ninja.ninjaSprite;
 
                             }
-                            //if (ninja.Health <= 0)
-                            //{
-                            //    ninjaSpriteIndex += 0.5;
-                            //    if (ninjaSpriteIndex > 10)
-                            //    {
-                            //        itemRemover.Add(n);
-                            //    }
-                            //    ninja.DieSprites(ninjaSpriteIndex);
-                            //    ninja1.Fill = ninja.ninjaSprite;
-                            //}
+                            if (ninja.Health <= 0)
+                            {
+                                ninjaSounds.Open(new Uri(@"../../GameSounds/deathNinja.mp3", UriKind.Relative));
+                                ninjaSounds.Position = new TimeSpan(0, 0, 0);
+                                ninjaSounds.Play();
+                            }
                         }
 
                         if (n.Name.ToString() == "ninja2")
@@ -1272,16 +1291,12 @@ namespace Game_Treasure_Hunter
                                 ninjaTwo.HurtSprites(ninjaTwoSpriteIndex);
                                 ninja2.Fill = ninjaTwo.ninjaSprite;
                             }
-                            //if (ninjaTwo.Health <= 0)
-                            //{
-                            //    ninjaSpriteIndex += 0.5;
-                            //    if (ninjaSpriteIndex > 10)
-                            //    {
-                            //        itemRemover.Add(n);
-                            //    }
-                            //    ninjaTwo.DieSprites(ninjaSpriteIndex);
-                            //    ninja2.Fill = ninjaTwo.ninjaSprite;
-                            //}
+                            if (ninjaTwo.Health <= 0)
+                            {
+                                ninjaSounds.Open(new Uri(@"../../GameSounds/deathNinja.mp3", UriKind.Relative));
+                                ninjaSounds.Position = new TimeSpan(0, 0, 0);
+                                ninjaSounds.Play();
+                            }
                         }
                     }
                 }
@@ -1832,6 +1847,9 @@ namespace Game_Treasure_Hunter
                 trollWalkSounds.Stop();
                 robotRunSounds.Stop();
                 snakeSound.Stop();
+                bearSound.Stop();
+                birdSound.Stop();
+                hogSound.Stop();
 
             }
             

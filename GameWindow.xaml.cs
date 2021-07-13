@@ -119,6 +119,13 @@ namespace Game_Treasure_Hunter
         MediaPlayer terroristSounds = new MediaPlayer();
         MediaPlayer terroristShootSounds = new MediaPlayer();
         MediaPlayer soldierSounds = new MediaPlayer();
+        MediaPlayer bearSound = new MediaPlayer();
+        MediaPlayer bearAttackSound = new MediaPlayer();
+        MediaPlayer birdSound = new MediaPlayer();
+        MediaPlayer hogSound = new MediaPlayer();
+        MediaPlayer ninjaSounds = new MediaPlayer();
+        MediaPlayer ninjaBossSounds = new MediaPlayer();
+
 
         public GameWindow()
         {
@@ -638,6 +645,104 @@ namespace Game_Treasure_Hunter
             gameTimer.Start();
         }
 
+        private void LoadingSounds()
+        {
+            levelEnd.Open(new Uri(@"../../GameSounds/klubnichki.mp3", UriKind.Relative));
+            doorOpenMedia.Open(new Uri(@"../../GameSounds/dooropen.mp3", UriKind.Relative));
+            openBox.Open(new Uri(@"../../GameSounds/final.mp3", UriKind.Relative));
+            trollAttackSounds.Open(new Uri(@"../../GameSounds/trollAttack.wma", UriKind.Relative));
+            trollWalkSounds.Open(new Uri(@"../../GameSounds/trollWalk.mp3", UriKind.Relative));
+            trollIdleSounds.Open(new Uri(@"../../GameSounds/trollIdle.mp3", UriKind.Relative));
+            stonesSound.Open(new Uri(@"../../GameSounds/rockfall.mp3", UriKind.Relative));
+            wolfAttackSounds.Open(new Uri(@"../../GameSounds/wolfAttack.mp3", UriKind.Relative));
+            wolfDieSounds.Open(new Uri(@"../../GameSounds/wolfdie.mp3", UriKind.Relative));
+            robotRunSounds.Open(new Uri(@"../../GameSounds/runrobot.mp3", UriKind.Relative));
+            robotAttackSounds.Open(new Uri(@"../../GameSounds/robotAttack.mp3", UriKind.Relative));
+            snakeAttackSound.Open(new Uri(@"../../GameSounds/atakujuschaja-zmeja.mp3", UriKind.Relative));
+            snakeSound.Open(new Uri(@"../../GameSounds/zvuk-zmeya.mp3", UriKind.Relative));
+            terroristShootSounds.Open(new Uri(@"../../GameSounds/terror.mp3", UriKind.Relative));
+            bearSound.Open(new Uri(@"../../GameSounds/dyhanie-medvedja.mp3", UriKind.Relative));
+            bearAttackSound.Open(new Uri(@"../../GameSounds/bearAttack.mp3", UriKind.Relative));
+            birdSound.Open(new Uri(@"../../GameSounds/zvuk-vorony.mp3", UriKind.Relative));
+            hogSound.Open(new Uri(@"../../GameSounds/hog.mp3", UriKind.Relative));
+
+        }
+
+        //private void gameWindow_Closed(object sender, EventArgs e)
+        //{
+        //    backgroundMedia.Close();
+        //    backgroundMediaTwo.Close();
+        //    backgroundMediaThree.Close();
+        //    playerMedia.Close();
+        //    levelEnd.Close();
+        //    doorOpenMedia.Close();
+        //    openBox.Close();
+        //    mediaBullets.Close();
+        //    bonusMedia.Close();
+        //    bonusSounds.Close();
+        //    enemySounds.Close();
+        //    shooterSounds.Close();
+        //    trollSounds.Close();
+        //    trollAttackSounds.Close();
+        //    trollWalkSounds.Close();
+        //    trollIdleSounds.Close();
+        //    stonesSound.Close();
+        //    wolfAttackSounds.Close();
+        //    wolfDieSounds.Close();
+        //    robotRunSounds.Close();
+        //    robotSounds.Close();
+        //    robotLazerSounds.Close();
+        //    robotAttackSounds.Close();
+        //    snakeAttackSound.Close();
+        //    snakeSound.Close();
+        //    terroristSounds.Close();
+        //    terroristShootSounds.Close();
+        //    soldierSounds.Close();
+        //    bearSound.Close();
+        //    bearAttackSound.Close();
+        //    birdSound.Close();
+        //    hogSound.Close();
+        //    ninjaSounds.Close();
+        //    ninjaBossSounds.Close();
+        //}
+
+        //private void gameWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        //{
+        //    backgroundMedia.Close();
+        //    backgroundMediaTwo.Close();
+        //    backgroundMediaThree.Close();
+        //    playerMedia.Close();
+        //    levelEnd.Close();
+        //    doorOpenMedia.Close();
+        //    openBox.Close();
+        //    mediaBullets.Close();
+        //    bonusMedia.Close();
+        //    bonusSounds.Close();
+        //    enemySounds.Close();
+        //    shooterSounds.Close();
+        //    trollSounds.Close();
+        //    trollAttackSounds.Close();
+        //    trollWalkSounds.Close();
+        //    trollIdleSounds.Close();
+        //    stonesSound.Close();
+        //    wolfAttackSounds.Close();
+        //    wolfDieSounds.Close();
+        //    robotRunSounds.Close();
+        //    robotSounds.Close();
+        //    robotLazerSounds.Close();
+        //    robotAttackSounds.Close();
+        //    snakeAttackSound.Close();
+        //    snakeSound.Close();
+        //    terroristSounds.Close();
+        //    terroristShootSounds.Close();
+        //    soldierSounds.Close();
+        //    bearSound.Close();
+        //    bearAttackSound.Close();
+        //    birdSound.Close();
+        //    hogSound.Close();
+        //    ninjaSounds.Close();
+        //    ninjaBossSounds.Close();
+        //}
 
         private void Pause()
         {
@@ -659,24 +764,7 @@ namespace Game_Treasure_Hunter
             }
         }
 
-        private void LoadingSounds()
-        {
-            levelEnd.Open(new Uri(@"../../GameSounds/klubnichki.mp3", UriKind.Relative));
-            doorOpenMedia.Open(new Uri(@"../../GameSounds/dooropen.mp3", UriKind.Relative));
-            openBox.Open(new Uri(@"../../GameSounds/final.mp3", UriKind.Relative));
-            trollAttackSounds.Open(new Uri(@"../../GameSounds/trollAttack.wma", UriKind.Relative));
-            trollWalkSounds.Open(new Uri(@"../../GameSounds/trollWalk.mp3", UriKind.Relative));
-            trollIdleSounds.Open(new Uri(@"../../GameSounds/trollIdle.mp3", UriKind.Relative));
-            stonesSound.Open(new Uri(@"../../GameSounds/rockfall.mp3", UriKind.Relative));
-            wolfAttackSounds.Open(new Uri(@"../../GameSounds/wolfAttack.mp3", UriKind.Relative));
-            wolfDieSounds.Open(new Uri(@"../../GameSounds/wolfdie.mp3", UriKind.Relative));
-            robotRunSounds.Open(new Uri(@"../../GameSounds/runrobot.mp3", UriKind.Relative));
-            robotAttackSounds.Open(new Uri(@"../../GameSounds/robotAttack.mp3", UriKind.Relative));
-            snakeAttackSound.Open(new Uri(@"../../GameSounds/atakujuschaja-zmeja.mp3", UriKind.Relative));
-            snakeSound.Open(new Uri(@"../../GameSounds/zvuk-zmeya.mp3", UriKind.Relative));
-            terroristShootSounds.Open(new Uri(@"../../GameSounds/terror.mp3", UriKind.Relative));
-
-        }
+        
 
 
 
