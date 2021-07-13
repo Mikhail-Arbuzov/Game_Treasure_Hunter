@@ -508,10 +508,20 @@ namespace Game_Treasure_Hunter
             {
                 if (terrorist.Shoot)
                 {
+                    if (soundsGame && backgroundLevel2.Focusable == true && terrorist.Health > 0)
+                    {
+                        terroristShootSounds.Play();//стрельба из автомата 
+                        if (terroristShootSounds.Position >= new TimeSpan(0, 0, 3))
+                        {
+                            terroristShootSounds.Position = new TimeSpan(0, 0, 0);
+                            terroristShootSounds.Play();
+                        }
+                         
+                    }
                     terroristSpriteIndex += 0.5;
                     if (terroristSpriteIndex > 4)
                     {
-                        terroristSpriteIndex = 1;
+                        terroristSpriteIndex = 0;
                     }
                     terrorist.ShootSprites(terroristSpriteIndex);
                     terror.Fill = terrorist.terroristSprite;
@@ -657,12 +667,21 @@ namespace Game_Treasure_Hunter
                 {
                     Canvas.SetLeft(s, Canvas.GetLeft(s) + snake.Speed);
                     snake.MoveRight();
+                    if (soundsGame && backgroundLevel2.Focusable == true && snake.Health > 0)//шипения змени когда ползет
+                    {
+                        snakeSound.Play();
+                        if (snakeSound.Position >= new TimeSpan(0, 0, 9))
+                        {
+                            snakeSound.Position = new TimeSpan(0, 0, 0);
+                            snakeSound.Play();
+                        }
+                    }
                     //if(Canvas.GetLeft(s) < 3097 || Canvas.GetLeft(s) > 2671)
                     //{
                     //    snake.Speed = -snake.Speed;
                     //}
 
-                    if (Canvas.GetLeft(s) > 3097)
+                        if (Canvas.GetLeft(s) > 3097)
                     {
                         snake.Speed--;
                         snake.snakeOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };

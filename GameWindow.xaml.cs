@@ -114,6 +114,11 @@ namespace Game_Treasure_Hunter
         MediaPlayer robotSounds = new MediaPlayer();
         MediaPlayer robotLazerSounds = new MediaPlayer();
         MediaPlayer robotAttackSounds = new MediaPlayer();
+        MediaPlayer snakeAttackSound = new MediaPlayer();
+        MediaPlayer snakeSound = new MediaPlayer();
+        MediaPlayer terroristSounds = new MediaPlayer();
+        MediaPlayer terroristShootSounds = new MediaPlayer();
+        MediaPlayer soldierSounds = new MediaPlayer();
 
         public GameWindow()
         {
@@ -667,6 +672,9 @@ namespace Game_Treasure_Hunter
             wolfDieSounds.Open(new Uri(@"../../GameSounds/wolfdie.mp3", UriKind.Relative));
             robotRunSounds.Open(new Uri(@"../../GameSounds/runrobot.mp3", UriKind.Relative));
             robotAttackSounds.Open(new Uri(@"../../GameSounds/robotAttack.mp3", UriKind.Relative));
+            snakeAttackSound.Open(new Uri(@"../../GameSounds/atakujuschaja-zmeja.mp3", UriKind.Relative));
+            snakeSound.Open(new Uri(@"../../GameSounds/zvuk-zmeya.mp3", UriKind.Relative));
+            terroristShootSounds.Open(new Uri(@"../../GameSounds/terror.mp3", UriKind.Relative));
 
         }
 

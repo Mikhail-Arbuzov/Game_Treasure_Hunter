@@ -373,10 +373,16 @@ namespace Game_Treasure_Hunter
                     {
                         if (terHitBox.IntersectsWith(playerHitBox))
                         {
+                            terroristShootSounds.Play();
+                            if (terroristShootSounds.Position >= new TimeSpan(0, 0, 3))
+                            {
+                                terroristShootSounds.Position = new TimeSpan(0, 0, 0);
+                                terroristShootSounds.Play();
+                            }
                             terroristSpriteIndex += 0.5;
                             if (terroristSpriteIndex > 6)
                             {
-                                terroristSpriteIndex = 1;
+                                terroristSpriteIndex = 0;
                             }
                             terrorist.AttackSprites(terroristSpriteIndex);
                             terror.Fill = terrorist.terroristSprite;
@@ -408,6 +414,9 @@ namespace Game_Treasure_Hunter
                             soldierSpriteIndex += 0.5;
                             if (soldierSpriteIndex > 6)
                             {
+                                soldierSounds.Open(new Uri(@"../../GameSounds/kingal2.mp3", UriKind.Relative));//удар кинжалом
+                                soldierSounds.Position = new TimeSpan(0, 0, 0);
+                                soldierSounds.Play();
                                 soldierSpriteIndex = 1;
                             }
                             soldierOne.AttackSprites(soldierSpriteIndex);
@@ -646,6 +655,13 @@ namespace Game_Treasure_Hunter
 
                     if (snakeHitBox2.IntersectsWith(playerHitBox))
                     {
+                        snakeSound.Stop();
+                        snakeAttackSound.Play();//атака змеи
+                        if (snakeAttackSound.Position >= new TimeSpan(0, 0, 2))
+                        {
+                            snakeAttackSound.Position = new TimeSpan(0, 0, 0);
+                            snakeAttackSound.Play();
+                        }
                         snake.AttackRight();
                         //if (Canvas.GetLeft(animal) > 3097)
                         //{
@@ -861,6 +877,7 @@ namespace Game_Treasure_Hunter
                                 snake.Health -= 1;
                                 if (snake.Health <= 0)
                                 {
+                                    snakeSound.Stop();//остановить звук шипения змеи
                                     itemToRemover.Add(r);
                                 }
                             }
@@ -1081,16 +1098,12 @@ namespace Game_Treasure_Hunter
                                 soldier.Fill = soldierOne.soldierSprite;
                                 itemRemover.Add(y);
                             }
-                            //if (soldierOne.Health <= 0)
-                            //{
-                            //    soldierSpriteIndex += 0.5;
-                            //    if (soldierSpriteIndex > 10)
-                            //    {
-                            //        itemRemover.Add(h);
-                            //    }
-                            //    soldierOne.DieSprites(soldierSpriteIndex);
-                            //    soldier.Fill = soldierOne.soldierSprite;
-                            //}
+                            if (soldierOne.Health <= 0)
+                            {
+                                soldierSounds.Open(new Uri(@"../../GameSounds/ranenie1.mp3", UriKind.Relative));
+                                soldierSounds.Position = new TimeSpan(0,0,0);
+                                soldierSounds.Play();
+                            }
                         }
                     }
 
@@ -1114,16 +1127,12 @@ namespace Game_Treasure_Hunter
                                 terror.Fill = terrorist.terroristSprite;
                                 itemRemover.Add(y);
                             }
-                            //if (terrorist.Health <= 0)
-                            //{
-                            //    terroristSpriteIndex +=0.5;
-                            //    if (terroristSpriteIndex > 9)
-                            //    {
-                            //        itemRemover.Add(t);
-                            //    }
-                            //    terrorist.DieSprites(terroristSpriteIndex);
-                            //    terror.Fill = terrorist.terroristSprite;
-                            //}
+                            if (terrorist.Health <= 0)
+                            {
+                                terroristSounds.Open(new Uri(@"../../GameSounds/terroristDie.mp3", UriKind.Relative));
+                                terroristSounds.Position = new TimeSpan(0, 0, 0);
+                                terroristSounds.Play();
+                            }
                         }
                     }
 
@@ -1822,6 +1831,7 @@ namespace Game_Treasure_Hunter
                 backgroundMediaThree.Stop();
                 trollWalkSounds.Stop();
                 robotRunSounds.Stop();
+                snakeSound.Stop();
 
             }
             
