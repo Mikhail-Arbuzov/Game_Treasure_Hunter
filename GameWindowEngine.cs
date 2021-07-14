@@ -1840,6 +1840,8 @@ namespace Game_Treasure_Hunter
                 }
                 player.DieSprites(playerSpriteIndex);
                 hero.Fill = player.playerSprite;
+                //звук проигрыша игрока
+                gameOverSound.Play();
                 //отключение лишних звуков
                 backgroundMedia.Stop();
                 backgroundMediaTwo.Stop();

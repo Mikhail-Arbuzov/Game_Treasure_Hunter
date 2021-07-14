@@ -106,9 +106,22 @@ namespace Game_Treasure_Hunter
             gameWindow.turnOffsong = true;
         }
 
-        private void mainWindow_Closed(object sender, EventArgs e)
-        {
-            songMenu.Close();
-        }
+        //выход из игры при нажатии на красный крестик....Не корректно взаимодействует с другими окнами приложения
+        //private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        //{
+        //    string message3 = "Вы уверены,что хотите закрыть приложение?";
+        //    MessageBoxResult result3 = MessageBox.Show(message3, "TREASURE HUNTER", MessageBoxButton.YesNo);
+
+        //    switch (result3)
+        //    {
+        //        case MessageBoxResult.Yes:
+        //            songMenu.Close();//закрытие аудио файла из меню
+        //            Application.Current.Shutdown();
+        //            break;
+        //        case MessageBoxResult.No:
+        //            e.Cancel = true;
+        //            break;
+        //    }
+        //}
     }
 }

@@ -125,6 +125,7 @@ namespace Game_Treasure_Hunter
         MediaPlayer hogSound = new MediaPlayer();
         MediaPlayer ninjaSounds = new MediaPlayer();
         MediaPlayer ninjaBossSounds = new MediaPlayer();
+        MediaPlayer gameOverSound = new MediaPlayer();
 
 
         public GameWindow()
@@ -170,6 +171,7 @@ namespace Game_Treasure_Hunter
 
             StartGame();
             LoadingSounds();//метод по загрузке более продолжительных звуков в игре
+            
         }
 
         
@@ -247,6 +249,7 @@ namespace Game_Treasure_Hunter
 
             if (e.Key == Key.R && gameOver == true)
             {
+                gameOverSound.Stop();//отключение звука проигрыша игрока
                 GameWindow game = new GameWindow();
                 game.Show();
                 game.backgroundMedia.Play();//включить фоновый звук на первом уровне
@@ -645,6 +648,75 @@ namespace Game_Treasure_Hunter
             gameTimer.Start();
         }
 
+        //закрытие всех аудиофайлов при (нажатии Х) выходе из окна игры
+        private void GameWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (gameTimer.IsEnabled)
+            {
+                shooterSounds.Stop();
+                trollWalkSounds.Stop();
+                trollIdleSounds.Stop();
+                stonesSound.Stop();
+                robotRunSounds.Stop();
+                robotLazerSounds.Stop();
+                snakeSound.Stop();
+                bearSound.Stop();
+                terroristShootSounds.Stop();
+                birdSound.Stop();
+                hogSound.Stop();
+                ninjaSounds.Stop();
+                ninjaBossSounds.Stop();
+                gameTimer.IsEnabled = false;
+                string message2 = "Хотите выйти из игры ?";
+                MessageBoxResult result2 = MessageBox.Show(message2, "TREASURE HUNTER", MessageBoxButton.YesNo);
+                switch (result2)
+                {
+                    case MessageBoxResult.Yes:
+                        backgroundMedia.Close();
+                        backgroundMediaTwo.Close();
+                        backgroundMediaThree.Close();
+                        playerMedia.Close();
+                        levelEnd.Close();
+                        doorOpenMedia.Close();
+                        openBox.Close();
+                        mediaBullets.Close();
+                        bonusMedia.Close();
+                        bonusSounds.Close();
+                        enemySounds.Close();
+                        shooterSounds.Close();
+                        trollSounds.Close();
+                        trollAttackSounds.Close();
+                        trollWalkSounds.Close();
+                        trollIdleSounds.Close();
+                        stonesSound.Close();
+                        wolfAttackSounds.Close();
+                        wolfDieSounds.Close();
+                        robotRunSounds.Close();
+                        robotSounds.Close();
+                        robotLazerSounds.Close();
+                        robotAttackSounds.Close();
+                        snakeAttackSound.Close();
+                        snakeSound.Close();
+                        terroristSounds.Close();
+                        terroristShootSounds.Close();
+                        soldierSounds.Close();
+                        bearSound.Close();
+                        bearAttackSound.Close();
+                        birdSound.Close();
+                        hogSound.Close();
+                        ninjaSounds.Close();
+                        ninjaBossSounds.Close();
+                        gameOverSound.Close();
+                        Application.Current.Shutdown();
+                        break;
+                    case MessageBoxResult.No:
+                        gameTimer.IsEnabled = true;
+                        e.Cancel = true;
+                        break;
+                }
+            }
+        }
+
         private void LoadingSounds()
         {
             levelEnd.Open(new Uri(@"../../GameSounds/klubnichki.mp3", UriKind.Relative));
@@ -665,89 +737,30 @@ namespace Game_Treasure_Hunter
             bearAttackSound.Open(new Uri(@"../../GameSounds/bearAttack.mp3", UriKind.Relative));
             birdSound.Open(new Uri(@"../../GameSounds/zvuk-vorony.mp3", UriKind.Relative));
             hogSound.Open(new Uri(@"../../GameSounds/hog.mp3", UriKind.Relative));
+            gameOverSound.Open(new Uri(@"../../GameSounds/gameover.mp3", UriKind.Relative));
 
         }
-
-        //private void gameWindow_Closed(object sender, EventArgs e)
-        //{
-        //    backgroundMedia.Close();
-        //    backgroundMediaTwo.Close();
-        //    backgroundMediaThree.Close();
-        //    playerMedia.Close();
-        //    levelEnd.Close();
-        //    doorOpenMedia.Close();
-        //    openBox.Close();
-        //    mediaBullets.Close();
-        //    bonusMedia.Close();
-        //    bonusSounds.Close();
-        //    enemySounds.Close();
-        //    shooterSounds.Close();
-        //    trollSounds.Close();
-        //    trollAttackSounds.Close();
-        //    trollWalkSounds.Close();
-        //    trollIdleSounds.Close();
-        //    stonesSound.Close();
-        //    wolfAttackSounds.Close();
-        //    wolfDieSounds.Close();
-        //    robotRunSounds.Close();
-        //    robotSounds.Close();
-        //    robotLazerSounds.Close();
-        //    robotAttackSounds.Close();
-        //    snakeAttackSound.Close();
-        //    snakeSound.Close();
-        //    terroristSounds.Close();
-        //    terroristShootSounds.Close();
-        //    soldierSounds.Close();
-        //    bearSound.Close();
-        //    bearAttackSound.Close();
-        //    birdSound.Close();
-        //    hogSound.Close();
-        //    ninjaSounds.Close();
-        //    ninjaBossSounds.Close();
-        //}
-
-        //private void gameWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        //{
-        //    backgroundMedia.Close();
-        //    backgroundMediaTwo.Close();
-        //    backgroundMediaThree.Close();
-        //    playerMedia.Close();
-        //    levelEnd.Close();
-        //    doorOpenMedia.Close();
-        //    openBox.Close();
-        //    mediaBullets.Close();
-        //    bonusMedia.Close();
-        //    bonusSounds.Close();
-        //    enemySounds.Close();
-        //    shooterSounds.Close();
-        //    trollSounds.Close();
-        //    trollAttackSounds.Close();
-        //    trollWalkSounds.Close();
-        //    trollIdleSounds.Close();
-        //    stonesSound.Close();
-        //    wolfAttackSounds.Close();
-        //    wolfDieSounds.Close();
-        //    robotRunSounds.Close();
-        //    robotSounds.Close();
-        //    robotLazerSounds.Close();
-        //    robotAttackSounds.Close();
-        //    snakeAttackSound.Close();
-        //    snakeSound.Close();
-        //    terroristSounds.Close();
-        //    terroristShootSounds.Close();
-        //    soldierSounds.Close();
-        //    bearSound.Close();
-        //    bearAttackSound.Close();
-        //    birdSound.Close();
-        //    hogSound.Close();
-        //    ninjaSounds.Close();
-        //    ninjaBossSounds.Close();
-        //}
 
         private void Pause()
         {
             if(gameTimer.IsEnabled)
             {
+                backgroundMedia.Stop();
+                backgroundMediaTwo.Stop();
+                backgroundMediaThree.Stop();
+                shooterSounds.Stop();
+                trollWalkSounds.Stop();
+                trollIdleSounds.Stop();
+                stonesSound.Stop();
+                robotRunSounds.Stop();
+                robotLazerSounds.Stop();
+                snakeSound.Stop();
+                bearSound.Stop();
+                terroristShootSounds.Stop();
+                birdSound.Stop();
+                hogSound.Stop();
+                ninjaSounds.Stop();
+                ninjaBossSounds.Stop();
                 gameTimer.IsEnabled = false;
                 string message = "Если хотите вернуться в игровое меню, то нажмите Ok";
                 MessageBoxResult result = MessageBox.Show(message, "TREASURE HUNTER", MessageBoxButton.OKCancel);
