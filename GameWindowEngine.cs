@@ -818,10 +818,11 @@ namespace Game_Treasure_Hunter
                                 itemRemover.Add(y);
 
                                 wolf.Health -= 1;
+                               
                                 if (wolf.Health <= 0)
                                 {
-                                    wolfDieSounds.Play();
-                                    itemToRemover.Add(wf);
+                                    wolfDieSounds.Play();// волк скулит
+                                    //itemToRemover.Add(wf);
                                 }
                             }
                             //if (wolfHitBox.IntersectsWith(playerHitBox))
@@ -1917,6 +1918,7 @@ namespace Game_Treasure_Hunter
                 }
                 if(snake.Health > 0)
                 {
+                    snakeSound.Stop();
                     itemToRemover.Add(snake.snakeOne);
                 }
             }

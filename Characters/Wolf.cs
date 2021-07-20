@@ -14,7 +14,8 @@ namespace Game_Treasure_Hunter
     {
         BitmapImage spriteWolfImage = new BitmapImage();
         public Image wolfOne = new Image();
-        double countActions = 0;
+        public double countActions = 0;
+        //public bool wolfLife;  
 
         int totalWolfFrames;
         int wolfCurrentFrame;
@@ -235,5 +236,20 @@ namespace Game_Treasure_Hunter
         //    wolfOne.Source = ClippingFrame(WolfCurrentFrame);
         //    wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
         //}
+        public CroppedBitmap ClippingFrame2(int f2)
+        {
+            const int w2 = 150;
+            const int h2 = 125;
+            //int frameX3 = (f2 % 6) * w2;
+            int frameX3 = f2;
+            return new CroppedBitmap(spriteWolfImage, new System.Windows.Int32Rect(frameX3, 0, w2, h2));
+        }
+
+        public void DieWolf()
+        {
+            //wolfOne.Width = 150;
+            //wolfOne.Height = 125;
+            wolfOne.Source = ClippingFrame2(900);
+        }
     }
 }

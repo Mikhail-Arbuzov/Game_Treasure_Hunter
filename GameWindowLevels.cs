@@ -51,7 +51,7 @@ namespace Game_Treasure_Hunter
                     shooterSpriteIndex += 0.5;
                     if (shooterSpriteIndex > 10)
                     {
-                        if (soundsGame)
+                        if (soundsGame && backgroundLevel2.Focusable == false && backgroundLevel3.Focusable == false)
                         {
                             shooterSounds.Open(new Uri(@"../../GameSounds/shooter.mp3", UriKind.Relative));
                             shooterSounds.Position = new TimeSpan(0, 0, 0);
@@ -197,32 +197,50 @@ namespace Game_Treasure_Hunter
                 enemy1.Fill = enemy.enemySprite;
             }
 
-
+          
             //движение волка
             foreach (var w in MyCanvas.Children.OfType<Image>())
             {
-                if ((string)w.Tag == "wolf")
+                if (wolf.Health > 0)
                 {
-                    Canvas.SetLeft(w, Canvas.GetLeft(w) + wolf.Speed);
-
-                    wolf.MoveRight();
-                    //if (Canvas.GetLeft(w) < Canvas.GetLeft(ground4) || Canvas.GetLeft(w) + w.Width > Canvas.GetLeft(ground4) + ground4.Width)
-                    //{
-                    //    wolf.Speed = -wolf.Speed;
-                    //}
-
-                    if (Canvas.GetLeft(w) > 1403)
+                    if ((string)w.Tag == "wolf")
                     {
-                        wolf.Speed--;
-                        wolf.wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
-                    }
-                    if (Canvas.GetLeft(w) < 1012)
-                    {
-                        wolf.Speed++;
-                        wolf.wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
-                    }
+                        Canvas.SetLeft(w, Canvas.GetLeft(w) + wolf.Speed);
 
+                        wolf.MoveRight();
+                        //if (Canvas.GetLeft(w) < Canvas.GetLeft(ground4) || Canvas.GetLeft(w) + w.Width > Canvas.GetLeft(ground4) + ground4.Width)
+                        //{
+                        //    wolf.Speed = -wolf.Speed;
+                        //}
+
+                        if (Canvas.GetLeft(w) > 1403)
+                        {
+                            wolf.Speed--;
+                            wolf.wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
+                        }
+                        if (Canvas.GetLeft(w) < 1012)
+                        {
+                            wolf.Speed++;
+                            wolf.wolfOne.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
+                        }
+
+                    }
                 }
+                else
+                {
+                    wolf.countActions++;
+                    wolf.DieWolf();// гибель волка
+                    if(wolf.countActions >= 100)
+                    {
+                        itemToRemover.Add(wolf.wolfOne);
+                    }
+                    if (wolf.countActions >= 600)
+                    { 
+                        wolf.countActions = 0; 
+                    }
+                }
+                
+
             }
 
             //действия Троля
@@ -426,7 +444,7 @@ namespace Game_Treasure_Hunter
                     shooterSpriteIndex += 0.5;
                     if (shooterSpriteIndex > 10)
                     {
-                        if(backgroundLevel2.Focusable == true)
+                        if(backgroundLevel2.Focusable == true && shooterTwo.Health > 0)
                         {
                             shooterSounds.Open(new Uri(@"../../GameSounds/shooter.mp3", UriKind.Relative));
                             shooterSounds.Position = new TimeSpan(0, 0, 0);
@@ -483,7 +501,7 @@ namespace Game_Treasure_Hunter
             {
                 shooterSpriteIndex += 0.5;
                 shooterTwo.DieSprites(shooterSpriteIndex);
-                shooter2.Fill = shooterOne.shooterSprite;
+                shooter2.Fill = shooterTwo.shooterSprite;
                 shooterTwo.countDie += 0.2;
                 if (shooterTwo.countDie > 14)
                 {
