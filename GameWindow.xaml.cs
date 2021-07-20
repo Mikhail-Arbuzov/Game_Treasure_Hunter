@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Speech.Synthesis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -128,6 +127,10 @@ namespace Game_Treasure_Hunter
         MediaPlayer ninjaBossSounds = new MediaPlayer();
         MediaPlayer gameOverSound = new MediaPlayer();
 
+        //SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();//для озвучки текста
+        //PromptBuilder promptBuilderPlayer = new PromptBuilder(); // для настройки произношения текста игроком
+        //PromptStyle promptStyleStrikeStone = new PromptStyle();// настройка стиля речи при ударе камнем 
+
 
         public GameWindow()
         {
@@ -172,7 +175,6 @@ namespace Game_Treasure_Hunter
 
             StartGame();
             LoadingSounds();//метод по загрузке более продолжительных звуков в игре
-            
         }
 
         
