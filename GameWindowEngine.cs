@@ -24,6 +24,9 @@ namespace Game_Treasure_Hunter
             catridgesScore.Content = "Патроны: " + bulletsScore;
             treasuresScore.Content = "Сокровища: " + gem;
             healthBoss.Content = "Здоровье Босса: " + healthProgress.Value;
+            //таймер времени в игре
+            counterTime += TimeSpan.FromMilliseconds(20);
+            timer.Content = counterTime.ToString(@"hh\:mm\:ss");
 
             //чтоб игрок не выходил за экран а также настройка фонового звука уровней
             if (backgroundLevel.Focusable == false && backgroundLevel3.Focusable == false && backgroundLevel2.Focusable == false)
@@ -1800,6 +1803,7 @@ namespace Game_Treasure_Hunter
                             gem = 0;
                             treasuresScore.Foreground = Brushes.White;
                             healthBoss.Foreground = Brushes.LightGray;
+                            timer.Foreground = Brushes.LightGray;
                             healthProgress.Value = ninjaBoss.Health;
                             healthProgress.Minimum = 0;
                             healthProgress.Maximum = 8;

@@ -64,7 +64,7 @@ namespace Game_Treasure_Hunter
         public int bulletsScore = 20;
         int gem;
 
-        //double countDie = 0;
+        TimeSpan counterTime = new TimeSpan();
         //double countDie2 = 0;
         //double countHurt = 0;
 
