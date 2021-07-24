@@ -25,7 +25,7 @@ namespace Game_Treasure_Hunter
             treasuresScore.Content = "Сокровища: " + gem;
             healthBoss.Content = "Здоровье Босса: " + healthProgress.Value;
             //таймер времени в игре
-            counterTime += TimeSpan.FromMilliseconds(20);
+            counterTime+=TimeSpan.FromSeconds(1) - TimeSpan.FromMilliseconds(955);
             timer.Content = counterTime.ToString(@"hh\:mm\:ss");
 
             //чтоб игрок не выходил за экран а также настройка фонового звука уровней
@@ -1826,6 +1826,9 @@ namespace Game_Treasure_Hunter
                             backgroundMediaThree.Stop();
                             healthScore.Foreground = Brushes.Green;
                             ShowGameOver("Победа!!!\nСокровища\nнайдены!");
+                            //открывается окно с таблицей рейтинга
+                            RatingWindow ratingWindow = new RatingWindow();
+                            ratingWindow.Show();
                         }
                     }
                 }

@@ -175,6 +175,7 @@ namespace Game_Treasure_Hunter
 
             StartGame();
             LoadingSounds();//метод по загрузке более продолжительных звуков в игре
+           
         }
 
         

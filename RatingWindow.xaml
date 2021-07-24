@@ -1,0 +1,66 @@
+﻿<Window x:Class="Game_Treasure_Hunter.RatingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Game_Treasure_Hunter"
+        mc:Ignorable="d"
+        Title="RatingWindow" Height="450" Width="800">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="200"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Введите имя нового игрока:" HorizontalAlignment="Left" Margin="195,31,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NewNameText" HorizontalAlignment="Left" Height="23" Margin="365,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="AddRatingButton" Content="Добавить в рейтинг" HorizontalAlignment="Left" Margin="517,31,0,0" VerticalAlignment="Top" Width="117" Height="26"/>
+        <Label Content="Введите имя игрока:" HorizontalAlignment="Left" Margin="195,73,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="23" Margin="323,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162"/>
+        <Button x:Name="UpdateRatingButton" Content="Обновить рейтинг" HorizontalAlignment="Left" Margin="517,74,0,0" VerticalAlignment="Top" Width="117" Height="26"/>
+        
+        <Label Content="Рейтинг игроков в зависимости от уровня сложности игры" HorizontalAlignment="Left" Margin="195,114,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
+        <Button x:Name="OnEasyButton" Content="On easy" HorizontalAlignment="Left" Margin="176,144,0,0" VerticalAlignment="Top" Width="83" Height="41">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="OnNormalButton" Content="On normal" HorizontalAlignment="Left" Margin="306,144,0,0" VerticalAlignment="Top" Width="83" Height="41">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="OnHardButton" Content="On heavy" HorizontalAlignment="Left" Margin="436,144,0,0" VerticalAlignment="Top" Width="83" Height="41">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="AllOptionsButton" Content="All options" HorizontalAlignment="Left" Margin="566,144,0,0" VerticalAlignment="Top" Width="83" Height="41">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <DataGrid x:Name="ratingGrid" HorizontalAlignment="Left" Height="191" Margin="71,10,0,0" Grid.Row="1"  VerticalAlignment="Top"  VerticalScrollBarVisibility="Auto" Width="653">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Имя игрока"/>
+                <DataGridTextColumn Header="     Кол-во здоровья"/>
+                <DataGridTextColumn Header="Всего собрано монет"/>
+                <DataGridTextColumn Header="Всего потрачено патронов"/>
+                <DataGridTextColumn Header="Сложность"/>
+                <DataGridTextColumn Header="        Время" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="1" HorizontalAlignment="Left" Margin="50,34,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="2" HorizontalAlignment="Left" Margin="50,60,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="3" HorizontalAlignment="Left" Margin="50,86,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
