@@ -23,7 +23,7 @@ namespace Game_Treasure_Hunter
     {
         bool isSuccess;
         public Result result;// переменная для экземпляра класса модели полей из таблицы БД
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Programs\Game_Treasure_Hunter\GameDB.mdf;Integrated Security=True";
+        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Programs\Game_Treasure_Hunter\Database\GameDB.mdf;Integrated Security=True";
        
         public RatingWindow()
         {
@@ -80,7 +80,7 @@ namespace Game_Treasure_Hunter
                 NewNameText.BorderBrush = Brushes.Black;
 
             }
-            else  //данные не отправлены
+            else//данные не отправлены
             {
                 MessageBox.Show("имя не добавлено!","База данных", MessageBoxButton.OK, MessageBoxImage.Warning);
             }

@@ -1825,6 +1825,9 @@ namespace Game_Treasure_Hunter
                         if (playerHitBox.IntersectsWith(chestHitBox))
                         {
                             backgroundMediaThree.Stop();
+                            bearSound.Stop();
+                            birdSound.Stop();
+                            hogSound.Stop();
                             healthScore.Foreground = Brushes.Green;
                             ShowGameOver("Победа!!!\nСокровища\nнайдены!");
                             //открывается окно с таблицей рейтинга
@@ -1895,10 +1898,10 @@ namespace Game_Treasure_Hunter
                     shooterSounds.Stop();
                     itemRemover.Add(shooter1);
                 }
-                //if(wolf.Health > 0)
-                //{
-                //    itemToRemover.Add(wolf.wolfOne);
-                //}
+                if (wolf.Health > 0)
+                {
+                    itemToRemover.Add(wolf.wolfOne);
+                }
             }
 
             if (gem == 3 && backgroundLevel2.Focusable == true)

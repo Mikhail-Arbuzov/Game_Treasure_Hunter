@@ -711,11 +711,11 @@
     <Resource Include="Images\Bush.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GameDB.ldf">
+    <Content Include="Database\GameDB.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>GameDB.mdf</DependentUpon>
     </Content>
-    <Content Include="GameDB.mdf">
+    <Content Include="Database\GameDB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="GameSounds\arrows.mp3" />
