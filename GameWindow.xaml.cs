@@ -130,6 +130,10 @@ namespace Game_Treasure_Hunter
         //SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();//для озвучки текста
         //PromptBuilder promptBuilderPlayer = new PromptBuilder(); // для настройки произношения текста игроком
         //PromptStyle promptStyleStrikeStone = new PromptStyle();// настройка стиля речи при ударе камнем 
+       
+        int counterCartridges = 0;// счетчик для счета всех патронов
+        int counterCoins = 0;//счетчик для счета всех собранных монет в игре
+        public string choiceComplexity; //выбор сложности игры
 
 
         public GameWindow()
@@ -175,7 +179,6 @@ namespace Game_Treasure_Hunter
 
             StartGame();
             LoadingSounds();//метод по загрузке более продолжительных звуков в игре
-           
         }
 
         
@@ -258,6 +261,7 @@ namespace Game_Treasure_Hunter
                 game.Show();
                 game.backgroundMedia.Play();//включить фоновый звук на первом уровне
                 game.soundsGame = true;//запустить звуки из игры
+                game.choiceComplexity = "Easy";// сложность игры по умолчанию
                 this.Close();            
             }
 
@@ -324,6 +328,7 @@ namespace Game_Treasure_Hunter
                     playerMedia.Position = new TimeSpan(0, 0, 0);
                     playerMedia.Play();
                     MyCanvas.Children.Add(newBullet);
+                    counterCartridges++;//cчетчик потраченных патронов
                 }
                 if(bulletsScore <=0)
                 {

@@ -1384,6 +1384,7 @@ namespace Game_Treasure_Hunter
                         bonusMedia.Play();
                         itemRemover.Add(x);
                         score += 1;
+                        counterCoins += 1; //счетчик собираемых монет
                         if (score >= 7)
                         {
                             bonusMedia.Stop();
@@ -1828,6 +1829,12 @@ namespace Game_Treasure_Hunter
                             ShowGameOver("Победа!!!\nСокровища\nнайдены!");
                             //открывается окно с таблицей рейтинга
                             RatingWindow ratingWindow = new RatingWindow();
+                            //передача данных из игры 
+                            ratingWindow.result.health = player.Health;
+                            ratingWindow.result.coins = counterCoins;
+                            ratingWindow.result.cartridges = counterCartridges;
+                            ratingWindow.result.complexity = choiceComplexity;
+                            ratingWindow.result.time = (string)timer.Content;
                             ratingWindow.Show();
                         }
                     }

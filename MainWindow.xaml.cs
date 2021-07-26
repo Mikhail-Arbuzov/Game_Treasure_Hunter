@@ -41,6 +41,10 @@ namespace Game_Treasure_Hunter
             {
                 gameWindow.backgroundMedia.Play();//запуск звука фона первого раунда
             }
+            if(normal.IsChecked == false && hard.IsChecked == false)
+            {
+                gameWindow.choiceComplexity = "Easy";// если выбор сложности не сделан, то значение будет равным easy 
+            }
             gameWindow.Show();
             gameWindow.soundsGame = true;//запустить звуки из игры
             this.Close();
@@ -71,6 +75,7 @@ namespace Game_Treasure_Hunter
             Canvas.SetLeft(bushRect, 2955);
             Canvas.SetTop(bushRect, 500);
             gameWindow.MyCanvas.Children.Add(bushRect);
+            gameWindow.choiceComplexity = "Normal";
         }
 
         private void hard_Checked(object sender, RoutedEventArgs e)
@@ -91,6 +96,7 @@ namespace Game_Treasure_Hunter
             Canvas.SetLeft(bulletsRect4, 4558);
             Canvas.SetTop(bulletsRect4, 151);
             gameWindow.MyCanvas.Children.Add(bulletsRect4);
+            gameWindow.choiceComplexity = "Hard";
         }
 
         //включение и отключение  фонового звука в игре 
