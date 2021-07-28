@@ -22,6 +22,7 @@ namespace Game_Treasure_Hunter
     public partial class RatingWindow : Window
     {
         bool isSuccess;
+        bool successfully;
         public Result result;// переменная для экземпляра класса модели полей из таблицы БД
         string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Programs\Game_Treasure_Hunter\Database\GameDB.mdf;Integrated Security=True";
        
@@ -64,7 +65,7 @@ namespace Game_Treasure_Hunter
                     }
                     catch 
                     {
-                        MessageBox.Show("Имя не добавлено!Возможно такое имя игрока уже есть!", "База данных", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("Имя не добавлено! Возможно такое имя игрока уже есть!", "База данных", MessageBoxButton.OK, MessageBoxImage.Warning);
                         connection.Close();
 
                     }
@@ -103,6 +104,48 @@ namespace Game_Treasure_Hunter
             //NewNameText.Text = "";
             NewNameText.ToolTip = "";
             NewNameText.BorderBrush = Brushes.Transparent;
+        }
+
+        private void UpdateRatingButton_Click(object sender, RoutedEventArgs e)
+        {
+            string oldName = NameText.Text.Trim();// добавляю данные из textbox и убираю лишнии пробелы
+            string sqlExpression2 = String.Format("UPDATE Results SET health ='{0}', coins ='{1}', cartridges ='{2}', complexity ='{3}', time ='{4}' WHERE name =@oldName ", result.health, result.coins, result.cartridges, result.complexity, result.time);
+            if (Regex.IsMatch(oldName, @"^[а-яА-ЯёЁa-zA-Z]+$") && NameText.Text != String.Empty)
+            {
+                using (SqlConnection connection2 = new SqlConnection(connectionString))
+                {
+                    connection2.Open();
+                    SqlCommand command2 = new SqlCommand(sqlExpression2, connection2);
+                    SqlParameter nameParam = new SqlParameter("@oldName", System.Data.SqlDbType.NVarChar, 8);//параметер для вводимых данных, отправляимых в БД. С указанием типа и размера 
+                    nameParam.Value = oldName;//вводимое значение
+                    command2.Parameters.Add(nameParam);//добавляю параметер в Sql-запрос 
+                    int check = command2.ExecuteNonQuery();
+
+                    if (check > 0)//делаю проверку
+                    {
+                        successfully = true;
+                    }
+                    else
+                    {
+                        successfully = false;
+                    }
+                }
+            }
+            else
+            {
+                NameText.BorderBrush = Brushes.Red;
+            }
+
+            if(successfully == true)
+            {
+                MessageBox.Show("Рейтинг игрока обнавлен!", "База данных", MessageBoxButton.OK, MessageBoxImage.Information);
+                NameText.Text = "";
+                NameText.BorderBrush = Brushes.Green;
+            }
+            else
+            {
+                MessageBox.Show("Рейтинг игрока не обнавился! Возможно такого имени игрока нет в базе данных. Или это поле введено не корректно! При вводе должны использоваться только русские или английские буквы ", "База данных", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

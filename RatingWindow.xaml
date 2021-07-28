@@ -18,7 +18,7 @@
         <Button x:Name="AddRatingButton" Content="Добавить в рейтинг" HorizontalAlignment="Left" Margin="517,31,0,0" VerticalAlignment="Top" Width="117" Height="26" Click="AddRatingButton_Click"/>
         <Label Content="Введите имя игрока:" HorizontalAlignment="Left" Margin="195,73,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="23" Margin="323,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162"/>
-        <Button x:Name="UpdateRatingButton" Content="Обновить рейтинг" HorizontalAlignment="Left" Margin="517,74,0,0" VerticalAlignment="Top" Width="117" Height="26"/>
+        <Button x:Name="UpdateRatingButton" Content="Обновить рейтинг" HorizontalAlignment="Left" Margin="517,74,0,0" VerticalAlignment="Top" Width="117" Height="26" Click="UpdateRatingButton_Click"/>
         
         <Label Content="Рейтинг игроков в зависимости от уровня сложности игры" HorizontalAlignment="Left" Margin="195,114,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
         <Button x:Name="OnEasyButton" Content="On easy" HorizontalAlignment="Left" Margin="176,144,0,0" VerticalAlignment="Top" Width="83" Height="41">
