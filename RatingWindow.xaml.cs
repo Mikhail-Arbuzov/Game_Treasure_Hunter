@@ -43,21 +43,33 @@ namespace Game_Treasure_Hunter
                 ClearingTextField();//метод для очистки всплывающей подсказки
                 using (SqlConnection connection = new SqlConnection(connectionString))//подключение к БД
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sqlExpression, connection);
-                    SqlParameter nameParametr = new SqlParameter("@name", System.Data.SqlDbType.NVarChar, 8);//параметер для вводимых данных, отправляимых в БД. С указанием типа и размера 
-                    nameParametr.Value = name;//вводимое значение
-                    command.Parameters.Add(nameParametr);//добавляю параметер в Sql-запрос 
-                    int rows = command.ExecuteNonQuery();//выполнение Sql-запроса
-                    //проверка на отправку данных в БД
-                    if (rows > 0)
+                    try 
                     {
-                        isSuccess = true;
+                        connection.Open();
+                        SqlCommand command = new SqlCommand(sqlExpression, connection);
+                        SqlParameter nameParametr = new SqlParameter("@name", System.Data.SqlDbType.NVarChar, 8);//параметер для вводимых данных, отправляимых в БД. С указанием типа и размера 
+                        nameParametr.Value = name;//вводимое значение
+                        command.Parameters.Add(nameParametr);//добавляю параметер в Sql-запрос 
+                        int rows = command.ExecuteNonQuery();//выполнение Sql-запроса
+
+                        //проверка на отправку данных в БД
+                        if (rows > 0)
+                        {
+                            isSuccess = true;
+                        }
+                        else
+                        {
+                            isSuccess = false;
+                        }
                     }
-                    else
+                    catch 
                     {
-                        isSuccess = false;
+                        MessageBox.Show("Имя не добавлено!Возможно такое имя игрока уже есть!", "База данных", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        connection.Close();
+
                     }
+                   
+                   
                 }
             }
            
@@ -75,14 +87,14 @@ namespace Game_Treasure_Hunter
            
             if(isSuccess == true)//данные отправлены
             {
-                MessageBox.Show("имя добавлено!","База данных",MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Имя добавлено!","База данных",MessageBoxButton.OK, MessageBoxImage.Information);
                 NewNameText.Text = "";
                 NewNameText.BorderBrush = Brushes.Black;
 
             }
             else//данные не отправлены
             {
-                MessageBox.Show("имя не добавлено!","База данных", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Имя не добавлено!","База данных", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
