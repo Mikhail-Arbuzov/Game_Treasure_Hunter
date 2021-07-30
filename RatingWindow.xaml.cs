@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Speech.Synthesis;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -23,9 +25,13 @@ namespace Game_Treasure_Hunter
     {
         bool isSuccess;
         bool successfully;
-        public Result result;// переменная для экземпляра класса модели полей из таблицы БД
+        public Result result;// переменная для сбора данных из игры и отправки их в таблицу БД
+        Result result2;// переменная для вывода данных из таблицы БД
+
         string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Programs\Game_Treasure_Hunter\Database\GameDB.mdf;Integrated Security=True";
-       
+
+        SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();//для озвучки текста
+
         public RatingWindow()
         {
             InitializeComponent();
@@ -145,6 +151,77 @@ namespace Game_Treasure_Hunter
             else
             {
                 MessageBox.Show("Рейтинг игрока не обнавился! Возможно такого имени игрока нет в базе данных. Или это поле введено не корректно! При вводе должны использоваться только русские или английские буквы ", "База данных", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void OnEasyButton_Click(object sender, RoutedEventArgs e)
+        {
+            DataTable dt; // переменная автаномная часть структуры бд ввиде таблицы  
+            PromptBuilder promptBuilder = new PromptBuilder(); // для настройки произношения текста 
+
+            string sqlExpression3 = String.Format("SELECT name, health, coins, cartridges, complexity, time FROM Results WHERE complexity = 'Easy' ORDER BY time ASC, cartridges ASC, coins DESC ");
+
+            using (SqlConnection connect = new SqlConnection(connectionString))
+            {
+                connect.Open();
+                SqlCommand command3 = new SqlCommand(sqlExpression3, connect);
+
+                using (SqlDataReader reader = command3.ExecuteReader())
+                {
+                    if (reader.HasRows)//проверка данных
+                    {
+                        while(reader.Read()) //построчно считываем данные
+                        {
+                            result2 = new Result()
+                            {
+                                name = reader.GetString(0),
+                                health = reader.GetInt32(1),
+                                coins = reader.GetInt32(2),
+                                cartridges = reader.GetInt32(3),
+                                complexity = reader.GetString(4),
+                                time2 = reader.GetTimeSpan(5)
+                            };
+                            //string name = reader.GetString(0);
+                            //int health = reader.GetInt32(1);
+                            //int coins = reader.GetInt32(2);
+                            //int cartridges = reader.GetInt32(3);
+                            //string complexity = reader.GetString(4);
+                            //TimeSpan time = reader.GetTimeSpan(5);
+                        }
+                    }
+                    else
+                    {
+                        speechSynthesizer.SpeakAsyncCancelAll();// отменяет все асинхронные операции синтеза речи
+                        MessageBox.Show("Данных нет! ", "База данных", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                //создаю модель виртуальной таблицы чтобы перенести ее в DataGrid для визуализации
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlExpression3, connect);
+                dt = new DataTable();
+                dataAdapter.Fill(dt);// заполняем таблицу
+                ratingGrid.ItemsSource = dt.DefaultView; // делаю привязку к представлению таблицы
+                //получение значение первой ячейки первой строки  через DataTable
+                string firstCell = dt.Rows[0][0].ToString();
+                //получение значение первой ячейки первой строки  с помощью DataGridCellInfo не до конца логика была развита..
+                //var cellInfo = ratingGrid.SelectedCells[0];
+                //var content = cellInfo.Column.GetCellContent(cellInfo.Item);
+
+                promptBuilder.StartStyle(new PromptStyle()// настройка речи
+                {
+                    Emphasis = PromptEmphasis.Reduced,//низкий уровень выделения текста
+                    Rate = PromptRate.Medium,// средняя скорость речи
+                    Volume = PromptVolume.Loud // высокая громкость речи
+                });
+                promptBuilder.AppendText("Победителем");//добавляю текст
+                promptBuilder.AppendText("ста");
+                promptBuilder.AppendText("но", PromptEmphasis.Strong);//ударение
+                promptBuilder.AppendText("вится");
+                //promptBuilder.AppendTextWithPronunciation("становится", "становица");// иключение выходит не прафильная фонетика "с"
+                promptBuilder.AppendBreak(TimeSpan.FromMilliseconds(200));//пауза
+                promptBuilder.AppendText(String.Format("{0}", firstCell), PromptEmphasis.Strong);// называет имя из поля name
+                promptBuilder.EndStyle();
+
+                speechSynthesizer.SpeakAsync(promptBuilder);//воспроизведение речи
             }
         }
     }

@@ -19,9 +19,9 @@
         <Label Content="Введите имя игрока:" HorizontalAlignment="Left" Margin="195,73,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="23" Margin="323,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162"/>
         <Button x:Name="UpdateRatingButton" Content="Обновить рейтинг" HorizontalAlignment="Left" Margin="517,74,0,0" VerticalAlignment="Top" Width="117" Height="26" Click="UpdateRatingButton_Click"/>
-        
+
         <Label Content="Рейтинг игроков в зависимости от уровня сложности игры" HorizontalAlignment="Left" Margin="195,114,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
-        <Button x:Name="OnEasyButton" Content="On easy" HorizontalAlignment="Left" Margin="176,144,0,0" VerticalAlignment="Top" Width="83" Height="41">
+        <Button x:Name="OnEasyButton" Content="On easy" HorizontalAlignment="Left" Margin="176,144,0,0" VerticalAlignment="Top" Width="83" Height="41" Click="OnEasyButton_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -49,14 +49,14 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <DataGrid x:Name="ratingGrid" HorizontalAlignment="Left" Height="191" Margin="71,10,0,0" Grid.Row="1"  VerticalAlignment="Top"  VerticalScrollBarVisibility="Auto" Width="653">
+        <DataGrid x:Name="ratingGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="191" Margin="92,10,0,0" Grid.Row="1"  VerticalAlignment="Top" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Width="640">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Имя игрока"/>
-                <DataGridTextColumn Header="     Кол-во здоровья"/>
-                <DataGridTextColumn Header="Всего собрано монет"/>
-                <DataGridTextColumn Header="Всего потрачено патронов"/>
-                <DataGridTextColumn Header="Сложность"/>
-                <DataGridTextColumn Header="        Время" Width="100"/>
+                <DataGridTextColumn Binding="{Binding name}" Header="Имя игрока"/>
+                <DataGridTextColumn Binding="{Binding health}" Header="     Кол-во здоровья"/>
+                <DataGridTextColumn Binding="{Binding coins}" Header="Всего собрано монет"/>
+                <DataGridTextColumn Binding="{Binding cartridges}" Header="Всего потрачено патронов"/>
+                <DataGridTextColumn Binding="{Binding complexity}" Header="Сложность"/>
+                <DataGridTextColumn Binding="{Binding time}" Header="        Время" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="1" HorizontalAlignment="Left" Margin="50,34,0,0" Grid.Row="1" VerticalAlignment="Top"/>

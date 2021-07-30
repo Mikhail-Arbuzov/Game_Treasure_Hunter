@@ -127,8 +127,8 @@ namespace Game_Treasure_Hunter
         MediaPlayer ninjaBossSounds = new MediaPlayer();
         MediaPlayer gameOverSound = new MediaPlayer();
 
-        //SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();//для озвучки текста
-        //PromptBuilder promptBuilderPlayer = new PromptBuilder(); // для настройки произношения текста игроком
+        
+        
         //PromptStyle promptStyleStrikeStone = new PromptStyle();// настройка стиля речи при ударе камнем 
        
         int counterCartridges = 0;// счетчик для счета всех патронов
