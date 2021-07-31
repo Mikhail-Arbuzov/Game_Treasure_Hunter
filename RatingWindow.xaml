@@ -28,21 +28,21 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="OnNormalButton" Content="On normal" HorizontalAlignment="Left" Margin="306,144,0,0" VerticalAlignment="Top" Width="83" Height="41">
+        <Button x:Name="OnNormalButton" Content="On normal" HorizontalAlignment="Left" Margin="306,144,0,0" VerticalAlignment="Top" Width="83" Height="41" Click="OnNormalButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="OnHardButton" Content="On heavy" HorizontalAlignment="Left" Margin="436,144,0,0" VerticalAlignment="Top" Width="83" Height="41">
+        <Button x:Name="OnHardButton" Content="On heavy" HorizontalAlignment="Left" Margin="436,144,0,0" VerticalAlignment="Top" Width="83" Height="41" Click="OnHardButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="AllOptionsButton" Content="All options" HorizontalAlignment="Left" Margin="566,144,0,0" VerticalAlignment="Top" Width="83" Height="41">
+        <Button x:Name="AllOptionsButton" Content="All options" HorizontalAlignment="Left" Margin="566,144,0,0" VerticalAlignment="Top" Width="83" Height="41" Click="AllOptionsButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
