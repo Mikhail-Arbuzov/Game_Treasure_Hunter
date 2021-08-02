@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +25,9 @@ namespace Game_Treasure_Hunter
     {
         GameWindow gameWindow = new GameWindow();
         MediaPlayer songMenu;
-       
+
+        string connectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Programs\Game_Treasure_Hunter\Database\GameDB.mdf;Integrated Security=True";
+
 
         public MainWindow()
         {
@@ -110,6 +114,44 @@ namespace Game_Treasure_Hunter
         {
             songMenu.Stop();
             gameWindow.turnOffsong = true;
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataTable data;
+            string sqlRequest = String.Format("SELECT control, action FROM Keys");
+
+            using (SqlConnection connection2 = new SqlConnection(connectionStr))
+            {
+                await connection2.OpenAsync();
+                SqlCommand cmd = new SqlCommand(sqlRequest, connection2);
+                using (SqlDataReader reader5 = await cmd.ExecuteReaderAsync())
+                {
+                    if (reader5.HasRows)//проверка данных
+                    {
+                        while (await reader5.ReadAsync()) //построчно считываем данные
+                        {
+                            Control controlKeys = new Control()
+                            {
+                                control = reader5.GetString(0),
+                                action = reader5.GetString(1)
+                            };
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Данных нет! ", "База данных", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        
+                    }
+                }
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlRequest, connection2);
+                data = new DataTable();
+                sqlDataAdapter.Fill(data);
+                controlGrid.ItemsSource = data.DefaultView;
+            }
+
+          
         }
 
         //выход из игры при нажатии на красный крестик....Не корректно взаимодействует с другими окнами приложения

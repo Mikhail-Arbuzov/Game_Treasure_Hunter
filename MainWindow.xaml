@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Game_Treasure_Hunter"
         mc:Ignorable="d"
-        Title="Menu" Height="450" Width="800">
+        Title="Menu" Height="450" Width="800" Loaded="MainWindow_Loaded">
     
     <Grid Margin="0,0,-0.4,0">
         <Grid.Background>
@@ -37,10 +37,10 @@
                     </StackPanel>
                 </Expander.Header>
 
-                <DataGrid  Name ="controlGrid" VerticalScrollBarVisibility="Auto">
+                <DataGrid  Name ="controlGrid" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="             Клавиши" Width="180"/>
-                        <DataGridTextColumn Header="                             Действие" Width="260"/>
+                        <DataGridTextColumn Binding="{Binding control}" Header="     Клавиши" Width="90"/>
+                        <DataGridTextColumn Binding="{Binding action}" Header="                                      Действие" Width="390"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Expander>

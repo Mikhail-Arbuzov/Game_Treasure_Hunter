@@ -81,6 +81,7 @@
     <Compile Include="Characters\Troll.cs" />
     <Compile Include="Characters\Wolf.cs" />
     <Compile Include="Characters\Snake.cs" />
+    <Compile Include="Entities\Control.cs" />
     <Compile Include="RatingWindow.xaml.cs">
       <DependentUpon>RatingWindow.xaml</DependentUpon>
     </Compile>
