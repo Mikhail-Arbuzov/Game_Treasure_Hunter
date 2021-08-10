@@ -697,9 +697,6 @@
     <Resource Include="Sprites\SpritesWolf\Wolf.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="back.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\treeOne1.png" />
   </ItemGroup>
   <ItemGroup>
@@ -712,6 +709,7 @@
     <Resource Include="Images\Bush.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="backgroundForest2.jpg" />
     <Content Include="Database\GameDB.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>GameDB.mdf</DependentUpon>
