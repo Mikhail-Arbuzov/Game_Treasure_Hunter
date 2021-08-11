@@ -6,61 +6,114 @@
         xmlns:local="clr-namespace:Game_Treasure_Hunter"
         mc:Ignorable="d"
         Title="RatingWindow" Height="450" Width="800"  WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <LinearGradientBrush x:Key ="dataGridStyleGradient" EndPoint="0,1">
+            <GradientStop Color="#ff9933" Offset="0.1"/>
+            <GradientStop Color="#ffff00" Offset="1.0"/>
+        </LinearGradientBrush>
+    </Window.Resources>
     <Grid>
-
+        <Grid.Background>
+            <ImageBrush ImageSource ="ImagesMenu\backgroundDesert2.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height ="200"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Content="Введите имя нового игрока:" HorizontalAlignment="Left" Margin="195,31,0,0" VerticalAlignment="Top"/>
+        <Label Content="Введите имя нового игрока:" HorizontalAlignment="Left" Margin="195,31,0,0" VerticalAlignment="Top" FontSize="13" FontFamily="Times New Roman Bold Italic" Foreground="White"/>
         <TextBox x:Name="NewNameText" HorizontalAlignment="Left" Height="23" Margin="365,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="AddRatingButton" Content="Добавить в рейтинг" HorizontalAlignment="Left" Margin="517,31,0,0" VerticalAlignment="Top" Width="117" Height="26" Click="AddRatingButton_Click"/>
-        <Label Content="Введите имя игрока:" HorizontalAlignment="Left" Margin="195,73,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="AddRatingButton" Content="Добавить в рейтинг"  HorizontalAlignment="Left" Margin="517,31,0,0" VerticalAlignment="Top" Width="117" Height="26" Click="AddRatingButton_Click">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0.5,1" EndPoint="0.5,0">
+                    <GradientStop Color="Gray" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Label Content="Введите имя игрока:" HorizontalAlignment="Left" Margin="195,73,0,0" VerticalAlignment="Top" FontSize="13" FontFamily="Times New Roman Bold Italic" Foreground="White"/>
         <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="23" Margin="323,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162"/>
-        <Button x:Name="UpdateRatingButton" Content="Обновить рейтинг" HorizontalAlignment="Left" Margin="517,74,0,0" VerticalAlignment="Top" Width="117" Height="26" Click="UpdateRatingButton_Click"/>
+        <Button x:Name="UpdateRatingButton" Content="Обновить рейтинг" HorizontalAlignment="Left" Margin="517,74,0,0" VerticalAlignment="Top" Width="117" Height="26" Click="UpdateRatingButton_Click">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0.5,1" EndPoint="0.5,0">
+                    <GradientStop Color="Gray" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
-        <Label Content="Рейтинг игроков в зависимости от уровня сложности игры" HorizontalAlignment="Left" Margin="195,114,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
-        <Button x:Name="OnEasyButton" Content="On easy" HorizontalAlignment="Left" Margin="176,144,0,0" VerticalAlignment="Top" Width="83" Height="41" Click="OnEasyButton_Click">
+        <Label Content="Рейтинг игроков в зависимости от уровня сложности игры" HorizontalAlignment="Left" Margin="195,114,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="White"/>
+        <Button x:Name="OnEasyButton" Content="On easy" FontWeight="Bold" Foreground="Gray"  HorizontalAlignment="Left" Margin="176,144,0,0" VerticalAlignment="Top" Width="83" Height="41" Click="OnEasyButton_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#43c6ac" Offset="0"/>
+                    <GradientStop Color="#f8ffae" Offset="1"/>
+                    <!--<GradientStop Color="#ffffff" Offset="1.1"/>-->
+                </LinearGradientBrush>
+            </Button.Background>
         </Button>
-        <Button x:Name="OnNormalButton" Content="On normal" HorizontalAlignment="Left" Margin="306,144,0,0" VerticalAlignment="Top" Width="83" Height="41" Click="OnNormalButton_Click">
+        <Button x:Name="OnNormalButton" Content="On normal" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Left" Margin="306,144,0,0" VerticalAlignment="Top" Width="83" Height="41" Click="OnNormalButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#ae8ba1" Offset="0"/>
+                    <GradientStop Color="#f2ecb6" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
         </Button>
-        <Button x:Name="OnHardButton" Content="On heavy" HorizontalAlignment="Left" Margin="436,144,0,0" VerticalAlignment="Top" Width="83" Height="41" Click="OnHardButton_Click">
+        <Button x:Name="OnHardButton" Content="On heavy" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Left" Margin="436,144,0,0" VerticalAlignment="Top" Width="83" Height="41" Click="OnHardButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#e3ff73" Offset="0"/>
+                    <GradientStop Color="#e27c36" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
         </Button>
-        <Button x:Name="AllOptionsButton" Content="All options" HorizontalAlignment="Left" Margin="566,144,0,0" VerticalAlignment="Top" Width="83" Height="41" Click="AllOptionsButton_Click">
+        <Button x:Name="AllOptionsButton" Content="All options" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Left" Margin="566,144,0,0" VerticalAlignment="Top" Width="83" Height="41" Click="AllOptionsButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#ead6ee" Offset="0"/>
+                    <GradientStop Color="#a0f1ea" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
         </Button>
-        <DataGrid x:Name="ratingGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="191" Margin="92,10,0,0" Grid.Row="1"  VerticalAlignment="Top" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Width="640">
+        <DataGrid x:Name="ratingGrid" AutoGenerateColumns="False" ColumnHeaderHeight="26" HorizontalAlignment="Left" Height="191" Margin="92,10,0,0" Grid.Row="1"  VerticalAlignment="Top" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+            <DataGrid.Resources>
+                <Style TargetType ="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value ="{StaticResource dataGridStyleGradient}"/>
+                </Style>
+            </DataGrid.Resources>
+
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding name}" Header="Имя игрока"/>
-                <DataGridTextColumn Binding="{Binding health}" Header="     Кол-во здоровья"/>
-                <DataGridTextColumn Binding="{Binding coins}" Header="Всего собрано монет"/>
-                <DataGridTextColumn Binding="{Binding cartridges}" Header="Всего потрачено патронов"/>
-                <DataGridTextColumn Binding="{Binding complexity}" Header="Сложность"/>
-                <DataGridTextColumn Binding="{Binding time}" Header="        Время" Width="100"/>
+                <DataGridTextColumn Binding="{Binding health}" Header="  Кол-во здоровья"/>
+                <DataGridTextColumn Binding="{Binding coins}" Header=" Всего собрано монет"/>
+                <DataGridTextColumn Binding="{Binding cartridges}" Header=" Всего потрачено патронов"/>
+                <DataGridTextColumn Binding="{Binding complexity}" Header="  Сложность"/>
+                <DataGridTextColumn Binding="{Binding time}" Header="     Время" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="1" HorizontalAlignment="Left" Margin="50,34,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="2" HorizontalAlignment="Left" Margin="50,60,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="3" HorizontalAlignment="Left" Margin="50,86,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="1" HorizontalAlignment="Left" Margin="71,35,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.487,0.312" Foreground="Yellow" FontSize="10" FontWeight="Bold"/>
+        <Label Content="2" HorizontalAlignment="Left" Margin="71,54,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" FontSize="10" FontWeight="Bold" RenderTransformOrigin="0.488,0.833"/>
+        <Label Content="3" HorizontalAlignment="Left" Margin="71,75,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="Red" FontSize="10" FontWeight="Bold"/>
     </Grid>
 </Window>
