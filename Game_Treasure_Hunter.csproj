@@ -709,6 +709,7 @@
     <Resource Include="Images\Bush.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ImagesMenu\log-out.png" />
     <Resource Include="ImagesMenu\backgroundDesert2.jpg" />
     <Resource Include="backgroundForest2.jpg" />
     <Content Include="Database\GameDB.ldf">

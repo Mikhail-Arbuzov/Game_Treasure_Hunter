@@ -396,5 +396,11 @@ namespace Game_Treasure_Hunter
             }
 
         }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();// выход из приложения
+        }
+
     }
 }
