@@ -37,7 +37,7 @@
                     </StackPanel>
                 </Expander.Header>
 
-                <DataGrid  Name ="controlGrid" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto">
+                <DataGrid  Name ="controlGrid" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" VerticalGridLinesBrush="Black" RowBackground="#e0ffff">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding control}" Header="     Клавиши" Width="90"/>
                         <DataGridTextColumn Binding="{Binding action}" Header="                                      Действие" Width="390"/>
