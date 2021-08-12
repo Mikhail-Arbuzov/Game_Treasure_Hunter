@@ -126,11 +126,13 @@ namespace Game_Treasure_Hunter
         MediaPlayer ninjaSounds = new MediaPlayer();
         MediaPlayer ninjaBossSounds = new MediaPlayer();
         MediaPlayer gameOverSound = new MediaPlayer();
+        MediaPlayer raneniePlayer = new MediaPlayer();
+        MediaPlayer raneniePlayer2 = new MediaPlayer();
 
-        
-        
+
+
         //PromptStyle promptStyleStrikeStone = new PromptStyle();// настройка стиля речи при ударе камнем 
-       
+
         int counterCartridges = 0;// счетчик для счета всех патронов
         int counterCoins = 0;//счетчик для счета всех собранных монет в игре
         public string choiceComplexity; //выбор сложности игры
@@ -716,6 +718,9 @@ namespace Game_Treasure_Hunter
                         ninjaSounds.Close();
                         ninjaBossSounds.Close();
                         gameOverSound.Close();
+                        raneniePlayer.Close();
+                        raneniePlayer2.Close();
+
                         Application.Current.Shutdown();
                         break;
                     case MessageBoxResult.No:

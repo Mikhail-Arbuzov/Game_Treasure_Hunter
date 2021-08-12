@@ -748,11 +748,11 @@
     <Content Include="GameSounds\levelstop.mp3" />
     <Content Include="GameSounds\playerBol.mp3" />
     <Content Include="GameSounds\playerShoot.mp3" />
+    <Content Include="GameSounds\ranen.mp3" />
+    <Content Include="GameSounds\ranenBullet.mp3" />
     <Content Include="GameSounds\ranenie1.mp3" />
-    <Content Include="GameSounds\ranenie2.mp3" />
     <Content Include="GameSounds\robotAttack.mp3" />
     <Content Include="GameSounds\robotdie.mp3" />
-    <Content Include="GameSounds\robotshoot.mp3" />
     <Content Include="GameSounds\rockfall.mp3" />
     <Content Include="GameSounds\RockPrivet.wma" />
     <Content Include="GameSounds\runrobot.mp3" />

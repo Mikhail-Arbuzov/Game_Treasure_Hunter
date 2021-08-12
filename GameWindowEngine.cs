@@ -720,6 +720,10 @@ namespace Game_Treasure_Hunter
                     if (playerHitBox.IntersectsWith(hogHitBox2))
                     {
                         player.Health -= 2;
+                        //звук ранения игрока 
+                        raneniePlayer2.Open(new Uri(@"../../GameSounds/ranen.mp3", UriKind.Relative));
+                        raneniePlayer2.Position = new TimeSpan(0, 0, 0);
+                        raneniePlayer2.Play();
                         playerSpriteIndex += 0.5;
                         if (playerSpriteIndex > 10)
                         {
@@ -738,6 +742,11 @@ namespace Game_Treasure_Hunter
                     if (playerHitBox.IntersectsWith(birdHitBox2))
                     {
                         player.Health -= 1;
+                        //звук ранения игрока 
+                        raneniePlayer2.Open(new Uri(@"../../GameSounds/ranen.mp3", UriKind.Relative));
+                        raneniePlayer2.Position = new TimeSpan(0, 0, 0);
+                        raneniePlayer2.Play();
+
                         playerSpriteIndex += 0.5;
                         if (playerSpriteIndex > 10)
                         {
@@ -1481,7 +1490,11 @@ namespace Game_Treasure_Hunter
                     if (playerHitBox.IntersectsWith(enemyBulletHitBox))
                     {
                         player.Health -= 2;
-                        
+                        //звук ранения игрока от пули
+                        raneniePlayer.Open(new Uri(@"../../GameSounds/ranenBullet.mp3", UriKind.Relative));
+                        raneniePlayer.Position = new TimeSpan(0, 0, 0);
+                        raneniePlayer.Play();
+
                         playerSpriteIndex += 0.5;
                         if (playerSpriteIndex > 10)
                         {
@@ -1517,6 +1530,11 @@ namespace Game_Treasure_Hunter
                     if (playerHitBox.IntersectsWith(enemyBulletHitBox2))
                     {
                         player.Health -= 2;
+                        //звук ранения игрока от пули
+                        raneniePlayer.Open(new Uri(@"../../GameSounds/ranenBullet.mp3", UriKind.Relative));
+                        raneniePlayer.Position = new TimeSpan(0, 0, 0);
+                        raneniePlayer.Play();
+
                         playerSpriteIndex += 0.5;
                         if (playerSpriteIndex > 10)
                         {
@@ -1549,6 +1567,11 @@ namespace Game_Treasure_Hunter
                     if (playerHitBox.IntersectsWith(enemyBulletHitBox3))
                     {
                         player.Health -= 2;
+                        //звук ранения игрока от пули
+                        raneniePlayer.Open(new Uri(@"../../GameSounds/ranenBullet.mp3", UriKind.Relative));
+                        raneniePlayer.Position = new TimeSpan(0, 0, 0);
+                        raneniePlayer.Play();
+
                         playerSpriteIndex += 0.5;
                         if (playerSpriteIndex > 10)
                         {
@@ -1583,6 +1606,11 @@ namespace Game_Treasure_Hunter
                     if (playerHitBox.IntersectsWith(lazerHitBox))
                     {
                         player.Health -= 2;
+                        //звук ранения игрока 
+                        raneniePlayer2.Open(new Uri(@"../../GameSounds/ranen.mp3", UriKind.Relative));
+                        raneniePlayer2.Position = new TimeSpan(0, 0, 0);
+                        raneniePlayer2.Play();
+
                         itemRemover.Add(x);
                         playerSpriteIndex += 0.5;
                         if (playerSpriteIndex > 10)
@@ -1618,6 +1646,11 @@ namespace Game_Treasure_Hunter
                     if (playerHitBox.IntersectsWith(kunaiHitBox))
                     {
                         player.Health -= 2;
+                        //звук ранения игрока 
+                        raneniePlayer2.Open(new Uri(@"../../GameSounds/ranen.mp3", UriKind.Relative));
+                        raneniePlayer2.Position = new TimeSpan(0, 0, 0);
+                        raneniePlayer2.Play();
+
                         itemRemover.Add(x);
                         playerSpriteIndex += 0.5;
                         if (playerSpriteIndex > 10)
@@ -1650,6 +1683,11 @@ namespace Game_Treasure_Hunter
                     if (playerHitBox.IntersectsWith(arrowHitBox))
                     {
                         player.Health -= 2;
+                        //звук ранения игрока 
+                        raneniePlayer2.Open(new Uri(@"../../GameSounds/ranen.mp3", UriKind.Relative));
+                        raneniePlayer2.Position = new TimeSpan(0, 0, 0);
+                        raneniePlayer2.Play();
+
                         itemRemover.Add(x);
                         playerSpriteIndex += 0.5;
                         if (playerSpriteIndex > 10)
@@ -1671,6 +1709,11 @@ namespace Game_Treasure_Hunter
                     Rect stoneHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (playerHitBox.IntersectsWith(stoneHitBox))
                     {
+                        //звук ранения игрока 
+                        raneniePlayer2.Open(new Uri(@"../../GameSounds/ranen.mp3", UriKind.Relative));
+                        raneniePlayer2.Position = new TimeSpan(0, 0, 0);
+                        raneniePlayer2.Play();
+
                         itemRemover.Add(x);
                         player.Health -= 4;
                         playerSpriteIndex += 0.5;
@@ -1870,6 +1913,8 @@ namespace Game_Treasure_Hunter
                 bearSound.Stop();
                 birdSound.Stop();
                 hogSound.Stop();
+                raneniePlayer.Stop();
+                raneniePlayer2.Stop();
 
             }
             
