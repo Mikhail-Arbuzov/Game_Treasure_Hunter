@@ -27,6 +27,9 @@ namespace Game_Treasure_Hunter
         bool successfully;
         public Result result;// переменная для сбора данных из игры и отправки их в таблицу БД
         
+        MediaPlayer theEndGame = new MediaPlayer();//звук об окончании игры
+
+        MediaPlayer buttonMedia = new MediaPlayer();//звук кнопки All options
 
         string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Programs\Game_Treasure_Hunter\Database\GameDB.mdf;Integrated Security=True";
 
@@ -36,7 +39,8 @@ namespace Game_Treasure_Hunter
         {
             InitializeComponent();
             result = new Result();
-            
+            theEndGame.Open(new Uri(@"../../GameSounds/theEnd.mp3", UriKind.Relative));
+            theEndGame.Play();
         }
 
         private void AddRatingButton_Click(object sender, RoutedEventArgs e)
@@ -156,6 +160,8 @@ namespace Game_Treasure_Hunter
 
         private void OnEasyButton_Click(object sender, RoutedEventArgs e)
         {
+            //theEndGame.Stop();// выключение лишних звуков
+            
             DataTable dt; // переменная автаномная часть структуры бд ввиде таблицы  
             PromptBuilder promptBuilder = new PromptBuilder(); // для настройки произношения текста 
 
@@ -227,6 +233,7 @@ namespace Game_Treasure_Hunter
 
         private void OnNormalButton_Click(object sender, RoutedEventArgs e)
         {
+            //theEndGame.Stop();// выключение лишних звуков
             DataTable dataTable;
             PromptBuilder promptBuilder2 = new PromptBuilder();
             string sqlExpression4 = String.Format("SELECT name, health, coins, cartridges, complexity, time FROM Results WHERE complexity = 'Normal' ORDER BY time ASC, cartridges ASC, coins DESC ");
@@ -284,6 +291,7 @@ namespace Game_Treasure_Hunter
 
         private void OnHardButton_Click(object sender, RoutedEventArgs e)
         {
+            //theEndGame.Stop();// выключение лишних звуков
             DataTable dataTable2;
             PromptBuilder promptBuilder3 = new PromptBuilder();
             string sqlExpression5 = String.Format("SELECT name, health, coins, cartridges, complexity, time FROM Results WHERE complexity = 'Hard' ORDER BY time ASC, cartridges ASC, coins DESC ");
@@ -341,6 +349,12 @@ namespace Game_Treasure_Hunter
 
         private void AllOptionsButton_Click(object sender, RoutedEventArgs e)
         {
+            //theEndGame.Stop();// выключение лишних звуков
+
+            buttonMedia.Open(new Uri(@"../../GameSounds/levelstop.mp3", UriKind.Relative));
+            buttonMedia.Position = new TimeSpan(0, 0, 0);
+            buttonMedia.Play();
+
             DataTable dataTable3;
             PromptBuilder promptBuilder4 = new PromptBuilder();
             string sqlExpression6 = String.Format("SELECT name, health, coins, cartridges, complexity, time FROM Results ORDER BY cartridges ASC, time ASC, coins DESC ");
@@ -386,6 +400,7 @@ namespace Game_Treasure_Hunter
                     Rate = PromptRate.Medium,// средняя скорость речи
                     Volume = PromptVolume.Loud // высокая громкость речи
                 });
+                promptBuilder4.AppendBreak(TimeSpan.FromSeconds(3));//пауза чтоб проиграла мелодия кнопки
                 promptBuilder4.AppendText("Чемпион");//добавляю текст
                 promptBuilder4.AppendBreak(TimeSpan.FromMilliseconds(200));//пауза
                 promptBuilder4.AppendText(String.Format("{0}", firstCell4), PromptEmphasis.Strong);// называет имя из поля name
@@ -393,12 +408,14 @@ namespace Game_Treasure_Hunter
 
                 speechSynthesizer.SpeakAsync(promptBuilder4);//воспроизведение речи
 
+
             }
 
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
+            theEndGame.Close();// выключение лишних звуков
             Application.Current.Shutdown();// выход из приложения
         }
 

@@ -1872,7 +1872,7 @@ namespace Game_Treasure_Hunter
                             birdSound.Stop();
                             hogSound.Stop();
                             healthScore.Foreground = Brushes.Green;
-                            ShowGameOver("Победа!!!\nСокровища\nнайдены!");
+                            ShowGameOver("Победа!!!\nСокровища\nнайдены!\nЗакройте окно \nрейтинга");
                             //открывается окно с таблицей рейтинга
                             RatingWindow ratingWindow = new RatingWindow();
                             //передача данных из игры 

@@ -21,7 +21,7 @@ namespace Game_Treasure_Hunter
         {
             gameOver = true;
             gameTimer.Stop();
-            healthScore.Content = "Здоровье: " + player.Health + Environment.NewLine + msg + Environment.NewLine + "Нажмите R" + Environment.NewLine + "чтобы начать игру заново" + Environment.NewLine + "заново";
+            healthScore.Content = "Здоровье: " + player.Health + Environment.NewLine + msg + Environment.NewLine + "Нажмите R" + Environment.NewLine + "чтобы начать игру" + Environment.NewLine + "заново";
         }
 
         private void SnowFalls(double a)
