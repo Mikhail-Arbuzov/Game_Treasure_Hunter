@@ -452,7 +452,7 @@ namespace Game_Treasure_Hunter
             //door1.Stroke = Brushes.Red;
             player.IdleSprites(1);
             hero.Fill = player.playerSprite;
-            hero.Stroke = Brushes.Black;
+            hero.Stroke = Brushes.Gray;//выделение границ прямоугольника в котором установлен спрайт игрока
             enemy.RunSprites(1);
             enemy1.Fill = enemy.enemySprite;
             shooterOne.RunSprites(1);

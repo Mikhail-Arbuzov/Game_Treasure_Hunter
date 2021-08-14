@@ -25,8 +25,8 @@
                <Rectangle x:Name="spike4" Tag="spike" Fill="Aqua" Height="64" Canvas.Left="653" Canvas.Top="731" Width="48" RenderTransformOrigin="0.342,0.644"/>
                <Rectangle x:Name="platform1" Tag="platforma" Fill="Pink" Height="96" Canvas.Left="410" Canvas.Top="603" Width="180"/>
                <Rectangle x:Name="platform2" Tag="platforma" Fill="Pink" Height="96" Canvas.Left="604" Canvas.Top="350" Width="180"/>
-               <Rectangle x:Name="platform3" Tag="platforma" Fill="Pink" Height="104" Canvas.Left="151" Canvas.Top="258" Width="384"/>
-               <Rectangle x:Name="platform4" Tag="platforma" Fill="Pink" Height="104" Canvas.Left="799" Canvas.Top="181" Width="384"/>
+               <Rectangle x:Name="platform3" Tag="platforma" Fill="Pink" Height="104" Canvas.Left="151" Canvas.Top="258" Width="350"/>
+               <Rectangle x:Name="platform4" Tag="platforma" Fill="Pink" Height="104" Canvas.Left="799" Canvas.Top="181" Width="350"/>
                <Rectangle x:Name="platform5" Tag="platforma" Fill="Pink" Height="104" Canvas.Left="1339" Canvas.Top="301" Width="256"/>
                <Rectangle x:Name="platform6" Tag="platforma" Fill="Pink" Height="104" Canvas.Left="1078" Canvas.Top="342" Width="256"/>
                <Rectangle x:Name="snow" Fill="Gray" Height="64" Canvas.Left="571" Width="1024"/>
@@ -134,7 +134,7 @@
                <!--<Rectangle x:Name="tree" Fill="#FF2BE2D8" Height="232" Canvas.Left="3485" Canvas.Top="254" Width="29"/>-->
                <!--<Rectangle x:Name="tree2" Fill="#FF2BE2D8" Height="261" Canvas.Left="4724" Canvas.Top="263" Width="21"/>-->
 
-               <Rectangle x:Name="hero"  Fill="Red" Height="128" Canvas.Left="31" Canvas.Top="422" Width="128"/>
+               <Rectangle x:Name="hero"  Fill="Red" Height="128" Canvas.Left="31" Canvas.Top="422" Width="100"/>
                <Image Source="Images/treeOne1.png" Width ="340" Height="265" Canvas.Left="3338" Canvas.Top="250"/>
                <Image Source="Images/korni.png" Width ="278" Height="76" Canvas.Left="3368" Canvas.Top="427"/>
 
