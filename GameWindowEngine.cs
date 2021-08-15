@@ -1338,6 +1338,17 @@ namespace Game_Treasure_Hunter
                     //}
                 }
 
+                if ((string)x.Tag == "ground2")
+                {
+                    Rect groundHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+                    if (playerHitBox.IntersectsWith(groundHitBox))
+                    {
+                        player.JumpSpeed = 0;
+                        jumping = false;
+                        Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
+                    }
+                }
+
                 if ((string)x.Tag == "platforma")
                 {
                     Rect platformHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
@@ -1744,6 +1755,14 @@ namespace Game_Treasure_Hunter
                         if (playerHitBox.IntersectsWith(surfaceHitBox))
                         {
                             Canvas.SetLeft(hero, Canvas.GetLeft(hero) + horizontalSpeedPlatform2);
+                        }
+                    }
+
+                    if (x.Name.ToString() == "surface14")
+                    {
+                        if (playerHitBox.IntersectsWith(surfaceHitBox))
+                        {
+                            Canvas.SetLeft(hero, Canvas.GetLeft(hero) + horizontalSpeedPlatform);
                         }
                     }
                 }

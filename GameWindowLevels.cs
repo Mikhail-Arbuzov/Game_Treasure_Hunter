@@ -23,22 +23,24 @@ namespace Game_Treasure_Hunter
         private void MotionLevelOne()
         {
             Canvas.SetLeft(platform1, Canvas.GetLeft(platform1) + horizontalSpeedPlatform); //настроил
-            if (Canvas.GetLeft(platform1) > 604)
+            Canvas.SetLeft(surface14, Canvas.GetLeft(surface14) + horizontalSpeedPlatform);
+            if (Canvas.GetLeft(platform1) > 604 && Canvas.GetLeft(surface14) > 604)
             {
                 horizontalSpeedPlatform--;
             }
 
-            if (Canvas.GetLeft(platform1) < 410)
+            if (Canvas.GetLeft(platform1) < 410 && Canvas.GetLeft(surface14) < 410)
             {
                 horizontalSpeedPlatform++;
             }
 
             Canvas.SetTop(platform2, Canvas.GetTop(platform2) + verticalSpeedPlatform);
-            if (Canvas.GetTop(platform2) > 181)
+            Canvas.SetTop(surface15, Canvas.GetTop(surface15) + verticalSpeedPlatform);
+            if (Canvas.GetTop(platform2) > 181 && Canvas.GetTop(surface15) > 181)
             {
                 verticalSpeedPlatform = -verticalSpeedPlatform;
             }
-            if (Canvas.GetTop(platform2) > 350)
+            if (Canvas.GetTop(platform2) > 350 && Canvas.GetTop(surface15) > 350)
             {
                 verticalSpeedPlatform = -verticalSpeedPlatform;
             }
@@ -716,7 +718,8 @@ namespace Game_Treasure_Hunter
         private void MotionLevelThree()
         {
             Canvas.SetTop(platform9, Canvas.GetTop(platform9) - verticalSpeedPlatform);
-            if (Canvas.GetTop(platform9) < 381 || Canvas.GetTop(platform9) > 181)
+            Canvas.SetTop(surface17, Canvas.GetTop(surface17) - verticalSpeedPlatform);
+            if (Canvas.GetTop(platform9) < 381 || Canvas.GetTop(platform9) > 181 && Canvas.GetTop(surface17) < 381 || Canvas.GetTop(surface17) > 181)
             {
                 verticalSpeedPlatform = -verticalSpeedPlatform;
             }
