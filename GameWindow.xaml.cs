@@ -25,7 +25,7 @@ namespace Game_Treasure_Hunter
         bool gameOver;
         bool jumping;
         public bool jumpDown;//для включения и отключения прыжка вниз
-        double speedBullet = 10;
+        double speedBullet = 10;// скорость пули игрока
         Rect playerHitBox;// для проверки пересечения с другими игровыми объектами
         //для стирания элементов игры
         List<Rectangle> itemRemover = new List<Rectangle>();
@@ -59,15 +59,13 @@ namespace Game_Treasure_Hunter
         double robotSpriteIndex = 0;
         double trollSpriteIndex = 0;
         double snowSpriteIndex = 0;
-        //счетчики бонусов 
+        //счетчики бонусов в игре
         int score;
-        public int bulletsScore = 20;
+        public int bulletsScore = 20;// по умолчанию
         int gem;
 
-        TimeSpan counterTime = new TimeSpan();
-        //double countDie2 = 0;
-        //double countHurt = 0;
-
+        TimeSpan counterTime = new TimeSpan();//переменная для счетчика времени игры
+       
         public Player player;
         Wolf wolf;
         Bear bear;
@@ -91,7 +89,7 @@ namespace Game_Treasure_Hunter
         public bool turnOffsong = false;//для отключения фонового звука уровней
         public bool soundsGame = false;//запустить или отключить звуки из игры
         bool soundTrollRun = false;//для отключения звука хотьбы троля
-        //double timeStopSong = 0;
+        
         MediaPlayer backgroundMediaTwo = new MediaPlayer();
         MediaPlayer backgroundMediaThree = new MediaPlayer();
         MediaPlayer playerMedia = new MediaPlayer();
@@ -129,8 +127,6 @@ namespace Game_Treasure_Hunter
         MediaPlayer raneniePlayer = new MediaPlayer();
         MediaPlayer raneniePlayer2 = new MediaPlayer();
 
-        //PromptStyle promptStyleStrikeStone = new PromptStyle();// настройка стиля речи при ударе камнем 
-
         int counterCartridges = 0;// счетчик для счета всех патронов
         public int counterCoins = 0;//счетчик для счета всех собранных монет в игре
         public string choiceComplexity; //выбор сложности игры
@@ -141,9 +137,11 @@ namespace Game_Treasure_Hunter
             InitializeComponent();
            
             MyCanvas.Focus();
+
             gameTimer.Tick += GameEngine;
             gameTimer.Interval = TimeSpan.FromMilliseconds(20);
-            LoadingBackground();
+
+            LoadingBackground();// загрузка изображений фона уровней
             player = new Player();
             ninja = new Ninja();
             ninjaTwo = new Ninja();
@@ -161,6 +159,7 @@ namespace Game_Treasure_Hunter
             hog = new Hog("pack://application:,,,/Sprites/SpritesHog/m_zp.png", 120, 196, 120, "hog", 3, 0);
             bird = new Bird("pack://application:,,,/Sprites/SpritesBird/Bird_Black.png", 0, 96, 96, "bird", 4, 0);
             snake = new Snake("pack://application:,,,/Sprites/SpritesSnake/snake.png", 80, 80, 80, "snake", 4, 0);
+            // загрузка изображений животных в игре
             wolf.UploadingImage();
             wolf.InitPictures();
             MyCanvas.Children.Add(wolf.wolfOne);
@@ -181,7 +180,7 @@ namespace Game_Treasure_Hunter
             LoadingSounds();//метод по загрузке более продолжительных звуков в игре
         }
 
-        
+        //управление 
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
@@ -218,7 +217,6 @@ namespace Game_Treasure_Hunter
 
             if(e.Key == Key.Up && jumping == false)
             {
-                //goUp = true;
                 jumping = true;
                 player.ForceJump = 15;
                 player.JumpSpeed = -5;
@@ -324,7 +322,7 @@ namespace Game_Treasure_Hunter
                 bulletsScore--;
                 if(bulletsScore > 0)
                 {
-                    playerMedia.Open(new Uri(@"../../GameSounds/playerShoot.mp3", UriKind.Relative));
+                    playerMedia.Open(new Uri(@"../../GameSounds/playerShoot.mp3", UriKind.Relative));//звук выстрела из ружья игрока
                     playerMedia.Position = new TimeSpan(0, 0, 0);
                     playerMedia.Play();
                     MyCanvas.Children.Add(newBullet);
@@ -349,8 +347,6 @@ namespace Game_Treasure_Hunter
                 if(Keyboard.IsKeyDown(Key.Right))
                 {
                     hero.LayoutTransform = new ScaleTransform() { ScaleX = 1 };
-                    //speedBullet++;
-                    //Canvas.SetLeft(newBullet, Canvas.GetLeft(newBullet) + speedBullet);
                 }
                
             }
@@ -358,23 +354,11 @@ namespace Game_Treasure_Hunter
             if (e.Key == Key.Left)
             {
                 goLeft = false;
-                //playerSpriteIndex += 0.5;
-                //if (playerSpriteIndex > 10)
-                //    playerSpriteIndex = 1;
-
-                //player.IdleSprites(playerSpriteIndex);
-                //hero.Fill = player.playerSprite;
             }
 
             if (e.Key == Key.Right)
             {
                 goRight = false;
-                //playerSpriteIndex += 0.5;
-                //if (playerSpriteIndex > 10)
-                //    playerSpriteIndex = 1;
-
-                //player.IdleSprites(playerSpriteIndex);
-                //hero.Fill = player.playerSprite;
             }
         }
 
@@ -396,24 +380,29 @@ namespace Game_Treasure_Hunter
 
         private void StartGame()
         {
-            backgroundMedia.Open(new Uri(@"../../GameSounds/gory.mp3", UriKind.Relative));
-            backgroundMediaTwo.Open(new Uri(@"../../GameSounds/beloe_solnce_pustyni.mp3", UriKind.Relative));
-            backgroundMediaThree.Open(new Uri(@"../../GameSounds/forest.mp3", UriKind.Relative));
+            backgroundMedia.Open(new Uri(@"../../GameSounds/gory.mp3", UriKind.Relative));// фоновый звук в первом уровне
+            backgroundMediaTwo.Open(new Uri(@"../../GameSounds/beloe_solnce_pustyni.mp3", UriKind.Relative));// фоновый звук во втором уровне
+            backgroundMediaThree.Open(new Uri(@"../../GameSounds/forest.mp3", UriKind.Relative));// фоновый звук в третьем уровне
+            // начальное положение игрока при старте игры
             Canvas.SetLeft(hero, 31);
             Canvas.SetTop(hero, 422);
             //Canvas.SetLeft(hero, 3242);
             //Canvas.SetTop(hero, 632);
             //scroll.ScrollToHorizontalOffset(3200);
+
+            // визуальный уровень здоровья Босса
             healthProgress.Value = trollOne.Health;
             healthProgress.Minimum = 0;
             healthProgress.Maximum = 5;
             healthProgress.Foreground = Brushes.Purple;
-            healthProgress.Opacity = 0.2;
+            healthProgress.Opacity = 0.2;// прозрачный
+            // кол-во монет и сокровищ при старте игры
             score = 0;
-            //bulletsScore = 20;
             gem = 0;
+            // прыжек игрока и проигрыш при старте игры 
             gameOver = false;
             jumping = false;
+                                          // загрузка изображений всех элементов игры
             //первый уровень
             ImageBrush gr1 = new ImageBrush();
             gr1.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/ground1.png"));
@@ -445,11 +434,10 @@ namespace Game_Treasure_Hunter
             spike2.Fill = sp;
             spike3.Fill = sp;
             spike4.Fill = sp;
-            SnowFalls(1);
+            SnowFalls(1);// снег
             ImageBrush entry1 = new ImageBrush();
             entry1.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/doorClose.png"));
             door1.Fill = entry1;
-            //door1.Stroke = Brushes.Red;
             player.IdleSprites(1);
             hero.Fill = player.playerSprite;
             //hero.Stroke = Brushes.Gray;//выделение границ прямоугольника в котором установлен спрайт игрока
@@ -459,10 +447,9 @@ namespace Game_Treasure_Hunter
             shooter1.Fill = shooterOne.shooterSprite;
             trollOne.RunSprites(1);
             troll.Fill = trollOne.trollSprite;
-            //troll.Stroke = Brushes.Red;
+            // положение волка в игре
             Canvas.SetTop(wolf.wolfOne, 665);
             Canvas.SetLeft(wolf.wolfOne, 1012);
-            
             ImageBrush coin = new ImageBrush();
             coin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/coin.gif"));
             coin1.Fill = coin;
@@ -493,6 +480,7 @@ namespace Game_Treasure_Hunter
             ImageBrush bulletImage = new ImageBrush();
             bulletImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/bullets.png"));
             bulletsRect.Fill = bulletImage;
+
             //Второй уровень
             ImageBrush gr5 = new ImageBrush();
             gr5.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/groundLeft.png"));
@@ -541,13 +529,11 @@ namespace Game_Treasure_Hunter
             shooter2.Fill = shooterTwo.shooterSprite;
             terrorist.RunSprites(1);
             terror.Fill = terrorist.terroristSprite;
-            //terror.Stroke = Brushes.Black;
             robot.RunSprites(1);
             robo.Fill = robot.robotSprite;
-            //robo.Stroke = Brushes.Black;
+            // положение змеи в игре
             Canvas.SetTop(snake.snakeOne,571);
             Canvas.SetLeft(snake.snakeOne, 3097);
-            //MyCanvas.Children.Add(snake.snakeOne);
             coin11.Fill = coin;
             coin12.Fill = coin;
             coin13.Fill = coin;
@@ -568,6 +554,7 @@ namespace Game_Treasure_Hunter
             ImageBrush bsImage = new ImageBrush();
             bsImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/bloodstone_01.png"));
             bloodStone.Fill = bsImage;
+
             //Третий уровень
             ImageBrush gr8 = new ImageBrush();
             gr8.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/plleft.png"));
@@ -609,21 +596,15 @@ namespace Game_Treasure_Hunter
             ninjaBow.Fill = ninjaBoss.ninjaBossSprite;
             ninja.RunSprites(1);
             ninja1.Fill = ninja.ninjaSprite;
-            //bear.UploadingImage();
-            //bear.InitPictures();
+            // положение медведя в игре
             Canvas.SetTop(bear.bearOne,353);
             Canvas.SetLeft(bear.bearOne, 4400);
-            //MyCanvas.Children.Add(bear.bearOne);
-            //hog.UploadingImage();
-            //hog.InitPictures();
+            // положение кобана в игре
             Canvas.SetTop(hog.hogOne,593);
             Canvas.SetLeft(hog.hogOne, 4443);
-            //MyCanvas.Children.Add(hog.hogOne);
-            //bird.UploadingImage();
-            //bird.InitPictures();
+            // положение птицы в игре
             Canvas.SetTop(bird.birdOne, 53);
             Canvas.SetLeft(bird.birdOne,3227);
-            //MyCanvas.Children.Add(bird.birdOne);
             coin19.Fill = coin;
             coin20.Fill = coin;
             coin21.Fill = coin;
@@ -654,7 +635,7 @@ namespace Game_Treasure_Hunter
             //trImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/tree2.png"));
             //tree2.Fill = trImage;
 
-            gameTimer.Start();
+            gameTimer.Start(); //запуск работы DispatcherTimer
         }
 
         //закрытие всех аудиофайлов при (нажатии Х) выходе из окна игры
@@ -728,7 +709,7 @@ namespace Game_Treasure_Hunter
                 }
             }
         }
-
+        // загружга продолжительных аудиозвуков в игре
         private void LoadingSounds()
         {
             levelEnd.Open(new Uri(@"../../GameSounds/klubnichki.mp3", UriKind.Relative));
@@ -752,7 +733,7 @@ namespace Game_Treasure_Hunter
             gameOverSound.Open(new Uri(@"../../GameSounds/gameover.mp3", UriKind.Relative));
 
         }
-
+        // метод паузы в игре
         private void Pause()
         {
             if(gameTimer.IsEnabled)
@@ -788,23 +769,6 @@ namespace Game_Treasure_Hunter
                 }
             }
         }
-
-        
-
-
-
-        //private void Window_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if(Keyboard.IsKeyDown(Key.A))
-        //    {
-        //        scroll.LineLeft();
-        //    }
-
-        //    if(Keyboard.IsKeyDown(Key.D))
-        //    {
-        //        scroll.LineRight();
-        //    }
-        //}
 
     }
 }

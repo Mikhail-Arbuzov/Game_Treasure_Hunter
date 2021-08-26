@@ -17,6 +17,7 @@ namespace Game_Treasure_Hunter
 {
     public partial class GameWindow : Window
     {
+        //при проигрыше игрока
         private void ShowGameOver(string msg)
         {
             gameOver = true;
@@ -24,6 +25,7 @@ namespace Game_Treasure_Hunter
             healthScore.Content = "Здоровье: " + player.Health + Environment.NewLine + msg + Environment.NewLine + "Нажмите R" + Environment.NewLine + "чтобы начать игру" + Environment.NewLine + "заново";
         }
 
+        //снег
         private void SnowFalls(double a)
         {
             ImageBrush snowSprite = new ImageBrush();
@@ -42,6 +44,7 @@ namespace Game_Treasure_Hunter
             snow.Fill = snowSprite;
         }
 
+        //смена спрайтов камней и их положений
         private void MakeStones()
         {
             ImageBrush stoneSprite = new ImageBrush();
@@ -89,6 +92,7 @@ namespace Game_Treasure_Hunter
             }
         }
 
+        //пули врагов
         private void EnemyBulletMaker()
         {
             Rectangle enemyBullet = new Rectangle
@@ -212,6 +216,7 @@ namespace Game_Treasure_Hunter
             //}
         }
 
+        //стрелы врагов
         private void GunFireMaker()
         {
             ImageBrush lazerImage = new ImageBrush();

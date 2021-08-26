@@ -38,6 +38,7 @@ namespace Game_Treasure_Hunter
             songMenu.Play();
         }
 
+        // кнопка старта игры
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             songMenu.Stop();
@@ -54,6 +55,7 @@ namespace Game_Treasure_Hunter
             this.Close();
         }
 
+        // кнопка выхода из игры
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             songMenu.Close();//закрытие аудио файла из меню
@@ -116,6 +118,7 @@ namespace Game_Treasure_Hunter
             gameWindow.turnOffsong = true;
         }
 
+        //выгрузка данных из базы данных для таблицы управления
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             DataTable data;

@@ -19,6 +19,7 @@ namespace Game_Treasure_Hunter
     {
         private void GameEngine(object sender, EventArgs e)
         {
+            //изменяемые показатели в игре
             healthScore.Content = "Здоровье: " + player.Health;
             coinScore.Content = "Монеты: " + score;
             catridgesScore.Content = "Патроны: " + bulletsScore;
@@ -599,6 +600,7 @@ namespace Game_Treasure_Hunter
                 }
             }
 
+            //взаимодействие животных с игроком 
             foreach (var animal in MyCanvas.Children.OfType<Image>())
             {
                 if (animal is Image && (string)animal.Tag == "wolf")
@@ -607,9 +609,9 @@ namespace Game_Treasure_Hunter
 
                     if (wolfHitBox2.IntersectsWith(playerHitBox))
                     {
-                        //wolfAttackSounds.Position = new TimeSpan(0, 0, 1);
                         wolfAttackSounds.Play();
                         wolf.AttackRight();
+                        //движение при атаке волка не корректно был сработан
                         //if (Canvas.GetLeft(animal) < Canvas.GetLeft(ground4))
                         //{
                         //    wolf.AttackLeft();
@@ -649,15 +651,8 @@ namespace Game_Treasure_Hunter
                             bearAttackSound.Play();
                         }
                         bear.AttackLeft();
-                        //if (Canvas.GetLeft(animal) < Canvas.GetLeft(ground13))
-                        //{
-                        //    bear.AttackRight();
-                        //}
-                        //if (Canvas.GetLeft(animal) + animal.Width > Canvas.GetLeft(ground13) + ground13.Width)
-                        //{
-                           
-                        //}
                     }
+
                     if (playerHitBox.IntersectsWith(bearHitBox2))
                     {
                         player.Health -= 2;
@@ -688,13 +683,14 @@ namespace Game_Treasure_Hunter
                             snakeAttackSound.Play();
                         }
                         snake.AttackRight();
+                        //движение при атаке змеи не корректно был сработан
                         //if (Canvas.GetLeft(animal) > 3097)
                         //{
                         //    snake.AttackLeft();
                         //}
                         //if (Canvas.GetLeft(animal) < 2671)
                         //{
-
+                        //     snake.AttackRight();
                         //}
                     }
                     if (playerHitBox.IntersectsWith(snakeHitBox2))
@@ -757,6 +753,7 @@ namespace Game_Treasure_Hunter
                     }
                 }
             }
+
             //стрельба по врагам и объектам
             foreach (var y in MyCanvas.Children.OfType<Rectangle>())
             {
@@ -837,28 +834,7 @@ namespace Game_Treasure_Hunter
                                     //itemToRemover.Add(wf);
                                 }
                             }
-                            //if (wolfHitBox.IntersectsWith(playerHitBox))
-                            //{
-                            //    if (Canvas.GetLeft(wf) < Canvas.GetLeft(ground4))
-                            //    {
-                            //        wolf.AttackLeft();
-                            //    }
-                            //    if (Canvas.GetLeft(wf) + wf.Width > Canvas.GetLeft(ground4) + ground4.Width)
-                            //    {
-                            //        wolf.AttackRight();
-                            //    }
-                            //}
-                            //if (playerHitBox.IntersectsWith(wolfHitBox))
-                            //{
-                            //    player.Health -= 2;
-                            //    playerSpriteIndex += 0.5;
-                            //    if (playerSpriteIndex > 10)
-                            //    {
-                            //        playerSpriteIndex = 1;
-                            //    }
-                            //    player.HurtSprites(playerSpriteIndex);
-                            //    hero.Fill = player.playerSprite;
-                            //}
+                          
                         }
                     }
 
@@ -877,28 +853,7 @@ namespace Game_Treasure_Hunter
                                     itemToRemover.Add(be);
                                 }
                             }
-                            //if (bearHitBox.IntersectsWith(playerHitBox))
-                            //{
-                            //    if (Canvas.GetLeft(be) < Canvas.GetLeft(ground13))
-                            //    {
-                            //        bear.AttackLeft();
-                            //    }
-                            //    if (Canvas.GetLeft(be) + be.Width > Canvas.GetLeft(ground13) + ground13.Width)
-                            //    {
-                            //        bear.AttackRight();
-                            //    }
-                            //}
-                            //if (playerHitBox.IntersectsWith(bearHitBox))
-                            //{
-                            //    player.Health -= 2;
-                            //    playerSpriteIndex += 0.5;
-                            //    if (playerSpriteIndex > 10)
-                            //    {
-                            //        playerSpriteIndex = 1;
-                            //    }
-                            //    player.HurtSprites(playerSpriteIndex);
-                            //    hero.Fill = player.playerSprite;
-                            //}
+                            
                         }
                     }
 
@@ -917,28 +872,7 @@ namespace Game_Treasure_Hunter
                                     itemToRemover.Add(r);
                                 }
                             }
-                            //if (snakeHitBox.IntersectsWith(playerHitBox))
-                            //{
-                            //    if (Canvas.GetLeft(r) < 3097)
-                            //    {
-                            //        snake.AttackLeft();
-                            //    }
-                            //    if (Canvas.GetLeft(r) > 2671)
-                            //    {
-                            //        snake.AttackRight();
-                            //    }
-                            //}
-                            //if (playerHitBox.IntersectsWith(snakeHitBox))
-                            //{
-                            //    player.Health -= 2;
-                            //    playerSpriteIndex += 0.5;
-                            //    if (playerSpriteIndex > 10)
-                            //    {
-                            //        playerSpriteIndex = 1;
-                            //    }
-                            //    player.HurtSprites(playerSpriteIndex);
-                            //    hero.Fill = player.playerSprite;
-                            //}
+                           
                         }
                     }
 
@@ -957,17 +891,7 @@ namespace Game_Treasure_Hunter
                                     itemToRemover.Add(k);
                                 }
                             }
-                            //if (playerHitBox.IntersectsWith(hogHitBox))
-                            //{
-                            //    player.Health -= 2;
-                            //    playerSpriteIndex += 0.5;
-                            //    if (playerSpriteIndex > 10)
-                            //    {
-                            //        playerSpriteIndex = 1;
-                            //    }
-                            //    player.HurtSprites(playerSpriteIndex);
-                            //    hero.Fill = player.playerSprite;
-                            //}
+                           
                         }
                     }
 
@@ -986,17 +910,7 @@ namespace Game_Treasure_Hunter
                                     itemToRemover.Add(p);
                                 }
                             }
-                            //if (playerHitBox.IntersectsWith(birdHitBox))
-                            //{
-                            //    player.Health -= 1;
-                            //    playerSpriteIndex += 0.5;
-                            //    if (playerSpriteIndex > 10)
-                            //    {
-                            //        playerSpriteIndex = 1;
-                            //    }
-                            //    player.HurtSprites(playerSpriteIndex);
-                            //    hero.Fill = player.playerSprite;
-                            //}
+                            
                         }
                     }
 
@@ -1067,9 +981,6 @@ namespace Game_Treasure_Hunter
 
                                 if (shooterSpriteIndex > 6)
                                 {
-                                    //shooterSounds.Open(new Uri(@"../../GameSounds/ranenie2.mp3", UriKind.Relative));
-                                    //shooterSounds.Position = new TimeSpan(0, 0, 0);
-                                    //shooterSounds.Play();
                                     shooterOne.Health -= 1;
                                 }
                                 if (shooterSpriteIndex > 10)
@@ -1314,6 +1225,7 @@ namespace Game_Treasure_Hunter
                     }
                 }
             }
+
             //Взаимодействие игрока с элементами игры
             foreach (var x in MyCanvas.Children.OfType<Rectangle>())
             {
@@ -1322,7 +1234,6 @@ namespace Game_Treasure_Hunter
                     Rect groundHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (playerHitBox.IntersectsWith(groundHitBox))
                     {
-                        //player.ForceJump = 8;
                         player.JumpSpeed = 0;
                         jumping = false;
                         Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
@@ -1357,7 +1268,6 @@ namespace Game_Treasure_Hunter
                         if (playerHitBox.IntersectsWith(platformHitBox))
                         {
                             player.ForceJump = 8;
-                            //player.JumpSpeed = 0;
                             Canvas.SetTop(hero, Canvas.GetTop(x) - hero.Height);
                         }
                     }
@@ -1370,10 +1280,6 @@ namespace Game_Treasure_Hunter
                             Canvas.SetLeft(hero, Canvas.GetLeft(hero) + horizontalSpeedPlatform);
                         }
                     }
-
-
-
-
 
                     //if (x.Name.ToString() == "platform7")
                     //{
@@ -1858,7 +1764,6 @@ namespace Game_Treasure_Hunter
                         {
                             if (!turnOffsong)
                             {
-                                //backgroundMediaTwo.Stop();
                                 backgroundMediaThree.Play();
                             }
                             backgroundLevel3.Focusable = true;
@@ -2025,6 +1930,7 @@ namespace Game_Treasure_Hunter
                 //}
             }
 
+            // удаление элементов игры
             foreach (Rectangle item in itemRemover)
             {
                 MyCanvas.Children.Remove(item);

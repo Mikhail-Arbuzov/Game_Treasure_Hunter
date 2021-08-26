@@ -22,7 +22,8 @@ namespace Game_Treasure_Hunter
     {
         private void MotionLevelOne()
         {
-            Canvas.SetLeft(platform1, Canvas.GetLeft(platform1) + horizontalSpeedPlatform); //настроил
+            //движение платформ
+            Canvas.SetLeft(platform1, Canvas.GetLeft(platform1) + horizontalSpeedPlatform); 
             Canvas.SetLeft(surface14, Canvas.GetLeft(surface14) + horizontalSpeedPlatform);
             if (Canvas.GetLeft(platform1) > 604 && Canvas.GetLeft(surface14) > 604)
             {
@@ -348,6 +349,7 @@ namespace Game_Treasure_Hunter
 
         private void MotionLevelTwo()
         {
+            //движение штыков
             Canvas.SetTop(spike5, Canvas.GetTop(spike5) - verticalSpeedSpike);
 
             if (Canvas.GetTop(spike5) < 656)
@@ -681,6 +683,7 @@ namespace Game_Treasure_Hunter
                 robo.Fill = robot.robotSprite;
             }
 
+            //движение змеи
             foreach (var s in MyCanvas.Children.OfType<Image>())
             {
                 if ((string)s.Tag == "snake")
@@ -701,7 +704,7 @@ namespace Game_Treasure_Hunter
                     //    snake.Speed = -snake.Speed;
                     //}
 
-                        if (Canvas.GetLeft(s) > 3097)
+                    if (Canvas.GetLeft(s) > 3097)
                     {
                         snake.Speed--;
                         snake.snakeOne.LayoutTransform = new ScaleTransform() { ScaleX = -1 };
@@ -717,6 +720,7 @@ namespace Game_Treasure_Hunter
 
         private void MotionLevelThree()
         {
+            //движение платформ
             Canvas.SetTop(platform9, Canvas.GetTop(platform9) - verticalSpeedPlatform);
             Canvas.SetTop(surface17, Canvas.GetTop(surface17) - verticalSpeedPlatform);
             if (Canvas.GetTop(platform9) < 381 || Canvas.GetTop(platform9) > 181 && Canvas.GetTop(surface17) < 381 || Canvas.GetTop(surface17) > 181)
@@ -736,6 +740,7 @@ namespace Game_Treasure_Hunter
                 horizontalSpeedPlatform2++;
             }
 
+            //действия животных
             foreach (var b in MyCanvas.Children.OfType<Image>())
             {
                 if ((string)b.Tag == "bird")
