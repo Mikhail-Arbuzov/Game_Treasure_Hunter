@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Game_Treasure_Hunter"
         mc:Ignorable="d"
-        Title="TREASURE HUNTER" Height="825" Width="800" WindowStartupLocation="CenterScreen" WindowState ="Maximized" Closing="GameWindow_Closing">
+        Title="TREASURE HUNTER" Height="825" Width="800" WindowStartupLocation="CenterScreen" WindowState ="Maximized" Closing="GameWindow_Closing" Icon="pack://application:,,,/ImagesMenu/Games.ico">
     <StackPanel>
         <ScrollViewer x:Name="scroll" CanContentScroll="False" Height="800" Width="1600" HorizontalScrollBarVisibility ="Hidden" VerticalScrollBarVisibility ="Hidden" IsHitTestVisible="False">
             <Canvas x:Name="MyCanvas" Height="800" Width="4800" Focusable="True"  KeyDown="KeyIsDown" KeyUp="KeyIsUp">

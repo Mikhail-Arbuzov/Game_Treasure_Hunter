@@ -709,6 +709,9 @@
     <Resource Include="Images\Bush.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ImagesMenu\Cup-champion.ico" />
+    <Resource Include="ImagesMenu\Games.ico" />
+    <Resource Include="ImagesMenu\Treasure-Map.ico" />
     <Resource Include="ImagesMenu\log-out.png" />
     <Resource Include="ImagesMenu\backgroundDesert2.jpg" />
     <Resource Include="backgroundForest2.jpg" />

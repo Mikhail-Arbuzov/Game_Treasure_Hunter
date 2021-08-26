@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Game_Treasure_Hunter"
         mc:Ignorable="d"
-        Title="Menu" Height="450" Width="800" WindowStartupLocation="CenterScreen"  Loaded="MainWindow_Loaded">
+        Title="Menu" Height="450" Width="800" WindowStartupLocation="CenterScreen"  Loaded="MainWindow_Loaded" Icon="pack://application:,,,/ImagesMenu/Treasure-Map.ico">
     
     <Grid Margin="0,0,-0.4,0">
         <Grid.Background>
