@@ -43,6 +43,7 @@ namespace Game_Treasure_Hunter
             theEndGame.Play();
         }
 
+        //обработчик события кнопки при добавлении данных в базу данных
         private void AddRatingButton_Click(object sender, RoutedEventArgs e)
         {
            
@@ -109,6 +110,7 @@ namespace Game_Treasure_Hunter
             }
         }
 
+        //метод для очистки всплывающей подсказки
         private void ClearingTextField()
         {
             //NewNameText.Text = "";
@@ -116,6 +118,7 @@ namespace Game_Treasure_Hunter
             NewNameText.BorderBrush = Brushes.Transparent;
         }
 
+        //обработчик события кнопки при обновлении имеющихся  данных в базе данных
         private void UpdateRatingButton_Click(object sender, RoutedEventArgs e)
         {
             string oldName = NameText.Text.Trim();// добавляю данные из textbox и убираю лишнии пробелы
@@ -157,6 +160,8 @@ namespace Game_Treasure_Hunter
                 MessageBox.Show("Рейтинг игрока не обнавился! Возможно такого имени игрока нет в базе данных. Или это поле введено не корректно! При вводе должны использоваться только русские или английские буквы ", "База данных", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        //обработчики события кнопок при выводе данных из базы данных
 
         private void OnEasyButton_Click(object sender, RoutedEventArgs e)
         {
@@ -413,6 +418,7 @@ namespace Game_Treasure_Hunter
 
         }
 
+        //выход из игры
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             theEndGame.Close();// выключение лишних звуков
